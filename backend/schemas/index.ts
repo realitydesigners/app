@@ -5,7 +5,7 @@ import author from './author'
 import logos from './logos'
 import video from './video'
 import quote from './quote'
-import idea from './idea'
+import library from './library'
 import affirmations from './affirmations'
 import transition from './transition'
 
@@ -13,11 +13,11 @@ export const schemaTypes = [
   post,
   author,
   category,
+  library,
   blockContent,
   logos,
   video,
   quote,
-  idea,
   affirmations,
   transition,
 ]
