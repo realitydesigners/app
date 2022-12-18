@@ -1,0 +1,55 @@
+---
+import { useSanityClient } from "astro-sanity";
+import { urlForImage } from "../../sanity/urlForImage";
+
+export async function allPosts() {
+  const client = useSanityClient();
+  const query = `*[_type=="library" && category._ref in *[_type=="category" && name=="Spirituality"]._id ][0..100]{...,author->{...}}{...,category->{...}} `;
+  const posts = await client.fetch(query);
+  return posts;
+}
+
+export async function getStaticPaths() {
+  const allBlogPosts = await allPosts();
+
+  return allBlogPosts.map((post: any) => ({
+    params: { slug: post.slug.current },
+    props: { post },
+  }));
+}
+
+const posts = await allPosts();
+---
+
+<div class="w-screen flex justify-start pt-40 mb-12 pl-8">
+  <h1 class="text-5xl text-white font-bold uppercase">Spirituality</h1>
+</div>
+{
+  posts.map((post: any) => (
+    <div class="w-full h-auto block pl-8 pr-8 ">
+      <ul class=" mb-4">
+        <li class="block w-full border border-white  rounded-lg p-4">
+          <div class="block">
+            {post.category && post.category.name && (
+              <ul class="flex flex-row pb-2 ">
+                <li>
+                  <p class="text-white rounded-lg text-xs mr-2 lg:text-sm border font-mono p-2">
+                    {post.category.name}
+                  </p>
+                </li>
+              </ul>
+            )}
+
+            <a
+              href={`/library/posts/${post.slug.current}`}
+              class="pb-4  font-sans text-white text-2xl md:text-3xl font-bold hover:underline"
+            >
+              {post.title}
+            </a>
+            <p class="text-gray-400 font-mono text-md pb-4">{post.summary}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  ))
+}
