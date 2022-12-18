@@ -21,16 +21,14 @@ export default defineType({
         maxLength: 96,
       },
     }),
+
     defineField({
-      name: 'meta',
-      title: 'Meta',
-      type: 'string',
+      title: 'Category',
+      name: 'category',
+      type: 'reference',
+      to: [{type: 'category'}],
     }),
-    defineField({
-      name: 'summary',
-      title: 'Summary',
-      type: 'string',
-    }),
+
     defineField({
       name: 'body',
       title: 'Body',
