@@ -1,0 +1,95 @@
+---
+import logo from "/src/images/white-logo.gif";
+---
+
+<nav
+  class="flex items-center justify-between flex-wrap fixed w-full z-20 top-0"
+>
+  <div class="flex items-center flex-shrink-0 text-white mr-6">
+    <a href="/" class="w-12 ml-4 pt-4 lg:w-20 lg:pt-12 absolute z-20">
+      <img src={logo} alt="logo" /><img />
+    </a>
+    <div class="absolute flex-row z-20 pt-4 pl-16 lg:pt-12 lg:pl-24">
+      <h2 class="text-white text-lg lead lg:text-2xl font-extrabold font-sans">
+        REALITY
+      </h2>
+      <h2 class="text-white text-sm lead lg:text-xl font-medium font-sans">
+        DESIGNERS
+      </h2>
+    </div>
+  </div>
+
+  <div class="block lg:hidden">
+    <button
+      id="nav-toggle"
+      class="flex items-center hover:bg-slate-200 bg-white relative mt-4 mr-4 z-20 px-4 py-4 border text-gray-500 hover:text-black hover:border-white"
+    >
+      <svg
+        class="fill-current h-5 w-5"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+        ><title>Menu</title><path
+          d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div
+    class="w-full h-screen bg-black -mt-20 z-10 lg:bg-transparent lg:m-0 lg:h-auto flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0"
+    id="nav-content"
+  >
+    <ul
+      class="list-reset mt-40 lg:mt-8 lg:flex justify-end flex-1 items-center justify-center"
+    >
+      <li class="mr-3">
+        <a
+          class="inline-block text-5xl lg:text-sm font-sans font-semibold text-slate-300 hover:text-white no-underline py-2 px-4"
+          href="/">HOME</a
+        >
+      </li>
+      <li class="mr-3">
+        <a
+          class="inline-block text-5xl lg:text-sm font-sans font-semibold text-slate-300 hover:text-white no-underline py-2 px-4"
+          href="/blog">BLOG</a
+        >
+      </li>
+      <li class="mr-3">
+        <a
+          class="inline-block text-5xl lg:text-sm font-sans font-semibold text-slate-300 hover:text-white no-underline py-2 px-4"
+          href="/about">ABOUT</a
+        >
+      </li>
+
+      <li class="mr-3">
+        <a
+          class="inline-block text-5xl lg:text-sm font-sans font-semibold text-slate-300 hover:text-white no-underline py-2 px-4"
+          href="/portal">PORTAL</a
+        >
+      </li>
+      <li class="mr-3">
+        <a
+          class="inline-block text-5xl lg:text-sm font-sans font-semibold text-slate-300 hover:text-white no-underline py-2 px-4"
+          href="/sitemap">SITEMAP</a
+        >
+      </li>
+    </ul>
+    <div class="block relative p-4 lg:p-0">
+      <button
+        class="block lg:absolute w-48 p-2 right-8 bg-white text-md font-bold rounded-2xl"
+        ><a href="https://discord.gg/TQBJzfzt" class="w-full"
+          >Join Our Community</a
+        >
+      </button>
+    </div>
+  </div>
+</nav>
+<style>
+  .lead {
+    line-height: 1em;
+  }
+</style>
+<script is:inline>
+  document.getElementById("nav-toggle").onclick = function () {
+    document.getElementById("nav-content").classList.toggle("hidden");
+  };
+</script>

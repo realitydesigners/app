@@ -1,0 +1,47 @@
+---
+import { useSanityClient } from "astro-sanity";
+import { urlForImage } from "../../sanity/urlForImage";
+
+export async function allPosts() {
+  const client = useSanityClient();
+  const query = `*[_type=="post"] | order(_createdAt desc)[0..1]{...,author->{...}}{...,category->{...}} `;
+  const posts = await client.fetch(query);
+  return posts;
+}
+
+export async function getStaticPaths() {
+  const allBlogPosts = await allPosts();
+
+  return allBlogPosts.map((post: any) => ({
+    params: { slug: post.slug.current },
+    props: { post },
+  }));
+}
+
+const posts = await allPosts();
+---
+
+{
+  posts.map((post: any) => (
+    <ul class="flex space-y-8">
+      <li class="flex flex-col">
+        <div class="h-96">
+          <img
+            src={urlForImage(post.mainImage).url()}
+            class="w-full flex-shrink-0 pb-2 object-cover h-full"
+            alt="main-image"
+          />
+        </div>
+        <div class="flex-grow flex flex-col">
+          <a
+            href={`/articles/posts/${post.slug.current}`}
+            class="pb-4 uppercase font-sans text-white text-4xl md:text-4xl lg:text-5xl font-extrabold hover:underline"
+          >
+            {post.title}
+          </a>
+          <p class="text-gray-400 font-mono text-md pb-4">{post.summary}</p>
+        </div>
+      </li>
+    </ul>
+  ))
+}

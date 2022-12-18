@@ -1,0 +1,82 @@
+---
+import logo from "/src/images/white-logo.gif";
+---
+
+<nav
+  class="flex items-center justify-between flex-wrap fixed w-full z-10 top-0"
+>
+  <div class="flex items-center flex-shrink-0 text-white mr-6">
+    <a
+      href="/"
+      class="w-12 ml-4 pt-4 md:w-14 md:pt-6 lg:w-20 lg:pt-12 absolute z-20"
+    >
+      <img src={logo} /><img />
+    </a>
+  </div>
+
+  <div class="block lg:hidden">
+    <button
+      id="nav-toggle"
+      class="flex items-center hover:bg-slate-300 bg-black relative mt-4 mr-4 z-20 px-4 py-4 border text-white hover:text-black hover:border-white"
+    >
+      <svg
+        class="fill-current h-3 w-3"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+        ><title>Menu</title><path
+          d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div
+    class="w-screen h-screen bg-slate-100 -mt-16 z-10 lg:bg-transparent lg:m-0 lg:h-auto flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0"
+    id="nav-content"
+  >
+    <ul
+      class="list-reset mt-40 lg:mt-8 lg:flex justify-end flex-1 items-center justify-center"
+    >
+      <li class="flex mb-2">
+        <a
+          href="/internal-world/transitions"
+          class="flex-col inline-block bg-white p-4 lg:p-2 ml-8 rounded-2xl text-3xl lg:text-sm font-mono font-semibold text-black no-underline"
+          >TRANSITIONS</a
+        >
+      </li>
+      <li class="flex mb-2">
+        <a
+          href="/internalworld/activations"
+          class="flex-col inline-block bg-white p-4 lg:p-2 ml-8 rounded-2xl text-3xl lg:text-sm font-mono font-semibold text-black no-underline"
+          >ACTIVATIONS</a
+        >
+      </li>
+      <li class="flex mb-2">
+        <a
+          href="/internal-world/templates"
+          class="flex-col inline-block bg-white p-4 lg:p-2 ml-8 rounded-2xl text-3xl lg:text-sm font-mono font-semibold text-black no-underline"
+          >TEMPLATES</a
+        >
+      </li>
+      <li class="flex mb-2">
+        <a
+          href="/internalworld/patterns"
+          class="flex-col inline-block bg-white p-4 lg:p-2 ml-8 rounded-2xl text-3xl lg:text-sm font-mono font-semibold text-black no-underline"
+          >PATTERNS</a
+        >
+      </li>
+      <li class="flex mb-2">
+        <a
+          href="/internalworld/glossary"
+          class="flex-col inline-block bg-white p-4 lg:p-2 ml-8 rounded-2xl text-3xl lg:text-sm font-mono font-semibold text-black no-underline"
+          >GLOSSARY</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  document.getElementById("nav-toggle").onclick = function () {
+    document.getElementById("nav-content").classList.toggle("hidden");
+  };
+</script>

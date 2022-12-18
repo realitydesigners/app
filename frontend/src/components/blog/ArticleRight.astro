@@ -1,0 +1,80 @@
+---
+import { useSanityClient } from "astro-sanity";
+import { urlForImage } from "../../sanity/urlForImage";
+
+export async function allPosts() {
+  const client = useSanityClient();
+  const query = `*[_type=="post"] | order(_createdAt desc)[0..20]{...,author->{...}}{...,category->{...}} `;
+  const posts = await client.fetch(query);
+  return posts;
+}
+
+export async function getStaticPaths() {
+  const allBlogPosts = await allPosts();
+
+  return allBlogPosts.map((post: any) => ({
+    params: { slug: post.slug.current },
+    props: { post },
+  }));
+}
+
+const posts = await allPosts();
+---
+
+{
+  posts.map((post: any) => (
+    <ul class="flex w-full">
+      <li class="flex w-full flex-row relative overflow-hidden">
+       <img
+          src={urlForImage(post.mainImage).url()}
+          class="w-full h-auto object-cover opacity-10 blur-lg  shadow-inner absolute"
+           alt="main image"
+        />
+        
+        <img
+          src={urlForImage(post.mainImage).url()}
+          class="w-28 h-28 p-2 rounded-2xl object-cover z-10"
+           alt="main-image"
+        />
+        <div class="flex-grow flex flex-col z-10 ">
+             <div class="flex ">
+                {post.category && post.category.name && (
+                  <p class="text-slate-400 font-mono uppercase text-xs lg:text-xs p-2">
+                    {post.category.name}
+                  </p>
+                )}
+              </div>
+          
+          <a
+            href={`/articles/posts/${post.slug.current}`}
+            class="font-sans pl-2 lead text-white font-extrabold text-lg hover:underline"
+          >
+            {post.title}
+         
+          </a>
+          <div class="flex ">
+                {post.author && post.author.name && (
+                  <p class="text-slate-700 font-poppins font-bold text-xs uppercase lg:text-xs p-2">
+                    {post.author.name}
+                  </p>
+                )}
+              </div>
+
+        </div>
+        
+      </li>
+     
+    </ul>
+     <div class="spacer w-full flex my-2 bg-gray-400 " />
+  ))
+}
+<style> 
+
+.spacer {
+  height: 1px;
+  background-color: rgb(20, 20, 20);
+}
+.lead {
+  line-height: 1.2em;
+}
+</style>

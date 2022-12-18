@@ -1,0 +1,124 @@
+---
+import { getIdeas } from "../sanity/api.js";
+export async function getStaticPaths() {
+  const allIdeas = await getIdeas();
+  return allIdeas.map((post: any) => ({
+    params: { slug: post.slug.current },
+    props: { post },
+  }));
+}
+
+const idea = await getIdeas();
+---
+
+<div
+  class="flex w-full flex-wrap h-auto justify-center bg-slate-100"
+  id="cards"
+>
+  {
+    idea.map((post: any) => (
+      <div class="card bg-slate-300 ">
+        <div class="flex justify-center card-content bg-slate-200 p-8">
+          <h2 class="text-black text-sm ">{post.meta}</h2>
+          <h2 class="text-black text-xl font-bold ">{post.title}</h2>
+          <h2 class="text-black text-sm ">{post.summary}</h2>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  :root {
+  }
+
+  #cards:hover > .card::after {
+    opacity: 1;
+  }
+
+  .card {
+    display: flex;
+    width: 22.5%;
+    height: auto;
+
+    justify-content: center;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    margin: 10px;
+  }
+  @media (max-width: 1280px) {
+    .card {
+      width: 30%;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .card {
+      width: 45%;
+    }
+  }
+  @media (max-width: 640px) {
+    .card {
+      width: 100%;
+    }
+  }
+
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  .card::before,
+  .card::after {
+    border-radius: inherit;
+    content: "";
+    height: 100%;
+    left: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    transition: opacity 500ms;
+    width: 100%;
+  }
+
+  .card::before {
+    background: radial-gradient(
+      800px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.388),
+      transparent 40%
+    );
+    z-index: 3;
+  }
+
+  .card::after {
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgb(255, 255, 255),
+      transparent 40%
+    );
+    z-index: 1;
+  }
+
+  .card > .card-content {
+    border-radius: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    inset: 1px;
+    position: relative;
+    z-index: 2;
+    height: auto;
+  }
+</style>
+<script>
+  document.getElementById("cards").onmousemove = (e) => {
+    for (const card of document.getElementsByClassName("card")) {
+      const rect = card.getBoundingClientRect(),
+        x = e.clientX - rect.left,
+        y = e.clientY - rect.top;
+
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    }
+  };
+</script>

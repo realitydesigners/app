@@ -1,0 +1,16 @@
+---
+import { urlForImage } from "../../sanity/urlForImage";
+import { getTransitions } from "../../sanity/api";
+
+export async function getStaticPaths() {
+  const allTransitions = await getTransitions();
+
+  return allTransitions.map((transition: any) => ({
+    params: { slug: transition.slug.current },
+    props: { transition },
+  }));
+}
+const transitions = await getTransitions();
+---
+
+{transitions.map((transition: any) => <p>{transition.title}</p>)}

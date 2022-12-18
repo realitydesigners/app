@@ -1,0 +1,129 @@
+---
+---
+
+<div class="flex w-full h-screen items-center justify-center">
+  <div class="flex flex-col static items-center">
+    <div class="flex">
+      <p class="neg1 hero-text font-poppins font-extrabold">We&nbsp;</p>
+      <p class="word-wrap hero-text">
+        <span class="word color1 font-poppins font-extrabold">Unlock</span>
+        <span class="word color2 font-poppins font-extrabold">Imagine</span>
+        <span class="word color3 font-poppins font-extrabold">See</span>
+      </p>
+    </div>
+
+    <div class="flex">
+      <p class="hero-text font-poppins font-extrabold">Worlds Inside</p>
+    </div>
+
+    <div class="flex">
+      <p class="neg2 hero-text font-poppins font-extrabold">Of&nbsp;</p>
+      <p class="word-wrap hero-text font-poppins">
+        <span class="word color4 font-extrabold">Minds</span>
+        <span class="word color5 font-extrabold">Lives</span>
+        <span class="word color6 font-extrabold">You</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-text {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    font-size: 7em;
+    line-height: 1.2em;
+    color: #fff;
+  }
+  .neg1 {
+    margin-left: -300px;
+  }
+  .neg2 {
+    margin-left: -175px;
+  }
+  .word {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .color1 {
+    color: #fff;
+  }
+  .color2 {
+    color: #fff;
+  }
+  .color3 {
+    color: #fff;
+  }
+  .color4 {
+    color: #fff;
+  }
+  .color5 {
+    color: #fff;
+  }
+  .color6 {
+    color: #fff;
+  }
+
+  .word {
+    animation-iteration-count: infinite;
+    animation-name: anim;
+    font-weight: 600;
+
+    animation-duration: 9s; /*calculate the exact time for looping*/
+  }
+
+  .word:nth-child(2) {
+    animation-delay: 3s;
+  }
+
+  .word:nth-child(3) {
+    animation-delay: 6s;
+  }
+  .word:nth-child(4) {
+    animation-delay: 9s;
+  }
+
+  @keyframes anim {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+
+    20% {
+      transform: translateY(0);
+      opacity: 1;
+      transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    60% {
+      transform: translateY(-33%);
+      opacity: 0;
+      transition: transform 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /*we give long pause after animation is done by this method*/
+  }
+  @media (max-width: 1280px) {
+    .hero-text {
+      font-size: 5em;
+    }
+    .neg1 {
+      margin-left: -200px;
+    }
+    .neg2 {
+      margin-left: -160px;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero-text {
+      font-size: 3.3em;
+    }
+    .neg1 {
+      margin-left: -140px;
+    }
+    .neg2 {
+      margin-left: -90px;
+    }
+  }
+</style>

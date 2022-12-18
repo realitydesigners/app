@@ -1,0 +1,47 @@
+---
+import { urlForImage } from "../sanity/urlForImage";
+import { getVideos } from "../sanity/api.js";
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getVideos();
+
+  return allBlogPosts.map((post: any) => ({
+    params: { slug: post.slug.current },
+    props: { post },
+  }));
+}
+
+const posts = await getVideos();
+---
+
+<div class="w-full h-screen">
+  {
+    posts.map((post: any) => (
+      <div class="flex flex-col w-full h-full relative overflow-hidden ">
+        <iframe
+          src={post.iframedesktop}
+          class="w-full h-full absolute"
+          title="main blog video"
+        />
+
+        <a
+          href="https://www.youtube.com/watch?v=x9hqRePBtOo"
+          class="w-10/12 ml-10 text-6xl  mt-48 xl:mt-60 xl:w-1/2 xl:ml-20 uppercase font-sans text-white xl:text-8xl font-bold z-10 pb-4 hover:underline "
+        >
+          {post.title}
+        </a>
+
+        <p class="text-white uppercase font-mono font-bold text-xl ml-10 xl:ml-20 z-10">
+          Podcast Episode 01
+        </p>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+</style>
