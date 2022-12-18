@@ -1,0 +1,104 @@
+---
+import { useSanityClient } from "astro-sanity";
+import logo from "../../../images/white-logo.gif";
+import PortableText from "../../../components/PortableText.astro";
+import { urlForImage } from "../../../sanity/urlForImage.js";
+
+export async function allPosts() {
+  const client = useSanityClient();
+  const query = `*[_type=="article"]{...,author->{...}}{...,category->{...}} `;
+  const posts = await client.fetch(query);
+  return posts;
+}
+
+export async function getStaticPaths() {
+  const allBlogPosts = await allPosts();
+
+  return allBlogPosts.map((post: any) => ({
+    params: { slug: post.slug.current },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <meta name="generator" content={Astro.generator} />
+  <title>ABOUT | REALITY DESIGNERS</title>
+</head>
+
+<main>
+  <div class="flex flex-row fixed ml-2">
+    <img class="w-14 h-auto pt-4" src={logo} />
+    <h2
+      class="w-1/2 z-10 pt-6 pl-2 leading-1 font-sans font-semibold text-white text-sm md:text-lg md:w-full md:pl-2 md:pt-8"
+    >
+      {post.title}
+    </h2>
+  </div>
+  <a href="#get">
+    <div class="flex absolute bottom-12 right-8 z-10 bg-white rounded-full p-3">
+      <p class="text-sm text-black font-semibold md:text-xl">Read ></p>
+    </div>
+  </a>
+
+  <div class="flex w-full h-screen overflow-hidden">
+    <iframe
+      src={post.iframedesktop}
+      frameborder="0"
+      class="hidden md:block md:h-full md:w-full m-0"
+    >
+    </iframe>
+    <iframe
+      src={post.iframemobile}
+      frameborder="0"
+      class="w-full h-full m-0 md:hidden"></iframe>
+  </div>
+  <div class="test flex flex-col">
+    <div class="polygon w-full h-10 bg-slate-200 z-2"></div>
+    <div id="get" class="flex w-full h-auto justify-center bg-slate-100">
+      <div class="w-10/12 pt-40 pb-40 md:w-2/5">
+        <PortableText class="port" portableText={post.body} />
+      </div>
+    </div>
+  </div>
+</main>
+<style>
+  body {
+    margin: 0;
+    background-color: rgb(0, 0, 0);
+    font-size: 1.8em;
+    line-height: 1.5em;
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+  }
+  .test {
+    margin-top: -40px;
+  }
+
+  .centered {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+  .polygon {
+    clip-path: polygon(
+      0 90%,
+      10% 0,
+      90% 0,
+      100% 90%,
+      100% 100%,
+      100% 100%,
+      0% 100%,
+      0% 100%,
+      0% 100%
+    );
+  }
+</style>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+</style>

@@ -1,0 +1,33 @@
+---
+import NavMain from "../components/navigation/NavMain.astro";
+---
+
+<main>
+  <NavMain />
+  <div
+    class="as flex flex-col w-full h-screen justify-center items-center bg-black"
+  >
+    <h1 class="text-3xl lg:text-5xl text-white font-sans font-semibold">
+      Site Map
+    </h1>
+
+    <div class="w-auto pt-8 h-auto">
+      <ul class="flex leading-8">
+        <li class="flex font-sans font-semibold flex-col text-white text-lg">
+          <a href="/" class="p-2">Index</a>
+          <a href="/about" class="p-2">About</a>
+          <a href="/blog" class="p-2">Blog</a>
+          <a href="/portal" class="p-2">Portal</a>
+          <a href="/community" class="p-2">Community</a>
+          <a href="/privacy-policy" class="p-2">Privacy Policy</a>
+          <a href="/glossary" class="p-2">Glossary</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<style>
+  .as {
+  }
+</style>
