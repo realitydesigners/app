@@ -1,0 +1,25 @@
+---
+import NavMain from "../components/navigation/NavMain.astro";
+import Footer from "../components/Footer.astro";
+import HeadCommon from "../components/headCommon.astro";
+import { SITE } from "../config";
+---
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-us">
+  <head>
+    <HeadCommon />
+    <title>{SITE.title}</title>
+  </head>
+
+  <body class="min-h-screen bg-black">
+    <div class="relative">
+      <NavMain />
+    </div>
+
+    <main id="content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

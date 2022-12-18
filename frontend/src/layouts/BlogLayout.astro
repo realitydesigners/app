@@ -1,0 +1,96 @@
+---
+import ArticleRight from "../components/blog/ArticleRight.astro";
+import ArticleMain from "../components/blog/ArticleMain.astro";
+import ArticleMainColumnOne from "../components/blog/ArticleMainColumnOne.astro";
+import ArticleTop from "../components/blog/ArticleTop.astro";
+import ArticleBottom from "../components/blog/ArticleBottom.astro";
+---
+
+<main>
+  <div
+    class="flex flex-col w-full h-auto bg-black justify-center items-center pt-4"
+  >
+    <div
+      id="desktop"
+      class="hidden flex-wrap lg:flex w-full lg:p-8 xl:pl-32 xl:pr-32"
+    >
+      <div class="flex h-auto mb-12"><ArticleTop /></div>
+      <div class="lg:w-1/4 pr-4">
+        <div class="flex flex-row flex-end pb-4">
+          <p
+            class="text-black w-full text-xs font-mono font-bold bg-white leading-6 p-2 pl-4"
+          >
+            RECENTLY ADDED
+          </p>
+          <div id="latest" class="w-full h-1 mb-4"></div>
+        </div>
+        <ArticleRight />
+      </div>
+      <div class="lg:w-1/2 pr-4 pl-4">
+        <ArticleMain />
+      </div>
+      <div class="lg:w-1/4 lg:flex-col pl-4 flex">
+        <div class="flex flex-row flex-end pb-4">
+          <div id="latest" class="w-full h-1 mb-4"></div>
+
+          <div id="latest" class="w-full h-1 bg-red-400 mb-4"></div>
+        </div>
+        <ArticleMainColumnOne />
+      </div>
+      <ArticleBottom />
+    </div>
+    <div
+      id="tablet"
+      class="hidden md:flex flex-row flex-wrap lg:hidden pl-8 pr-8"
+    >
+      <div class="w-2/3 pr-4">
+        <ArticleMain />
+      </div>
+      <div class="w-1/3">
+        <div class="flex flex-row flex-end pb-4">
+          <p
+            class="text-black w-full text-xs font-mono font-bold bg-white leading-6 p-2 pl-4"
+          >
+            RECENTLY ADDED
+          </p>
+          <div id="latest" class="w-full h-1 mb-4"></div>
+        </div>
+        <ArticleRight />
+      </div>
+      <div class="w-full my-8">
+        <ArticleMainColumnOne />
+      </div>
+    </div>
+    <div id="mobile" class="flex flex-col md:hidden pl-4 pr-4">
+      <div class="w-full">
+        <ArticleMain />
+      </div>
+      <div class="w-full pt-8">
+        <div class="flex flex-row flex-end pb-4">
+          <p
+            class="text-black w-full text-xs font-mono font-bold bg-white leading-6 p-2 pl-4"
+          >
+            RECENTLY ADDED
+          </p>
+        </div>
+        <ArticleRight />
+      </div>
+      <div class="w-full">
+        <div class="flex flex-row flex-end pb-4">
+          <p
+            class="text-white w-full text-xs font-mono font-bold bg-black leading-6 p-2 pl-4"
+          >
+            TODAYS TOP
+          </p>
+        </div>
+        <ArticleMainColumnOne />
+      </div>
+    </div>
+  </div>
+</main>
+<style>
+  #latest {
+    height: 2px;
+    background-color: rgb(255, 255, 255);
+  }
+</style>
