@@ -1,5 +1,6 @@
 ---
 import { useSanityClient } from "astro-sanity";
+import PortableText from "../../components/PortableText.astro";
 import { urlForImage } from "../../sanity/urlForImage";
 
 export async function allPosts() {
@@ -26,30 +27,36 @@ const posts = await allPosts();
 </div>
 {
   posts.map((post: any) => (
-    <div class="w-full h-auto block pl-8 pr-8 ">
+    <div class="w-full h-auto block pl-4 pr-4 ">
       <ul class=" mb-4">
         <li class="block w-full border border-white  rounded-lg p-4">
           <div class="block">
             {post.category && post.category.name && (
-              <ul class="flex flex-row pb-2 ">
+              <ul class="flex flex-row pb-2   ">
                 <li>
-                  <p class="text-white rounded-lg text-xs mr-2 lg:text-sm border font-mono p-2">
+                  <p class="text-black  bg-white   uppercase  rounded-lg text-xs mr-2 lg:text-sm border font-mono p-2">
                     {post.category.name}
                   </p>
                 </li>
               </ul>
             )}
-
             <a
               href={`/library/posts/${post.slug.current}`}
-              class="pb-4  font-sans text-white text-2xl md:text-3xl font-bold hover:underline"
+              class=" font-sans  text-white text-2xl md:text-3xl font-bold hover:underline"
             >
               {post.title}
             </a>
-            <p class="text-gray-400 font-mono text-md pb-4">{post.summary}</p>
+            <div class="text-white  text-md font-mono mt-4">
+              <PortableText class="port" portableText={post.excerpt} />
+            </div>
           </div>
         </li>
       </ul>
     </div>
   ))
 }
+<style>
+  .port {
+    color: #a0aec0;
+  }
+</style>

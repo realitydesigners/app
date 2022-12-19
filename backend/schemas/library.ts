@@ -21,17 +21,26 @@ export default defineType({
         maxLength: 96,
       },
     }),
-
     defineField({
       title: 'Category',
       name: 'category',
       type: 'reference',
       to: [{type: 'category'}],
     }),
+    defineField({
+      name: 'excerpt',
+      title: 'Excerpt',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+        },
+      ],
+    }),
 
     defineField({
-      name: 'body',
-      title: 'Body',
+      name: 'content',
+      title: 'Content',
       type: 'blockContent',
     }),
   ],
