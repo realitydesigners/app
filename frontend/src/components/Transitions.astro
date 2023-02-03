@@ -1,0 +1,37 @@
+---
+import { useSanityClient } from "astro-sanity";
+import { urlForImage } from "../sanity/urlForImage";
+
+export async function allPosts() {
+  const client = useSanityClient();
+  const query = `*[_type=="transition"] `;
+  const posts = await client.fetch(query);
+  return posts;
+}
+
+export async function getStaticPaths() {
+  const allBlogPosts = await allPosts();
+
+  return allBlogPosts.map((post: any) => ({
+    params: { slug: post.slug.current },
+    props: { post },
+  }));
+}
+
+const posts = await allPosts();
+---
+
+{
+  posts.map((post: any) => (
+    <ul class="flex flex-row flex-wrap bg-white w-1/3 p-2">
+      <li class=" bg-black w-full">
+        <a
+          href={`/articles/posts/${post.slug.current}`}
+          class="pb-4 uppercase font-sans text-white text-2xl md:text-4xl lg:text-5xl font-extrabold hover:underline"
+        >
+          {post.title}
+        </a>
+      </li>
+    </ul>
+  ))
+}
