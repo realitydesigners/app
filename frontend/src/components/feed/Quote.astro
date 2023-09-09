@@ -15,10 +15,11 @@ const { quote } = Astro.props
         <div class="text-white relative flex w-full border mb-4 border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 ease-in">
           {post?.mediaRef?.image && (
             <Image
-              src={post?.mediaRef?.image}
+              src={getSanityImageURL(post?.mediaRef?.image).url()}
               alt="Descriptive alt text"
               width={1000}
               height={1000}
+              format="webp"
               class="w-full h-full absolute rounded-xl object-cover opacity-25 blur-md"
             />
           )}

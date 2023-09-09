@@ -8,7 +8,7 @@ import { getSanityImageURL } from '../../utils/helpers.js'
 const { img } = Astro.props
 ---
 
-<ul class="w-full h-auto grid grid-cols-1 p-2 gap-4 flex-wrap">
+<ul class="w-full h-auto grid grid-cols-1 p-2 space-y-4 flex-wrap">
   {
     img &&
       img.map((image: any) => (
