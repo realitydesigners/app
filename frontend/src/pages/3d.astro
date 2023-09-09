@@ -1,5 +1,5 @@
 ---
-
+import Fiber from '../components/three/Fiber.jsx'
 import Layout from '../layouts/Layout.astro'
 import { getCategory } from '../lib/api.js'
 
@@ -7,9 +7,7 @@ const category = await getCategory()
 ---
 
 <Layout title="Reality Designers">
-  <main
-    class="flex flex-wrap w-screen h-auto justify-center bg-black pt-20 p-2 lg:p-12 lg:pt-28"
-  >
-
+  <main class="w-screen h-screen">
+    <Fiber client:load />
   </main>
 </Layout>

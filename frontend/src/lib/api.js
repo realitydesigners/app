@@ -172,7 +172,6 @@ export async function getQuote() {
 }`
 
   const data = await client.fetch(query)
-  console.log(JSON.stringify(data, null, 2))
 
   return data
 }
