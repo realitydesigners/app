@@ -1,0 +1,61 @@
+---
+import '@fontsource/rajdhani/400.css'
+import '@fontsource/rajdhani/600.css'
+import '@fontsource/rajdhani/700.css'
+import PortableTextComponent from '../portabletext/PortableTextComponent'
+
+const { posts } = Astro.props
+---
+
+<ul class="w-full h-auto grid grid-cols-1 p-2 flex-wrap">
+  {
+    posts?.map((post: any) => (
+      <li class="text-white p-3 w-full border border-gray-200 rounded-xl relative">
+        <div class="relative  h-[500px] overflow-y-auto">
+          <div class="flex w-full justify-start">
+            <p class="tag tracking-wide uppercase text-emerald-200 flex w-auto p-[.2em] pl-2 pr-2 text-xs backdrop-blur-lg  rounded-2xl border border-emerald-200 bg-emerald-200/20 transition-all duration-300 ease-in hover:bg-emerald-400 hover:border-emerald-400 hover:text-white">
+              Post
+            </p>
+          </div>
+          <div class="mb-8 p-2">
+            {post.content && (
+              <PortableTextComponent
+                content={post.content}
+                template="postCard"
+              />
+            )}
+          </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t rounded-xl from-black to-transparent z-0" />
+        <a
+          class="p-2 absolute bottom-2 right-2 z-10"
+          href={`/blog/${post.slug?.current}`}
+        >
+          <button class="read-button text-black bg-white text-sm pr-2 p-1 pl-3 rounded-full">
+            Read →
+          </button>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+  p {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+  }
+  .tag {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 8px;
+  }
+  .read-button {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+</style>

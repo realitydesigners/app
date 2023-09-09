@@ -1,0 +1,27 @@
+---
+import Article from '../components/feed/Article.astro'
+import Img from '../components/feed/Img.astro'
+import Post from '../components/feed/Post.astro'
+import Post2 from '../components/feed/Post2.astro'
+import Quote from '../components/feed/Quote.astro'
+import Layout from '../layouts/Layout.astro'
+import { getArticle, getImg, getPost, getQuote } from '../lib/api.js'
+
+const posts = await getPost()
+const img = await getImg()
+const quote = await getQuote()
+const article = await getArticle()
+const posts2 = await getPost()
+---
+
+<Layout title="Reality Designers">
+  <main
+    class="grid grid-cols-1 lg:p-20 pt-16 md:grid-cols-2 lg:grid-cols-3 wrap w-screen h-auto justify-center bg-black"
+  >
+    <Post posts={posts} />
+    <Img img={img} />
+    <Quote quote={quote} />
+    <Article article={article} />
+    <Post2 posts={posts2} />
+  </main>
+</Layout>

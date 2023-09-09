@@ -1,0 +1,80 @@
+---
+import '@fontsource/rajdhani/400.css'
+import '@fontsource/rajdhani/700.css'
+import { Image } from 'astro:assets'
+import { getSanityImageURL } from '../utils/helpers.js'
+import PortableTextComponent from './portabletext/PortableTextComponent.jsx'
+
+export interface Props {
+  post: any
+}
+
+const { post } = Astro.props
+---
+
+<div class="w-full h-auto text-white bg-black pt-20">
+  <div class="w-screen h-auto flex flex-col justify-center items-center">
+    <div class="grid grid-cols-1 w-full p-4 lg:w-1/2 lg:p-0 mb-8">
+      {
+        post.tags && (
+          <div class="flex flex-row  mb-2 ">
+            {post.tags.map((tag: any) => (
+              <p class="text-xs h-6 flex bg-white items-center justify-center p-1 border  uppercase tracking-wide  text-black mr-2">
+                {tag}
+              </p>
+            ))}
+          </div>
+        )
+      }
+
+      <h1 class="text-5xl lg:text-6xl mb-4 w-full md:w-3/4 lg:w-full">
+        {post.title}
+      </h1>
+      <p
+        class="w-full md:w-3/4 lg:w-full text-xl text-gray-300 leading-7 tracking-wide mb-4"
+      >
+        {post.excerpt}
+      </p>
+      {post.author && <p class="">By {post.author.name}</p>}
+    </div>
+  </div>
+  <div class="text-white w-full">
+    {
+      post?.darkLayout?.image && (
+        <Image
+          src={getSanityImageURL(post?.darkLayout?.image).url()}
+          alt="this is an image"
+          width={1000}
+          height={1000}
+          format="webp"
+          class="w-full h-auto"
+        />
+      )
+    }
+  </div>
+
+  {
+    post.darkLayout?.content && (
+      <PortableTextComponent
+        content={post.darkLayout?.content}
+        template="blog"
+      />
+    )
+  }
+
+  <style>
+    h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+    }
+    h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+    }
+
+    p {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+    }
+  </style>
+</div>

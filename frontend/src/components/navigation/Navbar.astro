@@ -1,0 +1,65 @@
+---
+import MenuItems from './MenuItems.astro'
+import NavLogo from './NavLogo.astro'
+---
+
+<nav
+  role="navigation"
+  class="flex items-center justify-between flex-wrap fixed w-full z-50 h-12 pb-2"
+>
+  <NavLogo />
+
+  <div class="block lg:hidden">
+    <button
+      id="nav-toggle"
+      class="flex items-center relative mt-2 z-20 mr-4"
+      aria-label="Toggle Menu"
+    >
+      <div class="text-lg text-white mr-2">
+        <p class="mt-2">MENU</p>
+      </div>
+      <svg
+        width="20"
+        height="20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M3 12h18M3 6h18M3 18h18" stroke="#fff" stroke-width="2"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="nav-content"
+    role="menu"
+    class="w-full h-screen justify-center -mt-12 lg:mt-0 lg:bg-transparent bg-black z-10 lg:h-auto flex-grow lg:flex lg:items-center lg:w-auto hidden"
+  >
+    <MenuItems />
+  </div>
+</nav>
+
+<style>
+  p {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+</style>
+
+<script type="module">
+  const navToggle = document.getElementById('nav-toggle')
+  const navContent = document.getElementById('nav-content')
+  const body = document.body
+
+  if (navToggle && navContent) {
+    navToggle.addEventListener('click', () => {
+      navContent.classList.toggle('hidden')
+
+      // Toggle scroll behavior for body
+      if (navContent.classList.contains('hidden')) {
+        body.style.overflow = 'auto' // Enable scrolling
+      } else {
+        body.style.overflow = 'hidden' // Disable scrolling
+      }
+    })
+  }
+</script>
