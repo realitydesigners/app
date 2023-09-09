@@ -5,6 +5,7 @@ const client = createClient({
   title: 'website',
   projectId: 'fovvfda4',
   dataset: 'production',
+  apiVersion: '2023-08-31',
   useCdn: true,
 })
 

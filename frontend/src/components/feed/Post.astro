@@ -6,7 +6,7 @@ import '@fontsource/rajdhani/700.css'
 const { posts } = Astro.props
 ---
 
-<ul class="w-full h-auto grid grid-cols-1 p-2 flex-wrap">
+<ul class="w-full h-auto gap-4 lg:max-h-0 grid grid-cols-1 p-2 flex-wrap">
   {
     posts &&
       posts.map((post: any) => (
