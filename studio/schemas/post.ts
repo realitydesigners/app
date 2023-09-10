@@ -1,7 +1,5 @@
 import {ImageIcon, LinkIcon, UserIcon, UploadIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
-
-import categoryType from './category'
+import {defineField, defineType} from 'sanity'
 
 import teamType from './team'
 
@@ -17,24 +15,6 @@ export default defineType({
       title: 'Title',
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      type: 'slug',
-      name: 'slug',
-      title: 'Slug',
-      options: {
-        source: 'title',
-      },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'publicationDate', // Replace with the desired name for the field
-      title: 'Publication Date', // Replace with the desired title for the field
-      type: 'date', // Use the 'date' type for a Date field
-      options: {
-        dateFormat: 'DD-MM-YYYY', // Specify the desired date format
-      },
-      validation: (rule) => rule.required(), // Add validation rules if needed
-    }),
 
     defineField({
       name: 'team',
@@ -43,35 +23,6 @@ export default defineType({
       to: [{type: teamType.name}],
     }),
 
-    defineField({
-      type: 'text',
-      name: 'excerpt',
-      title: 'Excerpt',
-      validation: (rule) => rule.required(),
-    }),
-
-    defineField({
-      name: 'category',
-      title: 'Category',
-      type: 'reference',
-      to: [{type: categoryType.name}],
-    }),
-
-    defineField({
-      type: 'image',
-      name: 'image',
-      title: 'Image',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: 'alt',
-          title: 'Alt Text',
-          type: 'string',
-        },
-      ],
-    }),
     defineField({
       type: 'array',
       name: 'content',
