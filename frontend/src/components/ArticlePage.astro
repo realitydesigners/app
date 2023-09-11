@@ -1,0 +1,74 @@
+---
+import '@fontsource/rajdhani/400.css'
+import '@fontsource/rajdhani/700.css'
+import { Image } from 'astro:assets'
+import { getSanityImageURL } from '../utils/helpers.js'
+import PortableTextComponent from './portabletext/PortableTextComponent.jsx'
+
+export interface Props {
+  article: any
+}
+
+const { article } = Astro.props
+---
+
+<div class="w-full h-auto text-white bg-black pt-20">
+  <div class="w-screen h-auto flex flex-col justify-center items-center">
+    <div class="grid grid-cols-1 w-full p-4 lg:w-1/2 lg:p-0 mb-8">
+      <h1 class="text-5xl lg:text-6xl mb-4 w-full md:w-3/4 lg:w-full">
+        {article.title}
+      </h1>
+      <p
+        class="w-full md:w-3/4 lg:w-full text-xl text-gray-300 leading-7 tracking-wide mb-4"
+      >
+        {article.excerpt}
+      </p>
+      {article.author && <p class="">By {article.author.name}</p>}
+    </div>
+  </div>
+
+  <div class="text-white w-full">
+    {
+      article?.image && (
+        <Image
+          src={getSanityImageURL(article?.image).url()}
+          alt="this is an image"
+          width={1000}
+          height={1000}
+          format="webp"
+          class="w-full h-auto"
+        />
+      )
+    }
+  </div>
+
+  {
+    article.content.map((item: any) => {
+      if (item._type === 'postsRef' && item.post) {
+        return (
+          <div class="w-full pt-20 pb-20">
+            <PortableTextComponent
+              content={item.post.content}
+              template="blog"
+            />
+          </div>
+        )
+      }
+    })
+  }
+</div>
+<style>
+  h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+  h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+
+  p {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+  }
+</style>

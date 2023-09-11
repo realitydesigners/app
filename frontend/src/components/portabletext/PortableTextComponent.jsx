@@ -1,4 +1,5 @@
 import { PortableText } from '@portabletext/react'
+import ArticleRef from './ArticleRef.jsx'
 import ImageRef from './ImageRef.jsx'
 import MediaRef from './MediaRef.jsx'
 import PostsRef from './PostsRef.jsx'
@@ -24,6 +25,8 @@ const iFrame = ({ value }) => {
 }
 
 const Blog = {
+  normal: ({ children }) => <p className="article-text">{children}</p>,
+
   block: {
     normal: ({ children }) => (
       <div
@@ -66,6 +69,7 @@ const Blog = {
   types: {
     iframe: iFrame,
     postsRef: PostsRef,
+    articleRef: ArticleRef,
     mediaRef: MediaRef,
     spline: SplineRef,
     image: ImageRef,

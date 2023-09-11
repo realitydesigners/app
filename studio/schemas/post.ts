@@ -68,20 +68,20 @@ export default defineType({
         },
         defineField({
           type: 'object',
-          name: 'postsRef',
-          title: 'Post',
+          name: 'articleRef',
+          title: 'Article',
           preview: {
             select: {
-              imageUrl: 'post.image.asset.url',
-              title: 'post.title',
+              imageUrl: 'article.image.asset.url',
+              title: 'article.title',
             },
           },
           fields: [
             defineField({
               type: 'reference',
-              name: 'post',
+              name: 'article',
               title: 'Referenced Post',
-              to: [{type: 'post'}],
+              to: [{type: 'article'}],
             }),
           ],
         }),

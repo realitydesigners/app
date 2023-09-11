@@ -1,0 +1,27 @@
+---
+// import BlogPost from '../../components/BlogPost.astro'
+import ArticlePage from '../../components/ArticlePage.astro'
+import Layout from '../../layouts/Layout.astro'
+import { getArticleBySlug, getPostBySlug } from '../../lib/api.js'
+
+export async function getStaticPaths() {
+  // const allBlogPosts = await getPostBySlug()
+  const allArticles = await getArticleBySlug()
+
+  return allArticles.map((article: any) => ({
+    params: { slug: article.slug.current },
+    props: { article },
+  }))
+}
+const { article = {} as any } = Astro.props
+---
+
+<head>
+  <script
+    type="module"
+    src="https://unpkg.com/@splinetool/viewer@0.9.434/build/spline-viewer.js"
+  ></script>
+</head>
+<Layout title="Reality Designers">
+  <ArticlePage article={article} />
+</Layout>

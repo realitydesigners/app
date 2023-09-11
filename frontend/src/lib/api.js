@@ -184,14 +184,61 @@ export async function getArticle() {
   excerpt,
   content[]{
     ...,
+    post->{
+      _id,
+      title,
+      content[]
+    }
   }
+    
 }`
   const data = await client.fetch(query)
   return data
 }
 
+export async function getArticleBySlug() {
+  const query = `
+    *[_type == "article"] {
+      title,
+      slug,
+      image,
+      excerpt,
+      content[] {
+        ...,
+        post-> {
+          _id,
+          title,
+          content[]{
+            ...,
+            media-> {
+              ...,
+              className->{name},
+              team->,
+            },
+            markDefs[]{
+              ...,
+              _type == "internalLink" => {
+                "slug": @.reference->slug
+              }
+            },
+           
+             "articleRef": {
+        "articleTitle": article->title,
+        "articleSlug": article->slug.current,
+        "articleImage": article->.image
+      },
+          }
+        }
+      }
+    }
+  `
+
+  const data = await client.fetch(query)
+  return data
+}
+
 export async function getCategory() {
-  const query = `*[_type == "category"] {
+  const query = `*[_type == "category" ] {
   _id,
   _type,
   title,
