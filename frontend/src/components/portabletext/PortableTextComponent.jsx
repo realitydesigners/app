@@ -25,8 +25,6 @@ const iFrame = ({ value }) => {
 }
 
 const Blog = {
-  normal: ({ children }) => <p className="article-text">{children}</p>,
-
   block: {
     normal: ({ children }) => (
       <div
