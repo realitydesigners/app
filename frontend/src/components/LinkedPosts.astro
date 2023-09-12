@@ -1,0 +1,24 @@
+---
+import DarkBlogPost from './DarkBlogPost.astro'
+import LightBlogPost from './LightBlogPost.astro'
+
+export interface Props {
+  linkedContent: any[]
+}
+
+const { linkedContent } = Astro.props
+console.log(linkedContent)
+---
+
+{
+  linkedContent?.map((item: any) => {
+    if (item.layout === 'dark') {
+      return <DarkBlogPost post={item.post} />
+    }
+    if (item.layout === 'light') {
+      return <LightBlogPost post={item.post} />
+    }
+
+    return null
+  })
+}

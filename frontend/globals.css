@@ -16,22 +16,6 @@ p:not(:last-child) {
   margin-bottom: 0.875rem;
 }
 
-ol,
-ul {
-  margin-left: 1rem;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* For Firefox */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-ol {
-  list-style-type: disc;
-}
-
 .img-light {
   padding: 2%;
 }

@@ -1,5 +1,6 @@
 ---
-import BlogPost from '../../components/BlogPost.astro'
+import DarkBlogPost from '../../components/DarkBlogPost.astro'
+import LightBlogPost from '../../components/LightBlogPost.astro'
 import Layout from '../../layouts/Layout.astro'
 import { getPostBySlug } from '../../lib/api.js'
 
@@ -15,12 +16,7 @@ export async function getStaticPaths() {
 const { post = {} as any } = Astro.props
 ---
 
-<head>
-  <script
-    type="module"
-    src="https://unpkg.com/@splinetool/viewer@0.9.434/build/spline-viewer.js"
-  ></script>
-</head>
 <Layout title="Reality Designers">
-  <BlogPost post={post} />
+  {post.layout === 'dark' && <DarkBlogPost post={post} />}
+  {post.layout === 'light' && <LightBlogPost post={post} />}
 </Layout>

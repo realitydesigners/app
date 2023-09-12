@@ -106,6 +106,7 @@ export async function getPostBySlug() {
         post-> {
           _id,
           title,
+          excerpt,
           content[]{
             ...,
             media-> {

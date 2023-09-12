@@ -70,9 +70,8 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Light Layout', value: 'light'},
-          {title: 'Dark Layout', value: 'dark'},
-          // Add as many layouts as you need
+          {title: 'Dark', value: 'dark'},
+          {title: 'Light', value: 'light'},
         ],
       },
       validation: (rule) => rule.required(),
@@ -288,8 +287,8 @@ export default defineType({
               title: 'Layout',
               options: {
                 list: [
-                  {title: 'Dark', value: 'Dark'},
-                  {title: 'Light', value: 'Light'},
+                  {title: 'Dark', value: 'dark'},
+                  {title: 'Light', value: 'light'},
                 ],
               },
             },
