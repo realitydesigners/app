@@ -43,7 +43,7 @@ const { article } = Astro.props
     }
   </div>
   {
-    article.content.map((item: any) => {
+    article?.content?.map((item: any) => {
       if (item._type === 'postsRef' && item.post) {
         let bgColor = 'bg-white' // Default background color
 

@@ -58,7 +58,7 @@ const { post } = Astro.props
     )
   }
   {
-    post?.linkedContent.map((item: any) => {
+    post?.linkedContent?.map((item: any) => {
       if (item._type === 'postsRef' && item.post) {
         let bgColor = 'bg-white' // Default background color
 
