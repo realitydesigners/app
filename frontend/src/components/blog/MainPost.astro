@@ -11,7 +11,7 @@ const { posts } = Astro.props
   {
     posts &&
       posts.map((post: any) => (
-        <a href={`/blog/${post.slug?.current}`}>
+        <a href={`/posts/${post.slug?.current}`}>
           <div class="text-white p-4 w-full ">
             {post?.lightLayout?.image && (
               <Image

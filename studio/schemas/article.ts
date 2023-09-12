@@ -46,7 +46,7 @@ export default defineType({
             {
               name: 'post',
               type: 'reference',
-              to: {type: 'post'},
+              to: {type: 'posts'},
             },
             {
               name: 'layout',

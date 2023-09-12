@@ -5,23 +5,22 @@ import Post from '../components/feed/Post.astro'
 import Post2 from '../components/feed/Post2.astro'
 import Quote from '../components/feed/Quote.astro'
 import Layout from '../layouts/Layout.astro'
-import { getArticle, getImg, getPost, getQuote } from '../lib/api.js'
+import { getArticle, getImg, getPosts, getQuote } from '../lib/api.js'
 
-const posts = await getPost()
+const posts = await getPosts()
 const img = await getImg()
 const quote = await getQuote()
 const article = await getArticle()
-const posts2 = await getPost()
+const posts2 = await getPosts()
 ---
 
 <Layout title="Reality Designers">
   <main
-    class="grid grid-cols p-0 lg:p-20 pt-16 md:grid-cols-2 lg:grid-cols-3 wrap w-full h-auto justify-center "
+    class="grid grid-cols p-0 lg:p-20 pt-16 md:grid-cols-2 lg:grid-cols-3 wrap w-full h-auto justify-center"
   >
     <Post posts={posts} />
     <Img img={img} />
     <Quote quote={quote} />
     <Article article={article} />
-  
   </main>
 </Layout>

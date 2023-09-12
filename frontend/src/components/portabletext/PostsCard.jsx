@@ -23,7 +23,7 @@ const PostsCard = ({ title, slug, image }) => {
           </p>
           <a
             className="duration-3 font-rajdhani text-xl tracking-wide text-gray-300 transition-colors group-hover:text-white group-hover:underline"
-            href={`/blog/${slug}`}
+            href={`/posts/${slug}`}
           >
             {title}
           </a>

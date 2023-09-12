@@ -50,7 +50,7 @@ export async function getRightSideBarPosts() {
 }
 
 export async function getMainPost() {
-  const query = `*[_type == "posts"] |  order(_createdAt desc)[9] {
+  const query = `*[_type == "posts"] |  order(_createdAt desc) {
     title,
     category,
     author,
@@ -70,61 +70,72 @@ export async function getMainPost() {
 }
 
 export async function getPostBySlug() {
-  const query = `*[_type == "posts"] |  order(_createdAt desc) {
-  title,
-  layout,
-  slug,
-  excerpt,
-  tags,
-  category,
-  publicationDate,
-  team->{
-   ...,
-  },
-
-  "lightLayout": {
-   "image": darkLayout.image,
-    "content": darkLayout.content[] {
-      ...,
-      media->,
-     "postsRef": {
-        "postsTitle": posts->title,
-        "postsSlug": posts->slug.current,
-        "postsImage": posts->darkLayout.image
-        
-      }
-    }
-  },
-  "darkLayout": {
-    "image": darkLayout.image,
-    "content": darkLayout.content[] {
-      ...,
-      media-> {
+  const query = `
+    *[_type == "posts"] | order(_createdAt desc) {
+      title,
+      layout,
+      slug,
+      excerpt,
+      tags,
+      category,
+      publicationDate,
+      team->{
+        ...
+      },
+      content[]{
         ...,
-        className->{name},
-        team->,
+        media-> {
+          ...,
+          className->{name},
+          team->,
+        },
+        markDefs[]{
+          ...,
+          _type == "internalLink" => {
+            "slug": @.reference->slug
+          }
+        },
+        "postsRef": {
+          "postsTitle": posts->title,
+          "postsSlug": posts->slug.current,
+          "postsImage": posts->image
+        },
       },
-     "postsRef": {
-        "postsTitle": posts->title,
-        "postsSlug": posts->slug.current,
-        "postsImage": posts->darkLayout.image
-      },
-      markDefs[]{
-      ...,
-      _type == "internalLink" => {
-        "slug": @.reference->slug
+      linkedContent[]{
+        ...,
+        post-> {
+          _id,
+          title,
+          content[]{
+            ...,
+            media-> {
+              ...,
+              className->{name},
+              team->,
+            },
+            markDefs[]{
+              ...,
+              _type == "internalLink" => {
+                "slug": @.reference->slug
+              }
+            },
+            "postsRef": {
+              "postsTitle": posts->title,
+              "postsSlug": posts->slug.current,
+              "postsImage": posts->image
+            },
+          }
+        }
       }
     }
-  }
-  }
-}
-`
+  `
+
   const data = await client.fetch(query)
   return data
 }
 
-export async function getPost() {
-  const query = `*[_type == "post"] |  order(_createdAt desc) {
+export async function getPosts() {
+  const query = `*[_type == "posts"] |  order(_createdAt desc) {
     title,
     category,
     author,

@@ -4,7 +4,7 @@ import {visionTool} from '@sanity/vision'
 
 import article from './schemas/article'
 import posts from './schemas/posts'
-import post from './schemas/post'
+
 import team from './schemas/team'
 import category from './schemas/category'
 import media from './schemas/media'
@@ -24,6 +24,6 @@ export default defineConfig({
   plugins: [deskTool(), visionTool()],
 
   schema: {
-    types: [article, img, video, quote, post, team, posts, category, media],
+    types: [article, img, video, quote, team, posts, category, media],
   },
 })

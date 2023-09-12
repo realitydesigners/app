@@ -27,8 +27,11 @@ const iFrame = ({ value }) => {
 const Blog = {
   block: {
     normal: ({ children }) => (
-      <div className="w-screen flex justify-center">
-        <p className="w-11/12 leading-7 tracking-wide text-xl md:w-3/4  lg:w-1/2 lg:text-2xl">
+      <div
+        className="w-screen flex justify-center "
+        style={{ fontFamily: 'Rajdhani', fontWeight: 600 }}
+      >
+        <p className="w-11/12 leading-7 tracking-wide text-xl md:w-3/4 lg:w-1/2 lg:text-2xl mb-8">
           {children}
         </p>
       </div>

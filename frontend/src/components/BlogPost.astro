@@ -52,14 +52,36 @@ const { post } = Astro.props
       )
     }
   </div>
-
   {
-    post.darkLayout?.content && (
-      <PortableTextComponent
-        content={post.darkLayout?.content}
-        template="blog"
-      />
+    post?.content && (
+      <PortableTextComponent content={post?.content} template="blog" />
     )
+  }
+  {
+    post?.linkedContent.map((item: any) => {
+      if (item._type === 'postsRef' && item.post) {
+        let bgColor = 'bg-white' // Default background color
+
+        switch (item.layout) {
+          case 'Dark':
+            bgColor = 'bg-black text-gray-300 post-2'
+            break
+          case 'Light':
+            bgColor = 'bg-gray-200 text-black post-1'
+            break
+          // You can add more cases if needed in the future
+        }
+
+        return (
+          <div class={`w-full pt-20 pb-20 ${bgColor}`}>
+            <PortableTextComponent
+              content={item.post.content}
+              template="blog"
+            />
+          </div>
+        )
+      }
+    })
   }
 
   <style>
