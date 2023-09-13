@@ -7,6 +7,7 @@ import type { Image, PortableTextBlock } from 'sanity'
 import * as THREE from 'three'
 import AllCategories from '../../components/three/AllCategories'
 import { useCategory } from '../../components/three/CategoryContext'
+import Sidebar from '../../components/three/Sidebar'
 import Stars from '../../components/three/Stars'
 
 export interface PostsPayload {
@@ -137,6 +138,8 @@ const InteractiveWorldScene: React.FC<InteractiveWorldSceneProps> = ({
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
+      <Sidebar content={currentContent} isVisible={shouldShowSidebar} />
+
       <Canvas
         style={{ height: '100vh', width: '100vw' }}
         gl={{ outputEncoding: THREE.sRGBEncoding }}
