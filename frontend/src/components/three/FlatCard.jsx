@@ -1,20 +1,6 @@
 import React from 'react'
 
-interface FlatCardProps {
-  title: string
-  author?: string
-  excerpt?: string
-  publicationDate?: string
-  slug?: string
-}
-
-export const FlatCard: React.FC<FlatCardProps> = ({
-  title,
-  author,
-  excerpt,
-  publicationDate,
-  slug,
-}) => {
+const FlatCard = ({ title, author, excerpt, publicationDate, slug }) => {
   return (
     <div className="mb-2 max-w-full rounded border border-gray-200/20 bg-black bg-opacity-50 p-4 font-mono text-gray-300 shadow-md transition duration-300 ease-in-out hover:bg-opacity-70">
       {publicationDate && (

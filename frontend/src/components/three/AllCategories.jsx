@@ -2,18 +2,15 @@ import { Text } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
-import { Crystal } from '../../components/three/Crystal'
-
-type Position = [number, number, number]
-type WorldInteractionHandler = (worldName: string, position: Position) => void
+import Crystal from './Crystal'
 
 export function getMainCategoryPositions(
-  count: number,
-  offset: [number, number, number] = [0, 0, 0],
-  radius: number = 15,
-): [number, number, number][] {
+  count,
+  offset = [0, 0, 0],
+  radius = 15,
+) {
   const phi = Math.PI * (43 - Math.sqrt(5)) // golden angle
-  const positions: [number, number, number][] = []
+  const positions = []
 
   for (let i = 0; i < count; i++) {
     const y = 1 - (i / (count - 1)) * 2 // y goes from 1 to -1
@@ -31,75 +28,20 @@ export function getMainCategoryPositions(
   return positions
 }
 
-export function getSubCategoryPositions(
-  count: number,
-  radius: number,
-  mainCategoryPosition: [number, number, number],
-): [number, number, number][] {
+export function getSubCategoryPositions(count, radius, mainCategoryPosition) {
   return Array.from({ length: count }, (_, index) => {
     const angle = (Math.PI * 2 * index) / count
     const x = mainCategoryPosition[0] + Math.cos(angle) * radius
     const y = mainCategoryPosition[1] + Math.sin(angle) * radius
-    return [x, y, mainCategoryPosition[2]] as [number, number, number]
+    return [x, y, mainCategoryPosition[2]]
   })
 }
 
-interface Category {
-  title?: string
-  isMain: boolean
-  subCategories?: Category[]
-}
-
-interface BaseCategoryProps {
-  title: string
-  position: Position
-  isHighlighted: boolean
-}
-
-interface MainCategoryProps extends BaseCategoryProps {
-  onClick: WorldInteractionHandler
-  onPointerOver?: WorldInteractionHandler
-  onPointerOut: () => void
-  hoveredWorld: string | null
-  onHover: () => void
-  onLeave: () => void
-  selectedMainWorld: string | null
-}
-
-interface SubCategoryProps extends BaseCategoryProps {
-  onClick: WorldInteractionHandler
-  onPointerOver: (subWorldName: string) => void
-  onPointerOut: () => void
-}
-
-interface MainCategoriesProps {
-  categories: Category[]
-  highlightedCategory: string | null
-  handleMainWorldInteraction: WorldInteractionHandler
-  hoveredWorld: string | null
-  setHoveredWorld: (world: string | null) => void
-  selectedMainWorld: string | null
-}
-
-interface SubCategoriesProps {
-  mainWorldPosition: Position
-  subCategories: Omit<SubCategoryProps, 'position'>[]
-}
-
-interface AllCategoriesProps {
-  categories: Category[]
-  highlightedCategory: string | null
-  handleMainWorldInteraction: WorldInteractionHandler
-  selectedMainWorld: string | null
-  highlightedWorld: string | null
-}
-
-const playSound = (soundPath: string) => {
+const playSound = (soundPath) => {
   const audio = new Audio(soundPath)
   audio.play()
 }
-
-export const MainCategory: React.FC<MainCategoryProps> = (props) => {
+export const MainCategory = (props) => {
   const {
     title,
     position,
@@ -129,7 +71,7 @@ export const MainCategory: React.FC<MainCategoryProps> = (props) => {
     onClick(title, position)
   }
 
-  const textRef = useRef<THREE.Object3D>(null)
+  const textRef = useRef(null)
   const { camera } = useThree()
 
   useFrame(() => {
@@ -164,14 +106,16 @@ export const MainCategory: React.FC<MainCategoryProps> = (props) => {
   )
 }
 
-export const MainCategories: React.FC<MainCategoriesProps> = ({
-  categories,
-  highlightedCategory,
-  handleMainWorldInteraction,
-  setHoveredWorld,
-  hoveredWorld,
-  selectedMainWorld,
-}) => {
+export const MainCategories = (props) => {
+  const {
+    categories,
+    highlightedCategory,
+    handleMainWorldInteraction,
+    setHoveredWorld,
+    hoveredWorld,
+    selectedMainWorld,
+  } = props
+
   const positions = getMainCategoryPositions(categories.length)
 
   return (
@@ -200,15 +144,17 @@ export const MainCategories: React.FC<MainCategoriesProps> = ({
   )
 }
 
-export const SubCategory: React.FC<SubCategoryProps> = ({
-  title,
-  position,
-  isHighlighted,
-  onClick,
-  onPointerOver,
-  onPointerOut,
-}) => {
-  const textRef = useRef<THREE.Object3D>(null)
+export const SubCategory = (props) => {
+  const {
+    title,
+    position,
+    isHighlighted,
+    onClick,
+    onPointerOver,
+    onPointerOut,
+  } = props
+
+  const textRef = useRef(null)
   const { camera } = useThree()
 
   useFrame(() => {
@@ -243,13 +189,11 @@ export const SubCategory: React.FC<SubCategoryProps> = ({
   )
 }
 
-export const SubCategories: React.FC<SubCategoriesProps> = ({
-  mainWorldPosition,
-  subCategories,
-}) => {
+export const SubCategories = (props) => {
+  const { mainWorldPosition, subCategories } = props
   const { camera } = useThree()
 
-  const currentPositionsRef = useRef<THREE.Vector3[]>([])
+  const currentPositionsRef = useRef([])
 
   const positions = getSubCategoryPositions(
     subCategories.length,
@@ -290,21 +234,26 @@ export const SubCategories: React.FC<SubCategoriesProps> = ({
   )
 }
 
-const AllCategories: React.FC<AllCategoriesProps> = ({
-  categories,
-  highlightedCategory,
-  handleMainWorldInteraction,
-  selectedMainWorld,
-}) => {
+const AllCategories = (props) => {
+  const {
+    categories,
+    highlightedCategory,
+    handleMainWorldInteraction,
+    selectedMainWorld,
+  } = props
+
+  const [hoveredWorld, setHoveredWorld] = useState(null)
+
   const positions = getMainCategoryPositions(categories.length)
   const selectedMainWorldPosition =
     positions[categories.findIndex((cat) => cat.title === highlightedCategory)]
   const selectedMainWorldCategory = categories.find(
     (category) => category.title === highlightedCategory,
   )
-  const subCategories = selectedMainWorldCategory?.subCategories || []
-  const [highlightedWorld, setHighlightedWorld] = useState<string | null>(null)
-  const [hoveredWorld, setHoveredWorld] = useState<string | null>(null)
+  const subCategories = selectedMainWorldCategory
+    ? selectedMainWorldCategory.subCategories
+    : []
+  const [highlightedWorld, setHighlightedWorld] = useState(null)
 
   return (
     <group
@@ -326,10 +275,10 @@ const AllCategories: React.FC<AllCategoriesProps> = ({
           subCategories={subCategories
             .filter((subCat) => subCat.title)
             .map((subCat) => ({
-              title: subCat.title!,
+              title: subCat.title,
               isHighlighted: highlightedWorld === subCat.title,
               onClick: handleMainWorldInteraction,
-              onPointerOver: () => setHighlightedWorld(subCat.title!),
+              onPointerOver: () => setHighlightedWorld(subCat.title),
               onPointerOut: () => {}, // Do nothing when pointer leaves sub-world
             }))}
         />

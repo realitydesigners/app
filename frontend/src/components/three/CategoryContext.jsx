@@ -1,33 +1,14 @@
-'use client'
-
 import React, { createContext, useContext, useState } from 'react'
 
-type Navigation = {
-  mainWorld: string | null
-  subWorld: string | null
-  category: string | null
-}
-
-type CategoryContextType = {
-  navigation: Navigation
-  setNavigation: React.Dispatch<React.SetStateAction<Navigation>>
-}
-
-const defaultContext: CategoryContextType = {
+const defaultContext = {
   navigation: { mainWorld: null, subWorld: null, category: null },
   setNavigation: () => {}, // dummy function
 }
 
-const CategoryContext = createContext<CategoryContextType>(defaultContext)
+const CategoryContext = createContext(defaultContext)
 
-interface CategoryProviderProps {
-  children: React.ReactNode
-}
-
-export const CategoryProvider: React.FC<CategoryProviderProps> = ({
-  children,
-}) => {
-  const [navigation, setNavigation] = useState<Navigation>({
+export const CategoryProvider = ({ children }) => {
+  const [navigation, setNavigation] = useState({
     mainWorld: null,
     subWorld: null,
     category: null,

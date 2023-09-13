@@ -4,17 +4,7 @@ import * as THREE from 'three'
 
 const CustomDodecahedronGeometry = new THREE.DodecahedronGeometry(1, 0)
 
-interface CrystalProps {
-  position: [number, number, number]
-  scale: [number, number, number]
-  onPointerOver?: () => void
-  onPointerOut?: () => void
-  onClick?: () => void
-  emissiveIntensity?: number
-  className?: string
-}
-
-export const Crystal: React.FC<CrystalProps> = ({
+const Crystal = ({
   position,
   scale,
   onPointerOver,
@@ -22,7 +12,7 @@ export const Crystal: React.FC<CrystalProps> = ({
   onClick,
   emissiveIntensity = 1,
 }) => {
-  const meshRef = useRef<THREE.Mesh>(null)
+  const meshRef = useRef(null)
   const { raycaster, camera, scene } = useThree()
 
   const material = useMemo(() => {
@@ -71,7 +61,7 @@ export const Crystal: React.FC<CrystalProps> = ({
 
   // Handle the click using event delegation and raycasting
   useEffect(() => {
-    const handleClick = (event: any) => {
+    const handleClick = (event) => {
       raycaster.setFromCamera(
         new THREE.Vector2(
           (event.clientX / window.innerWidth) * 2 - 1,
@@ -82,7 +72,7 @@ export const Crystal: React.FC<CrystalProps> = ({
       const intersects = raycaster.intersectObjects(scene.children, true)
 
       if (intersects.length > 0 && intersects[0].object === meshRef.current) {
-        onClick?.()
+        onClick && onClick()
       }
     }
 
@@ -107,3 +97,5 @@ export const Crystal: React.FC<CrystalProps> = ({
     </mesh>
   )
 }
+
+export default Crystal

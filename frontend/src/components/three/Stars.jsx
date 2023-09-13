@@ -1,15 +1,15 @@
 import { useFrame, useThree } from '@react-three/fiber'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
-export const Stars: React.FC = () => {
+export const Stars = () => {
   const { scene } = useThree()
-  const starFieldRef = useRef<THREE.Group>()
+  const starFieldRef = useRef()
 
-  React.useEffect(() => {
+  useEffect(() => {
     let group = new THREE.Group()
     let geometry = new THREE.BufferGeometry()
-    let vertices: number[] = []
+    let vertices = []
 
     for (let i = 0; i < 10000; i++) {
       const x = (Math.random() - 0.5) * 1000
@@ -37,9 +37,6 @@ export const Stars: React.FC = () => {
   }, [scene])
 
   useFrame(({ clock }) => {
-    console.log('Frame update')
-    console.log(starFieldRef.current)
-
     if (starFieldRef.current) {
       const elapsedTime = clock.getElapsedTime()
 

@@ -3,103 +3,32 @@
 import { OrbitControls, PerspectiveCamera, Text } from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import type { Image, PortableTextBlock } from 'sanity'
 import * as THREE from 'three'
 import AllCategories from '../../components/three/AllCategories'
 import { useCategory } from '../../components/three/CategoryContext'
 import Sidebar from '../../components/three/Sidebar'
 import Stars from '../../components/three/Stars'
 
-export interface PostsPayload {
-  title?: any
-  position?: any
-  layout?: string
-  slug?: {
-    current?: string
-  }
-  excerpt?: string
-  author?: string
-  tags?: string[]
-  category?: string
-  publicationDate?: string
-  lightLayout?: {
-    image?: Image
-    description?: PortableTextBlock[]
-  }
-  darkLayout?: {
-    image?: Image
-    description?: PortableTextBlock[]
-  }
-}
+const CAMERA_POSITION = [0, 0, 30]
 
-export interface CategoryPayload {
-  _id: string
-  _type: string
-  title?: string
-  name?: string
-  slug?: {
-    current?: string
-  }
-  isMain?: boolean
-  sceneIdentifier?: string
-  subCategories?: CategoryPayload[]
-  shape: {
-    name: string
-    title: string
-    scale: [number, number, number]
-    color: string
-    emissiveIntensity: number
-  }
-
-  associatedPosts?: PostsPayload[]
-}
-
-const CAMERA_POSITION: [number, number, number] = [0, 0, 30]
-
-interface InteractiveWorldSceneProps {
-  category: CategoryPayload[]
-}
-
-interface Category {
-  title: string
-  isMain: boolean
-  subCategories?: Category[]
-}
-const InteractiveWorldScene: React.FC<InteractiveWorldSceneProps> = ({
-  category,
-}) => {
+const InteractiveWorldScene = ({ category }) => {
   const { navigation, setNavigation } = useCategory()
-  const orbitControlsRef = useRef<any>(null)
+  const orbitControlsRef = useRef(null)
 
   // State variables
 
-  const [highlightedWorld, setHighlightedWorld] = useState<string | null>(null)
-  const [hoveredWorld, setHoveredWorld] = useState<string | null>(null)
-
-  const [cameraPosition, setCameraPosition] =
-    useState<[number, number, number]>(CAMERA_POSITION)
-  const [selectedMainWorld, setSelectedMainWorld] = useState<string | null>(
-    null,
-  )
-  const [highlightedCategory, setHighlightedCategory] = useState<string | null>(
-    null,
-  )
+  const [highlightedWorld, setHighlightedWorld] = useState(null)
+  const [hoveredWorld, setHoveredWorld] = useState(null)
+  const [cameraPosition, setCameraPosition] = useState(CAMERA_POSITION)
+  const [selectedMainWorld, setSelectedMainWorld] = useState(null)
+  const [highlightedCategory, setHighlightedCategory] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
-  const [selectedSubWorld, setSelectedSubWorld] = useState<string | null>(null)
-
-  const [currentContent, setCurrentContent] = useState<PostsPayload[]>([])
-
-  const [activeBackgroundScene, setActiveBackgroundScene] = useState<
-    string | null
-  >(null)
+  const [selectedSubWorld, setSelectedSubWorld] = useState(null)
+  const [currentContent, setCurrentContent] = useState([])
+  const [activeBackgroundScene, setActiveBackgroundScene] = useState(null)
 
   const handleMainWorldInteraction = useCallback(
-    (
-      worldName: string,
-      position: [number, number, number],
-      childCategoryName?: string,
-    ) => {
+    (worldName, position, childCategoryName) => {
       setSelectedMainWorld(worldName)
       setHighlightedWorld(worldName)
       setHighlightedCategory(worldName)
@@ -121,7 +50,7 @@ const InteractiveWorldScene: React.FC<InteractiveWorldSceneProps> = ({
         setHighlightedWorld(childCategoryName)
       }
 
-      setNavigation((prev: any) => ({
+      setNavigation((prev) => ({
         ...prev,
         mainWorld: worldName,
         category: prev.category,
@@ -132,7 +61,7 @@ const InteractiveWorldScene: React.FC<InteractiveWorldSceneProps> = ({
 
   const mainCategories = category.filter(
     (cat) => Boolean(cat.title) && cat.isMain,
-  ) as Category[]
+  )
 
   const shouldShowSidebar = sidebarOpen && currentContent.length > 0
 
