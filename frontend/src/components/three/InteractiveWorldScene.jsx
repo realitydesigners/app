@@ -1,14 +1,17 @@
 'use client'
 
+import { a, useSpring } from '@react-spring/three'
 import { OrbitControls, PerspectiveCamera, Text } from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
-import AllCategories from '../../components/three/AllCategories'
-import Breadcrumb from '../../components/three/Breadcrumb'
-import { useCategory } from '../../components/three/CategoryContext'
-import Sidebar from '../../components/three/Sidebar'
-import Stars from '../../components/three/Stars'
+import AllCategories from './AllCategories'
+import Breadcrumb from './Breadcrumb'
+import { useCategory } from './CategoryContext'
+import Fiber from './Fiber'
+import HumanScene from './HumanScene'
+import Sidebar from './Sidebar'
+import Stars from './Stars'
 
 const CAMERA_POSITION = [0, 0, 30]
 
@@ -66,6 +69,10 @@ const InteractiveWorldScene = ({ category = [] }) => {
 
   const shouldShowSidebar = sidebarOpen && currentContent.length > 0
 
+  const props = useSpring({
+    from: { scale: [0, 0, 0] },
+    to: { scale: [1, 1, 1] },
+  })
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
       <Breadcrumb
@@ -82,12 +89,15 @@ const InteractiveWorldScene = ({ category = [] }) => {
       >
         <PerspectiveCamera makeDefault position={cameraPosition} zoom={0.7} />
         <OrbitControls ref={orbitControlsRef} />
+        {activeBackgroundScene === 'humanScene' && (
+          <a.group scale={props.scale}>
+            <HumanScene />
+          </a.group>
+        )}
 
         {/*   
-        {activeBackgroundScene === 'humanScene' && <HumanScene />}
         {activeBackgroundScene === 'cultureScene' && <CultureScene />}
         */}
-
         <AllCategories
           categories={mainCategories}
           highlightedCategory={highlightedCategory}
