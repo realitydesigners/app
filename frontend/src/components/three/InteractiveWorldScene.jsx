@@ -3,13 +3,12 @@
 import { a, useSpring } from '@react-spring/three'
 import { OrbitControls, PerspectiveCamera, Text } from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import * as THREE from 'three'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import AllCategories from './AllCategories'
 import Breadcrumb from './Breadcrumb'
 import { useCategory } from './CategoryContext'
-import Fiber from './Fiber'
 import HumanScene from './HumanScene'
+import { Menu } from './Menu'
 import Sidebar from './Sidebar'
 import Stars from './Stars'
 
@@ -81,12 +80,18 @@ const InteractiveWorldScene = ({ category = [] }) => {
           subWorld: highlightedWorld,
         }}
       />
+      <Menu
+        categories={mainCategories}
+        selectedMainWorld={selectedMainWorld}
+        onSelectedMainWorldChange={setSelectedMainWorld}
+        onCategorySelect={setSelectedMainWorld}
+        onCategoryHighlight={setHighlightedCategory}
+        setSelectedSubWorld={setSelectedSubWorld}
+        onSubCategoryHighlight={setHighlightedWorld}
+      />
       <Sidebar content={currentContent} isVisible={shouldShowSidebar} />
 
-      <Canvas
-        style={{ height: '100vh', width: '100vw' }}
-        gl={{ outputEncoding: THREE.sRGBEncoding }}
-      >
+      <Canvas style={{ height: '100vh', width: '100vw' }}>
         <PerspectiveCamera makeDefault position={cameraPosition} zoom={0.7} />
         <OrbitControls ref={orbitControlsRef} />
         {activeBackgroundScene === 'humanScene' && (
