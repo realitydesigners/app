@@ -44,10 +44,11 @@ const { posts } = Astro.props
                     ))}
                 </div>
 
-                <h2 class="p-2 text-2xl uppercase leading-none text-white">
+                <h2 class="p-2 text-2xl uppercase leading-none text-white scramble-title animate-fadeIn duration-500">
                   {post.title}
                 </h2>
-                <p class="p-2 excerpt-clamp text-lg leading-tight text-gray-200/60">
+
+                <p class="p-2 excerpt-clamp text-lg leading-tight text-gray-200/60 scramble-excerpt">
                   {post.excerpt}
                 </p>
               </div>
@@ -76,4 +77,40 @@ const { posts } = Astro.props
     line-height: 1.5em;
     max-height: 4.5em;
   }
+  .dud {
+    color: transparent;
+    transition: color 0.3s;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.7s forwards;
+  }
 </style>
+
+<script>
+  import TextScrambler from '../effects/TextScrambler'
+
+  function scrambleText() {
+    const titles = document.querySelectorAll('.scramble-title')
+    const excerpts = document.querySelectorAll('.scramble-excerpt')
+
+    titles.forEach((title) => {
+      const scrambler = new TextScrambler(title)
+      scrambler.setText(title.textContent)
+    })
+
+    excerpts.forEach((excerpt) => {
+      const scrambler = new TextScrambler(excerpt)
+      scrambler.setText(excerpt.textContent)
+    })
+  }
+
+  document.addEventListener('DOMContentLoaded', scrambleText)
+</script>
