@@ -4,52 +4,51 @@ import '@fontsource/rajdhani/700.css'
 import { Image } from 'astro:assets'
 import { getSanityImageURL } from '../../utils/helpers.js'
 
-const { posts } = Astro.props
+const { post } = Astro.props
 ---
 
 <ul class="w-full lg:w-1/2 h-auto grid grid-cols-1 p-2 flex-wrap">
   {
-    posts &&
-      posts.map((post: any) => (
-        <a href={`/posts/${post.slug?.current}`}>
-          <div class="text-white p-4 w-full ">
-            {post?.lightLayout?.image && (
-              <Image
-                src={getSanityImageURL(post?.lightLayout?.image).url()}
-                alt="this is an image"
-                width={1000}
-                height={800}
-                format="webp"
-                class="w-full h-full object-cover"
-              />
-            )}
-            {post?.darkLayout?.image && (
-              <Image
-                src={getSanityImageURL(post?.darkLayout?.image).url()}
-                alt="this is an image"
-                width={1000}
-                height={800}
-                format="webp"
-                class="w-full h-full object-cover"
-              />
-            )}
-            <div class="flex p-2">
-              {post.tags &&
-                post.tags.map((tag: string) => (
-                  <p class="lg:text-md break-words rounded-full border border-gray-600 pt-1 pb-1 pl-3 pr-3 font-mono text-sm font-normal uppercase tracking-wide text-gray-400 mr-2">
-                    {tag}
-                  </p>
-                ))}
-            </div>
-            <h2 class="p-2 font-mono text-4xl uppercase leading-none text-white">
-              {post.title}
-            </h2>
-            <p class="p-2 font-mono text-lg leading-tight text-gray-200/60">
-              {post.excerpt}
-            </p>
+    post && (
+      <a href={`/posts/${post.slug?.current}`}>
+        <div class="text-white p-4 w-full ">
+          {post?.lightLayout?.image && (
+            <Image
+              src={getSanityImageURL(post?.lightLayout?.image).url()}
+              alt="this is an image"
+              width={1000}
+              height={800}
+              format="webp"
+              class="w-full h-full object-cover"
+            />
+          )}
+          {post?.darkLayout?.image && (
+            <Image
+              src={getSanityImageURL(post?.darkLayout?.image).url()}
+              alt="this is an image"
+              width={1000}
+              height={800}
+              format="webp"
+              class="w-full h-full object-cover"
+            />
+          )}
+          <div class="flex p-2">
+            {post.tags &&
+              post.tags.map((tag: string) => (
+                <p class="lg:text-md break-words rounded-full border border-gray-600 pt-1 pb-1 pl-3 pr-3 font-mono text-sm font-normal uppercase tracking-wide text-gray-400 mr-2">
+                  {tag}
+                </p>
+              ))}
           </div>
-        </a>
-      ))
+          <h2 class="p-2 font-mono text-4xl uppercase leading-none text-white">
+            {post.title}
+          </h2>
+          <p class="p-2 font-mono text-lg leading-tight text-gray-200/60">
+            {post.excerpt}
+          </p>
+        </div>
+      </a>
+    )
   }
 </ul>
 

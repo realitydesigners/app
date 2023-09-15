@@ -9,7 +9,7 @@ import {
   getRightSideBarPosts,
 } from '../lib/api.js'
 
-const posts = await getMainPost()
+const post = await getMainPost()
 const sideposts = await getRightSideBarPosts()
 const leftposts = await getLeftSideBarPosts()
 ---
@@ -19,7 +19,7 @@ const leftposts = await getLeftSideBarPosts()
     class="flex flex-wrap w-screen h-auto justify-center bg-black pt-20 p-2 lg:p-12 lg:pt-28"
   >
     <LeftSidePosts posts={leftposts} />
-    <MainPost posts={posts} />
+    <MainPost post={post} />
     <RightSidePosts posts={sideposts} />
   </main>
 </Layout>

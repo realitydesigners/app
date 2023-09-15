@@ -50,7 +50,7 @@ export async function getRightSideBarPosts() {
 }
 
 export async function getMainPost() {
-  const query = `*[_type == "posts"] |  order(_createdAt desc) {
+  const query = `*[_type == "posts"] |  order(_createdAt desc)[0] {
     title,
     category,
     author,
@@ -66,7 +66,7 @@ export async function getMainPost() {
     }
   }`
   const data = await client.fetch(query)
-  return [data]
+  return data
 }
 
 export async function getPostBySlug() {
@@ -184,7 +184,6 @@ export async function getQuote() {
 }`
 
   const data = await client.fetch(query)
-
   return data
 }
 
