@@ -13,28 +13,19 @@ const { posts } = Astro.props
       posts &&
         posts.map((post: any) => (
           <a href={`/posts/${post.slug?.current}`}>
-            <div class="flex flex-wrap text-white p-4 w-full border-b-2 mb-2 border-gray-200/20">
-              {post?.lightLayout?.image && (
+            <div class="flex flex-wrap text-white p-2 w-full border-b-2 mb-2 border-gray-400/20 ">
+              {post?.image && (
                 <Image
-                  src={getSanityImageURL(post?.lightLayout?.image).url()}
+                  src={getSanityImageURL(post?.image).url()}
                   alt="this"
                   width={1000}
                   height={1000}
                   format="webp"
-                  class="w-full h-64 lg:h-48 object-cover"
+                  class="w-full h-48  object-cover"
                 />
               )}
-              {post?.darkLayout?.image && (
-                <Image
-                  src={getSanityImageURL(post?.darkLayout?.image).url()}
-                  alt="this"
-                  width={1000}
-                  height={1000}
-                  format="webp"
-                  class="w-full h-64 lg:h-48 object-cover"
-                />
-              )}
-              <div class="p-2 w-full mb-2">
+
+              <div class="w-full mb-2">
                 <div class="flex p-2">
                   {post.tags &&
                     post.tags.map((tag: string) => (
@@ -43,12 +34,10 @@ const { posts } = Astro.props
                       </p>
                     ))}
                 </div>
-
-                <h2 class="p-2 text-2xl uppercase leading-none text-white scramble-title animate-fadeIn duration-500">
+                <h2 class="p-2 text-2xl uppercase leading-none text-white scramble-title">
                   {post.title}
                 </h2>
-
-                <p class="p-2 excerpt-clamp text-lg leading-tight text-gray-200/60 scramble-excerpt">
+                <p class="p-2 excerpt-clamp text-lg mb-4 text-gray-400 ">
                   {post.excerpt}
                 </p>
               </div>
@@ -74,43 +63,7 @@ const { posts } = Astro.props
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.5em;
-    max-height: 4.5em;
-  }
-  .dud {
-    color: transparent;
-    transition: color 0.3s;
-  }
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  .animate-fadeIn {
-    animation: fadeIn 0.7s forwards;
+    line-height: 1.2em;
+    max-height: 4em;
   }
 </style>
-
-<script>
-  import TextScrambler from '../effects/TextScrambler'
-
-  function scrambleText() {
-    const titles = document.querySelectorAll('.scramble-title')
-    const excerpts = document.querySelectorAll('.scramble-excerpt')
-
-    titles.forEach((title) => {
-      const scrambler = new TextScrambler(title)
-      scrambler.setText(title.textContent)
-    })
-
-    excerpts.forEach((excerpt) => {
-      const scrambler = new TextScrambler(excerpt)
-      scrambler.setText(excerpt.textContent)
-    })
-  }
-
-  document.addEventListener('DOMContentLoaded', scrambleText)
-</script>

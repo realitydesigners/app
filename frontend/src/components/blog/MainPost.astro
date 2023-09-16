@@ -11,27 +11,18 @@ const { post } = Astro.props
   {
     post && (
       <a href={`/posts/${post.slug?.current}`}>
-        <div class="text-white p-4 w-full ">
-          {post?.lightLayout?.image && (
+        <div class="text-white p-2 w-full ">
+          {post?.image && (
             <Image
-              src={getSanityImageURL(post?.lightLayout?.image).url()}
+              src={getSanityImageURL(post?.image).url()}
               alt="this is an image"
               width={1000}
               height={800}
               format="webp"
-              class="w-full h-full object-cover"
+              class="w-full h-72 lg:h-96 object-cover"
             />
           )}
-          {post?.darkLayout?.image && (
-            <Image
-              src={getSanityImageURL(post?.darkLayout?.image).url()}
-              alt="this is an image"
-              width={1000}
-              height={800}
-              format="webp"
-              class="w-full h-full object-cover"
-            />
-          )}
+
           <div class="flex p-2">
             {post.tags &&
               post.tags.map((tag: string) => (
@@ -40,10 +31,10 @@ const { post } = Astro.props
                 </p>
               ))}
           </div>
-          <h2 class="p-2 font-mono text-4xl uppercase leading-none text-white">
+          <h2 class="p-2 font-mono text-4xl uppercase leading-none text-white scramble-title">
             {post.title}
           </h2>
-          <p class="p-2 font-mono text-lg leading-tight text-gray-200/60">
+          <p class="p-2 font-mono text-lg leading-tight text-gray-400 ">
             {post.excerpt}
           </p>
         </div>

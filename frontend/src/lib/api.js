@@ -18,12 +18,7 @@ export async function getLeftSideBarPosts() {
     tags,
     slug,
     publicationDate,
-    lightLayout {
-      image,
-    },
-    darkLayout {
-      image,
-    }
+    image,
   }`
   const data = await client.fetch(query)
   return data
@@ -38,12 +33,7 @@ export async function getRightSideBarPosts() {
     tags,
     slug,
     publicationDate,
-    lightLayout {
-      image,
-    },
-    darkLayout {
-      image,
-    }
+    image,
   }`
   const data = await client.fetch(query)
   return data
@@ -58,12 +48,7 @@ export async function getMainPost() {
     tags,
     slug,
     publicationDate,
-    lightLayout {
-      image,
-    },
-    darkLayout {
-      image,
-    }
+    image,
   }`
   const data = await client.fetch(query)
   return data

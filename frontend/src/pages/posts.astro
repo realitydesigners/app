@@ -23,3 +23,42 @@ const leftposts = await getLeftSideBarPosts()
     <RightSidePosts posts={sideposts} />
   </main>
 </Layout>
+
+<style>
+  .dud {
+    color: transparent;
+    transition: color 0.3s;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.7s forwards;
+  }
+</style>
+
+<script>
+  import TextScrambler from '../components/effects/TextScrambler'
+
+  function scrambleText() {
+    const titles = document.querySelectorAll('.scramble-title')
+    const excerpts = document.querySelectorAll('.scramble-excerpt')
+
+    titles.forEach((title) => {
+      const scrambler = new TextScrambler(title)
+      scrambler.setText(title.textContent)
+    })
+
+    excerpts.forEach((excerpt) => {
+      const scrambler = new TextScrambler(excerpt)
+      scrambler.setText(excerpt.textContent)
+    })
+  }
+
+  document.addEventListener('DOMContentLoaded', scrambleText)
+</script>
