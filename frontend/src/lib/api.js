@@ -64,6 +64,7 @@ export async function getPostBySlug() {
       tags,
       category,
       publicationDate,
+      image,
       team->{
         ...
       },

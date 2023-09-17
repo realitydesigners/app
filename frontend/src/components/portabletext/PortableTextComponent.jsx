@@ -29,9 +29,9 @@ const Blog = {
     normal: ({ children }) => (
       <div
         className="w-screen flex justify-center "
-        style={{ fontFamily: 'Rajdhani', fontWeight: 600 }}
+        style={{ fontFamily: 'Rajdhani', fontWeight: 500 }}
       >
-        <p className="w-11/12 leading-7 tracking-wide text-xl md:w-3/4 lg:w-1/2 lg:text-2xl mb-8">
+        <p className="w-11/12 text-gray-300 leading-7 tracking-wide text-xl md:w-3/4 lg:w-1/2 lg:text-2xl mb-8 text-justify justify-end">
           {children}
         </p>
       </div>
@@ -47,6 +47,16 @@ const Blog = {
         className="w-screen flex justify-center"
       >
         <h2 className="my-4 w-11/12 text-4xl font-bold  leading-none tracking-wide md:w-3/4  lg:w-1/2  lg:text-5xl">
+          {children}
+        </h2>
+      </div>
+    ),
+    h3: ({ children }) => (
+      <div
+        style={{ fontFamily: 'Rajdhani', fontWeight: 700 }}
+        className="w-screen flex justify-center"
+      >
+        <h2 className="my-4 w-11/12 text-3xl font-bold  leading-none tracking-wide md:w-3/4  lg:w-1/2  lg:text-4xl">
           {children}
         </h2>
       </div>

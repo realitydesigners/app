@@ -43,14 +43,14 @@ const { post } = Astro.props
 
   <div class="text-white w-full">
     {
-      post?.darkLayout?.image && (
+      post?.image && (
         <Image
-          src={getSanityImageURL(post?.darkLayout?.image).url()}
+          src={getSanityImageURL(post?.image).url()}
           alt="this is an image"
           width={1000}
           height={1000}
           format="webp"
-          class="w-full h-auto"
+          class="w-full h-[25vh] lg:h-[66vh] object-cover mb-12 "
         />
       )
     }
