@@ -31,7 +31,7 @@ const Blog = {
         className="w-screen flex justify-center "
         style={{ fontFamily: 'Rajdhani', fontWeight: 500 }}
       >
-        <p className="w-11/12 text-gray-300 leading-7 tracking-wide text-xl md:w-3/4 lg:w-1/2 lg:text-2xl mb-8 text-justify justify-end">
+        <p className="w-5/6 text-gray-300 leading-7 tracking-wide text-xl md:w-3/4 lg:w-1/2 lg:text-2xl mb-8 text-justify">
           {children}
         </p>
       </div>
@@ -46,7 +46,7 @@ const Blog = {
         style={{ fontFamily: 'Rajdhani', fontWeight: 700 }}
         className="w-screen flex justify-center"
       >
-        <h2 className="my-4 w-11/12 text-4xl font-bold  leading-none tracking-wide md:w-3/4  lg:w-1/2  lg:text-5xl">
+        <h2 className="my-4 w-5/6 text-4xl font-bold  leading-none tracking-wide md:w-3/4  lg:w-1/2  lg:text-5xl">
           {children}
         </h2>
       </div>
