@@ -141,7 +141,7 @@ export default defineType({
           title: 'Post',
           preview: {
             select: {
-              imageUrl: 'posts.darkLayout.image.asset.url',
+              imageUrl: 'posts.image.asset.url',
               title: 'posts.title',
             },
           },
@@ -184,6 +184,25 @@ export default defineType({
                 ],
               },
             },
+          ],
+        }),
+        defineField({
+          type: 'object',
+          name: 'audioRef',
+          title: 'Audio',
+          preview: {
+            select: {
+              title: 'audio.title',
+            },
+          },
+          fields: [
+            defineField({
+              type: 'reference',
+              name: 'audio',
+              title: 'Audio File',
+              to: [{type: 'audio'}],
+              // This references the 'audio' schema
+            }),
           ],
         }),
 

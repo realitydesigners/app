@@ -1,5 +1,6 @@
 import { PortableText } from '@portabletext/react'
 import ArticleRef from './ArticleRef.jsx'
+import AudioRef from './AudioRef.jsx'
 import ImageRef from './ImageRef.jsx'
 import MediaRef from './MediaRef.jsx'
 import PostsRef from './PostsRef.jsx'
@@ -81,6 +82,7 @@ const Blog = {
     mediaRef: MediaRef,
     spline: SplineRef,
     image: ImageRef,
+    audioRef: AudioRef,
   },
 }
 

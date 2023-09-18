@@ -11,6 +11,7 @@ import media from './schemas/media'
 import img from './schemas/img'
 import quote from './schemas/quote'
 import video from './schemas/video'
+import audio from './schemas/audio'
 
 export default defineConfig({
   name: 'default',
@@ -24,6 +25,6 @@ export default defineConfig({
   plugins: [deskTool(), visionTool()],
 
   schema: {
-    types: [article, img, video, quote, team, posts, category, media],
+    types: [posts, img, audio, video, quote, team, category, media, article],
   },
 })

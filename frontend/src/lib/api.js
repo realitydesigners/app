@@ -75,6 +75,13 @@ export async function getPostBySlug() {
           className->{name},
           team->,
         },
+  audioRef {
+    ...,
+    audio->{
+      title,
+      audioFile
+    }
+  },
         markDefs[]{
           ...,
           _type == "internalLink" => {
@@ -100,6 +107,7 @@ export async function getPostBySlug() {
               className->{name},
               team->,
             },
+
             markDefs[]{
               ...,
               _type == "internalLink" => {
