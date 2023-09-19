@@ -1,21 +1,16 @@
-// AudioRef.jsx
+import AudioPlayer from './Audioplayer.jsx'
 
-function AudioRef({ value }) {
-  console.log('Received value in AudioRef:', value)
-  const { title, audioFile } = value
+const AudioRefWrapper = ({ value }) => {
+  const { audioRefData } = value
 
-  if (!audioFile || !audioFile.url) {
+  if (!audioRefData) {
     return <p>Audio file not found.</p>
   }
 
-  return (
-    <div>
-      <h3>{title}</h3>
-      <audio controls>
-        <source src={audioFile.url} type="audio/mpeg" />
-      </audio>
-    </div>
-  )
+  const audioTitle = audioRefData?.audioTitle
+  const audioFileUrl = audioRefData?.audioFileUrl
+
+  return <AudioPlayer audioTitle={audioTitle} audioFileUrl={audioFileUrl} />
 }
 
-export default AudioRef
+export default AudioRefWrapper

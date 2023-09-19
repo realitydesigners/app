@@ -1,12 +1,12 @@
-// AudioPlayer.jsx
-const AudioPlayer = ({ audio, title, description }) => {
+const AudioPlayer = ({ audioTitle, audioFileUrl }) => {
+  if (!audioFileUrl) {
+    return <p>Audio file not found.</p>
+  }
+
   return (
-    <div className="audio-player">
-      <h3>{title}</h3>
-      {description && <p>{description}</p>}
-      <audio controls>
-        <source src={audio} type="audio/mp3" />{' '}
-        {/* Ensure the type matches your audio file format */}
+    <div className=" p-4 mb-8">
+      <p className="mb-2 font-bold text-white-700 p-2">{audioTitle}</p>
+      <audio controls className="w-full" src={audioFileUrl}>
         Your browser does not support the audio element.
       </audio>
     </div>

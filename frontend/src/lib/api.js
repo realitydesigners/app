@@ -75,13 +75,11 @@ export async function getPostBySlug() {
           className->{name},
           team->,
         },
-  audioRef {
-    ...,
-    audio->{
-      title,
-      audioFile
-    }
-  },
+"audioRefData": {
+  "audioTitle": audio->title,
+  "audioFileUrl": audio->audioFile.asset->url
+},
+
         markDefs[]{
           ...,
           _type == "internalLink" => {
