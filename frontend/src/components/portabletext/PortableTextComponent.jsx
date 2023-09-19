@@ -8,6 +8,9 @@ import SplineRef from './SplineRef.jsx'
 import '@fontsource/rajdhani/400.css'
 import '@fontsource/rajdhani/500.css'
 import '@fontsource/rajdhani/700.css'
+import '@fontsource/noto-sans/400.css'
+import '@fontsource/noto-sans/500.css'
+import '@fontsource/noto-sans/600.css'
 
 const iFrame = ({ value }) => {
   const { url, width, height } = value
@@ -30,9 +33,9 @@ const Blog = {
     normal: ({ children }) => (
       <div
         className="w-screen flex justify-center "
-        style={{ fontFamily: 'Rajdhani', fontWeight: 500 }}
+        style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}
       >
-        <p className="w-5/6 text-gray-300 leading-7 tracking-wide text-xl md:w-3/4 lg:w-1/2 lg:text-2xl mb-8 text-justify">
+        <p className="w-5/6 text-gray-300 leading-7 tracking-wide text-xl md:w-3/4 lg:w-1/2 lg:text-xl mb-8 ">
           {children}
         </p>
       </div>

@@ -13,6 +13,7 @@
     "@astrojs/react": "^3.0.2",
     "@astrojs/renderer-react": "^0.5.0",
     "@astrojs/tailwind": "^5.0.0",
+    "@fontsource/noto-sans": "^5.0.12",
     "@fontsource/orbitron": "^5.0.12",
     "@fontsource/rajdhani": "^5.0.8",
     "@fontsource/twinkle-star": "^5.0.8",
