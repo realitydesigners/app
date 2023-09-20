@@ -80,6 +80,18 @@ export async function getPostBySlug() {
   "audioFileUrl": audio->audioFile.asset->url
 },
 
+
+quote->{
+  ...,
+
+  quote,
+  "mediaRef": {
+    "layout": mediaRef.layout,
+    "image": mediaRef.image->image.asset->url
+  }
+},
+
+
         markDefs[]{
           ...,
           _type == "internalLink" => {

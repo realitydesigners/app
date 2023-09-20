@@ -22,9 +22,6 @@ const h2Headings = Array.isArray(post.content)
       .filter((block: any) => block._type === 'block' && block.style === 'h2')
       .map((block: any) => block.children[0].text)
   : []
-
-console.log('h2Headings:', h2Headings)
-console.log('post:', post)
 ---
 
 <div class="w-full h-auto bg-black text-white pt-20">

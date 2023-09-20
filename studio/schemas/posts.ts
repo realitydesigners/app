@@ -1,4 +1,4 @@
-import {ImageIcon, LinkIcon, UserIcon} from '@sanity/icons'
+import {ImageIcon, LinkIcon, UserIcon, PlayIcon, BookIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
 import categoryType from './category'
@@ -157,6 +157,7 @@ export default defineType({
         defineField({
           type: 'object',
           name: 'mediaRef',
+
           title: 'Media',
           preview: {
             select: {
@@ -188,7 +189,41 @@ export default defineType({
         }),
         defineField({
           type: 'object',
+          name: 'quoteRef',
+          title: 'Quote',
+          icon: BookIcon,
+          preview: {
+            select: {
+              imageUrl: 'quote.mediaRef.image.asset.url',
+              title: 'quote.quote',
+            },
+          },
+          fields: [
+            defineField({
+              type: 'reference',
+              icon: ImageIcon,
+              name: 'quote',
+              title: 'Quote Item',
+              to: [{type: 'quote'}],
+            }),
+            {
+              name: 'className',
+              title: 'CSS Class',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Card 1', value: 'card-1'},
+                  {title: 'Card 2', value: 'card-2'},
+                  // Add more class options if needed
+                ],
+              },
+            },
+          ],
+        }),
+        defineField({
+          type: 'object',
           name: 'audioRef',
+          icon: PlayIcon,
           title: 'Audio',
           preview: {
             select: {
@@ -248,7 +283,7 @@ export default defineType({
           type: 'object',
           icon: LinkIcon,
           name: 'iframe',
-          title: 'iframe',
+          title: 'iFrame',
           fields: [
             defineField({
               type: 'url',

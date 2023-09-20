@@ -4,6 +4,7 @@ import AudioRef from './AudioRef.jsx'
 import ImageRef from './ImageRef.jsx'
 import MediaRef from './MediaRef.jsx'
 import PostsRef from './PostsRef.jsx'
+import QuoteRef from './QuoteRef.jsx'
 import SplineRef from './SplineRef.jsx'
 import '@fontsource/rajdhani/400.css'
 import '@fontsource/rajdhani/500.css'
@@ -35,7 +36,7 @@ const Blog = {
         className="w-screen flex justify-center "
         style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}
       >
-        <p className="w-5/6 text-gray-300 leading-7 tracking-wide text-xl md:w-3/4 lg:w-1/2 lg:text-xl mb-8 ">
+        <p className="w-5/6 text-gray-300 leading-7 tracking-normal text-xl md:w-3/4 lg:w-1/2 lg:text-xl mb-8 text-justify ">
           {children}
         </p>
       </div>
@@ -86,6 +87,7 @@ const Blog = {
     spline: SplineRef,
     image: ImageRef,
     audioRef: AudioRef,
+    quoteRef: QuoteRef,
   },
 }
 
