@@ -65,9 +65,9 @@ export async function getPostBySlug() {
       category,
       publicationDate,
       image,
-      
       team->{
-        ...
+        ...,
+        shortBio,
       },
       content[]{
         ...,
@@ -76,23 +76,18 @@ export async function getPostBySlug() {
           className->{name},
           team->,
         },
-"audioRefData": {
-  "audioTitle": audio->title,
-  "audioFileUrl": audio->audioFile.asset->url
-},
-
-
-quote->{
-  ...,
-
-  quote,
-  "mediaRef": {
-    "layout": mediaRef.layout,
-    "image": mediaRef.image->image.asset->url
-  }
-},
-
-
+        "audioRefData": {
+          "audioTitle": audio->title,
+          "audioFileUrl": audio->audioFile.asset->url
+        },
+        quote->{
+          ...,
+          quote,
+          "mediaRef": {
+            "layout": mediaRef.layout,
+            "image": mediaRef.image->image.asset->url
+          }
+        },
         markDefs[]{
           ...,
           _type == "internalLink" => {
@@ -108,9 +103,18 @@ quote->{
       linkedContent[]{
         ...,
         post-> {
-          _id,
           title,
+          layout,
+          slug,
           excerpt,
+          tags,
+          category,
+          publicationDate,
+          image,
+          team->{
+            ...,
+            shortBio,
+          },
           content[]{
             ...,
             media-> {
@@ -118,7 +122,18 @@ quote->{
               className->{name},
               team->,
             },
-
+            "audioRefData": {
+              "audioTitle": audio->title,
+              "audioFileUrl": audio->audioFile.asset->url
+            },
+            quote->{
+              ...,
+              quote,
+              "mediaRef": {
+                "layout": mediaRef.layout,
+                "image": mediaRef.image->image.asset->url
+              }
+            },
             markDefs[]{
               ...,
               _type == "internalLink" => {
@@ -139,7 +154,6 @@ quote->{
   const data = await client.fetch(query)
   return data
 }
-
 export async function getPosts() {
   const query = `*[_type == "posts"] |  order(_createdAt desc) {
     title,

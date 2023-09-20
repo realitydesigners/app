@@ -22,10 +22,17 @@ export default defineType({
       },
       validation: (rule) => rule.required(),
     }),
+
     defineField({
       name: 'role',
       title: 'Role',
       type: 'string',
+    }),
+    defineField({
+      type: 'text',
+      name: 'shortBio',
+      title: 'Short Bio',
+      validation: (rule) => rule.required(),
     }),
 
     defineField({

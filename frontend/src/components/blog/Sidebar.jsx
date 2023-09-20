@@ -1,14 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-// The sidebar that displays the headings
 export function Sidebar({ h2Headings, activeHeading }) {
   return (
-    <aside className=" hidden lg:block sticky top-20 p-2  rounded-md text-white border border-gray-600">
-      <ul className="scrollbar-hide hide-scrollbar flex flex-col space-y-2">
+    <aside className="hidden lg:block sticky top-20 border border-gray-600 p-4 text-white">
+      <h2 className="text-sm font-bold mb-4 text-white border-b border-gray-600 pb-2">
+        POST
+      </h2>
+      <ul className="scrollbar-hide hide-scrollbar flex flex-col space-y-2 mt-4">
         {h2Headings.map((heading) => (
-          <li className="bg-gray-600/60  hover:bg-gray-600/80 p-2 rounded">
+          <li
+            className={`border border-gray-600/60 hover:bg-gray-600/60 p-3 rounded-lg transition-colors duration-200 ${
+              activeHeading === heading ? 'bg-gray-600' : ''
+            }`}
+          >
             <a
-              className="rajdhani text-xs font-bold leading-none uppercase tracking-wide"
+              className="rajdhani text-sm font-bold leading-none uppercase tracking-wide"
               href={`#${heading.replace(/ /g, '-').toLowerCase()}`}
             >
               {heading}
