@@ -7,6 +7,7 @@ import '@fontsource/noto-sans/500.css'
 import '@fontsource/noto-sans/700.css'
 import { Image } from 'astro:assets'
 import { getSanityImageURL } from '../utils/helpers.js'
+import { SidebarWrapper } from './blog/Sidebar.jsx'
 import LinkedPosts from './LinkedPosts.astro'
 import PortableTextComponent from './portabletext/PortableTextComponent.jsx'
 
@@ -15,6 +16,15 @@ export interface Props {
 }
 
 const { post } = Astro.props
+
+const h2Headings = Array.isArray(post.content)
+  ? post.content
+      .filter((block: any) => block._type === 'block' && block.style === 'h2')
+      .map((block: any) => block.children[0].text)
+  : []
+
+console.log('h2Headings:', h2Headings)
+console.log('post:', post)
 ---
 
 <div class="w-full h-auto bg-black text-white pt-20">
@@ -59,6 +69,12 @@ const { post } = Astro.props
     }
   </div>
 
+  <div class="flex absolute p-8 h-full w-1/4">
+    <div class="relative w-auto h-full">
+      <SidebarWrapper h2Headings={h2Headings} />
+    </div>
+  </div>
+
   {
     post?.content && (
       <PortableTextComponent content={post?.content} template="blog" />
@@ -80,6 +96,10 @@ const { post } = Astro.props
   p {
     font-family: 'Noto Sans', sans-serif;
     font-weight: 500;
+  }
+  .rajhani {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
   }
 </style>
 
