@@ -1,8 +1,9 @@
 ---
 import DarkBlogPost from '../../components/DarkBlogPost.astro'
 import LightBlogPost from '../../components/LightBlogPost.astro'
-import Layout from '../../layouts/Layout.astro'
+import BlogLayout from '../../layouts/BlogLayout.astro'
 import { getPostBySlug } from '../../lib/api.js'
+import { getSanityImageURL } from '../../utils/helpers'
 
 export async function getStaticPaths() {
   const allBlogPosts = await getPostBySlug()
@@ -16,7 +17,11 @@ export async function getStaticPaths() {
 const { post = {} as any } = Astro.props
 ---
 
-<Layout title="Reality Designers">
+<BlogLayout
+  title={post.title}
+  description={post.excerpt}
+  imageURL={getSanityImageURL(post.image).url()}
+>
   {post.layout === 'dark' && <DarkBlogPost post={post} />}
   {post.layout === 'light' && <LightBlogPost post={post} />}
-</Layout>
+</BlogLayout>
