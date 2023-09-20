@@ -1,7 +1,7 @@
 export default class TextScrambler {
   constructor(el) {
     this.el = el
-    this.chars = '!<>-_\\/[]{}—=+*^?#'
+    this.chars = '!<>-_/[]—=+*^?#'
     this.update = this.update.bind(this)
   }
 
@@ -14,8 +14,8 @@ export default class TextScrambler {
     for (let i = 0; i < length; i++) {
       const from = oldText[i] || ''
       const to = newText[i] || ''
-      const start = Math.floor(Math.random() * 15)
-      const end = start + Math.floor(Math.random() * 15)
+      const start = Math.floor(Math.random() * 40)
+      const end = start + Math.floor(Math.random() * 40)
       this.queue.push({ from, to, start, end })
     }
 
@@ -36,11 +36,11 @@ export default class TextScrambler {
         complete++
         output += to
       } else if (this.frame >= start) {
-        if (!char || Math.random() < 0.28) {
+        if (!char || Math.random() < 0.1) {
           char = this.randomChar()
           this.queue[i].char = char
         }
-        output += `<span class="dud">${char}</span>`
+        output += `<span>${char}</span>`
       } else {
         output += from
       }
