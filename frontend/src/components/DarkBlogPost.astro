@@ -17,10 +17,16 @@ export interface Props {
 
 const { post } = Astro.props
 
-const h2Headings = Array.isArray(post.content)
-  ? post.content
-      .filter((block: any) => block._type === 'block' && block.style === 'h2')
-      .map((block: any) => block.children[0].text)
+const h2Headings = Array.isArray(post?.block)
+  ? post.block.flatMap((contentBlock: any) =>
+      contentBlock?.content
+        ? contentBlock.content
+            .filter(
+              (block: any) => block._type === 'block' && block.style === 'h2',
+            )
+            .map((block: any) => block.children[0]?.text)
+        : [],
+    )
   : []
 ---
 
@@ -90,8 +96,14 @@ const h2Headings = Array.isArray(post.content)
   </div>
 
   {
-    post?.content && (
-      <PortableTextComponent content={post?.content} template="blog" />
+    post?.block?.map(
+      (contentBlock: any) =>
+        contentBlock?.content && (
+          <PortableTextComponent
+            content={contentBlock.content}
+            template="blog"
+          />
+        ),
     )
   }
 </div>

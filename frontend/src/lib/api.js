@@ -72,7 +72,10 @@ export async function getPostBySlug() {
         image,
         shortBio,
       },
-      content[]{
+      block[]{
+        ...,
+      
+          content[]{
         ...,
         media-> {
           ...,
@@ -103,6 +106,9 @@ export async function getPostBySlug() {
           "postsImage": posts->image
         },
       },
+    },
+    
+  
       linkedContent[]{
         ...,
         post-> {
@@ -157,6 +163,7 @@ export async function getPostBySlug() {
   const data = await client.fetch(query)
   return data
 }
+
 export async function getPosts() {
   const query = `*[_type == "posts"] |  order(_createdAt desc) {
     title,

@@ -11,8 +11,9 @@ export function Sidebar({ h2Headings, activeHeading }) {
         POST
       </h2>
       <ul className="scrollbar-hide hide-scrollbar flex flex-col space-y-2 mt-4">
-        {h2Headings.map((heading) => (
+        {h2Headings.map((heading, index) => (
           <li
+            key={index}
             className={`border border-gray-600/60 hover:bg-gray-600/60 p-3 rounded-lg transition-colors duration-200 ${
               activeHeading === heading ? 'bg-gray-600' : ''
             }`}
