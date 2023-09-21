@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 export function Sidebar({ h2Headings, activeHeading }) {
+  if (!h2Headings || h2Headings.length === 0) {
+    return null
+  }
+
   return (
-    <aside className="hidden lg:block sticky top-20 border border-gray-600 p-4 text-white">
+    <aside className="hidden lg:block sticky top-20 z-50 border border-gray-600 p-4 text-white">
       <h2 className="text-sm font-bold mb-4 text-white border-b border-gray-600 pb-2">
         POST
       </h2>

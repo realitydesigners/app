@@ -36,9 +36,9 @@ const h2Headings = Array.isArray(post.content)
         {post.excerpt}
       </p>
     </div>
-    {
-      post.team && post.tags && (
-        <div class="flex w-11/12 items-center border border-gray-600 mb-2 p-1">
+    <div class="flex w-11/12 items-center border border-gray-600 mb-2 p-1">
+      {
+        post.team && (
           <div class="flex items-center w-full h-8 ">
             <Image
               src={getSanityImageURL(post?.team.image).url()}
@@ -52,6 +52,10 @@ const h2Headings = Array.isArray(post.content)
               By {post.team.name}
             </p>
           </div>
+        )
+      }
+      {
+        post.tags && (
           <div class="flex flex-row  ml-4">
             {post.tags.map((tag: any) => (
               <p class="text-xs h-6 flex bg-white items-center justify-center p-2 border uppercase tracking-wide text-black mr-1">
@@ -59,9 +63,9 @@ const h2Headings = Array.isArray(post.content)
               </p>
             ))}
           </div>
-        </div>
-      )
-    }
+        )
+      }
+    </div>
   </div>
 
   <div class="w-full flex justify-center">

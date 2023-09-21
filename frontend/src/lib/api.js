@@ -67,6 +67,9 @@ export async function getPostBySlug() {
       image,
       team->{
         ...,
+        name,
+        role,
+        image,
         shortBio,
       },
       content[]{
