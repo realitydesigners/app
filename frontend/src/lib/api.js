@@ -74,6 +74,17 @@ export async function getPostBySlug() {
       },
       block[]{
         ...,
+        heading,
+        subHeading,
+        image,
+        tags,
+         team->{
+        ...,
+        name,
+        role,
+        image,
+        shortBio,
+      },
       
           content[]{
         ...,

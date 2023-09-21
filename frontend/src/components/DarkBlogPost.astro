@@ -28,85 +28,88 @@ const h2Headings = Array.isArray(post?.block)
         : [],
     )
   : []
+
+console.log(post.block.heading)
 ---
 
 <div class="w-full h-auto bg-black pt-20 lg:pt-">
-  <div class="w-full h-auto flex flex-col justify-center items-center">
-    <div class="grid grid-cols-1 w-full md:w-3/4 p-8 lg:w-3/4 lg:p-0">
-      <h1
-        class="text-4xl text-gray-200 lg:text-5xl mb-4 w-auto lg:w-full scramble-title"
-      >
-        {post.title}
-      </h1>
-      <p class="w-full text-lg text-gray-200 leading-6 mb-4 tracking-wide">
-        {post.excerpt}
-      </p>
-    </div>
-    <div class="flex w-11/12 items-center border border-gray-600 mb-2 p-1">
-      {
-        post.team && (
-          <div class="flex items-center w-full h-8 ">
-            <Image
-              src={getSanityImageURL(post?.team.image).url()}
-              alt="this is an image"
-              width={10}
-              height={10}
-              format="webp"
-              class="w-6 h-6 object-cover  ml-1 rounded-full "
-            />
-            <p class="ml-2 uppercase text-gray-600 font-bold font-mono text-xs">
-              By {post.team.name}
-            </p>
-          </div>
-        )
-      }
-      {
-        post.tags && (
-          <div class="flex flex-row  ml-4">
-            {post.tags.map((tag: any) => (
-              <p class="text-xs h-6 flex bg-white items-center justify-center p-2 border uppercase tracking-wide text-black mr-1">
-                {tag}
-              </p>
-            ))}
-          </div>
-        )
-      }
-    </div>
-  </div>
-
-  <div class="w-full flex justify-center">
-    {
-      post?.image && (
-        <Image
-          src={getSanityImageURL(post?.image).url()}
-          alt="this is an image"
-          width={1000}
-          height={1000}
-          format="webp"
-          class="w-11/12 h-[325px] lg:h-[700px] object-cover mb-12 border border-gray-600 "
-        />
-      )
-    }
-  </div>
-
-  <div class="flex absolute p-8 h-full w-1/4">
-    <div class="relative w-auto h-full">
-      <SidebarWrapper h2Headings={h2Headings} />
-    </div>
-  </div>
-
   {
-    post?.block?.map(
-      (contentBlock: any) =>
-        contentBlock?.content && (
-          <PortableTextComponent
-            content={contentBlock.content}
-            template="blog"
-          />
-        ),
-    )
+    post?.block?.map((block: any) => (
+      <>
+        {block?._type === 'headingBlock' && (
+          <div class="">
+            <div class="w-full flex justify-center flex-cols">
+              <div class="md:w-3/4 lg:w-1/2 w-4/5">
+                <h1 class="text-4xl  text-gray-200 lg:text-5xl mb-4 w-auto lg:w-full scramble-title">
+                  {block.heading}
+                </h1>
+                <p class="w-full text-lg text-gray-200 leading-6 mb-4 tracking-wide">
+                  {block.subheading}
+                </p>
+              </div>
+            </div>
+            <div class="w-full flex justify-center flex-cols">
+              <div class="flex w-11/12 items-center border border-gray-600 mb-2 ">
+                {block.team && (
+                  <div class="flex items-center w-full h-8">
+                    <Image
+                      src={getSanityImageURL(block.team.image).url()}
+                      alt="Author Image"
+                      width={10}
+                      height={10}
+                      format="webp"
+                      class="w-5 h-5 object-cover ml-2 rounded-full"
+                    />
+                    <p class="ml-2 uppercase text-gray-600 font-bold font-mono text-xs">
+                      By {block.team.name}
+                    </p>
+                  </div>
+                )}
+
+                {block.tags && (
+                  <div class="flex flex-row ml-4 items-center">
+                    {block.tags.map((tag: any) => (
+                      <a class="text-xs h-6 flex font-semibold  bg-gray-600/60 items-center justify-center p-2 border border-gray-600 uppercase tracking-wide text-gray-200 mr-1">
+                        {tag}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+            {block.image && (
+              <div class="w-full flex justify-center">
+                <Image
+                  src={getSanityImageURL(block.image).url()}
+                  alt={block.image.alt || 'Image Alt Text'}
+                  width={1000}
+                  height={1000}
+                  format="webp"
+                  class="w-full   md:w-11/12  h-[325px] md:h-[500px] lg:h-[700px] object-cover mb-12 border border-gray-600"
+                />
+              </div>
+            )}
+          </div>
+        )}
+      </>
+    ))
   }
 </div>
+
+<div class="flex absolute p-8 h-full w-1/4">
+  <div class="relative w-auto h-full">
+    <SidebarWrapper h2Headings={h2Headings} />
+  </div>
+</div>
+{
+  post?.block?.map(
+    (contentBlock: any) =>
+      contentBlock?.content && (
+        <PortableTextComponent content={contentBlock.content} template="blog" />
+      ),
+  )
+}
+
 {
   post?.team && (
     <div class="w-full flex justify-center">
