@@ -1,4 +1,6 @@
 import { PortableText } from '@portabletext/react'
+import PropTypes from 'prop-types'
+import { useState } from 'react'
 import ArticleRef from './ArticleRef.jsx'
 import AudioRef from './AudioRef.jsx'
 import ImageRef from './ImageRef.jsx'
@@ -114,18 +116,20 @@ const PostCard = {
 }
 
 const PortableTextComponent = ({ content, template }) => {
-  let chosenComponents
+  const [chosenComponents, setChosenComponents] = useState(null)
 
-  switch (template) {
-    case 'blog':
-      chosenComponents = Blog
-      break
-    case 'postCard':
-      chosenComponents = PostCard
-      break
-    default:
-      console.error('Invalid template type specified.')
-      return null
+  if (!chosenComponents) {
+    switch (template) {
+      case 'blog':
+        setChosenComponents(Blog)
+        break
+      case 'postCard':
+        setChosenComponents(PostCard)
+        break
+      default:
+        console.error('Invalid template type specified.')
+        return null
+    }
   }
 
   return (
@@ -135,6 +139,11 @@ const PortableTextComponent = ({ content, template }) => {
       components={chosenComponents}
     />
   )
+}
+
+PortableTextComponent.propTypes = {
+  content: PropTypes.array.isRequired,
+  template: PropTypes.string.isRequired,
 }
 
 export default PortableTextComponent
