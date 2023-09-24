@@ -151,7 +151,6 @@ export default defineType({
         {
           type: 'object',
           name: 'contentBlock',
-
           title: 'Content',
           fields: [
             {

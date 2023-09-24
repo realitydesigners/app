@@ -33,8 +33,8 @@ export default defineConfig({
   },
   form: {
     components: {
-      field: CustomField,
       item: CustomItem,
+      field: CustomField,
     },
   },
 })

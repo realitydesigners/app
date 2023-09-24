@@ -1,8 +1,10 @@
-import { ImageIcon } from '@sanity/icons' // Replace 'ImageIcon' with the actual icon component you want to use
-import { Card, Container, Stack, Text } from '@sanity/ui'
+import { DashboardIcon, ImageIcon } from '@sanity/icons'
 
 function CustomItem(props) {
-  const { description, title, type, ...restProps } = props
+  const { title, ...restProps } = props
+
+  // Determine the type based on the block's schema type
+  const type = props.value._type || ''
 
   const handleDragStart = (e) => {
     e.dataTransfer.setData('item', JSON.stringify(props.value))
@@ -18,45 +20,43 @@ function CustomItem(props) {
   }
 
   const iconMap = {
-    headingBlock: () => (
-      <ImageIcon
+    headingBlock: (
+      <DashboardIcon
         style={{
           display: 'flex',
           width: '100%',
           height: '100%',
-          color: 'gray',
+          color: '#555',
         }}
       />
     ),
-    contentBlock: () => (
-      <ImageIcon
+    contentBlock: (
+      <DashboardIcon
         style={{
           display: 'flex',
           width: '100%',
           height: '100%',
-          color: 'blue',
+          color: '#777',
         }}
       />
     ),
   }
 
-  const iconComponent =
-    iconMap[type] ||
-    (() => (
-      <ImageIcon
-        style={{
-          display: 'flex',
-          width: '100%',
-          height: '100%',
-          color: '#444',
-        }}
-      />
-    ))
+  const defaultIcon = (
+    <ImageIcon
+      style={{
+        display: 'flex',
+        width: '100%',
+        height: '100%',
+        color: '#000',
+      }}
+    />
+  )
 
-  const icon = iconComponent()
+  const iconComponent = iconMap[type] || defaultIcon
 
   return (
-    <Container
+    <div
       draggable="true"
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
@@ -65,35 +65,34 @@ function CustomItem(props) {
         width: 'auto',
         display: 'flex',
         height: '100%',
-        paddingLeft: '0.3em',
-        paddingRight: '0.3em',
+        paddingLeft: '1em',
+        paddingRight: '1em',
+        marginBottom: '1em',
         alignItems: 'center',
       }}
     >
-      <Card
+      <div
         style={{
           display: 'flex',
           width: '100%',
           alignItems: 'center',
         }}
       >
-        <Stack
-          direction="row"
-          alignItems="center"
+        <div
           style={{
-            width: '10%',
-            height: '100%',
+            width: '50px',
+            height: '50px',
             display: 'flex',
             flexDirection: 'column',
             padding: '0.5em',
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#1e1e1e',
-            borderRadius: '0.em',
+            borderRadius: '.5em',
           }}
         >
-          {icon}
-          <Text
+          {iconComponent}
+          <div
             style={{
               color: '#777',
               fontSize: '0.5em',
@@ -102,19 +101,18 @@ function CustomItem(props) {
             }}
           >
             {title?.toUpperCase()}
-          </Text>
-        </Stack>
+          </div>
+        </div>
         <div
           style={{
             width: '90%',
             height: '100%',
-            color: 'gray',
           }}
         >
           {props.renderDefault(restProps)}
         </div>
-      </Card>
-    </Container>
+      </div>
+    </div>
   )
 }
 
