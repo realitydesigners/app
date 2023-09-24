@@ -7,6 +7,17 @@ export default {
   name: 'headingBlock',
   title: 'Heading',
   fields: [
+    defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Dark', value: 'dark'},
+          {title: 'Light', value: 'light'},
+        ],
+      },
+    }),
     {
       name: 'heading',
       title: 'Heading',
