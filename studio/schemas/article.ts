@@ -1,4 +1,4 @@
-import {UploadIcon, BookIcon, PlayIcon} from '@sanity/icons'
+import {UploadIcon} from '@sanity/icons'
 import {defineType, defineField, defineArrayMember} from 'sanity'
 
 export default defineType({

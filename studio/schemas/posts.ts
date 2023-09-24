@@ -102,7 +102,6 @@ export default defineType({
         {
           type: 'object',
           name: 'headingBlock',
-          icon: UserIcon,
           title: 'Heading',
           fields: [
             {
@@ -152,6 +151,7 @@ export default defineType({
         {
           type: 'object',
           name: 'contentBlock',
+
           title: 'Content',
           fields: [
             {
