@@ -14,6 +14,7 @@ import video from './schemas/video'
 import audio from './schemas/audio'
 
 import CustomField from '../frontend/src/components/CustomField'
+import CustomItem from '../frontend/src/components/CustomItem'
 
 export default defineConfig({
   theme,
@@ -33,6 +34,7 @@ export default defineConfig({
   form: {
     components: {
       field: CustomField,
+      item: CustomItem,
     },
   },
 })
