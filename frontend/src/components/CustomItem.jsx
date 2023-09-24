@@ -98,6 +98,7 @@ function CustomItem(props) {
               fontSize: '0.5em',
               fontWeight: 'bold',
               marginBottom: '.5em',
+              textAlign: 'center',
             }}
           >
             {title?.toUpperCase()}

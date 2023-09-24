@@ -1,6 +1,5 @@
 ---
-import DarkBlogPost from './DarkBlogPost.astro'
-import LightBlogPost from './LightBlogPost.astro'
+import BlogPost from './BlogPost.astro'
 
 export interface Props {
   linkedContent: any[]
@@ -11,13 +10,6 @@ const { linkedContent } = Astro.props
 
 {
   linkedContent?.map((item: any) => {
-    if (item.layout === 'dark') {
-      return <DarkBlogPost post={item.post} />
-    }
-    if (item.layout === 'light') {
-      return <LightBlogPost post={item.post} />
-    }
-
-    return null
+    return <BlogPost post={item.post} />
   })
 }

@@ -47,6 +47,7 @@ export default defineConfig({
   },
   form: {
     components: {
+      // Define custom components for the desk tool
       item: CustomItem,
       field: CustomField,
     },

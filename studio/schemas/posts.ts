@@ -46,11 +46,11 @@ export default defineType({
       of: [
         {
           type: 'headingBlock',
-          title: 'Heading ',
+          title: 'Heading Block',
         },
         {
           type: 'contentBlock',
-          title: 'Content',
+          title: 'Content Block',
         },
       ],
     }),

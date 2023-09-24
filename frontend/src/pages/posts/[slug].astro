@@ -1,5 +1,5 @@
 ---
-import DarkBlogPost from '../../components/DarkBlogPost.astro'
+import BlogPost from '../../components/BlogPost.astro'
 import LightBlogPost from '../../components/LightBlogPost.astro'
 import BlogLayout from '../../layouts/BlogLayout.astro'
 import { getPostBySlug } from '../../lib/api.js'
@@ -22,5 +22,5 @@ const { post = {} as any } = Astro.props
   description={post.excerpt}
   imageURL={getSanityImageURL(post.image).url()}
 >
-  <DarkBlogPost post={post} />}
+  <BlogPost post={post} />}
 </BlogLayout>
