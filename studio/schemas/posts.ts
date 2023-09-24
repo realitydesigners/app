@@ -15,6 +15,7 @@ export default defineType({
       type: 'string',
       name: 'title',
       title: 'Title',
+
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -102,6 +103,7 @@ export default defineType({
           name: 'headingBlock',
           icon: UserIcon,
           title: 'Heading Block',
+
           fields: [
             {
               name: 'heading',
