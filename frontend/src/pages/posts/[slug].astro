@@ -22,6 +22,5 @@ const { post = {} as any } = Astro.props
   description={post.excerpt}
   imageURL={getSanityImageURL(post.image).url()}
 >
-  {post.layout === 'dark' && <DarkBlogPost post={post} />}
-  {post.layout === 'light' && <LightBlogPost post={post} />}
+  <DarkBlogPost post={post} />}
 </BlogLayout>

@@ -58,12 +58,8 @@ export async function getPostBySlug() {
   const query = `
     *[_type == "posts"] | order(_createdAt desc) {
       title,
-      layout,
       slug,
       excerpt,
-      tags,
-      category,
-      publicationDate,
       image,
       team->{
         ...,
@@ -79,6 +75,8 @@ export async function getPostBySlug() {
         image,
         tags,
         layout,
+        title,
+        publicationDate,
          team->{
         ...,
         name,
@@ -115,7 +113,9 @@ export async function getPostBySlug() {
         "postsRef": {
           "postsTitle": posts->title,
           "postsSlug": posts->slug.current,
-          "postsImage": posts->image
+          "postsImage": posts->image,
+          "postsExcerpt": posts->excerpt,
+          ...,
         },
       },
     },

@@ -1,7 +1,7 @@
 import '../../../globals.css'
 import { getSanityImageURL } from '../../utils/helpers.js'
 
-const PostsCard = ({ title, slug, image }) => {
+const PostsCard = ({ title, slug, image, excerpt }) => {
   return (
     <div className="flex w-full  items-center justify-center p-8">
       <div className="transition-border w-full  md:w-1/2 group flex h-auto flex-row border border-gray-500 p-4 transition-shadow duration-300 hover:border-gray-200 hover:shadow-xl lg:w-1/2">
@@ -27,6 +27,7 @@ const PostsCard = ({ title, slug, image }) => {
           >
             {title}
           </a>
+          <p className="text-white"> {excerpt}</p>
         </div>
       </div>
     </div>

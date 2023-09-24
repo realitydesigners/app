@@ -26,14 +26,7 @@ const { posts } = Astro.props
               )}
 
               <div class="w-full mb-2">
-                <div class="flex p-2">
-                  {post.tags &&
-                    post.tags.map((tag: string) => (
-                      <p class="lg:text-md break-words rounded-full border border-gray-600 pt-1 pb-1 pl-3 pr-3 font-mono text-sm font-normal uppercase tracking-wide text-gray-400 mr-2">
-                        {tag}
-                      </p>
-                    ))}
-                </div>
+                <div class="flex p-2" />
                 <h2 class="p-2 text-2xl uppercase leading-none text-white scramble-title">
                   {post.title}
                 </h2>

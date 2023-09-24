@@ -1,5 +1,5 @@
 import {defineField} from 'sanity'
-
+import categoryType from '../category'
 import teamType from '../team'
 
 export default {
@@ -29,6 +29,14 @@ export default {
       type: 'text',
     },
     defineField({
+      name: 'publicationDate',
+      title: 'Publication Date',
+      type: 'date',
+      options: {
+        dateFormat: 'DD-MM-YYYY',
+      },
+    }),
+    defineField({
       type: 'image',
       name: 'image',
       title: 'Image',
@@ -43,7 +51,6 @@ export default {
         },
       ],
     }),
-
     defineField({
       name: 'team',
       title: 'Team',
@@ -58,6 +65,12 @@ export default {
       options: {
         layout: 'tags',
       },
+    }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'reference',
+      to: [{type: categoryType.name}],
     }),
   ],
 }
