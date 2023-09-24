@@ -12,6 +12,8 @@ import img from './schemas/img'
 import quote from './schemas/quote'
 import video from './schemas/video'
 import audio from './schemas/audio'
+import headingBlock from './schemas/blocks/headingBlock'
+import contentBlock from './schemas/blocks/contentBlock'
 
 import CustomField from '../frontend/src/components/CustomField'
 import CustomItem from '../frontend/src/components/CustomItem'
@@ -29,7 +31,19 @@ export default defineConfig({
   plugins: [deskTool(), visionTool()],
 
   schema: {
-    types: [posts, img, audio, video, quote, team, category, media, article],
+    types: [
+      posts,
+      img,
+      audio,
+      video,
+      quote,
+      team,
+      category,
+      media,
+      article,
+      headingBlock,
+      contentBlock,
+    ],
   },
   form: {
     components: {
