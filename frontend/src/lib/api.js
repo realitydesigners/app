@@ -78,6 +78,7 @@ export async function getPostBySlug() {
         subHeading,
         image,
         tags,
+        layout,
          team->{
         ...,
         name,

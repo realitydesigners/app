@@ -7,7 +7,8 @@ import '@fontsource/noto-sans/500.css'
 import '@fontsource/noto-sans/700.css'
 import { Image } from 'astro:assets'
 import { getSanityImageURL } from '../utils/helpers.js'
-import HeadingBlock from './blog/HeadingBlock.astro'
+import HeadingBlockDark from './blog/HeadingBlockDark.astro'
+import HeadingBlockLight from './blog/HeadingBlockLight.astro'
 import { SidebarWrapper } from './blog/Sidebar.jsx'
 import LinkedPosts from './LinkedPosts.astro'
 import PortableTextComponent from './portabletext/PortableTextComponent.jsx'
@@ -34,7 +35,12 @@ const h2Headings = Array.isArray(post?.block)
 {
   post?.block?.map((block: any) => (
     <div>
-      {block?._type === 'headingBlock' && <HeadingBlock block={block} />}
+      {block._type === 'headingBlock' &&
+        (block.layout === 'dark' ? (
+          <HeadingBlockDark block={block} />
+        ) : block.layout === 'light' ? (
+          <HeadingBlockLight block={block} />
+        ) : null)}
     </div>
   ))
 }
