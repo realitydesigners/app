@@ -5,68 +5,67 @@ import { getSanityImageURL } from '../../utils/helpers.js'
 const { block } = Astro.props
 ---
 
-<div class="w-full h-auto bg-white pt-20 lg:pt-8">
+<div class="w-full h-auto bg-gray-200 pt-20 lg:pt-32">
   {
     block?._type === 'headingBlock' && (
-      <div class="">
-        <div class="w-full flex justify-center flex-cols">
-          <div class="md:w-3/4 lg:w-1/2 w-4/5">
-            {block.heading && (
-              <h1 class="text-4xl text-black lg:text-5xl mb-4 w-auto lg:w-full scramble-title">
-                {block.heading}
-              </h1>
-            )}
-            {block.subheading && (
-              <p class="w-full text-lg text-black leading-6 mb-4 tracking-wide">
-                {block.subheading}
-              </p>
-            )}
-          </div>
-        </div>
-        <div class="w-full flex justify-center flex-cols">
-          <div class="flex w-11/12 items-center border border-black mb-2 ">
-            {block.team && block.team.image && (
-              <div class="flex items-center w-full h-8">
-                <Image
-                  src={getSanityImageURL(block.team.image).url()}
-                  alt="Author Image"
-                  width={10}
-                  height={10}
-                  format="webp"
-                  class="w-5 h-5 object-cover ml-2 rounded-full"
-                />
-                {block.team.name && (
-                  <p class="ml-2 uppercase text-black font-bold font-mono text-xs">
-                    By {block.team.name}
-                  </p>
-                )}
-              </div>
-            )}
-
-            {block.tags && block.tags.length > 0 && (
-              <div class="flex flex-row ml-4 items-center">
-                {block.tags.map((tag: string) => (
-                  <a class="text-xs h-6 flex font-semibold bg-black items-center justify-center p-2 borderuppercase tracking-wide text-white mr-1">
-                    {tag}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+      <div class="w-full  flex flex-wrap">
         {block.image && (
-          <div class="w-full flex justify-center">
-            {console.log('block.image:', block.image)}
+          <div class="w-full flex-wrap  lg:w-1/2 p-4 flex ">
             <Image
               src={getSanityImageURL(block.image).url()}
               alt={block.image.alt || 'Image Alt Text'}
               width={1000}
               height={1000}
               format="webp"
-              class="w-full md:w-11/12 h-[325px] md:h-[500px] lg:h-[700px] object-cover mb-12 border border-black p-1"
+              class="w-full h-[250px] md:h-[425px] lg:h-[600px] object-cover rounded-xl"
             />
+            <p class="text-black hidden text-sm p-4 uppercase tracking-widest ">
+              {block.image.alt}
+            </p>
           </div>
         )}
+        <div class="w-full lg:w-1/2 p-8 pr-8 lg:pr-20 flex pt-2 lg:pt-12 justify-center flex-cols">
+          <div class="w-full">
+            {block.heading && (
+              <h1 class="text-4xl text-black text-center mb-8 lg:text-left lg:text-6xl w-auto lg:w-full scramble-title">
+                {block.heading}
+              </h1>
+            )}
+            {block.subheading && (
+              <p class="w-full text-lg text-black mb-8 leading-6  tracking-wide">
+                {block.subheading}
+              </p>
+            )}
+            <div class="w-full flex ">
+              {block.team && block.team.image && (
+                <div class="flex items-center w-full h-8">
+                  <Image
+                    src={getSanityImageURL(block.team.image).url()}
+                    alt="Author Image"
+                    width={10}
+                    height={10}
+                    format="webp"
+                    class="w-5 h-5 object-cover ml-2 rounded-full"
+                  />
+                  {block.team.name && (
+                    <p class="ml-2 uppercase text-black font-bold font-mono text-xs">
+                      By {block.team.name}
+                    </p>
+                  )}
+                </div>
+              )}
+              {block.tags && block.tags.length > 0 && (
+                <div class="flex">
+                  {block.tags.map((tag: string) => (
+                    <a class="text-xs h-6 flex  font-semibold bg-black items-center justify-center p-2 borderuppercase tracking-wide text-white mr-1">
+                      {tag}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

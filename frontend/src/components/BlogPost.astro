@@ -52,10 +52,18 @@ const h2Headings = Array.isArray(post?.block)
 </div>
 {
   post?.block?.map(
-    (contentBlock: any) =>
-      contentBlock?.content && (
+    (contentBlock: any, index: number) =>
+      contentBlock?.content &&
+      (contentBlock.layout === 'dark' ? (
         <PortableTextComponent content={contentBlock.content} template="blog" />
-      ),
+      ) : contentBlock.layout === 'light' ? (
+        <div class="w-full h-auto bg-gray-200 pt-8 lg:pt-24">
+          <PortableTextComponent
+            content={contentBlock.content}
+            template="light"
+          />
+        </div>
+      ) : null),
   )
 }
 
