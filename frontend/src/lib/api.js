@@ -87,6 +87,7 @@ export async function getPostBySlug() {
       
           content[]{
         ...,
+        
         media-> {
           ...,
           className->{name},
@@ -136,39 +137,59 @@ export async function getPostBySlug() {
             ...,
             shortBio,
           },
+           block[]{
+        ...,
+        heading,
+        subHeading,
+        image,
+        tags,
+        layout,
+        title,
+        publicationDate,
+         team->{
+        ...,
+        name,
+        role,
+        image,
+        shortBio,
+      },
+    },
           content[]{
-            ...,
-            media-> {
-              ...,
-              className->{name},
-              team->,
-            },
-            "audioRefData": {
-              "audioTitle": audio->title,
-              "audioFileUrl": audio->audioFile.asset->url
-            },
-            quote->{
-              ...,
-              quote,
-              "mediaRef": {
-                "layout": mediaRef.layout,
-                "image": mediaRef.image->image.asset->url
-              }
-            },
-            markDefs[]{
-              ...,
-              _type == "internalLink" => {
-                "slug": @.reference->slug
-              }
-            },
-            "postsRef": {
-              "postsTitle": posts->title,
-              "postsSlug": posts->slug.current,
-              "postsImage": posts->image
-            },
+        ...,
+        
+        media-> {
+          ...,
+          className->{name},
+          team->,
+        },
+        "audioRefData": {
+          "audioTitle": audio->title,
+          "audioFileUrl": audio->audioFile.asset->url
+        },
+        quote->{
+          ...,
+          quote,
+          "mediaRef": {
+            "layout": mediaRef.layout,
+            "image": mediaRef.image->image.asset->url
           }
-        }
-      }
+        },
+        markDefs[]{
+          ...,
+          _type == "internalLink" => {
+            "slug": @.reference->slug
+          }
+        },
+        "postsRef": {
+          "postsTitle": posts->title,
+          "postsSlug": posts->slug.current,
+          "postsImage": posts->image,
+          "postsExcerpt": posts->excerpt,
+          ...,
+        },
+      },
+    },
+  },
     }
   `
 
