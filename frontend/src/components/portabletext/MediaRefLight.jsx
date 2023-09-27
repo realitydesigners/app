@@ -26,7 +26,7 @@ const MediaCard = ({ title, slug, image, media, className }) => {
                 <a href="/" className="text-gray-400">
                   Artist
                 </a>
-                <a href="/" c className="text-white">
+                <a href="/" className="text-white">
                   {media.team.name}
                 </a>
               </div>
