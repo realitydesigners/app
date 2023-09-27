@@ -6,20 +6,17 @@ const MediaCard = ({ title, slug, image, media, className }) => {
     case 'card-1':
       return (
         <div className="relative p-4 ">
-          <div
-            style={{ clipPath: 'polygon(1% 5%, 95% 0%, 90% 95%, 5% 90%)' }}
-            className="relative flex h-auto w-full"
-          >
+          <div className="relative flex h-auto w-full">
             {media?.image && (
               <img
                 src={getSanityImageURL(media.image).url()}
                 alt={title || 'Article image'}
-                className="relative h-full w-full"
+                className="relative h-[325px] md:h-[600px] lg:h-[800px] w-full object-cover rounded-2xl shadow-xl"
               />
             )}
           </div>
           {media?.team && (
-            <div className="relative -mt-4 lg:-mt-12 bottom-0 flex h-auto w-full  bg-gradient-to-t from-black to-transparent pl-4 lg:pl-16 text-white">
+            <div className="relative rounded-b-xl -mt-12  pt-4 bottom-0 flex h-auto w-full  bg-gradient-to-t from-black to-transparent pl-4  text-white">
               <img
                 src={getSanityImageURL(media.team.image).url()}
                 alt={media.team.name || 'Team image'}
@@ -78,4 +75,16 @@ const MediaCard = ({ title, slug, image, media, className }) => {
   }
 }
 
-export default MediaCard
+const MediaRefWrapper = ({ value }) => {
+  const { media, className } = value
+
+  if (!media || media.type !== 'image') {
+    return null
+  }
+
+  return (
+    <MediaCard media={media} slug={media.slug.current} className={className} />
+  )
+}
+
+export default MediaRefWrapper

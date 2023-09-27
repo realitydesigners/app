@@ -8,7 +8,23 @@ const { block } = Astro.props
 <div class="w-full h-auto bg-gray-200 pt-20 lg:pt-32">
   {
     block?._type === 'headingBlock' && (
-      <div class="w-full  flex flex-wrap">
+      <div class="w-full flex justify-center flex-wrap">
+        <div class="w-11/12 flex items-center  lg:hidden">
+          <div class="flex w-full">
+            <span class="text-black ml-2 w-auto text-xs font-mono tracking-wide scramble">
+              PUBLISHED ON {block.publicationDate}
+            </span>
+          </div>
+          {block.tags && block.tags.length > 0 && (
+            <div class="flex">
+              {block.tags.map((tag: string) => (
+                <span class="text-xs h-6 flex uppercase font-mono  font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
         {block.image && (
           <div class="w-full flex-wrap  lg:w-1/2 p-4 flex ">
             <Image
@@ -17,50 +33,54 @@ const { block } = Astro.props
               width={1000}
               height={1000}
               format="webp"
-              class="w-full h-[250px] md:h-[425px] lg:h-[600px] object-cover rounded-xl"
+              class="w-full h-[250px] md:h-[425px] lg:h-[600px] object-cover rounded-xl shadow-xl"
             />
-            <p class="text-black hidden text-sm p-4 uppercase tracking-widest ">
-              {block.image.alt}
-            </p>
           </div>
         )}
-        <div class="w-full lg:w-1/2 p-8 pr-8 lg:pr-20 flex pt-2 lg:pt-12 justify-center flex-cols">
+        <div class="w-full lg:w-1/2 p-8 pr-8 lg:pr-20 flex pt-2 lg:pt-4 justify-center flex-cols">
           <div class="w-full">
+            <div class="w-full hidden items-center lg:flex mb-6 ">
+              <div class="flex w-full">
+                <p class="text-black font-mono w-auto text-xs tracking-wide">
+                  PUBLISHED ON {block.publicationDate}
+                </p>
+              </div>
+              {block.tags && block.tags.length > 0 && (
+                <div class="flex">
+                  {block.tags.map((tag: string) => (
+                    <a class="text-xs h-6 flex uppercase font-mono font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">
+                      {tag}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
             {block.heading && (
-              <h1 class="text-4xl text-black text-center mb-8 lg:text-left lg:text-6xl w-auto lg:w-full scramble-title">
+              <h1 class="text-4xl text-black text-center mb-8 lg:text-left lg:text-6xl w-auto lg:w-full scramble">
                 {block.heading}
               </h1>
             )}
             {block.subheading && (
-              <p class="w-full text-lg text-black mb-8 leading-6  tracking-wide">
+              <p class="w-full text-lg text-black leading-6  tracking-wide scramble">
                 {block.subheading}
               </p>
             )}
-            <div class="w-full flex ">
+            <div class="w-full flex items-center pt-4">
               {block.team && block.team.image && (
-                <div class="flex items-center w-full h-8">
+                <div class="flex items-center pl-2 pr-3 p-4 h-8 bg-gray-300 rounded-lg border w-auto">
                   <Image
                     src={getSanityImageURL(block.team.image).url()}
                     alt="Author Image"
                     width={10}
                     height={10}
                     format="webp"
-                    class="w-5 h-5 object-cover ml-2 rounded-full"
+                    class="w-5 h-5 object-cover rounded-full"
                   />
                   {block.team.name && (
-                    <p class="ml-2 uppercase text-black font-bold font-mono text-xs">
+                    <span class="ml-2 uppercase text-black font-semibold  tracking-wide font-mono text-xs">
                       By {block.team.name}
-                    </p>
+                    </span>
                   )}
-                </div>
-              )}
-              {block.tags && block.tags.length > 0 && (
-                <div class="flex">
-                  {block.tags.map((tag: string) => (
-                    <a class="text-xs h-6 flex  font-semibold bg-black items-center justify-center p-2 borderuppercase tracking-wide text-white mr-1">
-                      {tag}
-                    </a>
-                  ))}
                 </div>
               )}
             </div>
@@ -86,6 +106,7 @@ const { block } = Astro.props
     font-weight: 500;
     animation: fadeIn 1s ease-out;
   }
+
   .rajhani {
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;

@@ -1,4 +1,10 @@
-import SplineCard from './SplineCard.jsx'
+const SplineCard = ({ url }) => {
+  return (
+    <div className="h-screen w-full">
+      <spline-viewer url={url}></spline-viewer>
+    </div>
+  )
+}
 
 const SplineRefWrapper = ({ value }) => {
   const { url } = value
