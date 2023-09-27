@@ -41,16 +41,16 @@ const { block } = Astro.props
           <div class="w-full">
             <div class="w-full hidden items-center lg:flex mb-6 ">
               <div class="flex w-full">
-                <p class="text-black font-mono w-auto text-xs tracking-wide">
+                <span class="text-black font-mono w-auto text-xs tracking-wide">
                   PUBLISHED ON {block.publicationDate}
-                </p>
+                </span>
               </div>
               {block.tags && block.tags.length > 0 && (
                 <div class="flex">
                   {block.tags.map((tag: string) => (
-                    <a class="text-xs h-6 flex uppercase font-mono font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">
+                    <span class="text-xs h-6 flex uppercase font-mono font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">
                       {tag}
-                    </a>
+                    </span>
                   ))}
                 </div>
               )}
