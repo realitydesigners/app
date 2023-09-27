@@ -59,6 +59,10 @@ export default defineType({
           type: 'contentBlock',
           title: 'Content Block',
         },
+        {
+          type: 'teamBlock',
+          title: 'Team Block',
+        },
       ],
     }),
 

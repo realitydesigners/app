@@ -3,14 +3,14 @@ import { getSanityImageURL } from '../../utils/helpers.js'
 
 const QuoteCard = ({ quote, media }) => {
   return (
-    <div className="flex w-full items-center justify-center mb-12 mt-12">
-      <div className="relative md:w-4/5 lg:w-1/2 w-11/12 border border-gray-600">
+    <div className="flex w-full items-center justify-center mb-8 ">
+      <div className="relative md:w-4/5 lg:w-1/2 w-11/12 border bg-black rounded-2xl border-gray-600">
         <div className="absolute inset-0 z-10">
           {media?.image && (
             <img
               src={getSanityImageURL(media.image).url()}
               alt="image"
-              className="h-full w-full opacity-40 object-cover"
+              className="h-full w-full opacity-60 object-cover"
             />
           )}
         </div>
@@ -28,9 +28,9 @@ const QuoteCard = ({ quote, media }) => {
           >
             <path d="M5 10h2V5h5V3H5zM11 10h2V5h5V3h-7z" />
           </svg>
-          <h3 className=" text-3xl lg:text-4xl pl-6 pr-6 pt-0 pb-6 font-bold uppercase leading-none text-gray-200 flex items-center">
+          <h4 className=" text-2xl text-center lg:text-3xl pl-6 pr-6 pt-0 pb-6 font-bold uppercase leading-none text-gray-200 flex items-center">
             {quote}
-          </h3>
+          </h4>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-12 w-12 -mb-4 text-white"

@@ -14,6 +14,7 @@ import video from './schemas/video'
 import audio from './schemas/audio'
 import headingBlock from './schemas/blocks/headingBlock'
 import contentBlock from './schemas/blocks/contentBlock'
+import teamBlock from './schemas/blocks/teamBlock'
 
 import CustomField from '../frontend/src/components/CustomField'
 import CustomItem from '../frontend/src/components/CustomItem'
@@ -43,6 +44,7 @@ export default defineConfig({
       article,
       headingBlock,
       contentBlock,
+      teamBlock,
     ],
   },
   form: {

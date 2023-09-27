@@ -5,7 +5,7 @@ const MediaCard = ({ title, slug, image, media, className }) => {
   switch (className) {
     case 'card-1':
       return (
-        <div className="relative p-4 ">
+        <div className="relative p-4 mb-8 ">
           <div className="relative flex h-auto w-full">
             {media?.image && (
               <img

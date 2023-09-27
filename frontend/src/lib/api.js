@@ -61,13 +61,6 @@ export async function getPostBySlug() {
       slug,
       excerpt,
       image,
-      team->{
-        ...,
-        name,
-        role,
-        image,
-        shortBio,
-      },
       block[]{
         ...,
         heading,

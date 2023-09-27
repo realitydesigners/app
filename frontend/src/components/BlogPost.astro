@@ -10,6 +10,7 @@ import { getSanityImageURL } from '../utils/helpers.js'
 import HeadingBlockDark from './blog/HeadingBlockDark.astro'
 import HeadingBlockLight from './blog/HeadingBlockLight.astro'
 import { SidebarWrapper } from './blog/Sidebar.jsx'
+import TeamBlock from './blog/TeamBlock.astro'
 import LinkedPosts from './LinkedPosts.astro'
 import PortableTextComponent from './portabletext/PortableTextComponent.jsx'
 
@@ -68,12 +69,18 @@ const h2Headings = Array.isArray(post?.block)
 }
 
 {
-  post?.team && (
+  post?.block?.map((block: any) => (
+    <div>{block._type === 'teamBlock' && <TeamBlock block={block} />}</div>
+  ))
+}
+
+{
+  post?.block?.team && (
     <div class="w-full flex justify-center">
       <div class="flex flex-col w-10/12 lg:w-1/2 mb-12  shadow-lg p-8 border border-gray-500/50 ">
         <div class="flex items-center space-x-4">
           <Image
-            src={getSanityImageURL(post?.team.image).url()}
+            src={getSanityImageURL(post?.block?.team.image).url()}
             alt="Team member image"
             width={10}
             height={10}
@@ -82,9 +89,11 @@ const h2Headings = Array.isArray(post?.block)
           />
           <div>
             <p class="text-white uppercase font-bold text-lg">
-              {post.team.name}
+              {post?.block?.teamname}
             </p>
-            <p class="text-gray-400 uppercase text-sm">{post.team.role}</p>
+            <p class="text-gray-400 uppercase text-sm">
+              {post?.block?.team.role}
+            </p>
           </div>
         </div>
         <p class="text-gray-300 mt-4">{post?.team.shortBio}</p>
