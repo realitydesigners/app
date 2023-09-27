@@ -53,15 +53,15 @@ export default defineType({
       of: [
         {
           type: 'headingBlock',
-          title: 'Heading Block',
+          title: 'Heading',
         },
         {
           type: 'contentBlock',
-          title: 'Content Block',
+          title: 'Content',
         },
         {
           type: 'teamBlock',
-          title: 'Team Block',
+          title: 'Team',
         },
       ],
     }),

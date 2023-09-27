@@ -1,4 +1,9 @@
-import { DashboardIcon, ImageIcon } from '@sanity/icons'
+import {
+  DashboardIcon,
+  ImageIcon,
+  MasterDetailIcon,
+  UserIcon,
+} from '@sanity/icons'
 
 function CustomItem(props) {
   const { title, ...restProps } = props
@@ -21,17 +26,27 @@ function CustomItem(props) {
 
   const iconMap = {
     headingBlock: (
-      <DashboardIcon
+      <MasterDetailIcon
         style={{
           display: 'flex',
           width: '100%',
           height: '100%',
-          color: '#555',
+          color: '#777',
         }}
       />
     ),
     contentBlock: (
       <DashboardIcon
+        style={{
+          display: 'flex',
+          width: '100%',
+          height: '100%',
+          color: '#777',
+        }}
+      />
+    ),
+    teamBlock: (
+      <UserIcon
         style={{
           display: 'flex',
           width: '100%',
