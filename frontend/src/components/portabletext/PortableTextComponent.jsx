@@ -102,13 +102,13 @@ const Light = {
         className="w-screen flex justify-center "
         style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}
       >
-        <p className="w-11/12 text-black leading-6 tracking-normal text-xl md:w-3/4 lg:w-3/5 lg:text-xl mb-8  ">
+        <p className="w-11/12 text-black leading-6 tracking-normal text-xl md:w-3/4 lg:w-1/2 lg:text-xl mb-8  ">
           {children}
         </p>
       </div>
     ),
     h1: ({ children }) => (
-      <h1 className="w-full text-4xl font-bold uppercase leading-none tracking-wide  lg:w-3/5 lg:text-6xl">
+      <h1 className="w-full text-4xl font-bold uppercase leading-none tracking-wide  lg:w-1/2 lg:text-6xl">
         {children}
       </h1>
     ),
@@ -117,7 +117,7 @@ const Light = {
         style={{ fontFamily: 'Rajdhani', fontWeight: 700 }}
         className="w-screen flex justify-center"
       >
-        <h2 className="my-4 w-11/12 text-gray-200 text-4xl font-bold uppercase  leading-none tracking-wide md:w-3/4   lg:w-3/5  lg:text-5xl">
+        <h2 className=" w-11/12 text-gray-200 text-4xl font-bold uppercase  leading-none tracking-wide md:w-3/4   lg:w-1/2  lg:text-5xl">
           {children}
         </h2>
       </div>
@@ -127,7 +127,7 @@ const Light = {
         style={{ fontFamily: 'Rajdhani', fontWeight: 700 }}
         className="w-screen flex justify-center"
       >
-        <h2 className="my-4 w-11/12 text-3xl font-bold  leading-none tracking-wide md:w-3/4   lg:w-3/5 lg:text-4xl">
+        <h2 className="mb-8  w-11/12 text-3xl font-bold  leading-none tracking-wide md:w-3/4   lg:w-1/2 lg:text-5xl">
           {children}
         </h2>
       </div>
