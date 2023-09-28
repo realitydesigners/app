@@ -80,7 +80,6 @@ export default {
         defineField({
           type: 'object',
           name: 'mediaRef',
-
           title: 'Media',
           preview: {
             select: {
@@ -95,6 +94,38 @@ export default {
               name: 'media',
               title: 'Media Item',
               to: [{type: 'media'}],
+            }),
+            {
+              name: 'className',
+              title: 'CSS Class',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Card 1', value: 'card-1'},
+                  {title: 'Card 2', value: 'card-2'},
+                  // Add more class options if needed
+                ],
+              },
+            },
+          ],
+        }),
+        defineField({
+          type: 'object',
+          name: 'imageRef',
+          title: 'Image',
+          preview: {
+            select: {
+              imageUrl: 'media.image.asset.url',
+              title: 'media.title',
+            },
+          },
+          fields: [
+            defineField({
+              type: 'reference',
+              icon: ImageIcon,
+              name: 'image',
+              title: 'Image Item',
+              to: [{type: 'img'}],
             }),
             {
               name: 'className',
@@ -174,8 +205,8 @@ export default {
           },
           preview: {
             select: {
-              imageUrl: 'asset.url',
-              title: 'caption',
+              media: 'asset',
+              title: 'alt',
             },
           },
           fields: [
@@ -243,4 +274,36 @@ export default {
       ],
     },
   ],
+  preview: {
+    select: {
+      contentArray: 'content',
+      layout: 'layout',
+    },
+    prepare(selection: {contentArray: any[]; layout: string}) {
+      const {contentArray, layout} = selection
+
+      // Determine the type of the first content item
+      const firstContentType = contentArray.length > 0 ? contentArray[0]._type : 'Unknown'
+
+      // If the first item is a text block, get the first few words
+      let firstWords = ''
+      if (firstContentType === 'block' && contentArray[0].children && contentArray[0].children[0]) {
+        firstWords = contentArray[0].children[0].text.split(' ').slice(0, 5).join(' ') + '...'
+      }
+
+      // Count the different content types
+      const contentTypeCounts = contentArray.reduce<{[key: string]: number}>((acc, item) => {
+        acc[item._type] = (acc[item._type] || 0) + 1
+        return acc
+      }, {})
+      const contentDiversity = Object.entries(contentTypeCounts)
+        .map(([type, count]) => `${count} ${type}`)
+        .join(', ')
+
+      return {
+        title: firstWords || firstContentType,
+        subtitle: `${contentArray.length} items | ${contentDiversity} | ${layout}`,
+      }
+    },
+  },
 }

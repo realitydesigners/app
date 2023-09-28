@@ -17,6 +17,7 @@ export default {
   preview: {
     select: {
       title: 'team.name',
+      subtitle: 'team.role',
       media: 'team.image',
     },
   },

@@ -73,4 +73,11 @@ export default {
       to: [{type: categoryType.name}],
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+      subtitle: 'subheading',
+      media: 'image',
+    },
+  },
 }

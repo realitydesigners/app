@@ -95,6 +95,14 @@ function CustomItem(props) {
       >
         <div
           style={{
+            width: '90%',
+            height: '100%',
+          }}
+        >
+          {props.renderDefault(restProps)}
+        </div>
+        <div
+          style={{
             width: '50px',
             height: '50px',
             display: 'flex',
@@ -118,14 +126,6 @@ function CustomItem(props) {
           >
             {title?.toUpperCase()}
           </div>
-        </div>
-        <div
-          style={{
-            width: '90%',
-            height: '100%',
-          }}
-        >
-          {props.renderDefault(restProps)}
         </div>
       </div>
     </div>
