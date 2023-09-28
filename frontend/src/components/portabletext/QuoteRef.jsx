@@ -10,7 +10,7 @@ const QuoteCard = ({ quote, media }) => {
             <img
               src={getSanityImageURL(media.image).url()}
               alt="image"
-              className="h-full w-full opacity-60 object-cover"
+              className="h-full w-full opacity-40  object-cover rounded-2xl"
             />
           )}
         </div>
@@ -28,7 +28,7 @@ const QuoteCard = ({ quote, media }) => {
           >
             <path d="M5 10h2V5h5V3H5zM11 10h2V5h5V3h-7z" />
           </svg>
-          <h4 className=" text-2xl text-center lg:text-3xl pl-6 pr-6 pt-0 pb-6 font-bold uppercase leading-none text-gray-200 flex items-center">
+          <h4 className=" text-3xl text-center lg:text-4xl pl-6 pr-6 pt-0 pb-6 font-bold uppercase leading-none text-gray-200 flex items-center">
             {quote}
           </h4>
           <svg
