@@ -102,7 +102,7 @@ const Light = {
         className="w-screen flex justify-center "
         style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}
       >
-        <p className="w-11/12 text-black leading-6 tracking-normal text-xl md:w-3/4 lg:w-1/2 lg:text-xl mb-8  ">
+        <p className="w-10/12 text-black leading-6 tracking-wide text-lg md:w-3/4 lg:w-1/2 lg:text-xl mb-8  ">
           {children}
         </p>
       </div>
@@ -117,7 +117,7 @@ const Light = {
         style={{ fontFamily: 'Rajdhani', fontWeight: 700 }}
         className="w-screen flex justify-center"
       >
-        <h2 className=" w-11/12 text-gray-200 text-4xl font-bold uppercase  leading-none tracking-wide md:w-3/4   lg:w-1/2  lg:text-5xl">
+        <h2 className=" w-10/12 text-gray-200 text-4xl font-bold uppercase  leading-none tracking-wide md:w-3/4   lg:w-1/2  lg:text-5xl">
           {children}
         </h2>
       </div>
@@ -127,7 +127,7 @@ const Light = {
         style={{ fontFamily: 'Rajdhani', fontWeight: 700 }}
         className="w-screen flex justify-center"
       >
-        <h2 className="mb-8  w-11/12 text-3xl font-bold  leading-none tracking-wide md:w-3/4   lg:w-1/2 lg:text-5xl">
+        <h2 className="mb-8  w-10/12 text-3xl font-bold  leading-none tracking-wide md:w-3/4   lg:w-1/2 lg:text-5xl">
           {children}
         </h2>
       </div>

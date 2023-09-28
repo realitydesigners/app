@@ -10,7 +10,7 @@ const ImageCard = ({ value }) => {
         <img
           src={getSanityImageURL(value).url()}
           alt={value.alt || 'Article image'}
-          className="h-full w-full"
+          className="h-full w-full mb-8"
         />
       </div>
     </div>
