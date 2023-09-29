@@ -66,23 +66,25 @@ const { block } = Astro.props
               </p>
             )}
             <div class="w-full flex items-center pt-4">
-              {block.team && block.team.image && (
-                <div class="flex items-center pl-2 pr-3 p-4 h-8 bg-gray-300 rounded-lg border w-auto">
-                  <Image
-                    src={getSanityImageURL(block.team.image).url()}
-                    alt="Author Image"
-                    width={10}
-                    height={10}
-                    format="webp"
-                    class="w-5 h-5 object-cover rounded-full"
-                  />
-                  {block.team.name && (
-                    <span class="ml-2 uppercase text-black font-semibold  tracking-wide font-mono text-xs">
-                      By {block.team.name}
-                    </span>
-                  )}
-                </div>
-              )}
+              <a href={`/team/${block.team.slug.current}`}>
+                {block.team && block.team.image && (
+                  <div class="flex items-center pl-2 pr-3 p-4 h-8 bg-gray-300 rounded-lg border w-auto">
+                    <Image
+                      src={getSanityImageURL(block.team.image).url()}
+                      alt="Author Image"
+                      width={10}
+                      height={10}
+                      format="webp"
+                      class="w-5 h-5 object-cover rounded-full"
+                    />
+                    {block.team.name && (
+                      <span class="ml-2 uppercase text-black font-semibold tracking-wide font-mono text-xs">
+                        By {block.team.name}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </a>
             </div>
           </div>
         </div>

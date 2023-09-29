@@ -31,7 +31,7 @@ export default defineType({
     defineField({
       type: 'text',
       name: 'shortBio',
-      title: 'Short Bio',
+      title: 'Summary',
       validation: (rule) => rule.required(),
     }),
 

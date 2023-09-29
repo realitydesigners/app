@@ -4,8 +4,26 @@ export default defineType({
   type: 'document',
   name: 'posts',
   title: 'Posts',
-
   fields: [
+    defineField({
+      name: 'block',
+      title: 'Content Block',
+      type: 'array',
+      of: [
+        {
+          type: 'headingBlock',
+          title: 'Heading',
+        },
+        {
+          type: 'contentBlock',
+          title: 'Content',
+        },
+        {
+          type: 'teamBlock',
+          title: 'Team',
+        },
+      ],
+    }),
     defineField({
       type: 'string',
       name: 'title',
@@ -43,27 +61,6 @@ export default defineType({
       options: {
         hotspot: true,
       },
-    }),
-
-    defineField({
-      name: 'block',
-      title: 'Content Block',
-      type: 'array',
-
-      of: [
-        {
-          type: 'headingBlock',
-          title: 'Heading',
-        },
-        {
-          type: 'contentBlock',
-          title: 'Content',
-        },
-        {
-          type: 'teamBlock',
-          title: 'Team',
-        },
-      ],
     }),
 
     defineField({

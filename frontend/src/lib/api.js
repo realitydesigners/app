@@ -331,3 +331,17 @@ export async function getCategory() {
   const data = await client.fetch(query)
   return data
 }
+
+export async function getTeam() {
+  const query = `*[_type == "team"] |  order(_createdAt desc) {
+  name,
+  role,
+  image,
+  shortBio,
+  bio,
+  slug,
+  title,    
+}`
+  const data = await client.fetch(query)
+  return data
+}

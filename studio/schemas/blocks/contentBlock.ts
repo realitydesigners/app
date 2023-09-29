@@ -119,6 +119,7 @@ export default {
               title: 'media.title',
             },
           },
+
           fields: [
             defineField({
               type: 'reference',

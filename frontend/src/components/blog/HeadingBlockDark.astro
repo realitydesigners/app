@@ -26,7 +26,10 @@ const { block } = Astro.props
         <div class="w-full flex justify-center flex-cols">
           <div class="flex w-11/12 items-center border border-gray-600 mb-2 ">
             {block.team && block.team.image && (
-              <div class="flex items-center w-full h-8">
+              <a
+                href={`/team/${block.team.slug.current}`}
+                class="flex items-center w-full h-8"
+              >
                 <Image
                   src={getSanityImageURL(block.team.image).url()}
                   alt="Author Image"
@@ -40,7 +43,7 @@ const { block } = Astro.props
                     By {block.team.name}
                   </p>
                 )}
-              </div>
+              </a>
             )}
 
             {block.tags && block.tags.length > 0 && (

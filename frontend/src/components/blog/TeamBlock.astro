@@ -21,7 +21,7 @@ const { block } = Astro.props
               width={10}
               height={10}
               format="webp"
-              class="w-20 h-20 object-cover rounded-full shadow-2xl border-gray-300 border-2"
+              class="w-20 h-20 object-cover rounded-full shadow-2xl "
             />
             <div class="ml-4 flex flex-col">
               <p class="text-black uppercase leading-none font-bold font-mono tracking-wide text-lg">
@@ -35,7 +35,23 @@ const { block } = Astro.props
           <p class="p-2 text-black text-sm font-mono mt-4">
             {block?.team.shortBio}
           </p>
-          <div class="w-auto p-2 gap-6 justify-center flex items-center flex-wrap">
+          <div class="bg-black justify-center flex rounded-lg">
+            <a
+              href={`/team/${block.team.slug.current}`}
+              class="text-sm uppercase text-white p-2 font-mono font-bold flex items-center"
+            >
+              <span>View Profile</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 ml-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M14.707 9.293a1 1 0 0 0-1.414-1.414L10 11.586 6.707 8.293a1 1 0 0 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l4-4z" />
+              </svg>
+            </a>
+          </div>
+          <div class="w-auto p-2 gap-6 justify-center items-center flex-wrap hidden">
             <a href="https://discord.com/channels/825128650935631942/927340981169307698">
               <Image
                 src={Discord}
