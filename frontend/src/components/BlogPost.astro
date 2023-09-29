@@ -33,24 +33,28 @@ const h2Headings = Array.isArray(post?.block)
   : []
 ---
 
+{/* HEADING BLOCK */}
 {
   post?.block?.map((block: any) => (
-    <div>
+    <>
       {block._type === 'headingBlock' &&
         (block.layout === 'dark' ? (
           <HeadingBlockDark block={block} />
         ) : block.layout === 'light' ? (
           <HeadingBlockLight block={block} />
         ) : null)}
-    </div>
+    </>
   ))
 }
 
+{/* SIDEBAR */}
 <div class="flex absolute p-8 h-full w-1/4">
   <div class="relative w-auto h-full">
     <SidebarWrapper h2Headings={h2Headings} />
   </div>
 </div>
+
+{/* CONTENT BLOCK */}
 {
   post?.block?.map(
     (contentBlock: any, index: number) =>
@@ -68,40 +72,14 @@ const h2Headings = Array.isArray(post?.block)
   )
 }
 
+{/* TEAM BLOCK */}
 {
   post?.block?.map((block: any) => (
     <div>{block._type === 'teamBlock' && <TeamBlock block={block} />}</div>
   ))
 }
 
-{
-  post?.block?.team && (
-    <div class="w-full flex justify-center">
-      <div class="flex flex-col w-10/12 lg:w-1/2 mb-12  shadow-lg p-8 border border-gray-500/50 ">
-        <div class="flex items-center space-x-4">
-          <Image
-            src={getSanityImageURL(post?.block?.team.image).url()}
-            alt="Team member image"
-            width={10}
-            height={10}
-            format="webp"
-            class="w-20 h-20 object-cover rounded-full"
-          />
-          <div>
-            <p class="text-white uppercase font-bold text-lg">
-              {post?.block?.teamname}
-            </p>
-            <p class="text-gray-400 uppercase text-sm">
-              {post?.block?.team.role}
-            </p>
-          </div>
-        </div>
-        <p class="text-gray-300 mt-4">{post?.team.shortBio}</p>
-      </div>
-    </div>
-  )
-}
-
+{/* RELATED POSTS */}
 <LinkedPosts linkedContent={post?.linkedContent} />
 
 <style>
