@@ -345,3 +345,19 @@ export async function getTeam() {
   const data = await client.fetch(query)
   return data
 }
+
+export async function getPostsByTeam() {
+  const query = `*[_type == "posts" ] | order(_createdAt desc) {
+    title,
+    category,
+    author,
+    excerpt,
+    tags,
+    slug,
+    publicationDate,
+    image,
+    content[],
+  }`
+  const data = await client.fetch(query)
+  return data
+}

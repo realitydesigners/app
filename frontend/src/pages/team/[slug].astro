@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets'
+import OtherPosts from '../../components/blog/OtherPosts.astro'
 import PortableTextComponent from '../../components/portabletext/PortableTextComponent'
 import BlogLayout from '../../layouts/BlogLayout.astro'
-import { getTeam } from '../../lib/api.js'
+import { getPostsByTeam, getTeam } from '../../lib/api.js'
 import { getSanityImageURL } from '../../utils/helpers'
 
 export async function getStaticPaths() {
@@ -15,6 +16,9 @@ export async function getStaticPaths() {
 }
 
 const { team = {} as any } = Astro.props
+
+const teamPosts = await getPostsByTeam()
+console.log(teamPosts)
 ---
 
 <BlogLayout
@@ -48,5 +52,13 @@ const { team = {} as any } = Astro.props
     <div class="w-full flex-cols justify-center mb-20">
       <PortableTextComponent content={team.bio} template="team" />
     </div>
+  </div>
+  <div
+    class="w-full flex flex-col items-center justify-center pb-20 bg-gray-200"
+  >
+    <h3 class="font-mono text-2xl py-8">
+      Posts By <span class="font-bold">{team.name}</span>
+    </h3>
+    <OtherPosts posts={teamPosts} />
   </div>
 </BlogLayout>
