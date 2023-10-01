@@ -361,3 +361,25 @@ export async function getPostsByTeam() {
   const data = await client.fetch(query)
   return data
 }
+
+export async function getVideo() {
+  const query = `*[_type == "video"] |  order(_createdAt desc) {
+  title,
+  slug,
+  url,
+  image,
+  }`
+  const data = await client.fetch(query)
+  return data
+}
+
+export async function getVideoBySlug() {
+  const query = `*[_type == "video"] |  order(_createdAt desc) {
+  title,
+  slug,
+  url,
+  image,
+  }`
+  const data = await client.fetch(query)
+  return data
+}

@@ -1,0 +1,61 @@
+---
+import BlogPost from '../../components/BlogPost.astro'
+import LightBlogPost from '../../components/LightBlogPost.astro'
+import BlogLayout from '../../layouts/BlogLayout.astro'
+import { getVideoBySlug } from '../../lib/api.js'
+import { getSanityImageURL } from '../../utils/helpers'
+
+export async function getStaticPaths() {
+  const allVideos = await getVideoBySlug()
+
+  return allVideos.map((video: any) => ({
+    params: { slug: video.slug.current },
+    props: { video },
+  }))
+}
+
+const { video = {} as any } = Astro.props
+---
+
+<BlogLayout
+  title={video.title}
+  description={video.excerpt}
+  imageURL={getSanityImageURL(video.image).url()}
+>
+  <main class="flex pt-20 w-screen h-full justify-center bg-black">
+    <div class="w-full flex lg:p-8 p-2 flex-wrap pb-90">
+      <div class="lg:w-3/4 w-full flex-col flex">
+        <iframe
+          width="100%"
+          height="100%"
+          class="w-full h-[300px] lg:h-[500px]"
+          src={video.url}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        <h2
+          class="p-2 text-2xl uppercase leading-none text-white scramble-title"
+        >
+          {video.title}
+        </h2>
+      </div>
+      <div class="lg:w-1/4 w-full h-[75vh] p-4">
+        <h2
+          class="p-2 text-xl uppercase leading-none text-white scramble-title"
+        >
+          {video.title}
+        </h2>
+      </div>
+    </div>
+  </main>
+</BlogLayout>
+<style>
+  h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+  p {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+  }
+</style>

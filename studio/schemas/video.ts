@@ -1,4 +1,4 @@
-import {UploadIcon, BookIcon, PlayIcon} from '@sanity/icons'
+import {UploadIcon} from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
@@ -11,6 +11,37 @@ export default defineType({
       type: 'string',
       name: 'title',
       title: 'Title',
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'url',
+      type: 'url',
+      title: 'Video URL',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      type: 'image',
+      name: 'image',
+      title: 'Image',
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+        },
+      ],
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: 'video',

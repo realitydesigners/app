@@ -1,0 +1,50 @@
+---
+import '@fontsource/rajdhani/400.css'
+import '@fontsource/rajdhani/700.css'
+import { Image } from 'astro:assets'
+import { getSanityImageURL } from '../../utils/helpers.js'
+
+const { videos } = Astro.props
+---
+
+<div class="w-full lg:w-1/2">
+  <ul class="w-full h-auto grid grid-cols-1 gap-2 p-2 flex-wrap">
+    {
+      videos &&
+        videos.map((video: any) => (
+          <a href={`/videos/${video.slug?.current}`}>
+            <div class="flex flex-wrap text-white p-2 w-full border-b-2 mb-2 border-gray-400/20 ">
+              {video?.image && (
+                <Image
+                  src={getSanityImageURL(video?.image).url()}
+                  alt="this"
+                  width={1000}
+                  height={1000}
+                  format="webp"
+                  class="w-full h-60 lg:h-80  object-cover rounded-xl"
+                />
+              )}
+
+              <div class="w-full mb-2">
+                <div class="flex p-2" />
+                <h2 class="p-2 text-2xl uppercase leading-none text-white scramble-title">
+                  {video.title}
+                </h2>
+              </div>
+            </div>
+          </a>
+        ))
+    }
+  </ul>
+</div>
+
+<style>
+  h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+  p {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+  }
+</style>
