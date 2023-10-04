@@ -333,7 +333,7 @@ export async function getCategory() {
 }
 
 export async function getTeam() {
-  const query = `*[_type == "team"] |  order(_createdAt desc) {
+  const query = `*[_type == "team"] |  order(_createdAt asc) {
   name,
   role,
   image,
