@@ -1,9 +1,7 @@
-'use client'
-
 import { a, useSpring } from '@react-spring/three'
-import { OrbitControls, PerspectiveCamera, Text } from '@react-three/drei'
-import { Canvas, useThree } from '@react-three/fiber'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import { useCallback, useState } from 'react'
 import AllCategories from './AllCategories'
 import Breadcrumb from './Breadcrumb'
 import { useCategory } from './CategoryContext'
@@ -16,12 +14,9 @@ const CAMERA_POSITION = [0, 0, 30]
 
 const InteractiveWorldScene = ({ category = [] }) => {
   const { navigation, setNavigation } = useCategory()
-  const orbitControlsRef = useRef(null)
 
   // State variables
-
   const [highlightedWorld, setHighlightedWorld] = useState(null)
-  const [hoveredWorld, setHoveredWorld] = useState(null)
   const [cameraPosition, setCameraPosition] = useState(CAMERA_POSITION)
   const [selectedMainWorld, setSelectedMainWorld] = useState(null)
   const [highlightedCategory, setHighlightedCategory] = useState(null)
@@ -51,6 +46,9 @@ const InteractiveWorldScene = ({ category = [] }) => {
 
       if (childCategoryName) {
         setHighlightedWorld(childCategoryName)
+        setSelectedSubWorld(childCategoryName)
+      } else {
+        setSelectedSubWorld(null)
       }
 
       setNavigation((prev) => ({
@@ -72,12 +70,13 @@ const InteractiveWorldScene = ({ category = [] }) => {
     from: { scale: [0, 0, 0] },
     to: { scale: [1, 1, 1] },
   })
+
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
       <Breadcrumb
         navigation={{
-          mainWorld: highlightedCategory,
-          subWorld: highlightedWorld,
+          mainWorld: selectedMainWorld,
+          subWorld: selectedSubWorld,
         }}
       />
       <Menu
@@ -93,16 +92,13 @@ const InteractiveWorldScene = ({ category = [] }) => {
 
       <Canvas style={{ height: '100vh', width: '100vw' }}>
         <PerspectiveCamera makeDefault position={cameraPosition} zoom={0.7} />
-        <OrbitControls ref={orbitControlsRef} />
+        <OrbitControls />
         {activeBackgroundScene === 'humanScene' && (
           <a.group scale={props.scale}>
             <HumanScene />
           </a.group>
         )}
 
-        {/*   
-        {activeBackgroundScene === 'cultureScene' && <CultureScene />}
-        */}
         <AllCategories
           categories={mainCategories}
           highlightedCategory={highlightedCategory}
