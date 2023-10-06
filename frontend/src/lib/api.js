@@ -193,12 +193,7 @@ export async function getPostBySlug() {
 export async function getPosts() {
   const query = `*[_type == "posts"] |  order(_createdAt desc) {
     title,
-    category,
-    author,
-    excerpt,
-    tags,
     slug,
-    publicationDate,
     image,
     content[],
     
