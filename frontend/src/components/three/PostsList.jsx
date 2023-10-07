@@ -1,31 +1,47 @@
-import { Box, Html, Plane, Text } from '@react-three/drei'
+import { Box, Html, Plane, Text, useTexture } from '@react-three/drei'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { urlFor } from '../../utils/urlFor'
 
 const PostBox = ({ post, position, rotationY }) => {
-  const meshRef = useRef()
-  const texture = useLoader(THREE.TextureLoader, urlFor(post.image).url())
-
-  console.log(texture)
+  const texture = useTexture(urlFor(post.image).url())
 
   return (
-    <group position={position} rotation={[0, rotationY + Math.PI, 0]}>
+    <group
+      position={position}
+      rotation={[0, rotationY + Math.PI, 0]}
+      scale={[3, 4, 0.1]}
+    >
       <mesh rotation={[0, 0, Math.PI / 2]}>
-        <Box args={[1.5, 1, 0]} />
-        <mesh ref={meshRef}>
-          <Box args={[1.5, 1, 0.1]} />
-          {texture && <meshBasicMaterial attach="material" map={texture} />}
+        <mesh name="Card">
+          <boxGeometry args={[1, 1, 0.1]} />
+          <meshBasicMaterial map={texture} />
         </mesh>
         <Text
-          position={[0, 0, 0.07]}
+          name="PostTitle"
+          position={[0, 0.25, 0.1]}
           fontSize={0.1}
-          color="black"
+          color="white"
+          maxWidth={0.8}
           anchorX="center"
           anchorY="middle"
+          font={'/fonts/monomaniac.ttf'}
         >
           {post.title}
+        </Text>
+        <Text
+          name="tag"
+          position={[0, -0.2, 0.1]}
+          fontSize={0.05}
+          color="white"
+          maxWidth={0.8}
+          anchorX="center"
+          anchorY="middle"
+          font={'/fonts/monomaniac.ttf'}
+          depth={0.1} // The amount of extrusion
+        >
+          {post.excerpt}
         </Text>
       </mesh>
     </group>
@@ -33,7 +49,7 @@ const PostBox = ({ post, position, rotationY }) => {
 }
 
 const PostsList = ({ posts }) => {
-  const circleRadius = 2
+  const circleRadius = 6
   const postsCount = posts.length
   const angleIncrement = (2 * Math.PI) / postsCount
 

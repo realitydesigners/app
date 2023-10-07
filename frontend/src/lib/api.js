@@ -195,6 +195,7 @@ export async function getPosts() {
     title,
     slug,
     image,
+    excerpt,
     content[],
     
   }`
