@@ -1,30 +1,67 @@
-import { Box, CameraControls } from '@react-three/drei'
+import { CameraControls } from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
-import React, { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import PostsList from './PostsList'
 import Stars from './Stars'
 
-const Scene = ({ posts }) => {
+const Description = () => {
   return (
-    <>
-      <ambientLight intensity={0.5} />
-      <PostsList posts={posts} />
-      <Stars />
-      <CameraControls />
-    </>
+    <div className="w-full lg:w-1/4top-20 left-8 flex flex-col h-full p-8 backdrop-blur-sm border border-black bg-white/5 rounded-lg shadow-lg">
+      <h2 className="text-black  text-4xl font-extrabold mb-2 leading-tight">
+        Tunnel
+      </h2>
+      <p className="text-black  text-md leading-tight mb-4 opacity-80">
+        A spatial representation where each post transforms into a navigable box
+        within a cosmic tunnel.
+      </p>
+      <h3 className="text-black text-2xl font-bold mb-2 leading-snug">
+        Data Integration
+      </h3>
+      <p className="text-black rajdhani text-md leading-tight mb-4 opacity-80">
+        The visualization is made using react-three-fiber. The content including
+        the images, title, and other meta information is sourced from our Sanity
+        API ensuring a real-time experience.
+      </p>
+      <h3 className="text-black text-xl font-bold mb-2 leading-snug">
+        Use Cases
+      </h3>
+      <ul className="text-black text-md mb-2 leading-tight pl-8 list-disc opacity-80">
+        <li className="mb-1">
+          Interactive Blog Exploration: Posts are shown as card in an ethereal
+          gallery, with hover effects and popovers when interacting with the
+          post.
+        </li>
+      </ul>
+    </div>
   )
 }
 
 const Tunnel = ({ posts }) => {
   return (
-    <Canvas
-      camera={{ position: [0, 0, 20], fov: 45 }}
-      style={{ height: 'full', width: '100vw', background: 'black' }}
-      className="border rounded-xl border-black"
-    >
-      <Scene posts={posts} />
-    </Canvas>
+    <>
+      <PostsList posts={posts} />
+    </>
   )
 }
 
-export default Tunnel
+const Scene = ({ posts }) => {
+  return (
+    <div className="relative flex flex-col-reverse lg:flex-row justify-center items-center w-full h-auto p-4 lg:p-12 gap-4">
+      <Description />
+      <div className="w-full lg:w-3/4 flex lg:h-[80vh] h-[60vh] shadow-2xl">
+        <Canvas
+          camera={{ position: [0, 0, 20], fov: 45 }}
+          style={{ height: 'full', width: '100vw', background: 'black' }}
+          className="border rounded-xl border-black"
+        >
+          {' '}
+          <Stars />
+          <CameraControls /> <ambientLight intensity={0.5} />
+          <PostsList posts={posts} />
+        </Canvas>
+      </div>
+    </div>
+  )
+}
+
+export default Scene
