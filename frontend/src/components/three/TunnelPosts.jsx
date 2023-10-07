@@ -9,10 +9,7 @@ const CAMERA_POSITION = [0, 0, 10]
 const Tunnel = ({ posts }) => {
   const [cameraPosition, setCameraPosition] = useState(CAMERA_POSITION)
 
-  console.log(
-    'Posts:',
-    posts.map((post) => post.image.asset.url),
-  )
+  console.log(posts.map((post) => post.image.asset))
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>

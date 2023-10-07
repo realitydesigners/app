@@ -1,8 +1,7 @@
-import { defineConfig, passthroughImageService } from "astro/config";
-import tailwind from "@astrojs/tailwind";
-import react from "@astrojs/react";
-
-import sanity from "astro-sanity";
+import react from '@astrojs/react'
+import tailwind from '@astrojs/tailwind'
+import sanity from 'astro-sanity'
+import { defineConfig, passthroughImageService } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,15 +9,18 @@ export default defineConfig({
     tailwind(),
     react(),
     sanity({
-      projectId: "fovvfda4",
-      dataset: "production",
+      projectId: 'fovvfda4',
+      dataset: 'production',
     }),
   ],
+  server: {
+    port: 3000,
+  },
   images: {
-    domains: ["cdn.sanity.io"],
+    domains: ['cdn.sanity.io'],
   },
   image: {
-   service: passthroughImageService(),
- },
-  plugins: ["prettier-plugin-astro"],
-});
+    service: passthroughImageService(),
+  },
+  plugins: ['prettier-plugin-astro'],
+})
