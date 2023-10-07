@@ -6,28 +6,28 @@ import Stars from './Stars'
 
 const Description = () => {
   return (
-    <div className="w-full lg:w-1/4top-20 left-8 flex flex-col h-full p-8 backdrop-blur-sm border border-black bg-gray-200/50 rounded-lg shadow-lg">
-      <h2 className="text-black  text-4xl font-extrabold mb-2 leading-tight">
+    <div className="w-full lg:w-1/4top-20 left-8 flex flex-col h-full p-8 backdrop-blur-sm  bg-black/50 rounded-lg shadow-lg">
+      <h2 className="text-gray-200  text-4xl font-extrabold mb-2 leading-tight">
         Tunnel
       </h2>
-      <p className="text-black  text-md leading-tight mb-4 opacity-80">
+      <p className="text-gray-300  text-md leading-tight mb-4 opacity-80">
         A spatial representation where each post transforms into a navigable box
         within a cosmic tunnel.
       </p>
-      <h3 className="text-black text-2xl font-bold mb-2 leading-snug">
+      <h3 className="text-gray-200  text-2xl font-bold mb-2 leading-snug">
         Data Integration
       </h3>
-      <p className="text-black rajdhani text-md leading-tight mb-4 opacity-80">
+      <p className="text-gray-300  rajdhani text-md leading-tight mb-4 opacity-80">
         The visualization is made using react-three-fiber. The content including
         the images, title, and other meta information is sourced from our Sanity
         API ensuring a real-time experience.
       </p>
-      <h3 className="text-black text-xl font-bold mb-2 leading-snug">
+      <h3 className="text-gray-200   text-xl font-bold mb-2 leading-snug">
         Use Cases
       </h3>
-      <ul className="text-black text-md mb-2 leading-tight pl-8 list-disc opacity-80">
+      <ul className="text-gray-300  text-md mb-2 leading-tight pl-8 list-disc opacity-80">
         <li className="mb-1">
-          Interactive Blog Exploration: Posts are shown as card in an ethereal
+          Interactive Blog Exploration: Posts are shown as a card in an ethereal
           gallery, with hover effects and popovers when interacting with the
           post.
         </li>
