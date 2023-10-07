@@ -1,4 +1,4 @@
-import { CameraControls } from '@react-three/drei'
+import { CameraControls, OrbitControls } from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
 import PostsList from './PostsList'
@@ -6,7 +6,7 @@ import Stars from './Stars'
 
 const Description = () => {
   return (
-    <div className="w-full lg:w-1/4top-20 left-8 flex flex-col h-full p-8 backdrop-blur-sm border border-black bg-white/5 rounded-lg shadow-lg">
+    <div className="w-full lg:w-1/4top-20 left-8 flex flex-col h-full p-8 backdrop-blur-sm border border-black bg-gray-200/50 rounded-lg shadow-lg">
       <h2 className="text-black  text-4xl font-extrabold mb-2 leading-tight">
         Tunnel
       </h2>
@@ -46,18 +46,18 @@ const Tunnel = ({ posts }) => {
 
 const Scene = ({ posts }) => {
   return (
-    <div className="relative flex flex-col-reverse lg:flex-row justify-center items-center w-full h-auto p-4 lg:p-12 gap-4">
+    <div className="relative flex flex-col-reverse lg:flex-row-reverse justify-center items-center w-full h-auto p-4 lg:p-20 gap-8 ">
       <Description />
-      <div className="w-full lg:w-3/4 flex lg:h-[80vh] h-[60vh] shadow-2xl">
+      <div className="w-full lg:w-3/4 flex lg:h-[80vh] h-[50vh] shadow-2xl">
         <Canvas
           camera={{ position: [0, 0, 20], fov: 45 }}
           style={{ height: 'full', width: '100vw', background: 'black' }}
           className="border rounded-xl border-black"
         >
-          {' '}
+          <OrbitControls />
           <Stars />
-          <CameraControls /> <ambientLight intensity={0.5} />
-          <PostsList posts={posts} />
+          <ambientLight intensity={0.5} />
+          <Tunnel posts={posts} />
         </Canvas>
       </div>
     </div>

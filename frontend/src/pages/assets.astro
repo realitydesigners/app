@@ -1,21 +1,27 @@
 ---
+import CategoryGrid from '../components/three/CategoryGrid.jsx'
 import TunnelPosts from '../components/three/TunnelPosts.jsx'
 import Layout from '../layouts/Layout.astro'
-import { getPosts } from '../lib/api.js'
+import { getCategory, getPosts } from '../lib/api.js'
 import '@fontsource/rajdhani/500.css'
 import '@fontsource/rajdhani/700.css'
 
 const posts = await getPosts()
+const category = await getCategory()
 ---
 
 <Layout title="Reality Designers">
-  <main class="w-screen relative h-full bg-gray-200">
+  <main
+    class="w-screen relative h-full"
+    style="background: linear-gradient(180deg, #dad9d9 0%, #b9bdbf 50%, #dad9d9 100%);"
+  >
     <div class="w-full pt-20 flex pb-8 justify-center items-center">
       <h1 class="text-black text-6xl lg:text-8xl font-mono uppercase">
         All Assets
       </h1>
     </div>
     <TunnelPosts posts={posts} client:load />
+    <CategoryGrid category={category} client:load />
   </main>
 </Layout>
 
