@@ -6,7 +6,7 @@ import Stars from './Stars'
 
 const Description = () => {
   return (
-    <div className="w-full lg:w-1/4top-20 left-8 flex flex-col h-full p-8 backdrop-blur-sm  bg-black/50 rounded-lg shadow-lg">
+    <div className="w-full lg:w-1/4top-20 left-8 flex flex-col h-full p-8 backdrop-blur-sm rounded-lg shadow-lg pb-20">
       <h2 className="text-gray-200  text-4xl font-extrabold mb-2 leading-tight">
         Tunnel
       </h2>
@@ -46,9 +46,9 @@ const Tunnel = ({ posts }) => {
 
 const Scene = ({ posts }) => {
   return (
-    <div className="relative flex flex-col-reverse lg:flex-row-reverse justify-center items-center w-full h-auto p-4 lg:p-20 gap-8 ">
+    <div className="relative flex flex-col-reverse lg:flex-row-reverse justify-center items-center w-full h-auto p-0 lg:p-20 gap-8 ">
       <Description />
-      <div className="w-full lg:w-3/4 flex lg:h-[80vh] h-[50vh] shadow-2xl">
+      <div className="w-full lg:w-3/4 flex lg:h-[80vh] h-[50vh] shadow-2xl border border-gray-200 lg:rounded-xl">
         <Canvas
           camera={{ position: [0, 0, 20], fov: 45 }}
           style={{ height: 'full', width: '100vw', background: 'black' }}
