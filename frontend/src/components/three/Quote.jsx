@@ -2,7 +2,7 @@ import { CameraControls, OrbitControls } from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
 import QuoteList from './QuoteList'
-import Stars from './Stars'
+import SplineCode from './SplineCode'
 
 const Quote = ({ quotes }) => {
   return (
@@ -25,8 +25,9 @@ const Scene = ({ quotes }) => {
         >
           <OrbitControls />
 
-          <ambientLight intensity={0.5} />
           <Quote quotes={quotes} />
+
+          <SplineCode />
         </Canvas>
       </div>
       <Bar />
