@@ -147,16 +147,4 @@ export default defineType({
       ],
     }),
   ],
-
-  preview: {
-    select: {
-      title: 'title',
-    },
-    prepare({title}) {
-      return {
-        subtitle: 'Page',
-        title,
-      }
-    },
-  },
 })

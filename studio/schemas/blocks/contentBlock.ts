@@ -115,8 +115,8 @@ export default {
           title: 'Image',
           preview: {
             select: {
-              imageUrl: 'media.image.asset.url',
-              title: 'media.title',
+              imageUrl: 'image.image.asset.url',
+              title: 'image.title',
             },
           },
 
