@@ -5,7 +5,6 @@ import { useCallback, useState } from 'react'
 import AllCategories from './AllCategories'
 import Breadcrumb from './Breadcrumb'
 import { useCategory } from './CategoryContext'
-import HumanScene from './HumanScene'
 import { Menu } from './Menu'
 import Sidebar from './Sidebar'
 import Stars from './Stars'
@@ -93,11 +92,6 @@ const InteractiveWorldScene = ({ category = [] }) => {
       <Canvas style={{ height: '100vh', width: '100vw' }}>
         <PerspectiveCamera makeDefault position={cameraPosition} zoom={0.7} />
         <OrbitControls />
-        {activeBackgroundScene === 'humanScene' && (
-          <a.group scale={props.scale}>
-            <HumanScene />
-          </a.group>
-        )}
 
         <AllCategories
           categories={mainCategories}
