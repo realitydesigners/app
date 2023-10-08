@@ -86,6 +86,12 @@ export async function getPostBySlug() {
           className->{name},
           team->,
         },
+        image->{
+          ...,
+          className->{name},
+          team->,
+        },
+ 
         "audioRefData": {
           "audioTitle": audio->title,
           "audioFileUrl": audio->audioFile.asset->url

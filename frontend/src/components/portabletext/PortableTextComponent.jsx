@@ -168,7 +168,7 @@ const Light = {
     articleRef: ArticleRef,
     mediaRef: MediaRefLight,
     spline: SplineRef,
-    image: ImageRef,
+    imageRef: ImageRef,
     audioRef: AudioRef,
     quoteRef: QuoteRef,
   },
