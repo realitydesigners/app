@@ -19,7 +19,7 @@ const Scene = ({ quotes }) => {
       <Description />
       <div className="w-full lg:w-3/4 flex lg:h-[90vh] h-[80vh]  shadow-2xl border-b lg:border-b-0 lg:border-r border-gray-600">
         <Canvas
-          camera={{ position: [0, 0, 10], fov: 45 }}
+          camera={{ position: [0, 0, 1], fov: 45 }}
           style={{ height: 'full', width: '100vw', background: 'black' }}
           className="border rounded-xl border-black"
         >
