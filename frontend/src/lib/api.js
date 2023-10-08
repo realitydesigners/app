@@ -10,7 +10,7 @@ const client = createClient({
 })
 
 export async function getLeftSideBarPosts() {
-  const query = `*[_type == "posts"] |  order(_createdAt desc)[0..1] {
+  const query = `*[_type == "posts"] |  order(_createdAt desc)[1..2] {
     title,
     category,
     author,
@@ -25,7 +25,7 @@ export async function getLeftSideBarPosts() {
 }
 
 export async function getRightSideBarPosts() {
-  const query = `*[_type == "posts"] |  order(_createdAt desc) {
+  const query = `*[_type == "posts"] |  order(_createdAt desc)[3..7] {
     title,
     category,
     author,

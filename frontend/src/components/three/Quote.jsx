@@ -17,11 +17,11 @@ const Scene = ({ quotes }) => {
     <div className="relative flex flex-wrap flex-col-reverse lg:flex-row-reverse justify-center  w-full h-auto   border border-gray-600 mb-20 ">
       <TopBar />
       <Description />
-      <div className="w-full lg:w-3/4 flex lg:h-[90vh] h-[80vh]  shadow-2xl border-b lg:border-b-0 lg:border-r border-gray-600">
+      <div className="w-full lg:w-3/4 flex lg:h-[90vh] h-[70vh]  shadow-2xl border-b lg:border-b-0 lg:border-r border-gray-600">
         <Canvas
           camera={{ position: [0, 0, 1], fov: 45 }}
           style={{ height: 'full', width: '100vw', background: 'black' }}
-          className="border rounded-xl border-black"
+          className="border  border-black"
         >
           <OrbitControls />
 
@@ -83,7 +83,7 @@ const Bar = () => {
 const TopBar = () => {
   return (
     <div className="w-full h-8 flex text-gray-600 font-mono uppercase tracking-widest text-xs items-center justify-center lg:border-b border-gray-600">
-      <p>Reality Designers | Tunnel </p>
+      <p>Reality Designers | 3D QUOTE </p>
     </div>
   )
 }
