@@ -133,6 +133,23 @@ const Light = {
       </div>
     ),
   },
+  list: {
+    bullet: ({ children }) => (
+      <div className="w-screen flex justify-center">
+        <ul className="w-10/12 font-mono text-black leading-6 tracking-wide text-lg md:w-3/4 lg:w-1/2 lg:text-xl list-decimal list-inside space-y-8 mb-8">
+          {children}
+        </ul>
+      </div>
+    ),
+    number: ({ children }) => (
+      <div className="w-screen flex justify-center">
+        <ol className="w-10/12 font-mono text-black leading-5 tracking-wide text-md md:w-3/4 lg:w-1/2 lg:text-lg list-decimal list-inside space-y-8 mb-8">
+          {children}
+        </ol>
+      </div>
+    ),
+  },
+
   marks: {
     internalLink: ({ value, children }) => {
       const { slug = {} } = value
