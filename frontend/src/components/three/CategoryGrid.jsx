@@ -71,7 +71,6 @@ const InteractiveWorldScene = ({ category = [] }) => {
             selectedMainWorld={selectedMainWorld}
             highlightedWorld={highlightedWorld}
           />
-          <Stars />
         </Canvas>
       </div>
       <Bar />
@@ -84,11 +83,11 @@ export default InteractiveWorldScene
 const Description = () => {
   return (
     <div className="w-full lg:w-1/4 font-mono flex flex-col h-full p-8 b border-b border-gray-600 shadow-lg ">
-      <div class="flex flex-row text-xs font-bold gap-2 mb-8 ">
-        <span class="text-teal-200 flex w-auto bg-teal-200/50  rounded pl-2 pr-2 p-1 border border-teal-200">
+      <div className="flex flex-row text-xs font-bold gap-2 mb-8 ">
+        <span className="text-teal-200 flex w-auto bg-teal-200/50  rounded pl-2 pr-2 p-1 border border-teal-200">
           3D
         </span>
-        <span class="text-yellow-200 flex w-auto bg-yellow-200/50  rounded pl-2 pr-2 p-1 border border-yellow-200">
+        <span className="text-yellow-200 flex w-auto bg-yellow-200/50  rounded pl-2 pr-2 p-1 border border-yellow-200">
           CMS
         </span>
       </div>
@@ -109,11 +108,11 @@ const Description = () => {
           and hover effects to reveal content.
         </li>
       </ul>
-      <div class="flex flex-row text-xs font-bold gap-2 my-4">
-        <span class="text-black flex w-auto te bg-white p-2">
+      <div className="flex flex-row text-xs font-bold gap-2 my-4">
+        <span className="text-black flex w-auto te bg-white p-2">
           React-Three-Fiber
         </span>
-        <span class="text-black flex w-auto bg-white p-2">Sanity</span>
+        <span className="text-black flex w-auto bg-white p-2">Sanity</span>
       </div>
     </div>
   )

@@ -1,13 +1,15 @@
 ---
 import CategoryGrid from '../components/three/CategoryGrid.jsx'
+import Quote from '../components/three/Quote.jsx'
 import TunnelPosts from '../components/three/TunnelPosts.jsx'
 import Layout from '../layouts/Layout.astro'
-import { getCategory, getPosts } from '../lib/api.js'
+import { getCategory, getPosts, getQuote } from '../lib/api.js'
 import '@fontsource/rajdhani/500.css'
 import '@fontsource/rajdhani/700.css'
 
 const posts = await getPosts()
 const category = await getCategory()
+const quotes = await getQuote()
 ---
 
 <Layout title="Reality Designers">
@@ -17,6 +19,7 @@ const category = await getCategory()
         All Assets
       </h1>
     </div>
+    <Quote quotes={quotes} client:load />
     <TunnelPosts posts={posts} client:load />
     <CategoryGrid category={category} client:load />
   </main>

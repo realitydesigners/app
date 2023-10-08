@@ -1,32 +1,32 @@
 import { CameraControls, OrbitControls } from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
-import PostsList from './PostsList'
+import QuoteList from './QuoteList'
 import Stars from './Stars'
 
-const Tunnel = ({ posts }) => {
+const Quote = ({ quotes }) => {
   return (
     <>
-      <PostsList posts={posts} />
+      <QuoteList quotes={quotes} />
     </>
   )
 }
 
-const Scene = ({ posts }) => {
+const Scene = ({ quotes }) => {
   return (
     <div className="relative flex flex-wrap flex-col-reverse lg:flex-row-reverse justify-center  w-full h-auto   border border-gray-600 mb-20 ">
       <TopBar />
       <Description />
       <div className="w-full lg:w-3/4 flex lg:h-[90vh] h-[80vh]  shadow-2xl border-b lg:border-b-0 lg:border-r border-gray-600">
         <Canvas
-          camera={{ position: [0, 0, 20], fov: 45 }}
+          camera={{ position: [0, 0, 10], fov: 45 }}
           style={{ height: 'full', width: '100vw', background: 'black' }}
           className="border rounded-xl border-black"
         >
           <OrbitControls />
 
           <ambientLight intensity={0.5} />
-          <Tunnel posts={posts} />
+          <Quote quotes={quotes} />
         </Canvas>
       </div>
       <Bar />
@@ -48,20 +48,19 @@ const Description = () => {
         </span>
       </div>
       <h2 className="text-gray-200  text-3xl font-extrabold mb-2 leading-tight">
-        Tunnel
+        Quote
       </h2>
       <p className="text-gray-300  text-sm leading-tight mb-12 opacity-80">
-        A spatial representation where each post transforms into a navigable box
-        within a cosmic tunnel.
+        A group of quotes in a circle.
       </p>
       <h3 className="text-gray-200   text-lg font-bold mb-2 leading-snug">
         Use Cases
       </h3>
       <ul className="text-gray-300  text-sm mb-2 leading-tight pl-8 list-disc opacity-80 ">
         <li className="mb-1">
-          Interactive Blog Exploration: Posts are shown as a card in an ethereal
-          gallery, with hover effects and popovers when interacting with the
-          post.
+          Interactive Blog Exploration: These quotes are shown as a card in an
+          ethereal gallery, with hover effects and popovers when interacting
+          with the post.
         </li>
       </ul>
       <div className="flex flex-row text-xs font-bold gap-2 my-4">
