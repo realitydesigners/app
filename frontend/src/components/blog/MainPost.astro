@@ -1,6 +1,4 @@
 ---
-import '@fontsource/rajdhani/400.css'
-import '@fontsource/rajdhani/700.css'
 import { Image } from 'astro:assets'
 import { getSanityImageURL } from '../../utils/helpers.js'
 
@@ -13,20 +11,22 @@ const { post } = Astro.props
       <a href={`/posts/${post.slug?.current}`}>
         <div class="text-white p-2 w-full ">
           {post?.image && (
-            <Image
-              src={getSanityImageURL(post?.image).url()}
-              alt="this is an image"
-              width={1000}
-              height={800}
-              format="webp"
-              class="w-full h-72 lg:h-96 object-cover"
-            />
+            <div class=" flex group overflow-hidden w-full h-72 lg:h-96">
+              <Image
+                src={getSanityImageURL(post?.image).url()}
+                alt="this is an image"
+                width={1000}
+                height={800}
+                format="webp"
+                class="object-cover transform transition-transform duration-300 w-full h-full group-hover:scale-105 "
+              />
+            </div>
           )}
 
-          <h2 class="p-2 font-mono text-4xl uppercase leading-none text-white scramble-title">
+          <h2 class="p-2 pt-4 font-mono text-4xl uppercase leading-none text-black scramble-title">
             {post.title}
           </h2>
-          <p class="p-2 font-mono text-lg leading-tight text-gray-400 ">
+          <p class="p-2 font-mono text-lg leading-tight text-gray-700 ">
             {post.excerpt}
           </p>
         </div>
@@ -42,6 +42,6 @@ const { post } = Astro.props
   }
   p {
     font-family: 'Rajdhani', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
   }
 </style>

@@ -47,7 +47,11 @@ export async function getMainPost() {
     excerpt,
     tags,
     slug,
+    block[]{
+        ...,
+
     publicationDate,
+    },
     image,
   }`
   const data = await client.fetch(query)

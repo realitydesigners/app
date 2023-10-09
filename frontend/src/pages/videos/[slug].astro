@@ -18,7 +18,7 @@ const { video = {} as any } = Astro.props
 <BlogLayout
   title={video.title}
   description={video.excerpt}
-  imageURL={getSanityImageURL(video.image).url()}
+  imageURL={getSanityImageURL(video?.image).url()}
 >
   <main class="flex pt-20 w-screen h-full justify-center bg-black">
     <div class="w-full flex lg:p-8 p-2 flex-wrap pb-90">
@@ -29,8 +29,10 @@ const { video = {} as any } = Astro.props
           class="w-full h-[300px] lg:h-[500px]"
           src={video.url}
           title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
+          allowfullscreen
+        >
+        </iframe>
+
         <h2
           class="p-2 text-2xl uppercase leading-none text-white scramble-title"
         >

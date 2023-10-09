@@ -1,6 +1,4 @@
 ---
-import '@fontsource/rajdhani/400.css'
-import '@fontsource/rajdhani/600.css'
 import { Image } from 'astro:assets'
 import { getSanityImageURL } from '../../utils/helpers.js'
 
@@ -13,25 +11,24 @@ const { posts } = Astro.props
       posts &&
         posts.map((post: any) => (
           <a href={`/posts/${post.slug?.current}`}>
-            <div class="flex flex-cols text-white p-2 w-full border-b-2 mb-2 border-gray-400/20">
+            <div class="flex flex-cols p-2 w-full border-b-2 mb-2 border-gray-300">
               {post?.image && (
-                <Image
-                  src={getSanityImageURL(post?.image).url()}
-                  alt="this"
-                  width={1000}
-                  height={1000}
-                  class="w-1/3 h-28 object-cover"
-                  format="webp"
-                />
+                <div class="flex group overflow-hidden w-1/3 h-24">
+                  <Image
+                    src={getSanityImageURL(post?.image).url()}
+                    alt="this"
+                    width={1000}
+                    height={1000}
+                    format="webp"
+                    class="object-cover transform transition-transform duration-300 w-full h-full group-hover:scale-105"
+                  />
+                </div>
               )}
 
               <div class="pl-4 w-2/3 mb-2">
-                <h2 class="mb-2 text-xl leading-tight  uppercase text-white">
+                <h2 class="mb-2 text-xl leading-none uppercase text-black">
                   {post.title}
                 </h2>
-                <p class="excerpt-clamp text-md leading-tight tracking-wide text-gray-200/60">
-                  {post.excerpt}
-                </p>
               </div>
             </div>
           </a>
@@ -43,11 +40,11 @@ const { posts } = Astro.props
 <style>
   h2 {
     font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
   }
   p {
     font-family: 'Rajdhani', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
   }
   .excerpt-clamp {
     display: -webkit-box;

@@ -1,26 +1,26 @@
 ---
 import { Image } from 'astro:assets'
-import RDLogo from '../../../public/rd-logo.svg'
+import Logo from '../../../public/logo.svg'
 import '@fontsource/rajdhani/600.css'
 import '@fontsource/rajdhani/700.css'
 ---
 
 <div class="ml-4 h-12 relative z-80">
   <a href="/" class="flex-cols z-80 items-center pt-2 flex">
-    <Image src={RDLogo} alt="logo" class="h-10 w-10 mr-2" />
-    <div class="block">
-      <h1 class="text-lg uppercase leading-none tracking-wide text-white">
+    <Image src={Logo} alt="logo" class="h-8 w-8 mr-2" />
+    <div class="flex flex-col">
+      <span class="text-lg uppercase leading-none tracking-wide text-black">
         Reality
-      </h1>
-      <h1 class="text-xs tracking-widest uppercase leading-none text-white">
+      </span>
+      <span class="text-xs tracking-widest uppercase leading-none text-black">
         Designers
-      </h1>
+      </span>
     </div>
   </a>
 </div>
 
 <style>
-  h1 {
+  span {
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;
   }
