@@ -1,6 +1,7 @@
 ---
 import CategoryGrid from '../components/three/CategoryGrid.jsx'
 import Quote from '../components/three/Quote.jsx'
+import SplineGLB from '../components/three/SplineGLB.jsx'
 import TunnelPosts from '../components/three/TunnelPosts.jsx'
 import Layout from '../layouts/Layout.astro'
 import { getCategory, getPosts, getQuote } from '../lib/api.js'
@@ -19,6 +20,7 @@ const quotes = await getQuote()
         All Assets
       </h1>
     </div>
+    <SplineGLB client:load />
     <Quote quotes={quotes} client:load />
     <TunnelPosts posts={posts} client:load />
     <CategoryGrid category={category} client:load />
