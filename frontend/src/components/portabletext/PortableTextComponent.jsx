@@ -153,10 +153,10 @@ const Light = {
   marks: {
     internalLink: ({ value, children }) => {
       const { slug = {} } = value
-      const href = `/blog/${slug?.current}`
+      const href = `/posts/${slug?.current}`
 
       return (
-        <a className="font-extrabold text-black " href={href}>
+        <a className="font-extrabold text-black underline " href={href}>
           {children}
         </a>
       )
