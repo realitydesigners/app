@@ -1,67 +1,52 @@
 import { OrbitControls } from '@react-three/drei'
-import { Canvas, useLoader } from '@react-three/fiber'
-import { MeshPhongMaterial, MeshStandardMaterial } from 'three'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { useRef } from 'react'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { fileUrlFor } from '../../utils/urlFor'
 
-const PlainGLB = () => {
-  return (
-    <>
-      <Gltf src="/models/spline.glb" scale={0.1} />
-    </>
-  )
-}
+const GLBFile = ({ model }) => {
+  const modelUrl = fileUrlFor(model[0]?.file?.asset._ref)
 
-const MaterialGLB = () => {
-  const gltf = useLoader(GLTFLoader, '/models/spline.glb')
-  const material = new MeshPhongMaterial({
-    color: 'gray',
-    shininess: 300,
-    specular: 0x222222,
-  })
+  const gltf = useLoader(GLTFLoader, modelUrl)
 
-  gltf.scene.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true
-      child.receiveShadow = true
-      child.material = material // your material
+  const meshRef = useRef()
+
+  useFrame(() => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x += 0.002
+      meshRef.current.rotation.y += 0.002
+      meshRef.current.rotation.z += 0.002
     }
   })
 
-  return <primitive object={gltf.scene} scale={0.2} />
+  return <primitive ref={meshRef} object={gltf.scene} scale={0.12} />
 }
 
-const Scene = () => {
+const Scene = ({ model }) => {
   return (
     <div className="relative flex flex-wrap flex-col-reverse lg:flex-row-reverse justify-center w-full h-auto border border-gray-600 mb-20">
-      <TopBar />
       <Description />
       <div className="w-full lg:w-3/4 flex lg:h-[90vh] h-[70vh] shadow-2xl border-b lg:border-b-0 lg:border-r border-gray-600">
         <Canvas
-          camera={{ position: [2, 2, 2], fov: 75 }}
+          camera={{ position: [0.5, 0.4, 1], fov: 75 }}
           style={{ height: 'full', width: '100vw', background: 'black' }}
           className="border border-black"
         >
           <OrbitControls />
           <pointLight
-            intensity={100}
-            position={[0, 3, 0]} // UP
-            color={'#54e7dc'} // Turquoise
-            castShadow={true}
-          />
-          <pointLight
-            intensity={100}
-            position={[0, -3, 0]} // DOWN
+            intensity={5}
+            position={[0, 1, 0]} // UP
             color={'#7668e0'} // Pink
             castShadow={true}
           />
           <pointLight
-            intensity={100}
-            position={[10, 1, 0]} // DOWN
-            color={'#6782f2'} // Pink
+            intensity={5}
+            position={[0, -1, 0]} // DOWN
+            color={'#7668e0'} // Pink
             castShadow={true}
           />
 
-          <MaterialGLB />
+          <GLBFile model={model} />
         </Canvas>
       </div>
       <Bar />
@@ -83,11 +68,12 @@ const Description = () => {
         </span>
       </div>
       <h2 className="text-gray-200  text-3xl font-extrabold mb-2 leading-tight">
-        GLB Model
+        GLB Sanity Model
       </h2>
       <p className="text-gray-300  text-sm leading-tight mb-12 opacity-80">
-        A glb model made in Spline, loaded in using react-three-fiber with point
-        light and materials.
+        This model was made in Spline, exported as a .glb file, and uploaded to
+        Sanity. This is a proof of concept for using Sanity as a CMS for 3D
+        objects. The animation can also be controlled from Sanity.
       </p>
       <h3 className="text-gray-200   text-lg font-bold mb-2 leading-snug">
         Use Cases

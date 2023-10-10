@@ -12,6 +12,7 @@ import img from './schemas/img'
 import quote from './schemas/quote'
 import video from './schemas/video'
 import audio from './schemas/audio'
+import model from './schemas/model'
 import headingBlock from './schemas/blocks/headingBlock'
 import contentBlock from './schemas/blocks/contentBlock'
 import teamBlock from './schemas/blocks/teamBlock'
@@ -45,6 +46,7 @@ export default defineConfig({
       headingBlock,
       contentBlock,
       teamBlock,
+      model,
     ],
   },
   form: {

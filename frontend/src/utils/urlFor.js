@@ -16,3 +16,14 @@ const builder = imageUrlFor(
 export function urlFor(source) {
   return builder.image(source)
 }
+
+export function fileUrlFor(ref) {
+  const projectId = 'fovvfda4'
+  const dataset = 'production'
+
+  const parts = ref.split('-')
+  const fileId = parts[1]
+  const fileExtension = parts[parts.length - 1] // This extracts 'glb' from your ref
+
+  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${fileId}.${fileExtension}`
+}

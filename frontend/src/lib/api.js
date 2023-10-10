@@ -389,3 +389,12 @@ export async function getVideoBySlug() {
   const data = await client.fetch(query)
   return data
 }
+
+export async function getModel() {
+  const query = `*[_type == "model"] |  order(_createdAt desc) {
+  title, 
+  file,
+  }`
+  const data = await client.fetch(query)
+  return data
+}
