@@ -2,7 +2,7 @@ import { OrbitControls } from '@react-three/drei'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { useRef } from 'react'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { fileUrlFor } from '../../utils/urlFor'
+import { fileUrlFor } from '../../lib/urlFor'
 
 const GLBFile = ({ model }) => {
   const modelUrl = fileUrlFor(model[0]?.file?.asset._ref)

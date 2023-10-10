@@ -283,16 +283,13 @@ export default {
     prepare(selection: {contentArray: any[]; layout: string}) {
       const {contentArray, layout} = selection
 
-      // Determine the type of the first content item
       const firstContentType = contentArray.length > 0 ? contentArray[0]._type : 'Unknown'
 
-      // If the first item is a text block, get the first few words
       let firstWords = ''
       if (firstContentType === 'block' && contentArray[0].children && contentArray[0].children[0]) {
         firstWords = contentArray[0].children[0].text.split(' ').slice(0, 5).join(' ') + '...'
       }
 
-      // Count the different content types
       const contentTypeCounts = contentArray.reduce<{[key: string]: number}>((acc, item) => {
         acc[item._type] = (acc[item._type] || 0) + 1
         return acc

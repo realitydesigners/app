@@ -2,7 +2,7 @@
 import '@fontsource/rajdhani/400.css'
 import '@fontsource/rajdhani/700.css'
 import { Image } from 'astro:assets'
-import { getSanityImageURL } from '../utils/helpers.js'
+import { getSanityImageURL } from '../lib/helpers.js'
 
 const { team } = Astro.props
 ---
@@ -37,8 +37,8 @@ const { team } = Astro.props
         team.map((member: any) => (
           <li class="flex-shrink-0 p-2 group">
             <a href={`/team/${member.slug?.current}`}>
-              <div class="w-full flex flex-col items-center group -ml-8 ">
-                <div class="w-[250px] h-[350px] lg:w-[400px] lg:h-[500px] overflow-hidden shadow-md mb-4 image-container group-hover:reveal-image">
+              <div class="w-full flex flex-col  items-center group -ml-8 ">
+                <div class="w-[225px] h-[275px] lg:w-[400px] lg:h-[500px] overflow-hidden shadow-md mb-4 image-container group-hover:reveal-image">
                   {member?.image && (
                     <Image
                       src={getSanityImageURL(member?.image).url()}

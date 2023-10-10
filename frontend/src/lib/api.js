@@ -328,7 +328,9 @@ export async function getCategory() {
     excerpt,
     author,
     tags,
+
     category,
+
     publicationDate,
     lightLayout,
     darkLayout,

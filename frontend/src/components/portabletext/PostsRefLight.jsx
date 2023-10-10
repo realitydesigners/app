@@ -1,5 +1,5 @@
 import '../../../globals.css'
-import { getSanityImageURL } from '../../utils/helpers.js'
+import { getSanityImageURL } from '../../lib/helpers.js'
 
 const PostsCardLight = ({ title, slug, image, excerpt }) => {
   return (

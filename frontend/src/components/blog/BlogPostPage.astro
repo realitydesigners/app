@@ -6,13 +6,13 @@ import '@fontsource/noto-sans/400.css'
 import '@fontsource/noto-sans/500.css'
 import '@fontsource/noto-sans/700.css'
 import { Image } from 'astro:assets'
-import { getSanityImageURL } from '../utils/helpers.js'
-import HeadingBlockDark from './blog/HeadingBlockDark.astro'
-import HeadingBlockLight from './blog/HeadingBlockLight.astro'
-import { SidebarWrapper } from './blog/Sidebar.jsx'
-import TeamBlock from './blog/TeamBlock.astro'
+import { getSanityImageURL } from '../../lib/helpers.js'
+import PortableTextComponent from '../portabletext/PortableTextComponent'
+import HeadingBlockDark from './HeadingBlockDark.astro'
+import HeadingBlockLight from './HeadingBlockLight.astro'
 import LinkedPosts from './LinkedPosts.astro'
-import PortableTextComponent from './portabletext/PortableTextComponent.jsx'
+import { SidebarWrapper } from './Sidebar'
+import TeamBlock from './TeamBlock.astro'
 
 export interface Props {
   post: any
@@ -115,7 +115,7 @@ const h2Headings = Array.isArray(post?.block)
 </style>
 
 <script>
-  import TextScrambler from './effects/TextScrambler'
+  import TextScrambler from '../../components/global/effects/TextScrambler'
 
   function scrambleText() {
     const scrambled = document.querySelectorAll('.scramble')

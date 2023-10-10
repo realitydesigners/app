@@ -2,12 +2,15 @@ import { a, useSpring } from '@react-spring/three'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { useCallback, useState } from 'react'
-import AllCategories from './AllCategories'
-import Breadcrumb from './Breadcrumb'
 import { useCategory } from './CategoryContext'
-import { Menu } from './Menu'
-import Sidebar from './Sidebar'
-import Stars from './Stars'
+import {
+  AllCategories,
+  Breadcrumb,
+  Crystal,
+  Menu,
+  Sidebar,
+  Stars,
+} from './index.ts'
 
 const CAMERA_POSITION = [0, 0, 30]
 

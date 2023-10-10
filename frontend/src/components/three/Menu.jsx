@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const Menu = ({
+const Menu = ({
   categories,
   onCategorySelect,
   onCategoryHighlight,
@@ -91,3 +91,4 @@ export const Menu = ({
     </div>
   )
 }
+export default Menu

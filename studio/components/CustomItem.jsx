@@ -1,12 +1,7 @@
-import {
-  DashboardIcon,
-  ImageIcon,
-  MasterDetailIcon,
-  UserIcon,
-} from '@sanity/icons'
+import {DashboardIcon, ImageIcon, MasterDetailIcon, UserIcon} from '@sanity/icons'
 
 function CustomItem(props) {
-  const { title, ...restProps } = props
+  const {title, ...restProps} = props
 
   // Determine the type based on the block's schema type
   const type = props.value._type || ''

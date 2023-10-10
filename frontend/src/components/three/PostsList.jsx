@@ -2,7 +2,7 @@ import { Box, Html, Plane, Text, useTexture } from '@react-three/drei'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
-import { urlFor } from '../../utils/urlFor'
+import { urlFor } from '../../lib/urlFor'
 
 const PostBox = ({ post, position, rotationY }) => {
   const texture = useTexture(urlFor(post.image).url())

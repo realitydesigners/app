@@ -1,5 +1,5 @@
 import '../../../globals.css'
-import { getSanityImageURL } from '../../utils/helpers'
+import { getSanityImageURL } from '../../lib/helpers'
 
 const ImageCard = ({ title, slug, image, className }) => {
   // Change 'img' to 'image' as the prop name

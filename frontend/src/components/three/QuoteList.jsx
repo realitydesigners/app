@@ -1,6 +1,6 @@
 import { Box, Line, Sphere, Text, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
-import { urlFor } from '../../utils/urlFor'
+import { urlFor } from '../../lib/urlFor'
 
 const QuoteBox = ({ quote, position, rotationY }) => {
   const textWidth = 1.1
