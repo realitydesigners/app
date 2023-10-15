@@ -10,6 +10,7 @@ import PostsRef from './PostsRef.jsx'
 import PostsRefLight from './PostsRefLight.jsx'
 import QuoteRef from './QuoteRef.jsx'
 import SplineRef from './SplineRef.jsx'
+import VideoRef from './VideoRef.jsx'
 import '@fontsource/rajdhani/400.css'
 import '@fontsource/rajdhani/500.css'
 import '@fontsource/rajdhani/700.css'
@@ -167,6 +168,7 @@ const Light = {
     postsRef: PostsRefLight,
     articleRef: ArticleRef,
     mediaRef: MediaRefLight,
+    videoRef: VideoRef,
     spline: SplineRef,
     imageRef: ImageRef,
     audioRef: AudioRef,
