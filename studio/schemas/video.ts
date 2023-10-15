@@ -25,7 +25,6 @@ export default defineType({
       name: 'url',
       type: 'url',
       title: 'Video URL',
-      validation: (Rule) => Rule.required(),
     }),
 
     defineField({

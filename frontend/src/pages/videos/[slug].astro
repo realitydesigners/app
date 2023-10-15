@@ -2,6 +2,7 @@
 import BlogLayout from '../../layouts/BlogLayout.astro'
 import { getVideoBySlug } from '../../lib/api.js'
 import { getSanityImageURL } from '../../lib/helpers.js'
+import { videoFileUrlFor } from '../../lib/urlFor.js'
 
 export async function getStaticPaths() {
   const allVideos = await getVideoBySlug()
@@ -12,7 +13,9 @@ export async function getStaticPaths() {
   }))
 }
 
-const { video = {} as any } = Astro.props
+const { video = {} } = Astro.props
+
+const videoUrl = videoFileUrlFor(video?.video?.asset?._ref)
 ---
 
 <BlogLayout
@@ -23,16 +26,10 @@ const { video = {} as any } = Astro.props
   <main class="flex pt-20 w-screen h-full justify-center bg-black">
     <div class="w-full flex lg:p-8 p-2 flex-wrap pb-90">
       <div class="lg:w-3/4 w-full flex-col flex">
-        <iframe
-          width="100%"
-          height="100%"
-          class="w-full h-[300px] lg:h-[500px]"
-          src={video.url}
-          title="YouTube video player"
-          allowfullscreen
-        >
-        </iframe>
-
+        <video width="100%" height="100%" controls>
+          <source src={videoUrl} type="video/mp4" />
+          {videoUrl ? '' : 'The video is not available.'}
+        </video>
         <h2
           class="p-2 text-2xl uppercase leading-none text-white scramble-title"
         >

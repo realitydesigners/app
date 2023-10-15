@@ -26,3 +26,17 @@ export function fileUrlFor(ref) {
 
   return `${BASE_URL}/${fileId}.${fileExtension}`
 }
+
+export function videoFileUrlFor(refString, fileExtension = 'mp4') {
+  if (!refString) {
+    return null
+  }
+
+  const fileIdParts = refString.split('-')
+  if (fileIdParts.length >= 2 && typeof fileIdParts[1] === 'string') {
+    const fileId = fileIdParts[1]
+    return `${BASE_URL}/${fileId}.${fileExtension}`
+  }
+
+  return null
+}

@@ -387,6 +387,7 @@ export async function getVideoBySlug() {
   slug,
   url,
   image,
+  video,
   }`
   const data = await client.fetch(query)
   return data
