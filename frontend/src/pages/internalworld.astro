@@ -1,0 +1,13 @@
+---
+import Categories from '../components/internalworld/Categories'
+import Layout from '../layouts/Layout.astro'
+import { getCategory } from '../lib/api.js'
+
+const category = await getCategory()
+---
+
+<Layout title="Reality Designers">
+  <main class="w-screen h-screen">
+    <Categories category={category} client:load />
+  </main>
+</Layout>
