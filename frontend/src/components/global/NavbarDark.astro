@@ -1,0 +1,113 @@
+---
+import { Image } from 'astro:assets'
+import Logo from '../../../public/rd-logo.svg'
+import '@fontsource/rajdhani/600.css'
+import '@fontsource/rajdhani/700.css'
+---
+
+<nav
+  role="navigation"
+  id="navbar"
+  class="flex items-center pb-1 pt-1 justify-between flex-wrap fixed w-full z-50 h-auto"
+>
+  <div class="ml-4 relative z-80 logo">
+    <a href="/" class="flex-cols z-80 items-center flex">
+      <Image src={Logo} alt="logo" class="h-8 w-8 mr-2" />
+      <div class="hidden lg:flex text-white flex-col">
+        <span class="text-lg tracking-wide leading-none">REALITY</span>
+        <span class="text-sm leading-none">DESIGNERS</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="flex relative lg:hidden">
+    <button
+      id="nav-toggle"
+      class="flex items-center relative z-20 mr-4"
+      aria-label="Toggle Menu"
+    >
+      <div class="text-lg text-white mr-2">
+        <p class="mt-2">EXPLORE</p>
+      </div>
+      <svg
+        width="20"
+        height="20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M3 12h18M3 6h18M3 18h18" stroke="#fff" stroke-width="2"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="nav-content"
+    role="menu"
+    class="w-full h-screen lg:bg-transparent z-10 lg:h-auto flex-grow lg:flex lg:items-center lg:w-auto hidden"
+  >
+    <div class="w-full lg:mr-8">
+      <ul
+        class="flex justify-center gap-2 items-center h-screen lg:h-auto flex-col lg:flex-row lg:justify-end uppercase text-white text-6xl lg:text-xl"
+      >
+        <li class="px-3 py-1 hover:bg-white rounded-lg hover:text-black">
+          <a href="/story">Story</a>
+        </li>
+        <li class="px-3 py-1 hover:bg-white rounded-lg hover:text-black">
+          <a href="/feed">Feed</a>
+        </li>
+        <li class="px-3 py-1 hover:bg-white rounded-lg hover:text-black">
+          <a href="/team">Team</a>
+        </li>
+        <li class="px-3 py-1 hover:bg-white rounded-lg hover:text-black">
+          <a href="/assets">Assets</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  p,
+  a,
+  span {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+
+  #nav-toggle:focus {
+    outline: none;
+    border: none;
+  }
+
+  #nav-toggle:active,
+  #nav-toggle:hover {
+    border: none;
+  }
+
+  .nav-expanded {
+    background-color: #000000;
+  }
+
+  .menu-content-expanded {
+    background-color: #000000;
+  }
+</style>
+
+<script type="module">
+  const navToggle = document.getElementById('nav-toggle')
+  const navContent = document.getElementById('nav-content')
+  const navbar = document.getElementById('navbar')
+  const body = document.body
+
+  if (navToggle && navContent) {
+    navToggle.addEventListener('click', () => {
+      navContent.classList.toggle('hidden')
+      navContent.classList.toggle('menu-content-expanded')
+      navbar.classList.toggle('nav-expanded')
+
+      body.style.overflow = navContent.classList.contains('hidden')
+        ? 'auto'
+        : 'hidden'
+    })
+  }
+</script>
