@@ -60,7 +60,7 @@ const Scene = ({ category = [] }) => {
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
       <Canvas
-        camera={{ position: [0, 0, 30], fov: 45 }}
+        camera={{ position: [0, 0, 25], fov: 45 }}
         style={{ height: '100vh', width: '100vw', background: 'black' }}
         className="border  border-black"
       >

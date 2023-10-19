@@ -8,7 +8,7 @@ import ModelWithEffects from './ModelWithEffects'
 export function getMainCategoryPositions(
   count,
   offset = [0, 0, 0],
-  radius = 6,
+  radius = 5,
 ) {
   const phi = Math.PI * (43 - Math.sqrt(2)) // golden angle
   const positions = []
@@ -152,6 +152,7 @@ export const MainCategories = (props) => {
 }
 
 export const SubCategory = (props) => {
+  console.log(props)
   const {
     title,
     position,
@@ -161,6 +162,8 @@ export const SubCategory = (props) => {
     onPointerOver,
     onPointerOut,
   } = props
+
+  console.log('Props in SubCategory:', props)
 
   const textRef = useRef(null)
   const { camera } = useThree()
