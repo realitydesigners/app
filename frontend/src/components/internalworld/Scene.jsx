@@ -4,14 +4,19 @@ import { useCallback, useState } from 'react'
 import AllCategories from './AllCategories'
 import { useCategory } from './CategoryContext'
 
-const Categories = ({ category = [] }) => {
+const Scene = ({ category = [] }) => {
   const { navigation, setNavigation } = useCategory()
 
   // State variables
+
   const [highlightedWorld, setHighlightedWorld] = useState(null)
 
   const [selectedMainWorld, setSelectedMainWorld] = useState(null)
   const [highlightedCategory, setHighlightedCategory] = useState(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [selectedSubWorld, setSelectedSubWorld] = useState(null)
+  const [currentContent, setCurrentContent] = useState([])
+  const [activeBackgroundScene, setActiveBackgroundScene] = useState(null)
 
   const handleMainWorldInteraction = useCallback(
     (worldName, position, childCategoryName) => {
@@ -55,7 +60,7 @@ const Categories = ({ category = [] }) => {
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
       <Canvas
-        camera={{ position: [0, 0, 40], fov: 45 }}
+        camera={{ position: [0, 0, 30], fov: 45 }}
         style={{ height: '100vh', width: '100vw', background: 'black' }}
         className="border  border-black"
       >
@@ -72,4 +77,4 @@ const Categories = ({ category = [] }) => {
   )
 }
 
-export default Categories
+export default Scene

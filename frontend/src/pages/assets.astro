@@ -14,9 +14,6 @@ const posts = await getPosts()
 const category = await getCategory()
 const quotes = await getQuote()
 const model = await getModel()
-
-const modelUrl = fileUrlFor(model[0]?.file?.asset._ref)
-console.log('Generated Model URL:', modelUrl)
 ---
 
 <Layout title="Reality Designers">

@@ -16,6 +16,7 @@ import model from './schemas/model'
 import headingBlock from './blocks/headingBlock'
 import contentBlock from './blocks/contentBlock'
 import teamBlock from './blocks/teamBlock'
+import modules from './schemas/internalworld/modules'
 
 import CustomField from './components/CustomField'
 import CustomItem from './components/CustomItem'
@@ -47,6 +48,7 @@ export default defineConfig({
       contentBlock,
       teamBlock,
       model,
+      modules,
     ],
   },
   form: {

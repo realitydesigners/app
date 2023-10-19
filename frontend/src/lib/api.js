@@ -408,3 +408,29 @@ export async function getModel() {
   const data = await client.fetch(query)
   return data
 }
+
+export async function getModules() {
+  const query = `*[_type == "modules" ] {
+  title,
+  model->{...,
+  file,
+   },
+  isMain,
+    "subCategories": *[_type == "modules" && references(^._id)] { 
+    _id, 
+    _type, 
+    title,
+    isMain,
+     model->{...,
+  file,
+   },
+  },
+  "associatedPosts": *[_type == "posts" && references(^._id)] {
+    title,
+    slug,
+    file,
+  }
+}`
+  const data = await client.fetch(query)
+  return data
+}

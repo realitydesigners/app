@@ -1,15 +1,16 @@
 import { Text } from '@react-three/drei'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import Crystal from './Crystal'
+import ModelWithEffects from './ModelWithEffects'
 
 export function getMainCategoryPositions(
   count,
   offset = [0, 0, 0],
-  radius = 15,
+  radius = 6,
 ) {
-  const phi = Math.PI * (43 - Math.sqrt(5)) // golden angle
+  const phi = Math.PI * (43 - Math.sqrt(2)) // golden angle
   const positions = []
 
   for (let i = 0; i < count; i++) {
@@ -44,6 +45,7 @@ const playSound = (soundPath) => {
 export const MainCategory = (props) => {
   const {
     title,
+    model,
     position,
     isHighlighted,
     onClick,
@@ -80,17 +82,21 @@ export const MainCategory = (props) => {
     }
   })
 
+  console.log('Model in MainCategory:', model)
+
   return (
     <group onPointerOver={onHover} onPointerOut={onLeave}>
-      <Crystal
-        className="main-crystal"
+      <ModelWithEffects
+        model={model}
+        className="model"
         position={position}
-        scale={[1, 1, 1]}
-        onPointerOver={handleHover}
+        scale={[0.5, 0.5, 0.5]}
+        onPointerOver={() => title && onPointerOver(title)}
         onPointerOut={onPointerOut}
-        onClick={handleClick}
-        emissiveIntensity={isDimmed ? 0.25 : isHighlighted ? 1.5 : 1}
+        onClick={() => title && onClick(title, position)}
+        emissiveIntensity={isHighlighted ? 2 : 1}
       />
+
       <Text
         ref={textRef}
         position={[position[0], position[1], position[2] + 2.5]}
@@ -128,6 +134,7 @@ export const MainCategories = (props) => {
           <MainCategory
             key={world}
             title={world}
+            model={cat.model}
             position={[x, y, z]}
             isHighlighted={isHovered}
             onClick={handleMainWorldInteraction}
@@ -148,6 +155,7 @@ export const SubCategory = (props) => {
   const {
     title,
     position,
+    model,
     isHighlighted,
     onClick,
     onPointerOver,
@@ -223,6 +231,7 @@ export const SubCategories = (props) => {
           <SubCategory
             key={subCat.title}
             title={subCat.title}
+            model={subCat.model}
             position={positions[index]}
             isHighlighted={subCat.isHighlighted}
             onClick={subCat.onClick}
