@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { fileUrlFor } from '../../lib/urlFor'
 
 const GLBFile = ({ model }) => {
-  const modelUrl = fileUrlFor(model[0]?.file?.asset._ref)
+  const modelUrl = fileUrlFor(model[1]?.file?.asset._ref)
 
   const gltf = useLoader(GLTFLoader, modelUrl)
 
