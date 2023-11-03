@@ -1,22 +1,18 @@
 import { PortableText } from '@portabletext/react'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import ArticleRef from './ArticleRef.jsx'
-import AudioRef from './AudioRef.jsx'
-import ImageRef from './ImageRef.jsx'
-import MediaRef from './MediaRef.jsx'
-import MediaRefLight from './MediaRefLight.jsx'
-import PostsRef from './PostsRef.jsx'
-import PostsRefLight from './PostsRefLight.jsx'
-import QuoteRef from './QuoteRef.jsx'
-import SplineRef from './SplineRef.jsx'
-import VideoRef from './VideoRef.jsx'
-import '@fontsource/rajdhani/400.css'
-import '@fontsource/rajdhani/500.css'
-import '@fontsource/rajdhani/700.css'
-import '@fontsource/noto-sans/400.css'
-import '@fontsource/noto-sans/500.css'
-import '@fontsource/noto-sans/600.css'
+import {
+  ArticleRef,
+  AudioRef,
+  ImageRef,
+  MediaRef,
+  MediaRefLight,
+  PostsRef,
+  PostsRefLight,
+  QuoteRef,
+  SplineRef,
+  VideoRef,
+} from './index';
 
 const iFrame = ({ value }) => {
   const { url, width, height } = value
