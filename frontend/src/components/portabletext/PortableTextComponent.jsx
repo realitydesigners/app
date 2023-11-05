@@ -177,9 +177,9 @@ const Team = {
     normal: ({ children }) => (
       <div
         className="w-screen flex justify-center "
-        style={{ fontFamily: 'Rajdhani', fontWeight: 600 }}
+        style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}
       >
-        <p className="w-10/12 text-black leading-6 tracking-normal text-xl md:w-3/4 lg:w-1/2 lg:text-xl mb-8  ">
+        <p className="w-10/12 text-white leading-7 tracking-normal text-lg md:w-3/4 lg:w-1/2 lg:text-xl mb-8  ">
           {children}
         </p>
       </div>

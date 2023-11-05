@@ -43,6 +43,12 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'scene',
+      title: 'Scene',
+      type: 'url',
+      
+    }),
+    defineField({
       type: 'array',
       name: 'bio',
       title: 'Bio',

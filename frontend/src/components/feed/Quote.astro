@@ -2,13 +2,13 @@
 import { Image } from 'astro:assets'
 import { getSanityImageURL } from '../../lib/helpers.js'
 
-const { quote } = Astro.props
+const { quotes } = Astro.props
 ---
 
 <ul class="w-full h-auto grid grid-cols-1 p-2 flex-wrap">
   {
-    quote &&
-      quote.map((post: any) => (
+    quotes &&
+      quotes.map((post: any) => (
         <div class="text-white relative flex w-full border mb-4 border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 ease-in">
           {post?.mediaRef?.image && (
             <Image
@@ -35,7 +35,7 @@ const { quote } = Astro.props
               <path d="M5 10h2V5h5V3H5zM11 10h2V5h5V3h-7z" />
             </svg>
             <h3 class="text-2xl pl-6 pr-6 pt-0 pb-6 uppercase leading-none text-gray-400 flex items-center z-10 ">
-              <span>{post.quote}</span>
+              <span>{post?.quote}</span>
             </h3>
             <svg
               xmlns="http://www.w3.org/2000/svg"

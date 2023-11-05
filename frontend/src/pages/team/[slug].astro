@@ -6,6 +6,8 @@ import BlogLayout from '../../layouts/BlogLayout.astro'
 import { getPostsByTeam, getTeam } from '../../lib/api.js'
 import { getSanityImageURL } from '../../lib/helpers.js'
 
+
+
 export async function getStaticPaths() {
   const Team = await getTeam()
 
@@ -26,30 +28,33 @@ const teamPosts = await getPostsByTeam()
   imageURL={getSanityImageURL(team.image).url()}
 >
   <div
-    class="min-h-screen pt-32 bg-gray-200 flex flex-col items-center justify-center"
+    class="min-h-screen bg-gray-200 flex flex-col items-center justify-center"
   >
-    <div class="flex items-center mb-8 justify-center space-y-4">
+  <spline-viewer class="w-full h-[87vh] bg-black" url={team.scene}></spline-viewer>
+
+ 
+    <div class="w-full bg-black  justify-center">
+      <PortableTextComponent content={team.bio} template="team" />
+    </div>
+    <div class="flex w-full p-8 items-center bg-black mb-8 justify-center space-y-2">
       <Image
         src={getSanityImageURL(team.image).url()}
         alt="Team member image"
         width={80}
         height={80}
         format="webp"
-        class="w-20 h-20 lg:w-32 lg:h-32 object-cover rounded-full shadow-2xl"
+        class="w-12 h-12 lg:w-24 lg:h-24 object-cover rounded-full shadow-2xl"
       />
-      <div class="flex ml-8 w-full flex-col">
+      <div class="flex ml-4 w-full justify-center flex-col">
         <h1
-          class="text-2xl mb-1 font-bold font-mono uppercase text-black tracking-wide"
+          class="text-xl mb-1 font-bold font-mono uppercase text-white leading-none tracking-wide"
         >
           {team.name}
         </h1>
-        <p class="text-md text-black uppercase font-mono tracking-widest">
+        <p class="text-sm text-gray-300 uppercase font-mono leading-none tracking-widest">
           {team.role}
         </p>
       </div>
-    </div>
-    <div class="w-full flex-cols justify-center mb-20">
-      <PortableTextComponent content={team.bio} template="team" />
     </div>
   </div>
   <div

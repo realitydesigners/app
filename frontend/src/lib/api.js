@@ -214,6 +214,7 @@ export async function getPosts() {
     image,
     excerpt,
     content[],
+
     
   }`
   const data = await client.fetch(query)
@@ -237,23 +238,27 @@ export async function getImg() {
       slug,
       title,
     },
+  
   }`
   const data = await client.fetch(query)
   return data
 }
 
+
 export async function getQuote() {
   const query = `*[_type == "quote"] {
-  quote,
-  "mediaRef": {
-    "layout": mediaRef.layout,
-    "image": mediaRef.image->image.asset->url
-  }
-}`
+    quote,
+    "mediaRef": {
+      "layout": mediaRef.layout,
+      "image": mediaRef.image->image.asset->url
+    }
+  }`
 
-  const data = await client.fetch(query)
-  return data
+  const data = await client.fetch(query);
+  return data;
 }
+
+
 
 export async function getArticle() {
   const query = `*[_type == "article"]  |  order(_createdAt desc) {
@@ -352,6 +357,7 @@ export async function getTeam() {
   name,
   role,
   image,
+  scene,
   shortBio,
   bio,
   slug,
