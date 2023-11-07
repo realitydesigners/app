@@ -440,3 +440,106 @@ export async function getModules() {
   const data = await client.fetch(query)
   return data
 }
+
+
+
+export async function getLibrary() {
+  const query = `
+    *[_type == "library"] | order(_createdAt desc) {
+      title,
+      slug,
+      excerpt,
+      image,
+  
+      isMain,
+      sceneIdentifier,
+      "sceneIdentifier": sceneIdentifier,
+      "subCategories": *[_type == "category" && references(^._id)] { 
+        _id, 
+        _type, 
+        title
+      },
+      "associatedPosts": *[_type == "posts" && references(^._id)] {
+        title,
+        slug,
+        excerpt,
+        author,
+        tags,
+    
+        category,
+    
+        publicationDate,
+        lightLayout,
+        darkLayout,
+      },
+      block[]{
+        ...,
+        heading,
+        subHeading,
+        image,
+        tags,
+        layout,
+        title,
+        publicationDate,
+         team->{
+        ...,
+        name,
+        role,
+        image,
+        shortBio,
+      },
+      
+          content[]{
+        ...,
+        
+        media-> {
+          ...,
+          className->{name},
+          team->,
+        },
+        image->{
+          ...,
+          className->{name},
+          team->,
+        },
+        "videoRefData": {
+          "videoTitle": video->title,
+          "videoFileUrl": video->video.asset->url,
+          "videoImage": video->image,
+          "videoTeam": video->team,
+          team->,
+        },
+ 
+        "audioRefData": {
+          "audioTitle": audio->title,
+          "audioFileUrl": audio->audioFile.asset->url
+        },
+        quote->{
+          ...,
+          quote,
+          "mediaRef": {
+            "layout": mediaRef.layout,
+            "image": mediaRef.image->image.asset->url
+          }
+        },
+        markDefs[]{
+          ...,
+          _type == "internalLink" => {
+            "slug": @.reference->slug
+          }
+        },
+        "postsRef": {
+          "postsTitle": posts->title,
+          "postsSlug": posts->slug.current,
+          "postsImage": posts->image,
+          "postsExcerpt": posts->excerpt,
+          ...,
+        },
+      },
+    },
+    }
+  `
+
+  const data = await client.fetch(query)
+  return data
+}

@@ -13,6 +13,7 @@ import quote from './schemas/quote'
 import video from './schemas/video'
 import audio from './schemas/audio'
 import model from './schemas/model'
+import library from './schemas/library'
 import headingBlock from './blocks/headingBlock'
 import contentBlock from './blocks/contentBlock'
 import teamBlock from './blocks/teamBlock'
@@ -44,6 +45,7 @@ export default defineConfig({
       category,
       media,
       article,
+      library,
       headingBlock,
       contentBlock,
       teamBlock,
