@@ -10,7 +10,7 @@ import {
 
 const CAMERA_POSITION = [0, 0, 5]
 
-const InteractiveWorldScene = ({ category = [] }) => {
+const InteractiveWorldScene = ({ library = [] }) => {
   const { navigation, setNavigation } = useCategory()
 
   // State variables
@@ -55,10 +55,10 @@ const InteractiveWorldScene = ({ category = [] }) => {
         category: prev.category,
       }))
     },
-    [category, setNavigation],
+    [library, setNavigation],
   )
 
-  const mainCategories = category.filter(
+  const mainCategories = library.filter(
     (cat) => Boolean(cat.title) && cat.isMain,
   )
 

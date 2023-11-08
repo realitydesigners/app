@@ -5,25 +5,7 @@ export default defineType({
   name: 'library',
   title: 'Library',
   fields: [
-    defineField({
-      name: 'block',
-      title: 'Content Block',
-      type: 'array',
-      of: [
-        {
-          type: 'headingBlock',
-          title: 'Heading',
-        },
-        {
-          type: 'contentBlock',
-          title: 'Content',
-        },
-        {
-          type: 'teamBlock',
-          title: 'Team',
-        },
-      ],
-    }),
+
     defineField({
       type: 'string',
       name: 'title',
@@ -46,12 +28,7 @@ export default defineType({
         type: 'array',
         of: [{type: 'reference', to: {type: 'library'}}],
       }),
-      defineField({
-        type: 'string',
-        name: 'sceneIdentifier',
-        title: 'Scene Identifier',
-        description: 'Identifier for the 3D background scene associated with this category.',
-      }),
+
       defineField({
         type: 'reference',
         name: 'model',
@@ -64,6 +41,25 @@ export default defineType({
         name: 'isMain',
         title: 'Is Main Category?',
         description: 'Check this if the category is a main category.',
+      }),
+      defineField({
+        name: 'block',
+        title: 'Content Block',
+        type: 'array',
+        of: [
+          {
+            type: 'headingBlock',
+            title: 'Heading',
+          },
+          {
+            type: 'contentBlock',
+            title: 'Content',
+          },
+          {
+            type: 'teamBlock',
+            title: 'Team',
+          },
+        ],
       }),
 
 

@@ -1,13 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { getCategory } from '../lib/api.js'
+import { getCategory, getLibrary } from '../lib/api.js'
 import Scene from '../components/library/Scene'
 
 const category = await getCategory()
+
+const library = await getLibrary()
 ---
 
 
   <main class="w-screen h-screen bg-black">
-    <Scene category={category} client:load />
+    <Scene library={library} client:load />
   </main>
 

@@ -146,5 +146,29 @@ export default defineType({
         }),
       ],
     }),
+
+    defineField({
+      name: 'subcategories',
+      title: 'Subcategories',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'posts'}}],
+    }),
+
+    defineField({
+      type: 'reference',
+      name: 'model',
+      title: '3D Model',
+      to: {type: 'model'},
+    }),
+
+    defineField({
+      type: 'boolean',
+      name: 'isMain',
+      title: 'Is Main Category?',
+      description: 'Check this if the category is a main category.',
+    }),
+
+
+
   ],
 })

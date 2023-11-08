@@ -89,12 +89,13 @@ export const MainCategory = (props) => {
       />
       <Text
         ref={textRef}
-        position={[position[0], position[1], position[2] + 2.5]}
+        position={[position[0], position[1], position[2] + 3]}
         color="white"
         fontSize={0.6}
         font={'/fonts/monomaniac.ttf'}
         anchorX="center"
         anchorY="middle"
+        maxWidth={7}
       >
         {title}
       </Text>
@@ -178,6 +179,7 @@ export const SubCategory = (props) => {
         font={'/fonts/monomaniac.ttf'}
         anchorX="center"
         anchorY="middle"
+        maxWidth={3}
       >
         {title}
       </Text>
