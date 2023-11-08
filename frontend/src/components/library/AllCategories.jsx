@@ -5,28 +5,24 @@ import * as THREE from 'three'
 import Crystal from './Crystal'
 
 export function getMainCategoryPositions(
-  count,
-  offset = [0, 0, 0],
-  radius = 15,
-) {
-  const phi = Math.PI * (43 - Math.sqrt(5)) // golden angle
-  const positions = []
-
-  for (let i = 0; i < count; i++) {
-    const y = 1 - (i / (count - 1)) * 2 // y goes from 1 to -1
-    const radiusAtY = Math.sqrt(1 - y * y) // radius at y position
-
-    const theta = phi * i
-
-    const x = Math.cos(theta) * radiusAtY * radius + offset[0]
-    const z = Math.sin(theta) * radiusAtY * radius + offset[2]
-    const offsetY = y * radius + offset[1]
-
-    positions.push([x, offsetY, z])
+    count,
+    offset = [0, 0, 0],
+    radius = 12,
+  ) {
+    const positions = [];
+  
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 * i) / count; // Evenly distribute around circle
+      const x = Math.cos(angle) * radius + offset[0];
+      const z = Math.sin(angle) * radius + offset[2];
+      const y = offset[1]; // Keep y fixed at the same height
+  
+      positions.push([x, y, z]);
+    }
+  
+    return positions;
   }
-
-  return positions
-}
+  
 
 export function getSubCategoryPositions(count, radius, mainCategoryPosition) {
   return Array.from({ length: count }, (_, index) => {

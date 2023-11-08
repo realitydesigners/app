@@ -5,10 +5,10 @@ import { useCallback, useState } from 'react'
 import { useCategory } from './CategoryContext'
 import {
   AllCategories,
-  
+
 } from './index.ts'
 
-const CAMERA_POSITION = [0, 0, 30]
+const CAMERA_POSITION = [0, 0, 5]
 
 const InteractiveWorldScene = ({ category = [] }) => {
   const { navigation, setNavigation } = useCategory()
@@ -73,7 +73,7 @@ const InteractiveWorldScene = ({ category = [] }) => {
     <div style={{ height: '100vh', width: '100vw' }}>
 
       <Canvas style={{ height: '100vh', width: '100vw' }}>
-        <PerspectiveCamera makeDefault position={cameraPosition} zoom={0.7} />
+        <PerspectiveCamera makeDefault position={cameraPosition} zoom={1} />
         <OrbitControls />
 
         <AllCategories
