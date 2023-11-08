@@ -1,14 +1,13 @@
 ---
-import Fiber from '../components/three/Fiber.jsx'
-import InteractiveWorldScene from '../components/three/InteractiveWorldScene.jsx'
 import Layout from '../layouts/Layout.astro'
 import { getCategory } from '../lib/api.js'
+import Scene from '../components/library/Scene'
 
 const category = await getCategory()
 ---
 
-<Layout title="Reality Designers">
-  <main class="w-screen h-screen">
-    <InteractiveWorldScene category={category} client:load />
+
+  <main class="w-screen h-screen bg-black">
+    <Scene category={category} client:load />
   </main>
-</Layout>
+
