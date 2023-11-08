@@ -70,7 +70,7 @@ const InteractiveWorldScene = ({ library = [] }) => {
   })
 
   return (
-    <div style={{ height: '100vh', width: '100vw' }}>
+    <div >
 
       <Canvas style={{ height: '100vh', width: '100vw' }}>
         <PerspectiveCamera makeDefault position={cameraPosition} zoom={1} />
