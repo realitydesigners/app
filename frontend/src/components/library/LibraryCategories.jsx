@@ -1,9 +1,9 @@
-import { Text, Line } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useRef, useState } from 'react';
 import Crystal from './Crystal';
 
-export function getMainCategoryPositions(count, offset = [0, 0, 0], radius = 15) {
+export function getCategoryPositions(count, offset = [0, 0, 0], radius = 15) {
   const positions = [];
 
   for (let i = 0; i < count; i++) {
@@ -18,12 +18,7 @@ export function getMainCategoryPositions(count, offset = [0, 0, 0], radius = 15)
   return positions;
 }
 
-const playSound = (soundPath) => {
-  const audio = new Audio(soundPath);
-  audio.play();
-};
-
-export const MainCategory = (props) => {
+export const Category = (props) => {
   const {
     title,
     position,
@@ -35,13 +30,16 @@ export const MainCategory = (props) => {
     onLeave,
     selectedMainWorld,
     rotationY,
-    textWidth = 21,
-    textHeight = 15,
   } = props;
 
   const isDimmed =
     (hoveredWorld && hoveredWorld !== title) ||
     (selectedMainWorld && selectedMainWorld !== title);
+
+  const playSound = (soundPath) => {
+      const audio = new Audio(soundPath);
+      audio.play();
+   };
 
   const handleHover = () => {
     playSound('/sounds/click.mp3');
@@ -55,7 +53,6 @@ export const MainCategory = (props) => {
     window.location.href = categoryRoute;
   };
   
-
   const textRef = useRef(null);
   const { camera } = useThree();
 
@@ -73,24 +70,24 @@ export const MainCategory = (props) => {
       onPointerOut={onLeave}
       onClick={handleRedirect}
     >
-    
         <Crystal
           className="main-crystal"
-          position={[0, 0, 0]}
-          scale={[2, 2, 2]}
+          position={[0, 0, 5]}
+          scale={[5,5,5]}
           onPointerOver={handleHover}
           onPointerOut={onPointerOut}
-          emissiveIntensity={isDimmed ? 0.25 : isHighlighted ? 1.5 : 1}
+          emissiveIntensity={isDimmed ? 0.5 : isHighlighted ? 1 : .6}
         />
         <Text
           ref={textRef}
-          position={[0, 0, -3]}
-          color="white"
-          fontSize={0.9}
+          position={[0, 0, -1]}
+          color="black"
+          fontSize={1.5}
           font="/fonts/monomaniac.ttf"
-          anchorX="center"
           anchorY="middle"
-          maxWidth={6}
+          maxWidth={5}
+          lineHeight={.9}
+          textAlign="center"
         >
           {title}
         </Text>
@@ -99,29 +96,37 @@ export const MainCategory = (props) => {
   );
 };
 
-
-export const MainCategories = (props) => {
+export const LibraryCategories = (props) => {
   const {
     categories,
     highlightedCategory,
     handleMainWorldInteraction,
-    setHoveredWorld,
     hoveredWorld,
     selectedMainWorld,
   } = props;
 
-  const positions = getMainCategoryPositions(categories.length);
+  const positions = getCategoryPositions(categories.length);
+  const [rotation, setRotation] = useState(0);
+  const groupRef = useRef();
+
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.001;
+    }
+  });
 
   return (
-    <>
+    <group ref={groupRef}>
       {categories.map((cat, index) => {
         const [x, y, z] = positions[index];
         const world = cat.title || '';
         const isHovered = world === highlightedCategory;
         const rotationY = -((Math.PI * 2 * index) / categories.length) + Math.PI / 2;
+        const groupRotationY = rotationY + rotation;
+
 
         return (
-          <MainCategory
+          <Category
             key={world}
             title={world}
             position={[x, y, z]}
@@ -130,15 +135,13 @@ export const MainCategories = (props) => {
             onPointerOver={() => handleMainWorldInteraction(world, [x, y, z])}
             onPointerOut={() => {}}
             hoveredWorld={hoveredWorld}
-            onHover={() => setHoveredWorld(world)}
-            onLeave={() => setHoveredWorld(null)}
             selectedMainWorld={selectedMainWorld}
             rotationY={rotationY}
           />
         );
       })}
-    </>
+    </group>
   );
 };
 
-export default React.memo(MainCategories);
+export default React.memo(LibraryCategories);

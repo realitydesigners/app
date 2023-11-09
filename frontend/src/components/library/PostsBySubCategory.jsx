@@ -98,7 +98,7 @@ export const SubCategory = (props) => {
         color="white"
         fontSize={0.9}
         font="/fonts/monomaniac.ttf"
-        anchorX="center"
+        textAlign="center"
         anchorY="middle"
         maxWidth={6}
       >
@@ -199,7 +199,7 @@ export const RefPost = (props) => {
         color="white"
         fontSize={0.9}
         font="/fonts/monomaniac.ttf"
-        anchorX="center"
+        textAlign="center"
         anchorY="middle"
         maxWidth={6}
       >

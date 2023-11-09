@@ -1,12 +1,12 @@
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useCallback, useState } from 'react';
-import { useCategory } from './CategoryContext';
-import { MainSceneCategories } from './index.ts';
+import { useCategory } from './CategoryContext.jsx';
+import { LibraryCategories } from './index.ts';
 
 const CAMERA_POSITION = [0, 0, 5];
 
-const MainScene = ({ library = [] }) => {
+const LibraryScene = ({ library = [] }) => {
   const { navigation, setNavigation } = useCategory();
   const [highlightedWorld, setHighlightedWorld] = useState(null);
   const [cameraPosition, setCameraPosition] = useState(CAMERA_POSITION);
@@ -38,7 +38,7 @@ const MainScene = ({ library = [] }) => {
         <PerspectiveCamera makeDefault position={cameraPosition} zoom={1} />
         <OrbitControls />
 
-        <MainSceneCategories
+        <LibraryCategories
           categories={mainCategories}
           highlightedCategory={highlightedCategory}
           handleMainWorldInteraction={handleMainWorldInteraction}
@@ -50,4 +50,4 @@ const MainScene = ({ library = [] }) => {
   );
 };
 
-export default MainScene;
+export default LibraryScene;
