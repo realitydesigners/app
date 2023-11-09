@@ -1,12 +1,24 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
-import { getLibrary } from '../../../lib/api.js'
+import { getLibrary, getCategory } from '../../../lib/api.js'
 import Scene from '../../../components/library/Scene'
 
-const library = await getLibrary()
+export async function getStaticPaths() {
+  const category = await getCategory()
+
+  return category.map((category: any) => ({
+    params: { slug: category.slug.current },
+    props: { category },
+  }))
+}
+
+const { category = {} as any } = Astro.props
+
+console.log(category)   
 ---
 
   <main class="w-screen h-screen bg-black">
-    <Scene library={library} client:load />
+    <div><p class="text-4xl text-whit z-20">{category.title}</p></div>
+    <Scene category={category} client:load />
   </main>
 

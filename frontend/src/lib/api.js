@@ -321,37 +321,6 @@ export async function getArticleBySlug() {
   return data
 }
 
-export async function getCategory() {
-  const query = `*[_type == "category" ] {
-  _id,
-  _type,
-  title,
-  isMain,
-  sceneIdentifier,
-  "sceneIdentifier": sceneIdentifier,
-  "subCategories": *[_type == "category" && references(^._id)] { 
-    _id, 
-    _type, 
-    title
-  },
-  "associatedPosts": *[_type == "posts" && references(^._id)] {
-    title,
-    slug,
-    excerpt,
-    author,
-    tags,
-
-    category,
-
-    publicationDate,
-    lightLayout,
-    darkLayout,
-  }
-}`
-  const data = await client.fetch(query)
-  return data
-}
-
 export async function getTeam() {
   const query = `*[_type == "team"] |  order(_createdAt asc) {
   name,
@@ -447,10 +416,43 @@ export async function getLibrary() {
   _id,
   _type,
   title,
+  slug,
   isMain,
   sceneIdentifier,
   "sceneIdentifier": sceneIdentifier,
   "subCategories": *[_type == "posts" && references(^._id)] { 
+    _id, 
+    _type, 
+    title
+  },
+  "associatedPosts": *[_type == "posts" && references(^._id)] {
+    title,
+    slug,
+    excerpt,
+    author,
+    tags,
+
+    category,
+
+    publicationDate,
+    lightLayout,
+    darkLayout,
+  }
+}`
+  const data = await client.fetch(query)
+  return data
+}
+
+export async function getCategory() {
+  const query = `*[_type == "category"] {
+  _id,
+  _type,
+  title,
+  isMain,
+  slug,
+  sceneIdentifier,
+  "sceneIdentifier": sceneIdentifier,
+  "subCategories": *[_type == "category" && references(^._id)] { 
     _id, 
     _type, 
     title

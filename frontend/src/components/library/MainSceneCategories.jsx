@@ -28,7 +28,6 @@ export const MainCategory = (props) => {
     title,
     position,
     isHighlighted,
-    onClick,
     onPointerOver,
     onPointerOut,
     hoveredWorld,
@@ -51,9 +50,10 @@ export const MainCategory = (props) => {
     }
   };
 
-  const handleClick = () => {
-    playSound('/sounds/click.mp3');
-    onClick(title, position);
+  const handleRedirect = () => {
+
+    const categoryRoute = `/library/category/${title}`;
+    window.location.href = categoryRoute;
   };
 
   const textRef = useRef(null);
@@ -71,6 +71,7 @@ export const MainCategory = (props) => {
       rotation={[0, rotationY, 0]}
       onPointerOver={onHover}
       onPointerOut={onLeave}
+      onClick={handleRedirect}
     >
     
         <Crystal
@@ -79,7 +80,6 @@ export const MainCategory = (props) => {
           scale={[2, 2, 2]}
           onPointerOver={handleHover}
           onPointerOut={onPointerOut}
-          onClick={handleClick}
           emissiveIntensity={isDimmed ? 0.25 : isHighlighted ? 1.5 : 1}
         />
         <Text
@@ -94,11 +94,11 @@ export const MainCategory = (props) => {
         >
           {title}
         </Text>
-        
     
     </group>
   );
 };
+
 
 export const MainCategories = (props) => {
   const {

@@ -8,9 +8,9 @@ import {
 
 } from './index.ts'
 
-const CAMERA_POSITION = [0, 0, 5]
+const CAMERA_POSITION = [0, 0, 2]
 
-const InteractiveWorldScene = ({ library = [] }) => {
+const Scene = ({ category = [] }) => {
   const { navigation, setNavigation } = useCategory()
 
   // State variables
@@ -55,12 +55,12 @@ const InteractiveWorldScene = ({ library = [] }) => {
         category: prev.category,
       }))
     },
-    [library, setNavigation],
+    [category, setNavigation],
   )
 
-  const mainCategories = library.filter(
-    (cat) => Boolean(cat.title) && cat.isMain,
-  )
+  const mainCategories = Array.isArray(category)
+  ? category.filter((cat) => Boolean(cat.title) && cat.isMain)
+  : [];
 
   const shouldShowSidebar = sidebarOpen && currentContent.length > 0
 
@@ -70,7 +70,7 @@ const InteractiveWorldScene = ({ library = [] }) => {
   })
 
   return (
-    <div >
+    <div style={{ height: '100vh', width: '100vw' }}>
 
       <Canvas style={{ height: '100vh', width: '100vw' }}>
         <PerspectiveCamera makeDefault position={cameraPosition} zoom={1} />
@@ -89,4 +89,4 @@ const InteractiveWorldScene = ({ library = [] }) => {
   )
 }
 
-export default InteractiveWorldScene
+export default Scene
