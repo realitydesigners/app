@@ -433,7 +433,7 @@ export async function getCategory() {
       _id,
       _type,
       title,
-      "associatedPosts": *[_type == "posts" && references(^._id)] {
+      "refPosts": *[_type == "posts" && references(^._id)] {
         _id,
         title,
         slug,
