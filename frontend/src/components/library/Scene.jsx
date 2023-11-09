@@ -8,7 +8,7 @@ import {
 
 } from './index.ts'
 
-const CAMERA_POSITION = [0, 0, 70]
+const CAMERA_POSITION = [0, 0, 5]
 
 const Scene = ({ category = [] }) => {
   const { navigation, setNavigation } = useCategory()

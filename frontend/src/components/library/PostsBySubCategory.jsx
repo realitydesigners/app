@@ -20,7 +20,7 @@ export function getSubCategoryPositions(count, offset = [0, 0, 0], radius = 15) 
 }
 
 const getRefPostPosition = (index, count, subCategoryPosition) => {
-  const radius = 6; // Adjust as needed
+  const radius = 10; // Adjust as needed
   const angle = (Math.PI * 2 * index) / count;
   const x = subCategoryPosition[0] + Math.cos(angle) * radius;
   const y = subCategoryPosition[1] + Math.sin(angle) * radius;
@@ -85,22 +85,23 @@ export const SubCategory = (props) => {
         <ModelWithEffects
         model={model}
         className="model"
-        position={[0,0,1]}
-        scale={[1.5,1.5,1.5]}
+        position={[0,0,5]}
+        scale={[3,3,3]}
         onPointerOver={() => title && onPointerOver(title)}
         onPointerOut={onPointerOut}
         onClick={() => title && onClick(title, position)}
-        emissiveIntensity={isHighlighted ? 2 : 1}
+        emissiveIntensity={isHighlighted ? 1 : .6}
       />
       <Text
         ref={textRef}
         position={[0, 0, -3]}
-        color="white"
-        fontSize={0.9}
+        color="black"
+        fontSize={1.5}
         font="/fonts/monomaniac.ttf"
-        textAlign="center"
         anchorY="middle"
         maxWidth={6}
+        lineHeight={.9}
+        textAlign="center"
       >
         {title}
       </Text>
@@ -187,17 +188,17 @@ export const RefPost = (props) => {
       <Crystal
         className="sub-crystal"
         position={[0, 0, 0]} 
-        scale={[0.5, 0.5, 0.5]}
+        scale={[1,1,1]}
         onPointerOver={() => title && onPointerOver(title)}
         onPointerOut={onPointerOut}
         onClick={() => title && onClick(title, position)}
-        emissiveIntensity={isHighlighted ? 1.5 : 1}
+        emissiveIntensity={isHighlighted ? 1 : .6}
       />
       <Text
         ref={textRef}
         position={[0, 0, -3]} 
-        color="white"
-        fontSize={0.9}
+        color="black"
+        fontSize={0.5}
         font="/fonts/monomaniac.ttf"
         textAlign="center"
         anchorY="middle"

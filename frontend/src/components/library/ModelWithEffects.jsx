@@ -31,18 +31,21 @@ const ModelWithEffects = ({
         varying vec2 vUv;
         void main() {
           vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }`,
       fragmentShader: `
         uniform float emissiveIntensity;
         varying vec2 vUv;
-  
+
+        float interferencePattern(float value) {
+          return mix(0.8, 1.0, sin(value * 1.0) * 0.5 + 0.5);
+        }
+
         void main() {
-          vec3 baseColor = vec3(0.6, 0.0, 1.0); 
-          float interferenceValue = sin(vUv.y * gl_FragCoord.y);
-          vec3 color = baseColor * (interferenceValue * 0.5 + 0.5);
+          float interferenceValue = interferencePattern(vUv.y * gl_FragCoord.y);
+          vec3 color = vec3(vUv.x, vUv.y, 1.0) * interferenceValue;
           color *= emissiveIntensity;
-          gl_FragColor = vec4(color, 0.5);
+          gl_FragColor = vec4(color, 0.3);
         }`,
       uniforms: {
         emissiveIntensity: { value: emissiveIntensity },
@@ -50,8 +53,8 @@ const ModelWithEffects = ({
       transparent: true,
       blending: THREE.AdditiveBlending,
       side: THREE.DoubleSide,
-    });
-  }, [emissiveIntensity]);
+    })
+  }, [emissiveIntensity])
   
 
   useEffect(() => {
