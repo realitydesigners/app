@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { useCallback, useState } from 'react'
 import { useCategory } from './CategoryContext'
 import {
-  AllCategories,
+  PostsBySubCategory,
 
 } from './index.ts'
 
@@ -64,6 +64,7 @@ const Scene = ({ category = [] }) => {
     : [];
 
     console.log("data", subCategories)
+    
  
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
@@ -72,7 +73,7 @@ const Scene = ({ category = [] }) => {
         <PerspectiveCamera makeDefault position={cameraPosition} zoom={1} />
         <OrbitControls />
 
-        <AllCategories
+        <PostsBySubCategory
           categories={subCategories}
           highlightedCategory={highlightedCategory}
           handleMainWorldInteraction={handleMainWorldInteraction}
