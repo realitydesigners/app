@@ -20,15 +20,6 @@ export function getMainCategoryPositions(count, offset = [0, 0, 0], radius = 15)
   return positions;
 }
 
-export function getSubCategoryPositions(count, radius, mainCategoryPosition) {
-  return Array.from({ length: count }, (_, index) => {
-    const angle = (Math.PI * 2 * index) / count;
-    const x = mainCategoryPosition[0] + Math.cos(angle) * radius;
-    const y = mainCategoryPosition[1] + Math.sin(angle) * radius;
-    return [x, y, mainCategoryPosition[2]];
-  });
-}
-
 const playSound = (soundPath) => {
   const audio = new Audio(soundPath);
   audio.play();
@@ -121,52 +112,6 @@ export const MainCategory = (props) => {
   );
 };
 
-export const SubCategory = (props) => {
-  const {
-    title,
-    position,
-    isHighlighted,
-    onClick,
-    onPointerOver,
-    onPointerOut,
-  } = props;
-
-  const textRef = useRef(null);
-  const { camera } = useThree();
-
-  useFrame(() => {
-    if (textRef.current) {
-      textRef.current.lookAt(camera.position);
-    }
-  });
-
-  return (
-    <group>
-      <Crystal
-        className="sub-crystal"
-        position={position}
-        scale={[0.5, 0.5, 0.5]}
-        onPointerOver={() => title && onPointerOver(title)}
-        onPointerOut={onPointerOut}
-        onClick={() => title && onClick(title, position)}
-        emissiveIntensity={isHighlighted ? 1.5 : 1}
-      />
-      <Text
-        ref={textRef}
-        position={[position[0], position[1], position[2] + 1.5]}
-        color="white"
-        fontSize={0.3}
-        font="/fonts/monomaniac.ttf"
-        anchorX="center"
-        anchorY="middle"
-        maxWidth={3}
-      >
-        {title}
-      </Text>
-      
-    </group>
-  );
-};
 
 export const MainCategories = (props) => {
     const {
@@ -210,44 +155,6 @@ export const MainCategories = (props) => {
   };
   
 
-export const SubCategories = (props) => {
-  const { mainWorldPosition, subCategories } = props;
-  const { camera } = useThree();
-
-  const currentPositionsRef = useRef([]);
-
-  const positions = getSubCategoryPositions(subCategories.length, 3, mainWorldPosition);
-
-  useFrame(() => {
-    if (currentPositionsRef.current.length === 0) return;
-    const mainWorldVec = new THREE.Vector3(...mainWorldPosition);
-
-    currentPositionsRef.current.forEach((currentPos, i) => {
-      const relativePos = new THREE.Vector3().subVectors(currentPos, mainWorldVec);
-      relativePos.applyQuaternion(camera.quaternion);
-      currentPos.copy(mainWorldVec).add(relativePos);
-    });
-  });
-
-  return (
-    <>
-      {subCategories
-        .filter((subCat) => subCat.title)
-        .map((subCat, index) => (
-          <SubCategory
-            key={subCat.title}
-            title={subCat.title}
-            position={positions[index]}
-            isHighlighted={subCat.isHighlighted}
-            onClick={subCat.onClick}
-            onPointerOver={subCat.onPointerOver}
-            onPointerOut={subCat.onPointerOut}
-          />
-        ))}
-    </>
-  );
-};
-
 const AllCategories = (props) => {
   const {
     categories,
@@ -261,13 +168,7 @@ const AllCategories = (props) => {
   const positions = getMainCategoryPositions(categories.length);
   const selectedMainWorldPosition =
     positions[categories.findIndex((cat) => cat.title === highlightedCategory)];
-  const selectedMainWorldCategory = categories.find(
-    (category) => category.title === highlightedCategory
-  );
-  const subCategories = selectedMainWorldCategory
-    ? selectedMainWorldCategory.subCategories
-    : [];
-  const [highlightedWorld, setHighlightedWorld] = useState(null);
+
 
   return (
     <group
@@ -283,20 +184,7 @@ const AllCategories = (props) => {
         setHoveredWorld={setHoveredWorld}
         selectedMainWorld={selectedMainWorld}
       />
-      {selectedMainWorld && (
-        <SubCategories
-          mainWorldPosition={selectedMainWorldPosition}
-          subCategories={subCategories
-            .filter((subCat) => subCat.title)
-            .map((subCat) => ({
-              title: subCat.title,
-              isHighlighted: highlightedWorld === subCat.title,
-              onClick: handleMainWorldInteraction,
-              onPointerOver: () => setHighlightedWorld(subCat.title),
-              onPointerOut: () => {},
-            }))}
-        />
-      )}
+    
     </group>
   );
 };

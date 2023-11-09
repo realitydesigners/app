@@ -8,7 +8,7 @@ import {
 
 } from './index.ts'
 
-const CAMERA_POSITION = [0, 0, 2]
+const CAMERA_POSITION = [0, 0, 70]
 
 const Scene = ({ category = [] }) => {
   const { navigation, setNavigation } = useCategory()
@@ -25,51 +25,47 @@ const Scene = ({ category = [] }) => {
 
   const handleMainWorldInteraction = useCallback(
     (worldName, position, childCategoryName) => {
-      setSelectedMainWorld(worldName)
-      setHighlightedWorld(worldName)
-      setHighlightedCategory(worldName)
-
-      const currentCategory = category.find((cat) => cat.title === worldName)
+      setSelectedMainWorld(worldName);
+      setHighlightedWorld(worldName);
+      setHighlightedCategory(worldName);
+  
+      const currentCategory = category;
+      
       if (currentCategory && currentCategory.sceneIdentifier) {
-        setActiveBackgroundScene(currentCategory.sceneIdentifier)
+        setActiveBackgroundScene(currentCategory.sceneIdentifier);
       }
-
+  
       if (currentCategory && currentCategory.associatedPosts) {
-        setCurrentContent(currentCategory.associatedPosts)
+        setCurrentContent(currentCategory.associatedPosts);
       } else {
-        setCurrentContent([])
+        setCurrentContent([]);
       }
-
-      setSidebarOpen(true)
-
+  
+      setSidebarOpen(true);
+  
       if (childCategoryName) {
-        setHighlightedWorld(childCategoryName)
-        setSelectedSubWorld(childCategoryName)
+        setHighlightedWorld(childCategoryName);
+        setSelectedSubWorld(childCategoryName);
       } else {
-        setSelectedSubWorld(null)
+        setSelectedSubWorld(null);
       }
-
+  
       setNavigation((prev) => ({
         ...prev,
         mainWorld: worldName,
         category: prev.category,
-      }))
+      }));
     },
     [category, setNavigation],
-  )
+  );
+  
+  
 
   const subCategories = Array.isArray(category.subCategories)
     ? category.subCategories.filter((subCat) => Boolean(subCat.title))
     : [];
 
-  const shouldShowSidebar = sidebarOpen && currentContent.length > 0
-
-  const props = useSpring({
-    from: { scale: [0, 0, 0] },
-    to: { scale: [1, 1, 1] },
-  })
-
-
+ 
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>

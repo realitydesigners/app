@@ -5,8 +5,8 @@ import MainScene from '../components/library/MainScene'
 
 const library = await getLibrary()
 ---
-
+<Layout title="Reality Designers">
   <main class="w-screen h-screen bg-black">
     <MainScene library={library} client:load />
   </main>
-
+</Layout>

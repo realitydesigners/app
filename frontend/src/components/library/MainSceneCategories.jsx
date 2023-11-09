@@ -51,10 +51,10 @@ export const MainCategory = (props) => {
   };
 
   const handleRedirect = () => {
-
-    const categoryRoute = `/library/category/${title}`;
+    const categoryRoute = `/library/${title.toLowerCase()}`;
     window.location.href = categoryRoute;
   };
+  
 
   const textRef = useRef(null);
   const { camera } = useThree();
