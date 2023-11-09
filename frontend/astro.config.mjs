@@ -23,4 +23,5 @@ export default defineConfig({
     service: passthroughImageService(),
   },
   plugins: ['prettier-plugin-astro'],
+  prefetch: true,
 })
