@@ -48,8 +48,6 @@ export const SubCategory = (props) => {
     textHeight = 15,
   } = props;
 
-  console.log('SubCategory rendered:', title);
-
   const isDimmed =
     (hoveredWorld && hoveredWorld !== title) ||
     (selectedMainWorld && selectedMainWorld !== title);
@@ -120,7 +118,6 @@ export const SubCategory = (props) => {
   );
 };
 
-
 export const SubCategories = (props) => {
   const {
     categories,
@@ -130,8 +127,6 @@ export const SubCategories = (props) => {
     hoveredWorld,
     selectedMainWorld,
   } = props;
-
-  console.log('SubCategories rendered');
 
   const positions = getSubCategoryPositions(categories.length);
 
@@ -150,22 +145,11 @@ export const SubCategories = (props) => {
             position={[x, y, z]}
             isHighlighted={isHovered}
             onClick={handleMainWorldInteraction}
-            onPointerOver={() => {
-              console.log('SubCategory pointer over:', world);
-              handleMainWorldInteraction(world, [x, y, z]);
-            }}
-            onPointerOut={() => {
-              console.log('SubCategory pointer out:', world);
-            }}
+            onPointerOver={() => {handleMainWorldInteraction(world, [x, y, z])}}
+            onPointerOut={() => {}}
             hoveredWorld={hoveredWorld}
-            onHover={() => {
-              console.log('SubCategory hover:', world);
-              setHoveredWorld(world);
-            }}
-            onLeave={() => {
-              console.log('SubCategory leave:', world);
-              setHoveredWorld(null);
-            }}
+            onHover={() => {setHoveredWorld(world)}}
+            onLeave={() => {setHoveredWorld(null)}}
             selectedMainWorld={selectedMainWorld}
             rotationY={rotationY}
           />
@@ -174,7 +158,6 @@ export const SubCategories = (props) => {
     </>
   );
 };
-
 
 export const RefPost = (props) => {
   const {
@@ -276,20 +259,25 @@ const PostsBySubCategory = (props) => {
     refPosts, // Pass the refPosts prop
   } = props;
 
-  console.log('PostsBySubCategory received refPosts:', refPosts); 
+
+  console.log('All Props:', props);
+  categories.forEach((category, index) => {
+    console.log(`Category ${index}:`, category);
+    console.log(`refPosts for Category ${index}:`, category.refPosts);
+  });
 
   const [hoveredWorld, setHoveredWorld] = useState(null);
 
+  const positions = getSubCategoryPositions(categories.length)
   const selectedCategory = categories.find(
     (category) => category.title === highlightedCategory
   );
 
   const subCategoryPosition = selectedCategory
     ? selectedCategory.position
-    : [0, 0, 0]; // Change the default position as needed
+    : []; // Change the default position as needed
 
     const [highlightedWorld, setHighlightedWorld] = useState(null)
-
 
   return (
     <group
@@ -309,19 +297,17 @@ const PostsBySubCategory = (props) => {
   <RefPosts
     subCategoryPosition={subCategoryPosition}
     refPosts={refPosts
-      .filter((postRef) => postRef.title)
-      .map((postRef) => ({
-        title: postRef.title,
-        isHighlighted: postRef.isHighlighted,
+      .filter((refPosts) => refPosts.title)
+      .map((refPosts) => ({
+        title: refPosts.title,
+        isHighlighted: highlightedWorld === refPosts.title,
+        
       }))
     }
-    setHighlightedWorld={setHighlightedWorld} // Pass setHighlightedWorld
+    setHighlightedWorld={setHighlightedWorld} 
   />
 )}
-
-
     </group>
-   
   );
   
 };

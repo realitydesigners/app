@@ -11,10 +11,7 @@ export async function getStaticPaths() {
     props: { category },
   }))
 }
-
 const { category = {} as any } = Astro.props
-
-console.log(category)
 ---
 <Layout title="Reality Designers">
   <main class="w-screen h-screen bg-black">

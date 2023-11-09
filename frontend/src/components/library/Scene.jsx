@@ -63,9 +63,9 @@ const Scene = ({ category = [] }) => {
     ? category.subCategories.filter((subCat) => Boolean(subCat.title))
     : [];
 
-    console.log("data", subCategories)
-    
-    console.log('Category data:', category);
+
+    console.log('Category data Fetched From Parent Page:', category);
+    console.log("subCategories", subCategories)
 
  
   return (
