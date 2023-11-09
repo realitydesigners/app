@@ -169,8 +169,6 @@ export const RefPost = (props) => {
     onPointerOut,
   } = props
 
-  console.log('RefPost rendering:', title);
-
   const { camera } = useThree();
   const textRef = useRef();
 
@@ -208,9 +206,8 @@ export const RefPost = (props) => {
 };
 
 
-export const RefPosts = ({ subCategoryPosition, categories, highlightedCategory, setHighlightedWorld }) => {
+export const RefPosts = ({ subCategoryPosition, refPosts, highlightedCategory, setHighlightedWorld }) => {
   const { camera } = useThree();
-
   const currentPositionsRef = useRef([]);
 
   useFrame(() => {
@@ -224,8 +221,6 @@ export const RefPosts = ({ subCategoryPosition, categories, highlightedCategory,
     });
   });
 
-  const refPosts = categories
-    .find(category => category.title === highlightedCategory)?.refPosts || [];
 
   return (
     <>
@@ -249,68 +244,38 @@ export const RefPosts = ({ subCategoryPosition, categories, highlightedCategory,
 };
 
 
-
 const PostsBySubCategory = (props) => {
   const {
     categories,
-    highlightedCategory,
     handleMainWorldInteraction,
     selectedMainWorld,
-    refPosts, // Pass the refPosts prop
   } = props;
 
-
-  console.log('All Props:', props);
-  categories.forEach((category, index) => {
-    console.log(`Category ${index}:`, category);
-    console.log(`refPosts for Category ${index}:`, category.refPosts);
-  });
-
   const [hoveredWorld, setHoveredWorld] = useState(null);
+  const [highlightedWorld, setHighlightedWorld] = useState(null);
 
-  const positions = getSubCategoryPositions(categories.length)
-  const selectedCategory = categories.find(
-    (category) => category.title === highlightedCategory
-  );
-
-  const subCategoryPosition = selectedCategory
-    ? selectedCategory.position
-    : []; // Change the default position as needed
-
-    const [highlightedWorld, setHighlightedWorld] = useState(null)
+  // Find the refPosts for the hoveredWorld. We use a different name to avoid conflicts.
+  const hoveredCategoryPosts = categories.find(cat => cat.title === hoveredWorld)?.refPosts || [];
 
   return (
-    <group
-      onPointerOut={() => {
-        setHoveredWorld(null);
-      }}
-    >
+    <group onPointerOut={() => setHoveredWorld(null)}>
       <SubCategories
         categories={categories}
-        highlightedCategory={highlightedCategory}
+        highlightedCategory={hoveredWorld}
         handleMainWorldInteraction={handleMainWorldInteraction}
-        hoveredWorld={hoveredWorld}
         setHoveredWorld={setHoveredWorld}
+        hoveredWorld={hoveredWorld}
         selectedMainWorld={selectedMainWorld}
       />
-   {refPosts && (
-  <RefPosts
-    subCategoryPosition={subCategoryPosition}
-    refPosts={refPosts
-      .filter((refPosts) => refPosts.title)
-      .map((refPosts) => ({
-        title: refPosts.title,
-        isHighlighted: highlightedWorld === refPosts.title,
-        
-      }))
-    }
-    setHighlightedWorld={setHighlightedWorld} 
-  />
-)}
+      {hoveredWorld && (
+        <RefPosts
+          subCategoryPosition={getSubCategoryPositions(1)[0]} // This is placeholder, adjust as needed
+          refPosts={hoveredCategoryPosts}
+          setHighlightedWorld={setHighlightedWorld}
+        />
+      )}
     </group>
   );
-  
 };
-
 
 export default React.memo(PostsBySubCategory);
