@@ -3,6 +3,7 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { useCallback, useState } from 'react'
 import { useCategory } from './CategoryContext'
+import { getPostsBySubcategory } from '../../lib/api.js'
 import {
   AllCategories,
 
@@ -28,7 +29,7 @@ const Scene = ({ category = [] }) => {
       setSelectedMainWorld(worldName);
       setHighlightedWorld(worldName);
       setHighlightedCategory(worldName);
-  
+
       const currentCategory = category;
       
       if (currentCategory && currentCategory.sceneIdentifier) {
@@ -55,6 +56,21 @@ const Scene = ({ category = [] }) => {
         mainWorld: worldName,
         category: prev.category,
       }));
+
+
+      if (childCategoryName) {
+        // Fetch posts associated with the selected subcategory
+        getPostsBySubcategory(childCategoryName)
+          .then((posts) => {
+            // Handle posts data as needed
+            console.log('Posts associated with subcategory:', posts);
+            // Update state or perform other actions with the posts data
+          })
+          .catch((error) => {
+            // Handle error if needed
+            console.error('Error fetching posts:', error);
+          });
+      }
     },
     [category, setNavigation],
   );
@@ -65,6 +81,7 @@ const Scene = ({ category = [] }) => {
     ? category.subCategories.filter((subCat) => Boolean(subCat.title))
     : [];
 
+    console.log(subCategories)
  
 
   return (

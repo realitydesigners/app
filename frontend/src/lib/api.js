@@ -423,32 +423,53 @@ export async function getLibrary() {
 
 export async function getCategory() {
   const query = `*[_type == "category"] {
-  _id,
-  _type,
-  title,
-  isMain,
-  slug,
-  sceneIdentifier,
-  "sceneIdentifier": sceneIdentifier,
-  "subCategories": *[_type == "category" && references(^._id)] { 
-    _id, 
-    _type, 
+    _id,
+    _type,
     title,
-  },
-  "associatedPosts": *[_type == "posts" && references(^._id)] {
+    isMain,
+    slug,
+    sceneIdentifier,
+    "subCategories": *[_type == "category" && references(^._id)] {
+      _id,
+      _type,
+      title,
+      "associatedPosts": *[_type == "posts" && references(^._id)] {
+        _id,
+        title,
+        slug,
+        excerpt,
+        author,
+        tags,
+        category,
+        publicationDate,
+        lightLayout,
+        darkLayout,
+      }
+    },
+  }
+  `;
+  
+  const data = await client.fetch(query);
+  return data;
+}
+
+export async function getPostsBySubcategory(subcategoryID) {
+  const query = `*[_type == "posts" && references(*[_id == $subcategoryID]._id)] {
+    _id,
+    _type,
     title,
     slug,
     excerpt,
     author,
     tags,
-
     category,
-
     publicationDate,
     lightLayout,
     darkLayout,
-  }
-}`
-  const data = await client.fetch(query)
-  return data
+  }`;
+  
+  const params = { subcategoryID };
+
+  const data = await client.fetch(query, params);
+  return data;
 }

@@ -168,7 +168,9 @@ const AllCategories = (props) => {
   const positions = getMainCategoryPositions(categories.length);
   const selectedMainWorldPosition =
     positions[categories.findIndex((cat) => cat.title === highlightedCategory)];
-
+  const selectedMainWorldCategory = categories.find(
+    (category) => category.title === highlightedCategory
+  );
 
   return (
     <group
