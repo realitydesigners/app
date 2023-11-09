@@ -443,7 +443,7 @@ export async function getModules() {
 
 
 export async function getLibrary() {
-  const query = `*[_type == "posts" ] {
+  const query = `*[_type == "category" ] {
   _id,
   _type,
   title,

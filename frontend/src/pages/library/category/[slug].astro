@@ -1,0 +1,12 @@
+---
+import Layout from '../../../layouts/Layout.astro'
+import { getLibrary } from '../../../lib/api.js'
+import Scene from '../../../components/library/Scene'
+
+const library = await getLibrary()
+---
+
+  <main class="w-screen h-screen bg-black">
+    <Scene library={library} client:load />
+  </main>
+
