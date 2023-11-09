@@ -413,31 +413,9 @@ export async function getModules() {
 
 export async function getLibrary() {
   const query = `*[_type == "category" ] {
-  _id,
-  _type,
   title,
   slug,
   isMain,
-  sceneIdentifier,
-  "sceneIdentifier": sceneIdentifier,
-  "subCategories": *[_type == "posts" && references(^._id)] { 
-    _id, 
-    _type, 
-    title
-  },
-  "associatedPosts": *[_type == "posts" && references(^._id)] {
-    title,
-    slug,
-    excerpt,
-    author,
-    tags,
-
-    category,
-
-    publicationDate,
-    lightLayout,
-    darkLayout,
-  }
 }`
   const data = await client.fetch(query)
   return data

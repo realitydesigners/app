@@ -151,7 +151,7 @@ export default defineType({
       name: 'subcategories',
       title: 'Subcategories',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'posts'}}],
+      of: [{type: 'reference', to: {type: 'category'}}],
     }),
 
     defineField({
