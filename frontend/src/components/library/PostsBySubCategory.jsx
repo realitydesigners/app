@@ -19,7 +19,7 @@ export function getSubCategoryPositions(count, offset = [0, 0, 0], radius = 15) 
 }
 
 const getRefPostPosition = (index, count, subCategoryPosition) => {
-  const radius = 3; // Adjust as needed
+  const radius = 6; // Adjust as needed
   const angle = (Math.PI * 2 * index) / count;
   const x = subCategoryPosition[0] + Math.cos(angle) * radius;
   const y = subCategoryPosition[1] + Math.sin(angle) * radius;
@@ -162,12 +162,12 @@ export const SubCategories = (props) => {
 export const RefPost = (props) => {
   const {
     title,
-    position,
+    position, // This is the position relative to the subCategoryPosition
     isHighlighted,
     onClick,
     onPointerOver,
     onPointerOut,
-  } = props
+  } = props;
 
   const { camera } = useThree();
   const textRef = useRef();
@@ -179,10 +179,10 @@ export const RefPost = (props) => {
   });
 
   return (
-    <group position={position}>
+    <group position={position}> 
       <Crystal
         className="sub-crystal"
-        position={position}
+        position={[0, 0, 0]} 
         scale={[0.5, 0.5, 0.5]}
         onPointerOver={() => title && onPointerOver(title)}
         onPointerOut={onPointerOut}
@@ -191,7 +191,7 @@ export const RefPost = (props) => {
       />
       <Text
         ref={textRef}
-        position={[0, 0, -3]}
+        position={[0, 0, -3]} 
         color="white"
         fontSize={0.9}
         font="/fonts/monomaniac.ttf"
@@ -248,14 +248,23 @@ const PostsBySubCategory = (props) => {
   const {
     categories,
     handleMainWorldInteraction,
-    selectedMainWorld,
+    
   } = props;
 
   const [hoveredWorld, setHoveredWorld] = useState(null);
-  const [highlightedWorld, setHighlightedWorld] = useState(null);
 
-  // Find the refPosts for the hoveredWorld. We use a different name to avoid conflicts.
-  const hoveredCategoryPosts = categories.find(cat => cat.title === hoveredWorld)?.refPosts || [];
+  // Get positions for all subcategories
+  const subCategoryPositions = getSubCategoryPositions(categories.length);
+
+  // Find the hovered subcategory object
+  const hoveredCategory = categories.find(cat => cat.title === hoveredWorld);
+
+  // Get the position for the hovered subcategory
+  const hoveredSubCategoryPosition = hoveredCategory ?
+    subCategoryPositions[categories.indexOf(hoveredCategory)] : null;
+
+  // Find the refPosts for the hoveredWorld
+  const hoveredCategoryPosts = hoveredCategory?.refPosts || [];
 
   return (
     <group onPointerOut={() => setHoveredWorld(null)}>
@@ -265,13 +274,11 @@ const PostsBySubCategory = (props) => {
         handleMainWorldInteraction={handleMainWorldInteraction}
         setHoveredWorld={setHoveredWorld}
         hoveredWorld={hoveredWorld}
-        selectedMainWorld={selectedMainWorld}
       />
-      {hoveredWorld && (
+      {hoveredWorld && hoveredSubCategoryPosition && (
         <RefPosts
-          subCategoryPosition={getSubCategoryPositions(1)[0]} // This is placeholder, adjust as needed
+          subCategoryPosition={hoveredSubCategoryPosition} 
           refPosts={hoveredCategoryPosts}
-          setHighlightedWorld={setHighlightedWorld}
         />
       )}
     </group>
