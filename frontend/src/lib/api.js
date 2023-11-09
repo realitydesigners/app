@@ -455,7 +455,7 @@ export async function getCategory() {
   "subCategories": *[_type == "category" && references(^._id)] { 
     _id, 
     _type, 
-    title
+    title,
   },
   "associatedPosts": *[_type == "posts" && references(^._id)] {
     title,

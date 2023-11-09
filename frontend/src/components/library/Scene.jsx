@@ -58,9 +58,9 @@ const Scene = ({ category = [] }) => {
     [category, setNavigation],
   )
 
-  const mainCategories = Array.isArray(category)
-  ? category.filter((cat) => Boolean(cat.title) && cat.isMain)
-  : [];
+  const subCategories = Array.isArray(category.subCategories)
+    ? category.subCategories.filter((subCat) => Boolean(subCat.title))
+    : [];
 
   const shouldShowSidebar = sidebarOpen && currentContent.length > 0
 
@@ -68,6 +68,8 @@ const Scene = ({ category = [] }) => {
     from: { scale: [0, 0, 0] },
     to: { scale: [1, 1, 1] },
   })
+
+
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
@@ -77,7 +79,7 @@ const Scene = ({ category = [] }) => {
         <OrbitControls />
 
         <AllCategories
-          categories={mainCategories}
+          categories={subCategories}
           highlightedCategory={highlightedCategory}
           handleMainWorldInteraction={handleMainWorldInteraction}
           selectedMainWorld={selectedMainWorld}

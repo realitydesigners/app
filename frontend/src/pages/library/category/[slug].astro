@@ -14,11 +14,11 @@ export async function getStaticPaths() {
 
 const { category = {} as any } = Astro.props
 
-console.log(category)   
+console.log(category)
 ---
 
   <main class="w-screen h-screen bg-black">
-    <div><p class="text-4xl text-whit z-20">{category.title}</p></div>
+
     <Scene category={category} client:load />
   </main>
 
