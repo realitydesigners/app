@@ -18,14 +18,13 @@ export function getSubCategoryPositions(count, offset = [0, 0, 0], radius = 15) 
   return positions;
 }
 
-export function getRefPostPositions(count, radius, subCategoryPosition) {
-  return Array.from({ length: count }, (_, index) => {
-    const angle = (Math.PI * 2 * index) / count;
-    const x = subCategoryPosition[0] + Math.cos(angle) * radius;
-    const y = subCategoryPosition[1] + Math.sin(angle) * radius;
-    return [x, y, subCategoryPosition[2]];
-  });
-}
+const getRefPostPosition = (index, count, subCategoryPosition) => {
+  const radius = 3; // Adjust as needed
+  const angle = (Math.PI * 2 * index) / count;
+  const x = subCategoryPosition[0] + Math.cos(angle) * radius;
+  const y = subCategoryPosition[1] + Math.sin(angle) * radius;
+  return [x, y, subCategoryPosition[2]];
+};
 
 const playSound = (soundPath) => {
   const audio = new Audio(soundPath)
@@ -226,15 +225,10 @@ export const RefPost = (props) => {
 };
 
 
-export const RefPosts = (props) => {
-  const { subCategoryPosition, refPosts } = props;
+export const RefPosts = ({ subCategoryPosition, categories, highlightedCategory, setHighlightedWorld }) => {
   const { camera } = useThree();
 
-  console.log('RefPosts received refPosts:', refPosts);
-
   const currentPositionsRef = useRef([]);
-
-  const positions = getRefPostPositions(refPosts.length, 3, subCategoryPosition);
 
   useFrame(() => {
     if (currentPositionsRef.current.length === 0) return;
@@ -247,25 +241,31 @@ export const RefPosts = (props) => {
     });
   });
 
+  const refPosts = categories
+    .find(category => category.title === highlightedCategory)?.refPosts || [];
+
   return (
     <>
-    {refPosts && (
-  <RefPosts 
-    subCategoryPosition={subCategoryPosition} 
-    refPosts={refPosts
-      .filter((postRef) => postRef.title)
-      .map((postRef) => ({  
-        title: postRef.title,
-        isHighlighted: postRef.isHighlighted,
-        onPointerOver: () => setHighlightedWorld(postRef.title),
-        onPointerOut: () => {}, 
-      }))}
-  />
-)}
+      {refPosts.map((postRef, index) => {
+        const [x, y, z] = getRefPostPosition(index, refPosts.length, subCategoryPosition);
+        const isHighlighted = postRef.isHighlighted;
 
+        return (
+          <RefPost
+            key={postRef.title}
+            title={postRef.title}
+            position={[x, y, z]}
+            isHighlighted={isHighlighted}
+            onPointerOver={() => setHighlightedWorld(postRef.title)}
+            onPointerOut={() => {}}
+          />
+        );
+      })}
     </>
   );
 };
+
+
 
 const PostsBySubCategory = (props) => {
   const {
@@ -306,18 +306,19 @@ const PostsBySubCategory = (props) => {
         selectedMainWorld={selectedMainWorld}
       />
    {refPosts && (
-  <RefPosts 
-    subCategoryPosition={subCategoryPosition} 
+  <RefPosts
+    subCategoryPosition={subCategoryPosition}
     refPosts={refPosts
       .filter((postRef) => postRef.title)
-      .map((postRef) => ({  
+      .map((postRef) => ({
         title: postRef.title,
         isHighlighted: postRef.isHighlighted,
-        onPointerOver: () => setHighlightedWorld(postRef.title),
-        onPointerOut: () => {}, 
-      }))}
+      }))
+    }
+    setHighlightedWorld={setHighlightedWorld} // Pass setHighlightedWorld
   />
 )}
+
 
     </group>
    

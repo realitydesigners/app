@@ -65,6 +65,8 @@ const Scene = ({ category = [] }) => {
 
     console.log("data", subCategories)
     
+    console.log('Category data:', category);
+
  
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
