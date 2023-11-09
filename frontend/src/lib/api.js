@@ -461,23 +461,3 @@ export async function getCategory() {
   return data;
 }
 
-export async function getPostsBySubcategory(subcategoryID) {
-  const query = `*[_type == "posts" && references(*[_id == $subcategoryID]._id)] {
-    _id,
-    _type,
-    title,
-    slug,
-    excerpt,
-    author,
-    tags,
-    category,
-    publicationDate,
-    lightLayout,
-    darkLayout,
-  }`;
-  
-  const params = { subcategoryID };
-
-  const data = await client.fetch(query, params);
-  return data;
-}

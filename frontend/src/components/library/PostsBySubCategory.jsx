@@ -3,6 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import Crystal from './Crystal';
+import ModelWithEffects from './ModelWithEffects';
 
 export function getSubCategoryPositions(count, offset = [0, 0, 0], radius = 15) {
   const positions = [];
@@ -34,6 +35,7 @@ const playSound = (soundPath) => {
 export const SubCategory = (props) => {
   const {
     title,
+    model,
     position,
     isHighlighted,
     onClick,
@@ -80,14 +82,15 @@ export const SubCategory = (props) => {
       onPointerOver={onHover}
       onPointerOut={onLeave}
     >
-      <Crystal
-        className="sub-crystal"
-        position={[0, 0, 0]}
-        scale={[2, 2, 2]}
-        onPointerOver={handleHover}
+        <ModelWithEffects
+        model={model}
+        className="model"
+        position={[0,0,1]}
+        scale={[1.5,1.5,1.5]}
+        onPointerOver={() => title && onPointerOver(title)}
         onPointerOut={onPointerOut}
-        onClick={handleClick}
-        emissiveIntensity={isDimmed ? 0.25 : isHighlighted ? 1.5 : 1}
+        onClick={() => title && onClick(title, position)}
+        emissiveIntensity={isHighlighted ? 2 : 1}
       />
       <Text
         ref={textRef}
@@ -142,6 +145,7 @@ export const SubCategories = (props) => {
           <SubCategory
             key={world}
             title={world}
+            model={cat.model}
             position={[x, y, z]}
             isHighlighted={isHovered}
             onClick={handleMainWorldInteraction}
