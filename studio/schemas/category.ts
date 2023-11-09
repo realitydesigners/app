@@ -23,6 +23,12 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      type: 'reference',
+      name: 'model',
+      title: '3D Model',
+      to: {type: 'model'},
+    }),
+    defineField({
       name: 'subcategories',
       title: 'Subcategories',
       type: 'array',

@@ -428,6 +428,9 @@ export async function getCategory() {
     title,
     isMain,
     slug,
+    model->{...,
+      file,
+       },
     sceneIdentifier,
     "subCategories": *[_type == "category" && references(^._id)] {
       _id,
@@ -435,6 +438,9 @@ export async function getCategory() {
       title,
       slug,
       isMain,
+      model->{...,
+        file,
+         },
       "refPosts": *[_type == "posts" && references(^._id)] {
         _id,
         title,
