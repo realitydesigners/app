@@ -4,12 +4,12 @@ import { useCallback, useState } from 'react';
 import { useCategory } from './CategoryContext.jsx';
 import { LibraryCategories } from './index.ts';
 
-const CAMERA_POSITION = [0, 0, 5];
+const CAMERA_POSITION = [0, 25, 40];
 
 const LibraryScene = ({ library = [] }) => {
   const { navigation, setNavigation } = useCategory();
   const [highlightedWorld, setHighlightedWorld] = useState(null);
-  const [cameraPosition, setCameraPosition] = useState(CAMERA_POSITION);
+
   const [selectedMainWorld, setSelectedMainWorld] = useState(null);
   const [highlightedCategory, setHighlightedCategory] = useState(null);
 
@@ -35,7 +35,7 @@ const LibraryScene = ({ library = [] }) => {
   return (
     <div>
       <Canvas style={{ height: '100vh', width: '100vw' }}>
-        <PerspectiveCamera makeDefault position={cameraPosition} zoom={1} />
+      <PerspectiveCamera makeDefault position={CAMERA_POSITION} zoom={1} />
         <OrbitControls />
 
         <LibraryCategories

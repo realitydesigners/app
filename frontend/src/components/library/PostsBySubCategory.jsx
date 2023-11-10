@@ -189,7 +189,6 @@ export const RefPost = (props) => {
         className="sub-crystal"
         position={[0, 0, 0]} 
         scale={[1,1,1]}
-        onPointerOver={() => title && onPointerOver(title)}
         onPointerOut={onPointerOut}
         onClick={() => title && onClick(title, position)}
         emissiveIntensity={isHighlighted ? 1 : .6}
@@ -239,8 +238,8 @@ export const RefPosts = ({ subCategoryPosition, refPosts, highlightedCategory, s
             title={postRef.title}
             position={[x, y, z]}
             isHighlighted={isHighlighted}
-            onPointerOver={() => setHighlightedWorld(postRef.title)}
-            onPointerOut={() => {}}
+        
+      
           />
         );
       })}
