@@ -1,12 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import { getLibrary } from '../lib/api.js'
+import LibraryLayout from '../layouts/LibraryLayout.astro'
+import { getCategory } from '../lib/api.js'
 import LibraryScene from '../components/library/LibraryScene.jsx'
 
-const library = await getLibrary()
+const library = await getCategory()
 ---
-<Layout title="Reality Designers">
-  <main class="w-screen h-screen bg-gray-200">
+<LibraryLayout title="Reality Designers">
+  <div class="w-screen h-screen bg-gray-200">
+  <div class="bg-white absolute z-20 justify-center align-center items-center flex w-full bottom-0 h-[120px]">
+    <p class="text-black font-mono uppercase ">This is Library</p></div>
     <LibraryScene library={library} client:load />
-  </main>
-</Layout>
+  </div>
+</LibraryLayout>

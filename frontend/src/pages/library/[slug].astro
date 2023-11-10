@@ -1,6 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import { getLibrary, getCategory } from '../../lib/api.js'
+import LibraryLayout from '../../layouts/LibraryLayout.astro'
+import { getCategory } from '../../lib/api.js'
 import Scene from '../../components/library/Scene'
 
 export async function getStaticPaths() {
@@ -13,10 +13,10 @@ export async function getStaticPaths() {
 }
 const { category = {} as any } = Astro.props
 ---
-<Layout title="Reality Designers">
+<LibraryLayout title="Reality Designers">
   <main class="w-screen h-screen bg-gray-200">
 
     <Scene category={category} client:load />
   </main>
-</Layout>
+</LibraryLayout>
 

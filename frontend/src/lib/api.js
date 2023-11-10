@@ -410,17 +410,6 @@ export async function getModules() {
   return data
 }
 
-
-export async function getLibrary() {
-  const query = `*[_type == "category" ] {
-  title,
-  slug,
-  isMain,
-}`
-  const data = await client.fetch(query)
-  return data
-}
-
 export async function getCategory() {
   const query = `*[_type == "category"] {
     _id,
