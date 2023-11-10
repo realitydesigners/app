@@ -80,14 +80,14 @@ export const SubCategory = (props) => {
       position={position}
       rotation={[0, rotationY, 0]}
       onPointerOver={onHover}
-      onPointerOut={onLeave}
+    
     >
         <ModelWithEffects
         model={model}
         className="model"
         position={[0,0,5]}
         scale={[3,3,3]}
-        onPointerOver={() => title && onPointerOver(title)}
+      
         onPointerOut={onPointerOut}
         onClick={() => title && onClick(title, position)}
         emissiveIntensity={isHighlighted ? 1 : .6}
@@ -143,21 +143,22 @@ export const SubCategories = (props) => {
         const rotationY = -((Math.PI * 2 * index) / categories.length) + Math.PI / 2;
 
         return (
+      
           <SubCategory
-            key={world}
-            title={world}
-            model={cat.model}
-            position={[x, y, z]}
-            isHighlighted={isHovered}
-            onClick={handleMainWorldInteraction}
-            onPointerOver={() => {handleMainWorldInteraction(world, [x, y, z])}}
-            onPointerOut={() => {}}
-            hoveredWorld={hoveredWorld}
-            onHover={() => {setHoveredWorld(world)}}
-            onLeave={() => {setHoveredWorld(null)}}
-            selectedMainWorld={selectedMainWorld}
-            rotationY={rotationY}
-          />
+          key={world}
+          title={world}
+          model={cat.model}
+          position={[x, y, z]}
+          isHighlighted={isHovered}
+          onClick={handleMainWorldInteraction}
+          onPointerOver={() => setHoveredWorld(world)}
+          onHover={() => {setHoveredWorld(world)}}
+          onLeave={() => {setHoveredWorld(null)}}
+          hoveredWorld={hoveredWorld}
+          selectedMainWorld={highlightedCategory}
+          rotationY={rotationY}
+        />
+          
         );
       })}
     </>
@@ -172,6 +173,7 @@ export const RefPost = (props) => {
     onClick,
     onPointerOver,
     onPointerOut,
+  
   } = props;
 
   const { camera } = useThree();
@@ -210,7 +212,17 @@ export const RefPost = (props) => {
 };
 
 
-export const RefPosts = ({ subCategoryPosition, refPosts, highlightedCategory, setHighlightedWorld }) => {
+export const RefPosts = (props) => {
+  const { 
+  subCategoryPosition, 
+  refPosts, 
+  highlightedCategory, 
+  setHighlightedWorld,
+  handleMainWorldInteraction,
+  setHoveredWorld,
+  hoveredWorld,
+  } = props;
+
   const { camera } = useThree();
   const currentPositionsRef = useRef([]);
 
@@ -238,6 +250,9 @@ export const RefPosts = ({ subCategoryPosition, refPosts, highlightedCategory, s
             title={postRef.title}
             position={[x, y, z]}
             isHighlighted={isHighlighted}
+            onPointerOver={() => {handleMainWorldInteraction(world, [x, y, z])}}
+            onPointerOut={() => {}}
+            hoveredWorld={hoveredWorld}
         
       
           />
@@ -247,12 +262,10 @@ export const RefPosts = ({ subCategoryPosition, refPosts, highlightedCategory, s
   );
 };
 
-
 const PostsBySubCategory = (props) => {
   const {
     categories,
     handleMainWorldInteraction,
-    
   } = props;
 
   const [hoveredWorld, setHoveredWorld] = useState(null);
@@ -271,7 +284,7 @@ const PostsBySubCategory = (props) => {
   const hoveredCategoryPosts = hoveredCategory?.refPosts || [];
 
   return (
-    <group onPointerOut={() => setHoveredWorld(null)}>
+    <group>
       <SubCategories
         categories={categories}
         highlightedCategory={hoveredWorld}
@@ -281,8 +294,10 @@ const PostsBySubCategory = (props) => {
       />
       {hoveredWorld && hoveredSubCategoryPosition && (
         <RefPosts
-          subCategoryPosition={hoveredSubCategoryPosition} 
+          subCategoryPosition={hoveredSubCategoryPosition}
           refPosts={hoveredCategoryPosts}
+          highlightedCategory={hoveredWorld}
+          handleMainWorldInteraction={handleMainWorldInteraction}
         />
       )}
     </group>
