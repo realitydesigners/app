@@ -1,41 +1,42 @@
-import { useCallback, useState } from 'react'
-import * as THREE from 'three'
-import { a, useSpring } from '@react-spring/three'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 
 import {
   PostsBySubCategory,
-  useMainWorldInteraction
-
+  useMainWorldInteraction,
 } from './index.ts'
 
 const CAMERA_POSITION = [0, 0, 5]
 
 const Scene = ({ category }) => {
+
   const {
     handleMainWorldInteraction,
+    handleCategoryHover,
+    handleCategoryLeave,
     subCategories,
     highlightedCategory,
     selectedMainWorld,
-    highlightedWorld
+    highlightedWorld,
   } = useMainWorldInteraction(category);
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
       <Canvas style={{ height: '100vh', width: '100vw' }}>
-      <PerspectiveCamera makeDefault position={CAMERA_POSITION} zoom={1} />
+        <PerspectiveCamera makeDefault position={CAMERA_POSITION} zoom={1} />
         <OrbitControls />
         <PostsBySubCategory
           categories={subCategories}
           highlightedCategory={highlightedCategory}
           handleMainWorldInteraction={handleMainWorldInteraction}
+          handleCategoryHover={handleCategoryHover}
+          handleCategoryLeave={handleCategoryLeave}
           selectedMainWorld={selectedMainWorld}
           highlightedWorld={highlightedWorld}
         />
       </Canvas>
     </div>
-  )
-}
+  );
+};
 
-export default Scene
+export default Scene;
