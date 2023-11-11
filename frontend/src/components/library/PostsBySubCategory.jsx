@@ -1,31 +1,35 @@
-import { Text, Line } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
-import React, { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import Crystal from './Crystal';
-import ModelWithEffects from './ModelWithEffects';
+import { Line, Text } from '@react-three/drei'
+import { useFrame, useThree } from '@react-three/fiber'
+import React, { useEffect, useRef, useState } from 'react'
+import * as THREE from 'three'
+import Crystal from './Crystal'
+import ModelWithEffects from './ModelWithEffects'
 
-export function getSubCategoryPositions(count, offset = [0, 0, 0], radius = 15) {
-  const positions = [];
+export function getSubCategoryPositions(
+  count,
+  offset = [0, 0, 0],
+  radius = 15,
+) {
+  const positions = []
 
   for (let i = 0; i < count; i++) {
-    const angle = (Math.PI * 2 * i) / count; // Evenly distribute around circle
-    const x = Math.cos(angle) * radius + offset[0];
-    const z = Math.sin(angle) * radius + offset[2];
-    const y = offset[1]; // Keep y fixed at the same height
+    const angle = (Math.PI * 2 * i) / count // Evenly distribute around circle
+    const x = Math.cos(angle) * radius + offset[0]
+    const z = Math.sin(angle) * radius + offset[2]
+    const y = offset[1] // Keep y fixed at the same height
 
-    positions.push([x, y, z]);
+    positions.push([x, y, z])
   }
-  return positions;
+  return positions
 }
 
 const getRefPostPosition = (index, count, subCategoryPosition) => {
-  const radius = 10; // Adjust as needed
-  const angle = (Math.PI * 2 * index) / count;
-  const x = subCategoryPosition[0] + Math.cos(angle) * radius;
-  const y = subCategoryPosition[1] + Math.sin(angle) * radius;
-  return [x, y, subCategoryPosition[2]];
-};
+  const radius = 10 // Adjust as needed
+  const angle = (Math.PI * 2 * index) / count
+  const x = subCategoryPosition[0] + Math.cos(angle) * radius
+  const y = subCategoryPosition[1] + Math.sin(angle) * radius
+  return [x, y, subCategoryPosition[2]]
+}
 
 const playSound = (soundPath) => {
   const audio = new Audio(soundPath)
@@ -48,49 +52,47 @@ export const SubCategory = (props) => {
     rotationY,
     textWidth = 21,
     textHeight = 15,
-  } = props;
+  } = props
 
   const isDimmed =
     (hoveredWorld && hoveredWorld !== title) ||
-    (selectedCategory && selectedCategory !== title);
+    (selectedCategory && selectedCategory !== title)
 
   const handleHover = () => {
-    playSound('/sounds/click.mp3');
+    playSound('/sounds/click.mp3')
     if (onPointerOver) {
-      onPointerOver(title, position);
+      onPointerOver(title, position)
     }
-  };
+  }
 
   const handleClick = () => {
-    playSound('/sounds/click.mp3');
-    onClick(title, position);
-  };
+    playSound('/sounds/click.mp3')
+    onClick(title, position)
+  }
 
-  const textRef = useRef(null);
-  const { camera } = useThree();
+  const textRef = useRef(null)
+  const { camera } = useThree()
 
   useFrame(() => {
     if (textRef.current) {
-      textRef.current.lookAt(camera.position);
+      textRef.current.lookAt(camera.position)
     }
-  });
+  })
 
   return (
     <group
       position={position}
       rotation={[0, rotationY, 0]}
       onPointerOver={onHover}
-    
     >
-        <ModelWithEffects
+      <ModelWithEffects
         model={model}
         className="model"
-        position={[0,0,5]}
-        scale={[3,3,3]}
-      
+        position={[0, 0, 5]}
+        scale={[3, 3, 3]}
         onPointerOut={onPointerOut}
         onClick={() => title && onClick(title, position)}
-        emissiveIntensity={isHighlighted ? 1 : .6}
+        emissiveIntensity={isHighlighted ? 1 : 0.6}
       />
       <Text
         ref={textRef}
@@ -100,7 +102,7 @@ export const SubCategory = (props) => {
         font="/fonts/monomaniac.ttf"
         anchorY="middle"
         maxWidth={6}
-        lineHeight={.9}
+        lineHeight={0.9}
         textAlign="center"
       >
         {title}
@@ -119,8 +121,8 @@ export const SubCategory = (props) => {
         dashed={false}
       />
     </group>
-  );
-};
+  )
+}
 
 export const SubCategories = (props) => {
   const {
@@ -130,40 +132,43 @@ export const SubCategories = (props) => {
     setHoveredWorld,
     hoveredWorld,
     selectedCategory,
-  } = props;
+  } = props
 
-  const positions = getSubCategoryPositions(categories.length);
+  const positions = getSubCategoryPositions(categories.length)
 
   return (
     <>
       {categories.map((cat, index) => {
-        const [x, y, z] = positions[index];
-        const world = cat.title || '';
-        const isHovered = world === highlightedCategory;
-        const rotationY = -((Math.PI * 2 * index) / categories.length) + Math.PI / 2;
+        const [x, y, z] = positions[index]
+        const world = cat.title || ''
+        const isHovered = world === highlightedCategory
+        const rotationY =
+          -((Math.PI * 2 * index) / categories.length) + Math.PI / 2
 
         return (
-      
           <SubCategory
-          key={world}
-          title={world}
-          model={cat.model}
-          position={[x, y, z]}
-          isHighlighted={isHovered}
-          onClick={onCategorySelect}
-          onPointerOver={() => setHoveredWorld(world)}
-          onHover={() => {setHoveredWorld(world)}}
-          onLeave={() => {setHoveredWorld(null)}}
-          hoveredWorld={hoveredWorld}
-          selectedCategory={highlightedCategory}
-          rotationY={rotationY}
-        />
-          
-        );
+            key={world}
+            title={world}
+            model={cat.model}
+            position={[x, y, z]}
+            isHighlighted={isHovered}
+            onClick={onCategorySelect}
+            onPointerOver={() => setHoveredWorld(world)}
+            onHover={() => {
+              setHoveredWorld(world)
+            }}
+            onLeave={() => {
+              setHoveredWorld(null)
+            }}
+            hoveredWorld={hoveredWorld}
+            selectedCategory={highlightedCategory}
+            rotationY={rotationY}
+          />
+        )
       })}
     </>
-  );
-};
+  )
+}
 
 export const RefPost = (props) => {
   const {
@@ -173,31 +178,30 @@ export const RefPost = (props) => {
     onClick,
     onPointerOver,
     onPointerOut,
-  
-  } = props;
+  } = props
 
-  const { camera } = useThree();
-  const textRef = useRef();
+  const { camera } = useThree()
+  const textRef = useRef()
 
   useFrame(() => {
     if (textRef.current) {
-      textRef.current.lookAt(camera.position);
+      textRef.current.lookAt(camera.position)
     }
-  });
+  })
 
   return (
-    <group position={position}> 
+    <group position={position}>
       <Crystal
         className="sub-crystal"
-        position={[0, 0, 0]} 
-        scale={[1,1,1]}
+        position={[0, 0, 0]}
+        scale={[1, 1, 1]}
         onPointerOut={onPointerOut}
         onClick={() => title && onClick(title, position)}
-        emissiveIntensity={isHighlighted ? 1 : .6}
+        emissiveIntensity={isHighlighted ? 1 : 0.6}
       />
       <Text
         ref={textRef}
-        position={[0, 0, -3]} 
+        position={[0, 0, -3]}
         color="black"
         fontSize={0.5}
         font="/fonts/monomaniac.ttf"
@@ -208,41 +212,46 @@ export const RefPost = (props) => {
         {title}
       </Text>
     </group>
-  );
-};
-
+  )
+}
 
 export const RefPosts = (props) => {
-  const { 
-  subCategoryPosition, 
-  refPosts, 
-  highlightedCategory, 
-  setHighlightedCategory,
-  onCategorySelect,
-  setHoveredWorld,
-  hoveredWorld,
-  } = props;
+  const {
+    subCategoryPosition,
+    refPosts,
+    highlightedCategory,
+    setHighlightedCategory,
+    onCategorySelect,
+    setHoveredWorld,
+    hoveredWorld,
+  } = props
 
-  const { camera } = useThree();
-  const currentPositionsRef = useRef([]);
+  const { camera } = useThree()
+  const currentPositionsRef = useRef([])
 
   useFrame(() => {
-    if (currentPositionsRef.current.length === 0) return;
-    const mainWorldVec = new THREE.Vector3(...subCategoryPosition);
+    if (currentPositionsRef.current.length === 0) return
+    const mainWorldVec = new THREE.Vector3(...subCategoryPosition)
 
     currentPositionsRef.current.forEach((currentPos, i) => {
-      const relativePos = new THREE.Vector3().subVectors(currentPos, mainWorldVec);
-      relativePos.applyQuaternion(camera.quaternion);
-      currentPos.copy(mainWorldVec).add(relativePos);
-    });
-  });
-
+      const relativePos = new THREE.Vector3().subVectors(
+        currentPos,
+        mainWorldVec,
+      )
+      relativePos.applyQuaternion(camera.quaternion)
+      currentPos.copy(mainWorldVec).add(relativePos)
+    })
+  })
 
   return (
     <>
       {refPosts.map((postRef, index) => {
-        const [x, y, z] = getRefPostPosition(index, refPosts.length, subCategoryPosition);
-        const isHighlighted = postRef.isHighlighted;
+        const [x, y, z] = getRefPostPosition(
+          index,
+          refPosts.length,
+          subCategoryPosition,
+        )
+        const isHighlighted = postRef.isHighlighted
 
         return (
           <RefPost
@@ -250,38 +259,36 @@ export const RefPosts = (props) => {
             title={postRef.title}
             position={[x, y, z]}
             isHighlighted={isHighlighted}
-            onPointerOver={() => {onCategorySelect(world, [x, y, z])}}
+            onPointerOver={() => {
+              onCategorySelect(world, [x, y, z])
+            }}
             onPointerOut={() => {}}
             hoveredWorld={hoveredWorld}
-        
-      
           />
-        );
+        )
       })}
     </>
-  );
-};
+  )
+}
 
 const PostsBySubCategory = (props) => {
-  const {
-    categories,
-    onCategorySelect,
-  } = props;
+  const { categories, onCategorySelect } = props
 
-  const [hoveredWorld, setHoveredWorld] = useState(null);
+  const [hoveredWorld, setHoveredWorld] = useState(null)
 
   // Get positions for all subcategories
-  const subCategoryPositions = getSubCategoryPositions(categories.length);
+  const subCategoryPositions = getSubCategoryPositions(categories.length)
 
   // Find the hovered subcategory object
-  const hoveredCategory = categories.find(cat => cat.title === hoveredWorld);
+  const hoveredCategory = categories.find((cat) => cat.title === hoveredWorld)
 
   // Get the position for the hovered subcategory
-  const hoveredSubCategoryPosition = hoveredCategory ?
-    subCategoryPositions[categories.indexOf(hoveredCategory)] : null;
+  const hoveredSubCategoryPosition = hoveredCategory
+    ? subCategoryPositions[categories.indexOf(hoveredCategory)]
+    : null
 
   // Find the refPosts for the hoveredWorld
-  const hoveredCategoryPosts = hoveredCategory?.refPosts || [];
+  const hoveredCategoryPosts = hoveredCategory?.refPosts || []
 
   return (
     <group>
@@ -301,7 +308,7 @@ const PostsBySubCategory = (props) => {
         />
       )}
     </group>
-  );
-};
+  )
+}
 
-export default React.memo(PostsBySubCategory);
+export default React.memo(PostsBySubCategory)

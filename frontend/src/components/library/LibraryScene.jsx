@@ -1,41 +1,35 @@
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
-import SplineCode  from '../three/SplineCode.jsx'
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import SplineCode from '../three/SplineCode.jsx'
+import { LibraryCategories, Sidebar, useCategoryInteraction } from './index.ts'
 
-import {
-  LibraryCategories,
-  useCategoryInteraction,
-  Sidebar,
-} from './index.ts'
-
-const CAMERA_POSITION = [0, 25, 40];
+const CAMERA_POSITION = [0, 25, 40]
 
 const LibraryScene = ({ category = [] }) => {
-
   const {
-    onCategorySelect,
     highlightedCategory,
-    selectedCategory,
+    mainCategories,
     isSidebarVisible,
+    onCategorySelect,
+    selectedCategory,
     subcategoryContent,
-  } = useCategoryInteraction(category);
+  } = useCategoryInteraction(category)
 
   return (
     <div>
-      <Sidebar content={subcategoryContent} isVisible={isSidebarVisible} />
+      <Sidebar isVisible={isSidebarVisible} content={subcategoryContent} />
       <Canvas style={{ height: '100vh', width: '100vw' }}>
         <PerspectiveCamera makeDefault position={CAMERA_POSITION} zoom={1} />
         <OrbitControls />
         <LibraryCategories
-          categories={category.filter(cat => Boolean(cat.title) && cat.isMain)} // Assuming this is how you define main categories
+          categories={mainCategories}
           highlightedCategory={highlightedCategory}
           onCategorySelect={onCategorySelect}
           selectedCategory={selectedCategory}
-        
         />
       </Canvas>
     </div>
-  );
-};
+  )
+}
 
-export default LibraryScene;
+export default LibraryScene

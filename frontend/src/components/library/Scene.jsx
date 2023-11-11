@@ -1,4 +1,3 @@
-// First, we list the imports
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { PostsBySubCategory, useCategoryInteraction } from './index.ts';
@@ -12,7 +11,6 @@ const Scene = ({ category }) => {
     onCategoryHover,
     onCategoryLeave,
     highlightedCategory,
- 
   } = useCategoryInteraction(category);
 
   return (

@@ -13,22 +13,19 @@ export const useCategoryInteraction = (category) => {
   const [subcategoryContent, setSubcategoryContent] = useState([]);
   const [activeBackgroundScene, setActiveBackgroundScene] = useState(null);
 
-  // Handler for when a category is hovered
   const onCategoryHover = useCallback((subcategoryName) => {
-    console.log('Hovered over:', subcategoryName);
+  
     const relatedPosts = category.subCategories.find(
       (sub) => sub.slug.current === subcategoryName
     )?.associatedPosts || [];
   
-    console.log('Related posts:', relatedPosts);
     setSubcategoryContent(relatedPosts);
-    setIsSidebarVisible(true); // Show the sidebar
+    setIsSidebarVisible(true); 
   }, [category.subCategories]);
   
 
-  // Handler for when hover is removed from a category
   const onCategoryLeave = useCallback(() => {
-    setIsSidebarVisible(false); // Hide the sidebar
+    setIsSidebarVisible(false); 
   }, []);
 
   const onCategorySelect = useCallback(
@@ -57,6 +54,10 @@ export const useCategoryInteraction = (category) => {
     [category.subCategories, setNavigation],
   );
 
+  const mainCategories = Array.isArray(category)
+  ? category.filter(cat => Boolean(cat.title) && cat.isMain)
+  : [];
+
   const subCategories = Array.isArray(category.subCategories)
     ? category.subCategories.filter((subCat) => Boolean(subCat.title))
     : [];
@@ -69,10 +70,10 @@ export const useCategoryInteraction = (category) => {
     onCategorySelect,
     onCategoryHover,
     onCategoryLeave,
+    mainCategories,
     subCategories,
     highlightedCategory,
     selectedCategory,
-    highlightedCategory,
     isSidebarVisible,
     subcategoryContent,
     activeBackgroundScene,
