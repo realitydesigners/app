@@ -1,21 +1,21 @@
-import { Text } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
-import React, { useRef, useState } from 'react';
-import Crystal from './Crystal';
+import { Text } from '@react-three/drei'
+import { useFrame, useThree } from '@react-three/fiber'
+import React, { useRef, useState } from 'react'
+import Crystal from './Crystal'
 
 export function getCategoryPositions(count, offset = [0, 0, 0], radius = 15) {
-  const positions = [];
+  const positions = []
 
   for (let i = 0; i < count; i++) {
-    const angle = (Math.PI * 2 * i) / count; // Evenly distribute around the circle
-    const x = Math.cos(angle) * radius + offset[0];
-    const z = Math.sin(angle) * radius + offset[2];
-    const y = offset[1]; // Keep y fixed at the same height
+    const angle = (Math.PI * 2 * i) / count // Evenly distribute around the circle
+    const x = Math.cos(angle) * radius + offset[0]
+    const z = Math.sin(angle) * radius + offset[2]
+    const y = offset[1] // Keep y fixed at the same height
 
-    positions.push([x, y, z]);
+    positions.push([x, y, z])
   }
 
-  return positions;
+  return positions
 }
 
 export const Category = (props) => {
@@ -25,42 +25,39 @@ export const Category = (props) => {
     isHighlighted,
     onPointerOver,
     onPointerOut,
-    hoveredWorld,
     onHover,
     onLeave,
     selectedCategory,
     rotationY,
-  } = props;
+  } = props
 
-  const isDimmed =
-    (hoveredWorld && hoveredWorld !== title) ||
-    (selectedCategory && selectedCategory !== title);
+  const isDimmed = selectedCategory && selectedCategory !== title
 
   const playSound = (soundPath) => {
-      const audio = new Audio(soundPath);
-      audio.play();
-   };
+    const audio = new Audio(soundPath)
+    audio.play()
+  }
 
   const handleHover = () => {
-    playSound('/sounds/click.mp3');
+    playSound('/sounds/click.mp3')
     if (onPointerOver) {
-      onPointerOver(title, position);
+      onPointerOver(title, position)
     }
-  };
+  }
 
   const handleRedirect = () => {
-    const categoryRoute = `/library/${title.toLowerCase()}`;
-    window.location.href = categoryRoute;
-  };
-  
-  const textRef = useRef(null);
-  const { camera } = useThree();
+    const categoryRoute = `/library/${title.toLowerCase()}`
+    window.location.href = categoryRoute
+  }
+
+  const textRef = useRef(null)
+  const { camera } = useThree()
 
   useFrame(() => {
     if (textRef.current) {
-      textRef.current.lookAt(camera.position);
+      textRef.current.lookAt(camera.position)
     }
-  });
+  })
 
   return (
     <group
@@ -70,60 +67,58 @@ export const Category = (props) => {
       onPointerOut={onLeave}
       onClick={handleRedirect}
     >
-        <Crystal
-          className="main-crystal"
-          position={[0, 0, 5]}
-          scale={[5,5,5]}
-          onPointerOver={handleHover}
-          onPointerOut={onPointerOut}
-          emissiveIntensity={isDimmed ? 0.5 : isHighlighted ? 1 : .6}
-        />
-        <Text
-          ref={textRef}
-          position={[0, 0, -1]}
-          color="black"
-          fontSize={1.5}
-          font="/fonts/monomaniac.ttf"
-          anchorY="middle"
-          maxWidth={5}
-          lineHeight={.9}
-          textAlign="center"
-        >
-          {title}
-        </Text>
-    
+      <Crystal
+        className="main-crystal"
+        position={[0, 0, 5]}
+        scale={[5, 5, 5]}
+        onPointerOver={handleHover}
+        onPointerOut={onPointerOut}
+        emissiveIntensity={isDimmed ? 0.5 : isHighlighted ? 1 : 0.6}
+      />
+      <Text
+        ref={textRef}
+        position={[0, 0, -1]}
+        color="black"
+        fontSize={1.5}
+        font="/fonts/monomaniac.ttf"
+        anchorY="middle"
+        maxWidth={5}
+        lineHeight={0.9}
+        textAlign="center"
+      >
+        {title}
+      </Text>
     </group>
-  );
-};
+  )
+}
 
 export const LibraryCategories = (props) => {
   const {
     categories,
     highlightedCategory,
     onCategorySelect,
-    hoveredWorld,
     selectedCategory,
-  } = props;
+  } = props
 
-  const positions = getCategoryPositions(categories.length);
-  const [rotation, setRotation] = useState(0);
-  const groupRef = useRef();
+  const positions = getCategoryPositions(categories.length)
+  const [rotation, setRotation] = useState(0)
+  const groupRef = useRef()
 
   useFrame(() => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += 0.001;
+      groupRef.current.rotation.y += 0.001
     }
-  });
+  })
 
   return (
     <group ref={groupRef}>
       {categories.map((cat, index) => {
-        const [x, y, z] = positions[index];
-        const world = cat.title || '';
-        const isHovered = world === highlightedCategory;
-        const rotationY = -((Math.PI * 2 * index) / categories.length) + Math.PI / 2;
-        const groupRotationY = rotationY + rotation;
-
+        const [x, y, z] = positions[index]
+        const world = cat.title || ''
+        const isHovered = world === highlightedCategory
+        const rotationY =
+          -((Math.PI * 2 * index) / categories.length) + Math.PI / 2
+        const groupRotationY = rotationY + rotation
 
         return (
           <Category
@@ -134,14 +129,13 @@ export const LibraryCategories = (props) => {
             onClick={onCategorySelect}
             onPointerOver={() => onCategorySelect(world, [x, y, z])}
             onPointerOut={() => {}}
-            hoveredWorld={hoveredWorld}
             selectedCategory={selectedCategory}
             rotationY={rotationY}
           />
-        );
+        )
       })}
     </group>
-  );
-};
+  )
+}
 
-export default React.memo(LibraryCategories);
+export default React.memo(LibraryCategories)

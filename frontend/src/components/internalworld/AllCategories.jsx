@@ -51,14 +51,14 @@ export const MainCategory = (props) => {
     onClick,
     onPointerOver,
     onPointerOut,
-    hoveredWorld,
+    onCategoryHover,
     onHover,
     onLeave,
     selectedMainWorld,
   } = props
 
   const isDimmed =
-    (hoveredWorld && hoveredWorld !== title) ||
+    (onCategoryHover && onCategoryHover !== title) ||
     (selectedMainWorld && selectedMainWorld !== title)
 
   const handleHover = () => {
@@ -117,8 +117,8 @@ export const MainCategories = (props) => {
     categories,
     highlightedCategory,
     handleMainWorldInteraction,
-    setHoveredWorld,
-    hoveredWorld,
+    setSelectedCategory,
+    onCategoryHover,
     selectedMainWorld,
   } = props
 
@@ -140,9 +140,9 @@ export const MainCategories = (props) => {
             onClick={handleMainWorldInteraction}
             onPointerOver={() => handleMainWorldInteraction(world, [x, y, z])}
             onPointerOut={() => {}}
-            hoveredWorld={hoveredWorld}
-            onHover={() => setHoveredWorld(world)}
-            onLeave={() => setHoveredWorld(null)}
+            onCategoryHover={onCategoryHover}
+            onHover={() => setSelectedCategory(world)}
+            onLeave={() => setSelectedCategory(null)}
             selectedMainWorld={selectedMainWorld}
           />
         )
@@ -254,7 +254,7 @@ const AllCategories = (props) => {
     selectedMainWorld,
   } = props
 
-  const [hoveredWorld, setHoveredWorld] = useState(null)
+  const [onCategoryHover, setSelectedCategory] = useState(null)
 
   const positions = getMainCategoryPositions(categories.length)
   const selectedMainWorldPosition =
@@ -270,15 +270,15 @@ const AllCategories = (props) => {
   return (
     <group
       onPointerOut={() => {
-        setHoveredWorld(null)
+        setSelectedCategory(null)
       }}
     >
       <MainCategories
         categories={categories}
         highlightedCategory={highlightedCategory}
         handleMainWorldInteraction={handleMainWorldInteraction}
-        hoveredWorld={hoveredWorld}
-        setHoveredWorld={setHoveredWorld}
+        onCategoryHover={onCategoryHover}
+        setSelectedCategory={setSelectedCategory}
         selectedMainWorld={selectedMainWorld}
       />
       {selectedMainWorld && (

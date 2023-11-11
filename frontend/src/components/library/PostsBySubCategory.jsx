@@ -45,9 +45,8 @@ export const SubCategory = (props) => {
     onClick,
     onPointerOver,
     onPointerOut,
-    hoveredWorld,
+    onCategoryHover,
     onHover,
-    onLeave,
     selectedCategory,
     rotationY,
     textWidth = 21,
@@ -55,7 +54,7 @@ export const SubCategory = (props) => {
   } = props
 
   const isDimmed =
-    (hoveredWorld && hoveredWorld !== title) ||
+    (onCategoryHover && onCategoryHover !== title) ||
     (selectedCategory && selectedCategory !== title)
 
   const handleHover = () => {
@@ -129,8 +128,8 @@ export const SubCategories = (props) => {
     categories,
     highlightedCategory,
     onCategorySelect,
-    setHoveredWorld,
-    hoveredWorld,
+    setSelectedCategory,
+    onCategoryHover,
     selectedCategory,
   } = props
 
@@ -153,14 +152,14 @@ export const SubCategories = (props) => {
             position={[x, y, z]}
             isHighlighted={isHovered}
             onClick={onCategorySelect}
-            onPointerOver={() => setHoveredWorld(world)}
+            onPointerOver={() => setSelectedCategory(world)}
             onHover={() => {
-              setHoveredWorld(world)
+              setSelectedCategory(world)
             }}
             onLeave={() => {
-              setHoveredWorld(null)
+              setSelectedCategory(null)
             }}
-            hoveredWorld={hoveredWorld}
+            onCategoryHover={onCategoryHover}
             selectedCategory={highlightedCategory}
             rotationY={rotationY}
           />
@@ -216,15 +215,8 @@ export const RefPost = (props) => {
 }
 
 export const RefPosts = (props) => {
-  const {
-    subCategoryPosition,
-    refPosts,
-    highlightedCategory,
-    setHighlightedCategory,
-    onCategorySelect,
-    setHoveredWorld,
-    hoveredWorld,
-  } = props
+  const { subCategoryPosition, refPosts, onCategorySelect, onCategoryHover } =
+    props
 
   const { camera } = useThree()
   const currentPositionsRef = useRef([])
@@ -263,7 +255,7 @@ export const RefPosts = (props) => {
               onCategorySelect(world, [x, y, z])
             }}
             onPointerOut={() => {}}
-            hoveredWorld={hoveredWorld}
+            onCategoryHover={onCategoryHover}
           />
         )
       })}
@@ -274,36 +266,38 @@ export const RefPosts = (props) => {
 const PostsBySubCategory = (props) => {
   const { categories, onCategorySelect } = props
 
-  const [hoveredWorld, setHoveredWorld] = useState(null)
+  const [onCategoryHover, setSelectedCategory] = useState(null)
 
   // Get positions for all subcategories
   const subCategoryPositions = getSubCategoryPositions(categories.length)
 
   // Find the hovered subcategory object
-  const hoveredCategory = categories.find((cat) => cat.title === hoveredWorld)
+  const hoveredCategory = categories.find(
+    (cat) => cat.title === onCategoryHover,
+  )
 
   // Get the position for the hovered subcategory
   const hoveredSubCategoryPosition = hoveredCategory
     ? subCategoryPositions[categories.indexOf(hoveredCategory)]
     : null
 
-  // Find the refPosts for the hoveredWorld
+  // Find the refPosts for the onCategoryHover
   const hoveredCategoryPosts = hoveredCategory?.refPosts || []
 
   return (
     <group>
       <SubCategories
         categories={categories}
-        highlightedCategory={hoveredWorld}
+        highlightedCategory={onCategoryHover}
         onCategorySelect={onCategorySelect}
-        setHoveredWorld={setHoveredWorld}
-        hoveredWorld={hoveredWorld}
+        setSelectedCategory={setSelectedCategory}
+        onCategoryHover={onCategoryHover}
       />
-      {hoveredWorld && hoveredSubCategoryPosition && (
+      {onCategoryHover && hoveredSubCategoryPosition && (
         <RefPosts
           subCategoryPosition={hoveredSubCategoryPosition}
           refPosts={hoveredCategoryPosts}
-          highlightedCategory={hoveredWorld}
+          highlightedCategory={onCategoryHover}
           onCategorySelect={onCategorySelect}
         />
       )}
