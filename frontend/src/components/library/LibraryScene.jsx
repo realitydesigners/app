@@ -4,7 +4,7 @@ import SplineCode  from '../three/SplineCode.jsx'
 
 import {
   LibraryCategories,
-  useMainWorldInteraction,
+  useCategoryInteraction,
   Sidebar,
 } from './index.ts'
 
@@ -19,7 +19,7 @@ const LibraryScene = ({ category = [] }) => {
     highlightedWorld,
     sidebarOpen,
     currentContent,
-  } = useMainWorldInteraction(category);
+  } = useCategoryInteraction(category);
 
   return (
     <div>

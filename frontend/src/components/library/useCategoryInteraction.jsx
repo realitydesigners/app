@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useCategory } from './CategoryContext';
 
-export const useMainWorldInteraction = (category) => {
+export const useCategoryInteraction = (category) => {
   const { navigation, setNavigation } = useCategory();
 
   // State variables
@@ -84,4 +84,4 @@ export const useMainWorldInteraction = (category) => {
   };
 };
 
-export default useMainWorldInteraction;
+export default useCategoryInteraction;

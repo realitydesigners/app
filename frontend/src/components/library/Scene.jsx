@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 
 import {
   PostsBySubCategory,
-  useMainWorldInteraction,
+  useCategoryInteraction,
 } from './index.ts'
 
 const CAMERA_POSITION = [0, 0, 5]
@@ -18,7 +18,7 @@ const Scene = ({ category }) => {
     highlightedCategory,
     selectedMainWorld,
     highlightedWorld,
-  } = useMainWorldInteraction(category);
+  } = useCategoryInteraction(category);
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
