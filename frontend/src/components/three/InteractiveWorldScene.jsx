@@ -28,12 +28,12 @@ const InteractiveWorldScene = ({ category = [] }) => {
   const [activeBackgroundScene, setActiveBackgroundScene] = useState(null)
 
   const handleMainWorldInteraction = useCallback(
-    (worldName, position, childCategoryName) => {
-      setSelectedMainWorld(worldName)
-      setHighlightedWorld(worldName)
-      setHighlightedCategory(worldName)
+    (categoryName, position, subcategoryName) => {
+      setSelectedMainWorld(categoryName)
+      setHighlightedWorld(categoryName)
+      setHighlightedCategory(categoryName)
 
-      const currentCategory = category.find((cat) => cat.title === worldName)
+      const currentCategory = category.find((cat) => cat.title === categoryName)
       if (currentCategory && currentCategory.sceneIdentifier) {
         setActiveBackgroundScene(currentCategory.sceneIdentifier)
       }
@@ -46,8 +46,8 @@ const InteractiveWorldScene = ({ category = [] }) => {
 
       setSidebarOpen(true)
 
-      if (childCategoryName) {
-        setHighlightedWorld(childCategoryName)
+      if (subcategoryName) {
+        setHighlightedWorld(subcategoryName)
         setSelectedSubWorld(childCategoryName)
       } else {
         setSelectedSubWorld(null)
@@ -55,7 +55,7 @@ const InteractiveWorldScene = ({ category = [] }) => {
 
       setNavigation((prev) => ({
         ...prev,
-        mainWorld: worldName,
+        mainCategory: categoryName,
         category: prev.category,
       }))
     },
@@ -77,7 +77,7 @@ const InteractiveWorldScene = ({ category = [] }) => {
     <div style={{ height: '100vh', width: '100vw' }}>
       <Breadcrumb
         navigation={{
-          mainWorld: selectedMainWorld,
+          mainCategory: selectedMainWorld,
           subWorld: selectedSubWorld,
         }}
       />

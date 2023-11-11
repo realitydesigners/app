@@ -1,9 +1,9 @@
 const Breadcrumb = ({ navigation }) => {
   return (
     <div className="absolute bottom-8 left-1/2 z-50 -translate-x-1/2 transform font-mono text-xs uppercase text-white">
-      {navigation.mainWorld && (
+      {navigation.mainCategory && (
         <>
-          <span>{navigation.mainWorld}</span>
+          <span>{navigation.mainCategory}</span>
         </>
       )}
       {navigation.subWorld && (

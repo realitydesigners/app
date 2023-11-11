@@ -19,12 +19,12 @@ const Scene = ({ category = [] }) => {
   const [activeBackgroundScene, setActiveBackgroundScene] = useState(null)
 
   const handleMainWorldInteraction = useCallback(
-    (worldName, position, childCategoryName) => {
-      setSelectedMainWorld(worldName)
-      setHighlightedWorld(worldName)
-      setHighlightedCategory(worldName)
+    (categoryName, position, subcategoryName) => {
+      setSelectedMainWorld(categoryName)
+      setHighlightedWorld(categoryName)
+      setHighlightedCategory(categoryName)
 
-      const currentCategory = category.find((cat) => cat.title === worldName)
+      const currentCategory = category.find((cat) => cat.title === categoryName)
       if (currentCategory && currentCategory.sceneIdentifier) {
         setActiveBackgroundScene(currentCategory.sceneIdentifier)
       }
@@ -37,16 +37,16 @@ const Scene = ({ category = [] }) => {
 
       setSidebarOpen(true)
 
-      if (childCategoryName) {
-        setHighlightedWorld(childCategoryName)
-        setSelectedSubWorld(childCategoryName)
+      if (subcategoryName) {
+        setHighlightedWorld(subcategoryName)
+        setSelectedSubWorld(subcategoryName)
       } else {
         setSelectedSubWorld(null)
       }
 
       setNavigation((prev) => ({
         ...prev,
-        mainWorld: worldName,
+        mainCategory: categoryName,
         category: prev.category,
       }))
     },

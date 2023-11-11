@@ -217,7 +217,7 @@ export const RefPosts = (props) => {
   subCategoryPosition, 
   refPosts, 
   highlightedCategory, 
-  sethighlightedCategory,
+  setHighlightedCategory,
   onCategorySelect,
   setHoveredWorld,
   hoveredWorld,

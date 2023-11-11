@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react'
 
 const defaultContext = {
-  navigation: { mainWorld: null, subWorld: null, category: null },
+  navigation: { mainCategory: null, subWorld: null, category: null },
   setNavigation: () => {}, // dummy function
 }
 
