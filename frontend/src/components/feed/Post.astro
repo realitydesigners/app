@@ -6,16 +6,16 @@ const { posts } = Astro.props
   {
     posts &&
       posts.map((post: any) => (
-        <div class="text-white p-3 w-full border border-gray-200 rounded-xl">
+        <div class="text-white p-3 w-full border border-black rounded-xl">
           <div class="flex w-full justify-end">
             <p class="tag tracking-wide uppercase text-emerald-200 flex w-auto p-[.2em] pl-2 pr-2 text-xs backdrop-blur-lg  rounded-2xl border border-emerald-200 bg-emerald-200/20 transition-all duration-300 ease-in hover:bg-emerald-400 hover:border-emerald-400 hover:text-white">
               Post
             </p>
           </div>
-          <h2 class="pl-2 pr-2 -mt-2 w-4/5 font-mono text-2xl uppercase leading-none text-white">
+          <h2 class="pl-2 pr-2 -mt-2 w-4/5 font-mono text-2xl uppercase leading-none text-black">
             {post.title}
           </h2>
-          <p class="p-2 mb-2 leading-6 tracking-wide text-lg  text-gray-400">
+          <p class="p-2 mb-2 leading-6 tracking-wide text-lg  text-black">
             {post.excerpt}
           </p>
           <a class="p-2" href={`/posts/${post.slug?.current}`}>
