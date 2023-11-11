@@ -11,9 +11,9 @@ const CAMERA_POSITION = [0, 0, 5]
 const Scene = ({ category }) => {
 
   const {
-    handleMainWorldInteraction,
-    handleCategoryHover,
-    handleCategoryLeave,
+    onCategorySelect,
+    onCategoryHover,
+    onCategoryLeave,
     subCategories,
     highlightedCategory,
     selectedMainWorld,
@@ -28,9 +28,9 @@ const Scene = ({ category }) => {
         <PostsBySubCategory
           categories={subCategories}
           highlightedCategory={highlightedCategory}
-          handleMainWorldInteraction={handleMainWorldInteraction}
-          handleCategoryHover={handleCategoryHover}
-          handleCategoryLeave={handleCategoryLeave}
+          onCategorySelect={onCategorySelect}
+          onCategoryHover={onCategoryHover}
+          onCategoryLeave={onCategoryLeave}
           selectedMainWorld={selectedMainWorld}
           highlightedWorld={highlightedWorld}
         />

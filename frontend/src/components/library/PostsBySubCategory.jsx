@@ -44,7 +44,7 @@ export const SubCategory = (props) => {
     hoveredWorld,
     onHover,
     onLeave,
-    selectedMainWorld,
+    selectedCategory,
     rotationY,
     textWidth = 21,
     textHeight = 15,
@@ -52,7 +52,7 @@ export const SubCategory = (props) => {
 
   const isDimmed =
     (hoveredWorld && hoveredWorld !== title) ||
-    (selectedMainWorld && selectedMainWorld !== title);
+    (selectedCategory && selectedCategory !== title);
 
   const handleHover = () => {
     playSound('/sounds/click.mp3');
@@ -126,10 +126,10 @@ export const SubCategories = (props) => {
   const {
     categories,
     highlightedCategory,
-    handleMainWorldInteraction,
+    onCategorySelect,
     setHoveredWorld,
     hoveredWorld,
-    selectedMainWorld,
+    selectedCategory,
   } = props;
 
   const positions = getSubCategoryPositions(categories.length);
@@ -150,12 +150,12 @@ export const SubCategories = (props) => {
           model={cat.model}
           position={[x, y, z]}
           isHighlighted={isHovered}
-          onClick={handleMainWorldInteraction}
+          onClick={onCategorySelect}
           onPointerOver={() => setHoveredWorld(world)}
           onHover={() => {setHoveredWorld(world)}}
           onLeave={() => {setHoveredWorld(null)}}
           hoveredWorld={hoveredWorld}
-          selectedMainWorld={highlightedCategory}
+          selectedCategory={highlightedCategory}
           rotationY={rotationY}
         />
           
@@ -217,8 +217,8 @@ export const RefPosts = (props) => {
   subCategoryPosition, 
   refPosts, 
   highlightedCategory, 
-  setHighlightedWorld,
-  handleMainWorldInteraction,
+  sethighlightedCategory,
+  onCategorySelect,
   setHoveredWorld,
   hoveredWorld,
   } = props;
@@ -250,7 +250,7 @@ export const RefPosts = (props) => {
             title={postRef.title}
             position={[x, y, z]}
             isHighlighted={isHighlighted}
-            onPointerOver={() => {handleMainWorldInteraction(world, [x, y, z])}}
+            onPointerOver={() => {onCategorySelect(world, [x, y, z])}}
             onPointerOut={() => {}}
             hoveredWorld={hoveredWorld}
         
@@ -265,7 +265,7 @@ export const RefPosts = (props) => {
 const PostsBySubCategory = (props) => {
   const {
     categories,
-    handleMainWorldInteraction,
+    onCategorySelect,
   } = props;
 
   const [hoveredWorld, setHoveredWorld] = useState(null);
@@ -288,7 +288,7 @@ const PostsBySubCategory = (props) => {
       <SubCategories
         categories={categories}
         highlightedCategory={hoveredWorld}
-        handleMainWorldInteraction={handleMainWorldInteraction}
+        onCategorySelect={onCategorySelect}
         setHoveredWorld={setHoveredWorld}
         hoveredWorld={hoveredWorld}
       />
@@ -297,7 +297,7 @@ const PostsBySubCategory = (props) => {
           subCategoryPosition={hoveredSubCategoryPosition}
           refPosts={hoveredCategoryPosts}
           highlightedCategory={hoveredWorld}
-          handleMainWorldInteraction={handleMainWorldInteraction}
+          onCategorySelect={onCategorySelect}
         />
       )}
     </group>

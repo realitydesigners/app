@@ -13,26 +13,25 @@ const CAMERA_POSITION = [0, 25, 40];
 const LibraryScene = ({ category = [] }) => {
 
   const {
-    handleMainWorldInteraction,
+    onCategorySelect,
     highlightedCategory,
-    selectedMainWorld,
-    highlightedWorld,
-    sidebarOpen,
-    currentContent,
+    selectedCategory,
+    isSidebarVisible,
+    subcategoryContent,
   } = useCategoryInteraction(category);
 
   return (
     <div>
-      <Sidebar content={currentContent} isVisible={sidebarOpen} />
+      <Sidebar content={subcategoryContent} isVisible={isSidebarVisible} />
       <Canvas style={{ height: '100vh', width: '100vw' }}>
         <PerspectiveCamera makeDefault position={CAMERA_POSITION} zoom={1} />
         <OrbitControls />
         <LibraryCategories
           categories={category.filter(cat => Boolean(cat.title) && cat.isMain)} // Assuming this is how you define main categories
           highlightedCategory={highlightedCategory}
-          handleMainWorldInteraction={handleMainWorldInteraction}
-          selectedMainWorld={selectedMainWorld}
-          highlightedWorld={highlightedWorld}
+          onCategorySelect={onCategorySelect}
+          selectedCategory={selectedCategory}
+        
         />
       </Canvas>
     </div>

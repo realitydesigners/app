@@ -5,36 +5,36 @@ export const useCategoryInteraction = (category) => {
   const { navigation, setNavigation } = useCategory();
 
   // State variables
-  const [highlightedWorld, setHighlightedWorld] = useState(null);
-  const [selectedMainWorld, setSelectedMainWorld] = useState(null);
-  const [highlightedCategory, setHighlightedCategory] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [selectedSubWorld, setSelectedSubWorld] = useState(null);
-  const [currentContent, setCurrentContent] = useState([]);
+  const [highlightedCategory, sethighlightedCategory] = useState(null);
+  const [selectedCategory, setselectedCategory] = useState(null);
+  const [highlightedSubcategory, setHighlightedSubcategory] = useState(null);
+  const [isSidebarVisible, setisSidebarVisible] = useState(false);
+  const [selectedSubcategory, setselectedSubcategory] = useState(null);
+  const [subcategoryContent, setsubcategoryContent] = useState([]);
   const [activeBackgroundScene, setActiveBackgroundScene] = useState(null);
 
   // Handler for when a category is hovered
-  const handleCategoryHover = useCallback((childCategoryName) => {
+  const onCategoryHover = useCallback((childCategoryName) => {
     console.log('Hovered over:', childCategoryName);
     const relatedPosts = category.subCategories.find(
       (sub) => sub.slug.current === childCategoryName
     )?.associatedPosts || [];
   
     console.log('Related posts:', relatedPosts);
-    setCurrentContent(relatedPosts);
-    setSidebarOpen(true); // Show the sidebar
+    setsubcategoryContent(relatedPosts);
+    setisSidebarVisible(true); // Show the sidebar
   }, [category.subCategories]);
   
 
   // Handler for when hover is removed from a category
-  const handleCategoryLeave = useCallback(() => {
-    setSidebarOpen(false); // Hide the sidebar
+  const onCategoryLeave = useCallback(() => {
+    setisSidebarVisible(false); // Hide the sidebar
   }, []);
 
-  const handleMainWorldInteraction = useCallback(
+  const onCategorySelect = useCallback(
     (worldName, position, childCategoryName) => {
-      setSelectedMainWorld(worldName);
-      setHighlightedWorld(worldName);
+      setselectedCategory(worldName);
+      sethighlightedCategory(worldName);
       setHighlightedCategory(worldName);
 
       const currentCategory = category.subCategories.find(
@@ -45,12 +45,12 @@ export const useCategoryInteraction = (category) => {
         setActiveBackgroundScene(currentCategory.sceneIdentifier);
       }
 
-      setCurrentContent(currentCategory?.associatedPosts || []);
+      setsubcategoryContent(currentCategory?.associatedPosts || []);
 
       if (childCategoryName) {
-        setSelectedSubWorld(childCategoryName);
+        setselectedSubcategory(childCategoryName);
       } else {
-        setSelectedSubWorld(null);
+        setselectedSubcategory(null);
       }
 
       setNavigation((prev) => ({
@@ -71,15 +71,15 @@ export const useCategoryInteraction = (category) => {
   console.log("subCategories", subCategories);
 
   return {
-    handleMainWorldInteraction,
-    handleCategoryHover,
-    handleCategoryLeave,
+    onCategorySelect,
+    onCategoryHover,
+    onCategoryLeave,
     subCategories,
     highlightedCategory,
-    selectedMainWorld,
-    highlightedWorld,
-    sidebarOpen,
-    currentContent,
+    selectedCategory,
+    highlightedCategory,
+    isSidebarVisible,
+    subcategoryContent,
     activeBackgroundScene,
   };
 };

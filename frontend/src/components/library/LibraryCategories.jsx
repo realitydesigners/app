@@ -28,13 +28,13 @@ export const Category = (props) => {
     hoveredWorld,
     onHover,
     onLeave,
-    selectedMainWorld,
+    selectedCategory,
     rotationY,
   } = props;
 
   const isDimmed =
     (hoveredWorld && hoveredWorld !== title) ||
-    (selectedMainWorld && selectedMainWorld !== title);
+    (selectedCategory && selectedCategory !== title);
 
   const playSound = (soundPath) => {
       const audio = new Audio(soundPath);
@@ -100,9 +100,9 @@ export const LibraryCategories = (props) => {
   const {
     categories,
     highlightedCategory,
-    handleMainWorldInteraction,
+    onCategorySelect,
     hoveredWorld,
-    selectedMainWorld,
+    selectedCategory,
   } = props;
 
   const positions = getCategoryPositions(categories.length);
@@ -131,11 +131,11 @@ export const LibraryCategories = (props) => {
             title={world}
             position={[x, y, z]}
             isHighlighted={isHovered}
-            onClick={handleMainWorldInteraction}
-            onPointerOver={() => handleMainWorldInteraction(world, [x, y, z])}
+            onClick={onCategorySelect}
+            onPointerOver={() => onCategorySelect(world, [x, y, z])}
             onPointerOut={() => {}}
             hoveredWorld={hoveredWorld}
-            selectedMainWorld={selectedMainWorld}
+            selectedCategory={selectedCategory}
             rotationY={rotationY}
           />
         );
