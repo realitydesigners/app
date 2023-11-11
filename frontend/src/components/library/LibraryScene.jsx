@@ -11,12 +11,11 @@ const LibraryScene = ({ category = [] }) => {
     mainCategories,
     isSidebarVisible,
     onCategorySelect,
-    selectedCategory,
     subcategoryContent,
   } = useCategoryInteraction(category)
 
   return (
-    <div>
+    <>
       <Sidebar isVisible={isSidebarVisible} content={subcategoryContent} />
       <Canvas style={{ height: '100vh', width: '100vw' }}>
         <PerspectiveCamera makeDefault position={CAMERA_POSITION} zoom={1} />
@@ -25,10 +24,9 @@ const LibraryScene = ({ category = [] }) => {
           categories={mainCategories}
           highlightedCategory={highlightedCategory}
           onCategorySelect={onCategorySelect}
-          selectedCategory={selectedCategory}
         />
       </Canvas>
-    </div>
+    </>
   )
 }
 

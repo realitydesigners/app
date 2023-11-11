@@ -130,7 +130,6 @@ export const SubCategories = (props) => {
     onCategorySelect,
     setSelectedCategory,
     onCategoryHover,
-    selectedCategory,
   } = props
 
   const positions = getSubCategoryPositions(categories.length)
@@ -139,22 +138,22 @@ export const SubCategories = (props) => {
     <>
       {categories.map((cat, index) => {
         const [x, y, z] = positions[index]
-        const world = cat.title || ''
-        const isHovered = world === highlightedCategory
+        const categoryName = cat.title || ''
+        const isHovered = categoryName === highlightedCategory
         const rotationY =
           -((Math.PI * 2 * index) / categories.length) + Math.PI / 2
 
         return (
           <SubCategory
-            key={world}
-            title={world}
+            key={categoryName}
+            title={categoryName}
             model={cat.model}
             position={[x, y, z]}
             isHighlighted={isHovered}
             onClick={onCategorySelect}
-            onPointerOver={() => setSelectedCategory(world)}
+            onPointerOver={() => setSelectedCategory(categoryName)}
             onHover={() => {
-              setSelectedCategory(world)
+              setSelectedCategory(categoryName)
             }}
             onLeave={() => {
               setSelectedCategory(null)
@@ -223,15 +222,15 @@ export const RefPosts = (props) => {
 
   useFrame(() => {
     if (currentPositionsRef.current.length === 0) return
-    const mainWorldVec = new THREE.Vector3(...subCategoryPosition)
+    const mainCategoryVec = new THREE.Vector3(...subCategoryPosition)
 
     currentPositionsRef.current.forEach((currentPos, i) => {
       const relativePos = new THREE.Vector3().subVectors(
         currentPos,
-        mainWorldVec,
+        mainCategoryVec,
       )
       relativePos.applyQuaternion(camera.quaternion)
-      currentPos.copy(mainWorldVec).add(relativePos)
+      currentPos.copy(mainCategoryVec).add(relativePos)
     })
   })
 
@@ -252,7 +251,7 @@ export const RefPosts = (props) => {
             position={[x, y, z]}
             isHighlighted={isHighlighted}
             onPointerOver={() => {
-              onCategorySelect(world, [x, y, z])
+              onCategorySelect(categoryName, [x, y, z])
             }}
             onPointerOut={() => {}}
             onCategoryHover={onCategoryHover}

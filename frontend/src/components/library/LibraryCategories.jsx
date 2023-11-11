@@ -129,7 +129,7 @@ export const LibraryCategories = (props) => {
             onClick={onCategorySelect}
             onPointerOver={() => onCategorySelect(world, [x, y, z])}
             onPointerOut={() => {}}
-            selectedCategory={selectedCategory}
+            selectedCategory={highlightedCategory}
             rotationY={rotationY}
           />
         )
