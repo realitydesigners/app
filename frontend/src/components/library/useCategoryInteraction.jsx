@@ -35,7 +35,7 @@ export const useCategoryInteraction = (category) => {
     (worldName, position, childCategoryName) => {
       setselectedCategory(worldName);
       sethighlightedCategory(worldName);
-      setHighlightedCategory(worldName);
+   
 
       const currentCategory = category.subCategories.find(
         (sub) => sub.slug.current === childCategoryName

@@ -1,23 +1,18 @@
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
+// First, we list the imports
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { PostsBySubCategory, useCategoryInteraction } from './index.ts';
 
-import {
-  PostsBySubCategory,
-  useCategoryInteraction,
-} from './index.ts'
-
-const CAMERA_POSITION = [0, 0, 5]
+const CAMERA_POSITION = [0, 0, 5];
 
 const Scene = ({ category }) => {
-
   const {
+    subCategories,
     onCategorySelect,
     onCategoryHover,
     onCategoryLeave,
-    subCategories,
     highlightedCategory,
-    selectedMainWorld,
-    highlightedWorld,
+ 
   } = useCategoryInteraction(category);
 
   return (
@@ -31,8 +26,6 @@ const Scene = ({ category }) => {
           onCategorySelect={onCategorySelect}
           onCategoryHover={onCategoryHover}
           onCategoryLeave={onCategoryLeave}
-          selectedMainWorld={selectedMainWorld}
-          highlightedWorld={highlightedWorld}
         />
       </Canvas>
     </div>
