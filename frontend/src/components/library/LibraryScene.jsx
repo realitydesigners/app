@@ -1,5 +1,6 @@
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import SplineCode  from '../three/SplineCode.jsx'
 
 import {
   LibraryCategories,
@@ -33,6 +34,8 @@ const LibraryScene = ({ category = [] }) => {
           selectedMainWorld={selectedMainWorld}
           highlightedWorld={highlightedWorld}
         />
+        <hemisphereLight name="Default Ambient Light" intensity={0.75} color="#eaeaea" />
+        <SplineCode />
       </Canvas>
     </div>
   );
