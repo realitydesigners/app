@@ -34,8 +34,6 @@ const LibraryScene = ({ category = [] }) => {
           selectedMainWorld={selectedMainWorld}
           highlightedWorld={highlightedWorld}
         />
-        <hemisphereLight name="Default Ambient Light" intensity={0.75} color="#eaeaea" />
-        <SplineCode />
       </Canvas>
     </div>
   );
