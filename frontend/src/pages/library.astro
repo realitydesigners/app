@@ -6,9 +6,8 @@ import LibraryScene from '../components/library/LibraryScene.jsx'
 const category = await getCategory()
 ---
 <LibraryLayout title="Reality Designers">
-  <div class="w-screen h-screen bg-gray-200">
-  <div class="bg-white absolute z-20 justify-center align-center items-center flex w-full bottom-0 h-[120px]">
-    <p class="text-black font-mono uppercase ">This is Library</p></div>
+  <div class="w-screen h-screen bg-black">
+
     <LibraryScene category={category} client:load />
   </div>
 </LibraryLayout>
