@@ -1,44 +1,13 @@
 ---
-import LibraryScene from '../components/library/LibraryScene.jsx'
 import SplatScene from '../components/library/Splat.jsx'
 import LibraryLayout from '../layouts/LibraryLayout.astro'
 
-const models = [
-  {
-    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/bicycle/bicycle-7k.splat',
-  },
-  {
-    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/bonsai/bonsai-7k.splat',
-  },
-  {
-    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/counter/counter-7k.splat',
-  },
-  {
-    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/garden/garden-7k.splat',
-  },
-  {
-    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/kitchen/kitchen-7k.splat',
-  },
-  {
-    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/playroom/playroom-7k.splat',
-  },
-  {
-    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/room/room-7k.splat',
-  },
-  {
-    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/stump/stump-7k.splat',
-  },
-]
-
-function getRandomModelUrl(models: any[]) {
-  return models[Math.floor(Math.random() * models.length)].url
-}
-
-const url = getRandomModelUrl(models)
+const url =
+  'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/stump/stump-7k.splat'
 ---
 
 <LibraryLayout title="Reality Designers">
-  <div class="w-screen h-screen bg-gray-200">
+  <div class="w-screen h-screen pl-4 pr-4 pt-16 pb-4 bg-gray-200">
     <SplatScene url={url} client:load />
   </div>
 </LibraryLayout>
