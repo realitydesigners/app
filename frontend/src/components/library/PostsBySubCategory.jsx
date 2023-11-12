@@ -4,37 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import Crystal from './Crystal'
 import ModelWithEffects from './ModelWithEffects'
-
-export function getSubCategoryPositions(
-  count,
-  offset = [0, 0, 0],
-  radius = 15,
-) {
-  const positions = []
-
-  for (let i = 0; i < count; i++) {
-    const angle = (Math.PI * 2 * i) / count // Evenly distribute around circle
-    const x = Math.cos(angle) * radius + offset[0]
-    const z = Math.sin(angle) * radius + offset[2]
-    const y = offset[1] // Keep y fixed at the same height
-
-    positions.push([x, y, z])
-  }
-  return positions
-}
-
-const getRefPostPosition = (index, count, subCategoryPosition) => {
-  const radius = 10 // Adjust as needed
-  const angle = (Math.PI * 2 * index) / count
-  const x = subCategoryPosition[0] + Math.cos(angle) * radius
-  const y = subCategoryPosition[1] + Math.sin(angle) * radius
-  return [x, y, subCategoryPosition[2]]
-}
-
-const playSound = (soundPath) => {
-  const audio = new Audio(soundPath)
-  audio.play()
-}
+import { getRefPostPosition, getSubCategoryPositions } from './Postions'
 
 export const SubCategory = (props) => {
   const {
@@ -43,31 +13,12 @@ export const SubCategory = (props) => {
     position,
     isHighlighted,
     onClick,
-    onPointerOver,
     onPointerOut,
-    onCategoryHover,
     onHover,
-    selectedCategory,
     rotationY,
     textWidth = 21,
     textHeight = 15,
   } = props
-
-  const isDimmed =
-    (onCategoryHover && onCategoryHover !== title) ||
-    (selectedCategory && selectedCategory !== title)
-
-  const handleHover = () => {
-    playSound('/sounds/click.mp3')
-    if (onPointerOver) {
-      onPointerOver(title, position)
-    }
-  }
-
-  const handleClick = () => {
-    playSound('/sounds/click.mp3')
-    onClick(title, position)
-  }
 
   const textRef = useRef(null)
   const { camera } = useThree()
@@ -116,7 +67,7 @@ export const SubCategory = (props) => {
         ]}
         position={[0, 0, 0]}
         color="gray"
-        lineWidth={1}
+        lineWidth={2}
         dashed={false}
       />
     </group>
@@ -169,14 +120,7 @@ export const SubCategories = (props) => {
 }
 
 export const RefPost = (props) => {
-  const {
-    title,
-    position, // This is the position relative to the subCategoryPosition
-    isHighlighted,
-    onClick,
-    onPointerOver,
-    onPointerOut,
-  } = props
+  const { title, position, isHighlighted, onClick, onPointerOut } = props
 
   const { camera } = useThree()
   const textRef = useRef()
@@ -217,23 +161,6 @@ export const RefPosts = (props) => {
   const { subCategoryPosition, refPosts, onCategorySelect, onCategoryHover } =
     props
 
-  const { camera } = useThree()
-  const currentPositionsRef = useRef([])
-
-  useFrame(() => {
-    if (currentPositionsRef.current.length === 0) return
-    const mainCategoryVec = new THREE.Vector3(...subCategoryPosition)
-
-    currentPositionsRef.current.forEach((currentPos, i) => {
-      const relativePos = new THREE.Vector3().subVectors(
-        currentPos,
-        mainCategoryVec,
-      )
-      relativePos.applyQuaternion(camera.quaternion)
-      currentPos.copy(mainCategoryVec).add(relativePos)
-    })
-  })
-
   return (
     <>
       {refPosts.map((postRef, index) => {
@@ -267,20 +194,16 @@ const PostsBySubCategory = (props) => {
 
   const [onCategoryHover, setSelectedCategory] = useState(null)
 
-  // Get positions for all subcategories
   const subCategoryPositions = getSubCategoryPositions(categories.length)
 
-  // Find the hovered subcategory object
   const hoveredCategory = categories.find(
     (cat) => cat.title === onCategoryHover,
   )
 
-  // Get the position for the hovered subcategory
   const hoveredSubCategoryPosition = hoveredCategory
     ? subCategoryPositions[categories.indexOf(hoveredCategory)]
     : null
 
-  // Find the refPosts for the onCategoryHover
   const hoveredCategoryPosts = hoveredCategory?.refPosts || []
 
   return (

@@ -2,21 +2,7 @@ import { Text } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef, useState } from 'react'
 import Crystal from './Crystal'
-
-export function getCategoryPositions(count, offset = [0, 0, 0], radius = 15) {
-  const positions = []
-
-  for (let i = 0; i < count; i++) {
-    const angle = (Math.PI * 2 * i) / count // Evenly distribute around the circle
-    const x = Math.cos(angle) * radius + offset[0]
-    const z = Math.sin(angle) * radius + offset[2]
-    const y = offset[1] // Keep y fixed at the same height
-
-    positions.push([x, y, z])
-  }
-
-  return positions
-}
+import { getCategoryPositions } from './Postions'
 
 export const Category = (props) => {
   const {
@@ -93,12 +79,7 @@ export const Category = (props) => {
 }
 
 export const LibraryCategories = (props) => {
-  const {
-    categories,
-    highlightedCategory,
-    onCategorySelect,
-    selectedCategory,
-  } = props
+  const { categories, highlightedCategory, onCategorySelect } = props
 
   const positions = getCategoryPositions(categories.length)
   const [rotation, setRotation] = useState(0)
