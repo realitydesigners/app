@@ -1,13 +1,13 @@
 ---
+import LibraryScene from '../components/library/LibraryScene.jsx'
 import LibraryLayout from '../layouts/LibraryLayout.astro'
 import { getCategory } from '../lib/api.js'
-import LibraryScene from '../components/library/LibraryScene.jsx'
 
 const category = await getCategory()
 ---
+
 <LibraryLayout title="Reality Designers">
   <div class="w-screen h-screen bg-gray-200">
-
     <LibraryScene category={category} client:load />
   </div>
 </LibraryLayout>

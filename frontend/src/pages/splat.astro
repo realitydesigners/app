@@ -1,0 +1,49 @@
+---
+import LibraryScene from '../components/library/LibraryScene.jsx'
+import SplatScene from '../components/library/Splat.jsx'
+import LibraryLayout from '../layouts/LibraryLayout.astro'
+
+const models = [
+  {
+    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/bicycle/bicycle-7k.splat',
+  },
+  {
+    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/bonsai/bonsai-7k.splat',
+  },
+  {
+    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/counter/counter-7k.splat',
+  },
+  {
+    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/garden/garden-7k.splat',
+  },
+  {
+    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/kitchen/kitchen-7k.splat',
+  },
+  {
+    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/playroom/playroom-7k.splat',
+  },
+  {
+    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/room/room-7k.splat',
+  },
+  {
+    url: 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/stump/stump-7k.splat',
+  },
+]
+
+function shuffleArray(array: any[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}
+
+const shuffledModels = shuffleArray(models)
+const url = shuffledModels[0].url
+---
+
+<LibraryLayout title="Reality Designers">
+  <div class="w-screen h-screen bg-gray-200">
+    <SplatScene url={url} client:load />
+  </div>
+</LibraryLayout>
