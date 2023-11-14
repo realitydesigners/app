@@ -11,24 +11,40 @@ const { posts } = Astro.props
       posts &&
         posts.map((post: any) => (
           <a href={`/posts/${post.slug?.current}`}>
-            <div class="flex flex-cols p-2 w-full border-b-2 mb-2 border-gray-300">
+            <div class="flex flex-cols pt-2 pb-2 w-full border-b-2 mb-2 border-gray-300">
               {post?.image && (
-                <div class="flex group overflow-hidden w-1/3 h-24">
+                <div class="flex group overflow-hidden min-w-20 h-20">
                   <Image
                     src={getSanityImageURL(post?.image).url()}
                     alt="this"
-                    width={1000}
-                    height={1000}
+                    width={100}
+                    height={100}
                     format="webp"
                     class="object-cover transform transition-transform duration-300 w-full h-full group-hover:scale-105"
                   />
                 </div>
               )}
 
-              <div class="pl-4 w-2/3 mb-2">
-                <h2 class="mb-2 text-xl leading-none uppercase text-black">
+              <div class="pl-4 flex-cols w-full ">
+                {post.subcategories
+                  ?.map((sub: { title: string }) => sub.title)
+                  .join(', ') && (
+                  <span class=" text-xs  mono tracking-wide    uppercase  text-black">
+                    {post.subcategories
+                      .map((sub: { title: string }) => sub.title)
+                      .join(', ')}
+                  </span>
+                )}
+                <h2 class="text-xl  pt-1 leading-none uppercase text-black">
                   {post.title}
                 </h2>
+                {post.block?.[0]?.publicationDate && (
+                  <span class="mono text-xs tracking-wide uppercase leading-tight text-black">
+                    {new Date(
+                      post.block[0].publicationDate,
+                    ).toLocaleDateString()}
+                  </span>
+                )}
               </div>
             </div>
           </a>
@@ -54,5 +70,12 @@ const { posts } = Astro.props
     text-overflow: ellipsis;
 
     max-height: 4.5em;
+  }
+  .mono {
+    font-family: 'JetBrains Mono Variable', sans-serif;
+  }
+
+  span {
+    line-height: 0em;
   }
 </style>

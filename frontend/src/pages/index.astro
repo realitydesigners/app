@@ -8,6 +8,7 @@ import {
   getMainPost,
   getRightSideBarPosts,
 } from '../lib/api.js'
+import '@fontsource-variable/jetbrains-mono'
 
 const post = await getMainPost()
 const sideposts = await getRightSideBarPosts()
@@ -19,7 +20,7 @@ const leftposts = await getLeftSideBarPosts()
     class="flex flex-wrap w-screen h-auto justify-center bg-gray-200 pt-20 p-2 lg:p-12 lg:pt-28"
   >
     <LeftSidePosts posts={leftposts} />
-        <MainPost post={post} />
+    <MainPost post={post} />
     <RightSidePosts posts={sideposts} />
   </main>
 </Layout>

@@ -24,13 +24,21 @@ const { posts } = Astro.props
                   />
                 </div>
               )}
-
               <div class="w-full mb-2">
                 <div class="flex p-1" />
-                <h2 class="p-1 text-2xl uppercase leading-none text-black scramble-title">
+                {post.subcategories
+                  ?.map((sub: { title: string }) => sub.title)
+                  .join(', ') && (
+                  <span class=" text-xs  mono tracking-wide  leading-tight uppercase  text-black">
+                    {post.subcategories
+                      .map((sub: { title: string }) => sub.title)
+                      .join(', ')}
+                  </span>
+                )}
+                <h2 class="p-1 text-3xl lg:text-2xl uppercase leading-none text-black scramble-title">
                   {post.title}
                 </h2>
-                <p class="p-1 excerpt-clamp text-lg mb-4 text-gray-700 ">
+                <p class="pt-2 text-sm leading-tight text-gray-700 mono excerpt-clamp">
                   {post.excerpt}
                 </p>
               </div>
@@ -50,13 +58,17 @@ const { posts } = Astro.props
     font-family: 'Rajdhani', sans-serif;
     font-weight: 500;
   }
+
+  .mono {
+    font-family: 'JetBrains Mono Variable', sans-serif;
+  }
   .excerpt-clamp {
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.3em;
-    max-height: 4em;
+    max-height: 6em;
   }
 </style>

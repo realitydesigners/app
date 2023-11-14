@@ -3,18 +3,20 @@ import { Image } from 'astro:assets'
 import { getSanityImageURL } from '../../lib/helpers.js'
 
 const { post } = Astro.props
+
+console.log(post)
 ---
 
-<ul class="w-full lg:w-1/2 h-auto grid grid-cols-1 p-2 flex-wrap">
-  {
-    post && (
+{
+  post && post.block && (
+    <ul class="w-full lg:w-1/2 h-auto grid grid-cols-1 p-2 flex-wrap">
       <a href={`/posts/${post.slug?.current}`}>
         <div class="text-white p-2 w-full ">
-          {post?.image && (
-            <div class=" flex group overflow-hidden w-full h-72 lg:h-96">
+          {post.image && (
+            <div class="flex group overflow-hidden w-full mb-1 h-72 lg:h-96">
               <Image
-                src={getSanityImageURL(post?.image).url()}
-                alt="this is an image"
+                src={getSanityImageURL(post.image).url()}
+                alt="Post image"
                 width={1000}
                 height={800}
                 format="webp"
@@ -22,18 +24,38 @@ const { post } = Astro.props
               />
             </div>
           )}
-
-          <h2 class="p-2 pt-4 font-mono text-4xl uppercase leading-none text-black scramble-title">
+          {post.subcategories
+            ?.map((sub: { title: string }) => sub.title)
+            .join(', ') && (
+            <span class=" text-xs  mono tracking-wide  leading-tight uppercase  text-black">
+              {post.subcategories
+                .map((sub: { title: string }) => sub.title)
+                .join(', ')}
+            </span>
+          )}
+          <h2 class="pt-2  text-5xl uppercase leading-none text-black scramble-title">
             {post.title}
           </h2>
-          <p class="p-2 font-mono text-lg leading-tight text-gray-700 ">
+          <p class="pt-2 mono text-lg leading-tight text-gray-700 ">
             {post.excerpt}
           </p>
+          <div class="w-full pt-4 flex justify-between">
+            {post.block[0]?.team?.name && (
+              <span class="mono text-xs tracking-wide uppercase leading-tight text-black">
+                {post.block[0].team.name}
+              </span>
+            )}
+            {post.block?.[0]?.publicationDate && (
+              <span class="mono text-xs tracking-wide uppercase leading-tight text-black">
+                {new Date(post.block[0].publicationDate).toLocaleDateString()}
+              </span>
+            )}
+          </div>
         </div>
       </a>
-    )
-  }
-</ul>
+    </ul>
+  )
+}
 
 <style>
   h2 {
@@ -43,5 +65,9 @@ const { post } = Astro.props
   p {
     font-family: 'Rajdhani', sans-serif;
     font-weight: 500;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono Variable', sans-serif;
   }
 </style>

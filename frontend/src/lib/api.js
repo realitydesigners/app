@@ -19,6 +19,30 @@ export async function getLeftSideBarPosts() {
     slug,
     publicationDate,
     image,
+    subcategories[]->{
+      ...,
+      name,
+      title,
+    },
+    
+    block[]{
+      ...,
+      heading,
+      subHeading,
+      image,
+      tags,
+      layout,
+      title,
+      publicationDate,
+       team->{
+      ...,
+      name,
+      role,
+      image,
+      shortBio,
+    },
+  },
+    
   }`
   const data = await client.fetch(query)
   return data
@@ -34,6 +58,29 @@ export async function getRightSideBarPosts() {
     slug,
     publicationDate,
     image,
+    subcategories[]->{
+      ...,
+      name,
+      title,
+    },
+    
+    block[]{
+      ...,
+      heading,
+      subHeading,
+      image,
+      tags,
+      layout,
+      title,
+      publicationDate,
+       team->{
+      ...,
+      name,
+      role,
+      image,
+      shortBio,
+    },
+  },
   }`
   const data = await client.fetch(query)
   return data
@@ -43,15 +90,35 @@ export async function getMainPost() {
   const query = `*[_type == "posts"] |  order(_createdAt desc)[0] {
     title,
     category,
-    author,
     excerpt,
     tags,
     slug,
-    block[]{
-        ...,
 
-    publicationDate,
+    subcategories[]->{
+      ...,
+      name,
+      title,
     },
+    
+    publicationDate,
+    block[]{
+      ...,
+      heading,
+      subHeading,
+      image,
+      tags,
+      layout,
+
+      title,
+      publicationDate,
+       team->{
+      ...,
+      name,
+      role,
+      image,
+      shortBio,
+    },
+  },
     image,
   }`
   const data = await client.fetch(query)
@@ -244,7 +311,6 @@ export async function getImg() {
   return data
 }
 
-
 export async function getQuote() {
   const query = `*[_type == "quote"] {
     quote,
@@ -254,11 +320,9 @@ export async function getQuote() {
     }
   }`
 
-  const data = await client.fetch(query);
-  return data;
+  const data = await client.fetch(query)
+  return data
 }
-
-
 
 export async function getArticle() {
   const query = `*[_type == "article"]  |  order(_createdAt desc) {
@@ -444,9 +508,8 @@ export async function getCategory() {
       }
     },
   }
-  `;
-  
-  const data = await client.fetch(query);
-  return data;
-}
+  `
 
+  const data = await client.fetch(query)
+  return data
+}

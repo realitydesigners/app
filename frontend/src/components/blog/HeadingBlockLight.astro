@@ -12,8 +12,9 @@ const { block } = Astro.props
         <div class="w-11/12 flex items-center  lg:hidden">
           <div class="flex w-full">
             <span class="text-black ml-2 w-auto text-xs font-mono tracking-wide scramble">
-              PUBLISHED ON {block.publicationDate}
-            </span>
+  PUBLISHED ON {new Date(block.publicationDate).toLocaleDateString()}
+</span>
+
           </div>
           {block.tags && block.tags.length > 0 && (
             <div class="flex">
