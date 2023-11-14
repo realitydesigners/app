@@ -58,6 +58,12 @@ export async function getRightSideBarPosts() {
     slug,
     publicationDate,
     image,
+    subcategories[]->{
+      ...,
+      name,
+      title,
+    },
+    
 
     block[]{
       ...,
@@ -417,6 +423,7 @@ export async function getVideo() {
   slug,
   url,
   image,
+  video,
   subcategories[]->{
     ...,
     name,
@@ -434,10 +441,18 @@ export async function getVideoBySlug() {
     slug,
     url,
     image,
+    video,
     subcategories[]->{
       ...,
       name,
       title,
+    },
+    "videoRefData": {
+      "videoTitle": video->title,
+      "videoFileUrl": video->video.asset->url,
+      "videoImage": video->image,
+      "videoTeam": video->team,
+      team->,
     },
     
     }`

@@ -29,13 +29,13 @@ const { posts } = Astro.props
                 {post.subcategories
                   ?.map((sub: { title: string }) => sub.title)
                   .join(', ') && (
-                  <span class=" text-xs  mono tracking-wide  leading-tight uppercase  text-black">
+                  <span class="bg-black text-white text-xs px-2 py-1 rounded-full mr-2 mb-2 uppercase mono tracking-wide leading-tight">
                     {post.subcategories
                       .map((sub: { title: string }) => sub.title)
                       .join(', ')}
                   </span>
                 )}
-                <h2 class="p-1 text-3xl lg:text-2xl uppercase leading-none text-black scramble-title">
+                <h2 class="pt-3 text-2xl uppercase leading-none text-black scramble-title">
                   {post.title}
                 </h2>
                 <p class="pt-2 text-sm leading-tight text-gray-700 mono excerpt-clamp">
@@ -62,6 +62,7 @@ const { posts } = Astro.props
   .mono {
     font-family: 'JetBrains Mono Variable', sans-serif;
   }
+
   .excerpt-clamp {
     display: -webkit-box;
     -webkit-line-clamp: 4;

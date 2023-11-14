@@ -7,11 +7,11 @@ const { post } = Astro.props
 
 {
   post && post.block && (
-    <ul class="w-full lg:w-1/2 h-auto grid grid-cols-1 p-2 flex-wrap">
+    <ul class="w-full lg:w-1/2 h-auto grid grid-cols-1 p-0 lg:p-2 flex-wrap">
       <a href={`/posts/${post.slug?.current}`}>
-        <div class="text-white p-2 w-full ">
+        <div class="text-white p-0 lg:p-2 w-full ">
           {post.image && (
-            <div class="flex group overflow-hidden w-full mb-1 h-80 lg:h-96">
+            <div class="flex group overflow-hidden w-full mb-2 h-80 lg:h-96">
               <Image
                 src={getSanityImageURL(post.image).url()}
                 alt="Post image"
@@ -22,32 +22,34 @@ const { post } = Astro.props
               />
             </div>
           )}
-          {post.subcategories
-            ?.map((sub: { title: string }) => sub.title)
-            .join(', ') && (
-            <span class=" text-xs  mono tracking-wide  leading-tight uppercase  text-black">
-              {post.subcategories
-                .map((sub: { title: string }) => sub.title)
-                .join(', ')}
-            </span>
-          )}
-          <h2 class="pt-2  text-5xl uppercase leading-none text-black scramble-title">
-            {post.title}
-          </h2>
-          <p class="pt-2 mono text-lg leading-tight text-gray-700 ">
-            {post.excerpt}
-          </p>
-          <div class="w-full pt-4 flex justify-between">
-            {post.block[0]?.team?.name && (
-              <span class="mono text-xs tracking-wide uppercase leading-tight text-black">
-                {post.block[0].team.name}
+          <div class=" pl-4 pr-4 pt-2 lg:p-0">
+            {post.subcategories
+              ?.map((sub: { title: string }) => sub.title)
+              .join(', ') && (
+              <span class="bg-black text-white text-xs px-2 py-1 rounded-full mr-2 mb-2 uppercase mono tracking-wide leading-tight">
+                {post.subcategories
+                  .map((sub: { title: string }) => sub.title)
+                  .join(', ')}
               </span>
             )}
-            {post.block?.[0]?.publicationDate && (
-              <span class="mono text-xs tracking-wide uppercase leading-tight text-black">
-                {new Date(post.block[0].publicationDate).toLocaleDateString()}
-              </span>
-            )}
+            <h2 class="pt-3  text-5xl uppercase leading-none text-black scramble-title">
+              {post.title}
+            </h2>
+            <p class="pt-2 mono text-lg leading-tight text-gray-700 ">
+              {post.excerpt}
+            </p>
+            <div class="w-full pt-4 flex justify-between">
+              {post.block[0]?.team?.name && (
+                <span class="mono text-xs tracking-wide uppercase leading-tight text-black">
+                  {post.block[0].team.name}
+                </span>
+              )}
+              {post.block?.[0]?.publicationDate && (
+                <span class="mono text-xs tracking-wide uppercase leading-tight text-black">
+                  {new Date(post.block[0].publicationDate).toLocaleDateString()}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </a>

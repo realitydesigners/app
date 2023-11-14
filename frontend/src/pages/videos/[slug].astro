@@ -1,4 +1,6 @@
 ---
+import '@fontsource/rajdhani/400.css'
+import '@fontsource/rajdhani/700.css'
 import BlogLayout from '../../layouts/BlogLayout.astro'
 import { getVideoBySlug } from '../../lib/api.js'
 import { getSanityImageURL } from '../../lib/helpers.js'
@@ -13,7 +15,7 @@ export async function getStaticPaths() {
   }))
 }
 
-const { video = {} } = Astro.props
+const { video = {} as any } = Astro.props
 
 const videoUrl = videoFileUrlFor(video?.video?.asset?._ref)
 ---
@@ -23,36 +25,69 @@ const videoUrl = videoFileUrlFor(video?.video?.asset?._ref)
   description={video.excerpt}
   imageURL={getSanityImageURL(video?.image).url()}
 >
-  <main class="flex pt-20 w-screen h-full justify-center bg-black">
-    <div class="w-full flex lg:p-8 p-2 flex-wrap pb-90">
-      <div class="lg:w-3/4 w-full flex-col flex">
-        <video width="100%" height="100%" controls>
-          <source src={videoUrl} type="video/mp4" />
-          {videoUrl ? '' : 'The video is not available.'}
-        </video>
-        <h2
-          class="p-2 text-2xl uppercase leading-none text-white scramble-title"
-        >
-          {video.title}
-        </h2>
-      </div>
-      <div class="lg:w-1/4 w-full h-[75vh] p-4">
-        <h2
-          class="p-2 text-xl uppercase leading-none text-white scramble-title"
-        >
-          {video.title}
-        </h2>
+  <main class="flex pt-12 lg:pt-20 w-screen h-full justify-center bg-gray-200">
+    <div class="container mx-auto max-w-7xl p-4 lg:p-8">
+      <div class="flex flex-wrap -mx-4">
+        <div class="lg:w-3/4 px-4 mb-8">
+          <div class="w-full aspect-w-16 aspect-h-9 mb-4">
+            <video
+              width="100%"
+              height="100%"
+              controls
+              class="rounded-lg shadow-lg"
+            >
+              <source src={videoUrl} type="video/mp4" />
+              {videoUrl ? '' : 'The video is not available.'}
+            </video>
+          </div>
+          <h1 class="text-3xl lg:text-4xl text-black font-bold uppercase mb-2">
+            {video.title}
+          </h1>
+          <p class="text-gray-600 text-lg mb-4">
+            {video.excerpt}
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            {
+              video.subcategories?.map((sub: { title: string }) => (
+                <span class="bg-black text-white text-xs px-3 py-1 rounded-full uppercase mono tracking-wide leading-tight">
+                  {sub.title}
+                </span>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
   </main>
 </BlogLayout>
 <style>
-  h2 {
+  h1,
+  h2,
+  p,
+  .mono {
     font-family: 'Rajdhani', sans-serif;
+  }
+  Implement the same type of logic h1 {
     font-weight: 700;
   }
-  p {
-    font-family: 'Rajdhani', sans-serif;
+
+  p,
+  .mono {
     font-weight: 400;
+  }
+
+  /* Responsive video embedding */
+  .aspect-w-16 {
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  }
+
+  .aspect-h-9 {
+    position: relative; /* For positioning the video absolutely */
+  }
+
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 </style>
