@@ -13,7 +13,7 @@ const { posts } = Astro.props
           <a href={`/posts/${post.slug?.current}`}>
             <div class="flex flex-wrap p-2 w-full border-b-2 mb-2 border-gray-300 ">
               {post?.image && (
-                <div class="flex group overflow-hidden w-full h-48">
+                <div class="flex group overflow-hidden w-full h-56 sm:h-80 lg:h-48">
                   <Image
                     src={getSanityImageURL(post?.image).url()}
                     alt="this"

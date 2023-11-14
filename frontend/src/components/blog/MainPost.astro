@@ -13,7 +13,7 @@ console.log(post)
       <a href={`/posts/${post.slug?.current}`}>
         <div class="text-white p-2 w-full ">
           {post.image && (
-            <div class="flex group overflow-hidden w-full mb-1 h-72 lg:h-96">
+            <div class="flex group overflow-hidden w-full mb-1 h-80 lg:h-96">
               <Image
                 src={getSanityImageURL(post.image).url()}
                 alt="Post image"
