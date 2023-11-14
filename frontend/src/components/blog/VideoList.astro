@@ -1,0 +1,67 @@
+---
+import '@fontsource/rajdhani/400.css'
+import '@fontsource/rajdhani/700.css'
+import { Image } from 'astro:assets'
+import { getSanityImageURL } from '../../lib/helpers.js'
+
+const { videos } = Astro.props
+---
+
+<div class="w-full lg:w-full">
+  <h1 class="text-black p-2 text-sm uppercase mono">Recent Videos</h1>
+  <ul class="flex flex-row overflow-x-auto w-full h-auto gap-2 p-2">
+    {
+      videos &&
+        videos.map((video: any) => (
+          <li class="shrink-0">
+            <a href={`/videos/${video.slug?.current}`} class="block text-black">
+              <div class="flex flex-col p-2 w-96  mb-2 ">
+                {video?.image && (
+                  <Image
+                    src={getSanityImageURL(video?.image).url()}
+                    alt={video.title}
+                    width={1000}
+                    height={1000}
+                    format="webp"
+                    class="w-full h-60 lg:h-60  object-cover "
+                  />
+                )}
+                {video.subcategories
+                  ?.map((sub: { title: string }) => sub.title)
+                  .join(', ') && (
+                  <span class=" text-xs pt-3 pb-3 mono tracking-wide  leading-tight uppercase  text-black">
+                    {video.subcategories
+                      .map((sub: { title: string }) => sub.title)
+                      .join(', ')}
+                  </span>
+                )}
+                <h2 class=" text-2xl uppercase leading-none scramble-title">
+                  {video.title}
+                </h2>
+              </div>
+            </a>
+          </li>
+        ))
+    }
+  </ul>
+</div>
+
+<style>
+  h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+  .mono {
+    font-family: 'JetBrains Mono Variable', sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+</style>

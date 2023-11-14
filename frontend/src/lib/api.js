@@ -58,12 +58,7 @@ export async function getRightSideBarPosts() {
     slug,
     publicationDate,
     image,
-    subcategories[]->{
-      ...,
-      name,
-      title,
-    },
-    
+
     block[]{
       ...,
       heading,
@@ -422,6 +417,12 @@ export async function getVideo() {
   slug,
   url,
   image,
+  subcategories[]->{
+    ...,
+    name,
+    title,
+  },
+  
   }`
   const data = await client.fetch(query)
   return data
@@ -429,12 +430,17 @@ export async function getVideo() {
 
 export async function getVideoBySlug() {
   const query = `*[_type == "video"] |  order(_createdAt desc) {
-  title,
-  slug,
-  url,
-  image,
-  video,
-  }`
+    title,
+    slug,
+    url,
+    image,
+    subcategories[]->{
+      ...,
+      name,
+      title,
+    },
+    
+    }`
   const data = await client.fetch(query)
   return data
 }

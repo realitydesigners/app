@@ -63,5 +63,11 @@ export default defineType({
       type: 'reference',
       to: {type: 'team'},
     }),
+    defineField({
+      name: 'subcategories',
+      title: 'Subcategories',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'category'}}],
+    }),
   ],
 })
