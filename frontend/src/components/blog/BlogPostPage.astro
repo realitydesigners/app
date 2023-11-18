@@ -105,18 +105,3 @@ const h2Headings = Array.isArray(post?.block)
     }
   }
 </style>
-
-<script>
-  import TextScrambler from '../../components/global/effects/TextScrambler'
-
-  function scrambleText() {
-    const scrambled = document.querySelectorAll('.scramble')
-
-    scrambled.forEach((word) => {
-      const scrambler = new TextScrambler(word)
-      scrambler.setText(word.textContent)
-    })
-  }
-
-  document.addEventListener('DOMContentLoaded', scrambleText)
-</script>

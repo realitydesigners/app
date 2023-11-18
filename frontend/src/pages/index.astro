@@ -49,24 +49,3 @@ const videos = await getVideo()
     font-family: 'JetBrains Mono Variable', sans-serif;
   }
 </style>
-
-<script>
-  import TextScrambler from '../components/global/effects/TextScrambler'
-
-  function scrambleText() {
-    const titles = document.querySelectorAll('.scramble-title')
-    const excerpts = document.querySelectorAll('.scramble-excerpt')
-
-    titles.forEach((title) => {
-      const scrambler = new TextScrambler(title)
-      scrambler.setText(title.textContent)
-    })
-
-    excerpts.forEach((excerpt) => {
-      const scrambler = new TextScrambler(excerpt)
-      scrambler.setText(excerpt.textContent)
-    })
-  }
-
-  document.addEventListener('DOMContentLoaded', scrambleText)
-</script>
