@@ -68,7 +68,7 @@ export default function Navbar() {
       <div
         id="nav-content"
         role="menu"
-        className={`absolute right-2 top-2 rounded-2xl border border-gray-200/20 bg-black/40 lg:w-1/3 sm:w-2/3 w-[96vw] h-[97vh] overflow-y-auto flex-grow flex items-center ${
+        className={`absolute right-2 top-2 rounded-2xl border border-gray-200/20 bg-black/50 lg:w-1/3 sm:w-2/3 w-[96vw] h-[97vh] overflow-y-auto flex-grow flex items-center ${
           isNavOpen ? 'flex' : 'hidden'
         }`}
       >
