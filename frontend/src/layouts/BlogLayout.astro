@@ -55,7 +55,7 @@ const { title, description, imageURL } = Astro.props
     ></script>
   </head>
   <body class="bg-gray-200">
-    <main transition:animate={slide({ duration: '.3s' })}>
+    <main transition:animate="fade">
       <Nav client:load />
       <slot />
       <Footer />
