@@ -4,6 +4,7 @@ import Navbar from '../components/global/Navbar.astro'
 import Nav from '../components/global/Nav'
 import { ViewTransitions } from 'astro:transitions'
 import { slide } from 'astro:transitions'
+
 import '@fontsource/orbitron'
 import '@fontsource/noto-sans/400.css'
 import '@fontsource/noto-sans/500.css'
@@ -33,9 +34,11 @@ const { title } = Astro.props
     <ViewTransitions transition:animate="slide" />
     <title>{title}</title>
   </head>
-  <body class="bg-gray-200" transition:animate={slide({ duration: '.3s' })}>
-    <Nav client:load />
-    <slot />
-    <Footer />
+  <body class="bg-gray-200">
+    <main transition:animate={slide({ duration: '.3s' })}>
+      <Nav client:load />
+      <slot />
+      <Footer />
+    </main>
   </body>
 </html>

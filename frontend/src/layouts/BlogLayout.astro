@@ -54,9 +54,11 @@ const { title, description, imageURL } = Astro.props
       src="https://unpkg.com/@splinetool/viewer@0.9.493/build/spline-viewer.js"
     ></script>
   </head>
-  <body class="bg-gray-200" transition:animate={slide({ duration: '.3s' })}>
-    <Nav client:load />
-    <slot />
-    <Footer />
+  <body class="bg-gray-200">
+    <main transition:animate={slide({ duration: '.3s' })}>
+      <Nav client:load />
+      <slot />
+      <Footer />
+    </main>
   </body>
 </html>
