@@ -9,7 +9,7 @@ import Logo from '../../../public/logo.svg'
 <nav
   role="navigation"
   id="navbar"
-  class="flex items-center justify-between   border-b border-gray-200 bg-gray-200/75 fixed w-full z-50 h-auto"
+  class="flex items-center justify-between z-80   border-b border-gray-200 bg-gray-200/75 fixed w-full z-50 h-auto"
 >
   <div class="ml-2 relative z-80 logo">
     <a href="/" class="flex-cols z-80 items-center flex">
@@ -121,28 +121,27 @@ import Logo from '../../../public/logo.svg'
 </style>
 
 <script type="module">
-  const navToggle = document.getElementById('nav-toggle');
-  const navContent = document.getElementById('nav-content');
-  const navbar = document.getElementById('navbar');
-  const body = document.body;
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const navToggle = document.getElementById('nav-toggle');
+    const navContent = document.getElementById('nav-content');
+    const body = document.body;
 
-  if (navToggle && navContent && navbar) {
-    navToggle.addEventListener('click', () => {
-      const isHidden = navContent.classList.toggle('hidden');
-      navContent.classList.toggle('menu-content-expanded');
-      navbar.classList.toggle('nav-expanded');
-      body.style.overflow = isHidden ? 'auto' : 'hidden';
+    // Only add the event listener if navToggle and navContent are not null
+    if (navToggle && navContent) {
+      navToggle.addEventListener('click', () => {
+        const isExpanded = navContent.classList.contains('hidden');
 
-      // Get the SVG element
-      const svg = navToggle.querySelector('svg');
-      
-      if (svg) {
-        // Toggle SVG for 'X' icon and menu icon
-        svg.innerHTML = isHidden
-          ? '<path d="M3 12h18M3 6h18M3 18h18" stroke="#000" stroke-width="2"></path>'
-          : '<path d="M3 3l18 18M3 21L21 3" stroke="#fff" stroke-width="2"></path>';
-      }
-      
-    });
-  }
+        // Toggle classes for showing and hiding content
+        navContent.classList.toggle('hidden', !isExpanded);
+        navContent.classList.toggle('flex', isExpanded);
+        body.style.overflow = isExpanded ? 'hidden' : 'auto';
+
+        // Change the SVG to 'X' when the menu is open
+        const svgPath = navToggle.querySelector('svg path');
+        if (svgPath) {
+          svgPath.setAttribute('d', isExpanded ? 'M3 3l18 18M3 21L21 3' : 'M3 12h18M3 6h18M3 18h18');
+        }
+      });
+    }
+  });
 </script>

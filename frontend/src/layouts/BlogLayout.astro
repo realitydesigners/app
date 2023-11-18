@@ -1,6 +1,10 @@
 ---
 import Footer from '../components/global/Footer.astro'
 import Navbar from '../components/global/Navbar.astro'
+import Nav from '../components/global/Nav'
+import { ViewTransitions } from 'astro:transitions'
+import { fade } from 'astro:transitions'
+
 import '@fontsource/orbitron'
 import '@fontsource/noto-sans/400.css'
 import '@fontsource/noto-sans/500.css'
@@ -43,13 +47,14 @@ const { title, description, imageURL } = Astro.props
 
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <ViewTransitions transition:animate={fade({ duration: '0.2s' })} />
     <script
       type="module"
       src="https://unpkg.com/@splinetool/viewer@0.9.493/build/spline-viewer.js"
     ></script>
   </head>
   <body class="bg-black">
-    <Navbar />
+    <Nav client:load />
     <slot />
     <Footer />
   </body>
