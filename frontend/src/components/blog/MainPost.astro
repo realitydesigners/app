@@ -18,7 +18,7 @@ const { post } = Astro.props
                 width={1000}
                 height={800}
                 format="webp"
-                class="object-cover transform transition-transform duration-300 w-full h-full group-hover:scale-105 "
+                class="object-cover rounded-md transform transition-transform duration-300 w-full h-full group-hover:scale-105 "
               />
             </div>
           )}
@@ -32,7 +32,7 @@ const { post } = Astro.props
                   .join(', ')}
               </span>
             )}
-            <h2 class="pt-3  text-5xl uppercase leading-none text-black scramble-title">
+            <h2 class="pt-3  text-5xl leading-none text-black scramble-title">
               {post.title}
             </h2>
             <p class="pt-2 mono text-lg leading-tight text-gray-700 ">
