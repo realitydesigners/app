@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import { getSanityImageURL } from '../../lib/helpers.js'
+import { slide } from 'astro:transitions'
 
 const { posts } = Astro.props
 ---
@@ -20,7 +21,7 @@ const { posts } = Astro.props
                     width={1000}
                     height={1000}
                     format="webp"
-                    class="object-cover rounded-md transform transition-transform duration-300 w-full h-full group-hover:scale-105"
+                    class="object-cover rounded-md transform transition-transform duration-300 w-full h-full group-hover:scale-105 "
                   />
                 </div>
               )}

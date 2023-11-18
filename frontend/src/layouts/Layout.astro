@@ -4,7 +4,6 @@ import Navbar from '../components/global/Navbar.astro'
 import { ViewTransitions } from 'astro:transitions'
 import { fade } from 'astro:transitions'
 import { slide } from 'astro:transitions'
-
 import Nav from '../components/global/Nav'
 
 import '@fontsource/orbitron'
@@ -34,14 +33,14 @@ const { title } = Astro.props
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ViewTransitions transition:animate={fade({ duration: '0.2s' })} />
+    <ViewTransitions transition:animate="slide" />
 
     <script
       type="module"
       src="https://unpkg.com/@splinetool/viewer@0.9.493/build/spline-viewer.js"
     ></script>
   </head>
-  <body class="bg-black">
+  <body class="bg-gray-200" transition:animate={slide({ duration: '.3s' })}>
     <Nav client:load />
     <slot />
     <Footer />
