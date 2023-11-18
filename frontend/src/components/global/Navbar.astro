@@ -1,32 +1,34 @@
 ---
 import { Image } from 'astro:assets'
 import Logo from '../../../public/logo.svg'
+
+
+
 ---
 
 <nav
   role="navigation"
   id="navbar"
-  class="flex items-center pb-1 pt-1 justify-between flex-wrap border-b border-gray-200 bg-gray-200/75 fixed w-full z-50 h-auto"
+  class="flex items-center justify-between pb-1 pt-1 border-b border-gray-200 bg-gray-200/75 fixed w-full z-50 h-auto"
 >
-  <div class="ml-4 relative z-80 logo">
+  <div class="ml-2 relative z-80 logo">
     <a href="/" class="flex-cols z-80 items-center flex">
-      <Image src={Logo} alt="logo" class=" p-1 h-10 w-10 mr-2" />
-      <div class="hidden lg:flex text-black flex-col">
-        <span class="text-lg tracking-wide leading-none">REALITY</span>
-        <span class="text-sm leading-none">DESIGNERS</span>
-      </div>
+      <Image src={Logo} alt="logo" class=" pt-2 pb-2 h-10 w-10 mr-1" />
+   
     </a>
+  </div>
+  <div class="flex lg:flex text-black pt-2 pb-2 flex-col">
+    <span class="text-md tracking-wide leading-none">REALITY</span>
+    <span class="text-xs leading-none ">DESIGNERS</span>
   </div>
 
   <div class="flex relative ">
     <button
       id="nav-toggle"
-      class="flex items-center relative z-20 mr-5"
+      class="flex items-center relative z-20 pb-1 mr-5"
       aria-label="Toggle Menu"
     >
-      <div class="text-lg text-black mr-2">
-        <p class="mt-2">MENU</p>
-      </div>
+    
       <svg
         width="20"
         height="20"
@@ -41,7 +43,7 @@ import Logo from '../../../public/logo.svg'
   <div
   id="nav-content"
   role="menu"
-  class="absolute right-2 top-2 rounded-2xl border border-gray-200/20 bg-black/40 lg:w-1/3 sm:w-2/3 w-3/4 h-[95vh] overflow-y-auto  flex-grow flex items-center hidden"
+  class="absolute right-2 top-2 rounded-2xl border border-gray-200/20 bg-black/40 lg:w-1/3 sm:w-2/3 w-[96vw] h-[97vh] overflow-y-auto  flex-grow flex items-center hidden"
 >
     <div class="w-full h-full p-2 relative ">
       <ul
@@ -94,6 +96,7 @@ import Logo from '../../../public/logo.svg'
   span {
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;
+    line-height: .8em;
   }
 
   #nav-toggle:focus {
@@ -121,23 +124,26 @@ import Logo from '../../../public/logo.svg'
 <script type="module">
   const navToggle = document.getElementById('nav-toggle');
   const navContent = document.getElementById('nav-content');
-  const navbar = document.getElementById('navbar'); // Define 'navbar'
+  const navbar = document.getElementById('navbar');
   const body = document.body;
 
-  // Check that all elements are not null before adding event listeners
   if (navToggle && navContent && navbar) {
-    const toggleText = navToggle.querySelector('p');
-    if (toggleText) { // Check that 'toggleText' is not null
-      navToggle.addEventListener('click', () => {
-        const isHidden = navContent.classList.toggle('hidden');
-        navContent.classList.toggle('menu-content-expanded');
-        navbar.classList.toggle('nav-expanded'); // Use 'navbar' after checking it's not null
+    navToggle.addEventListener('click', () => {
+      const isHidden = navContent.classList.toggle('hidden');
+      navContent.classList.toggle('menu-content-expanded');
+      navbar.classList.toggle('nav-expanded');
+      body.style.overflow = isHidden ? 'auto' : 'hidden';
 
-        // Set the text based on the `isHidden` variable state
-        toggleText.textContent = isHidden ? 'MENU' : 'CLOSE';
-
-        body.style.overflow = isHidden ? 'auto' : 'hidden';
-      });
-    }
+      // Get the SVG element
+      const svg = navToggle.querySelector('svg');
+      
+      if (svg) {
+        // Toggle SVG for 'X' icon and menu icon
+        svg.innerHTML = isHidden
+          ? '<path d="M3 12h18M3 6h18M3 18h18" stroke="#000" stroke-width="2"></path>'
+          : '<path d="M3 3l18 18M3 21L21 3" stroke="#fff" stroke-width="2"></path>';
+      }
+      
+    });
   }
 </script>

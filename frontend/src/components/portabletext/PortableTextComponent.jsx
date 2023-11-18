@@ -12,7 +12,7 @@ import {
   QuoteRef,
   SplineRef,
   VideoRef,
-} from './index';
+} from './index'
 
 const iFrame = ({ value }) => {
   const { url, width, height } = value
@@ -99,7 +99,7 @@ const Light = {
         className="w-screen flex justify-center "
         style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}
       >
-        <p className="w-10/12 text-black leading-6 tracking-wide text-lg md:w-3/4 lg:w-1/2 lg:text-xl mb-8  ">
+        <p className="w-11/12 text-black leading-7 tracking-wide text-lg md:w-3/4 lg:w-1/2 lg:text-xl mb-8  ">
           {children}
         </p>
       </div>
@@ -132,14 +132,20 @@ const Light = {
   },
   list: {
     bullet: ({ children }) => (
-      <div className="w-screen flex justify-center"    style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}>
+      <div
+        className="w-screen flex justify-center"
+        style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}
+      >
         <ul className="w-10/12  text-black leading-6 tracking-wide text-lg md:w-3/4 lg:w-1/2 lg:text-xl list-decimal list-inside space-y-8 mb-8">
           {children}
         </ul>
       </div>
     ),
     number: ({ children }) => (
-      <div className="w-screen flex justify-center"    style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}>
+      <div
+        className="w-screen flex justify-center"
+        style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}
+      >
         <ol className="w-10/12 text-black leading-6 tracking-wide text-lg md:w-3/4 lg:w-1/2 lg:text-xl list-decimal list-inside space-y-8 mb-8">
           {children}
         </ol>

@@ -12,9 +12,9 @@ const { block } = Astro.props
         <div class="w-11/12 flex items-center  lg:hidden">
           <div class="flex w-full">
             <span class="text-black ml-2 w-auto text-xs font-mono tracking-wide scramble">
-  PUBLISHED ON {new Date(block.publicationDate).toLocaleDateString()}
-</span>
-
+              PUBLISHED ON{' '}
+              {new Date(block.publicationDate).toLocaleDateString()}
+            </span>
           </div>
           {block.tags && block.tags.length > 0 && (
             <div class="flex">
@@ -34,11 +34,11 @@ const { block } = Astro.props
               width={1000}
               height={1000}
               format="webp"
-              class="w-full h-[250px] md:h-[425px] lg:h-[600px] object-cover rounded-xl"
+              class="w-full h-[250px] sm:h-[350px] md:h-[425px] lg:h-[600px] object-cover rounded-xl"
             />
           </div>
         )}
-        <div class="w-full lg:w-1/2 p-8 pr-8 lg:pr-20 flex pt-2 lg:pt-4 justify-center flex-cols">
+        <div class="w-full lg:w-1/2 p-4 pr-4 lg:pr-20 flex pt-2 lg:pt-4 justify-center flex-cols">
           <div class="w-full">
             <div class="w-full hidden items-center lg:flex mb-6 ">
               <div class="flex w-full">
@@ -49,7 +49,7 @@ const { block } = Astro.props
               {block.tags && block.tags.length > 0 && (
                 <div class="flex">
                   {block.tags.map((tag: string) => (
-                    <span class="text-xs h-6 flex uppercase font-mono font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">
+                    <span class="text-xs h-6  flex uppercase font-mono font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">
                       {tag}
                     </span>
                   ))}
@@ -57,12 +57,12 @@ const { block } = Astro.props
               )}
             </div>
             {block.heading && (
-              <h1 class="text-4xl uppercase text-black leading-none  mb-4  lg:text-6xl w-auto lg:w-full scramble">
+              <h1 class="text-3xl text-black leading-8  mb-4  lg:text-6xl w-auto lg:w-full scramble">
                 {block.heading}
               </h1>
             )}
             {block.subheading && (
-              <p class="w-full text-lg text-black leading-6  tracking-wide scramble">
+              <p class="w-full text-md text-black leading-5  tracking-wide scramble">
                 {block.subheading}
               </p>
             )}
@@ -108,6 +108,10 @@ const { block } = Astro.props
     font-family: 'Noto Sans', sans-serif;
     font-weight: 500;
     animation: fadeIn 1s ease-out;
+  }
+
+  span {
+    font-size: 10px;
   }
 
   .rajhani {
