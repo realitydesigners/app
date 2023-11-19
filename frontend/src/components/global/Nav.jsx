@@ -73,7 +73,13 @@ export default function Navbar() {
         }`}
       >
         <div class="w-full h-full backdrop-blur-xl p-2 relative ">
-          <ul class="flex font-bold relative  mt-20 p-2 gap-2 h-auto lg:h-auto flex-col  lg:justify-end uppercase text-black text-5xl lg:text-6xl">
+          <div class="w-full h-[300px]">
+            <a href="/">
+              <spline-viewer url="https://prod.spline.design/HeD0BAam-X2SBMf3/scene.splinecode"></spline-viewer>
+            </a>
+          </div>
+
+          <ul class="flex font-bold relative  p-2 gap-2 h-auto lg:h-auto flex-col  lg:justify-end uppercase text-black text-5xl lg:text-6xl">
             <li>
               <a
                 href="/library"
