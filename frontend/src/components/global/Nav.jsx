@@ -73,7 +73,7 @@ export default function Navbar() {
         }`}
       >
         <div class="w-full h-full backdrop-blur-xl p-2 relative ">
-          <div class="w-full h-[300px]">
+          <div class="w-full h-[250px]">
             <a href="/">
               <spline-viewer url="https://prod.spline.design/HeD0BAam-X2SBMf3/scene.splinecode"></spline-viewer>
             </a>
