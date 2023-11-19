@@ -12,7 +12,7 @@ const QuoteBox = ({ quote, position, rotationY }) => {
         name="PostTitle"
         position={[0, 0, 0]}
         fontSize={0.09}
-        color="white"
+        color="black"
         maxWidth={textWidth - 0.2}
         textAlign="center"
         anchorX="center"
@@ -30,8 +30,8 @@ const QuoteBox = ({ quote, position, rotationY }) => {
           [-textWidth / 2, -textHeight / 2, 0],
           [-textWidth / 2, textHeight / 2, 0],
         ]}
-        color="white"
-        lineWidth={0.4}
+        color="black"
+        lineWidth={1}
         dashed={false}
       />
     </group>

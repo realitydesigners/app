@@ -7,7 +7,7 @@ import Crystal from './Crystal'
 export function getMainCategoryPositions(
   count,
   offset = [0, 0, 0],
-  radius = 15,
+  radius = 10,
 ) {
   const phi = Math.PI * (43 - Math.sqrt(5)) // golden angle
   const positions = []
@@ -94,7 +94,7 @@ export const MainCategory = (props) => {
       <Text
         ref={textRef}
         position={[position[0], position[1], position[2] + 2.5]}
-        color="white"
+        color="black"
         fontSize={0.6}
         font={'/fonts/monomaniac.ttf'}
         anchorX="center"
@@ -177,7 +177,7 @@ export const SubCategory = (props) => {
       <Text
         ref={textRef}
         position={[position[0], position[1], position[2] + 1.5]}
-        color="white"
+        color="black"
         fontSize={0.3}
         font={'/fonts/monomaniac.ttf'}
         anchorX="center"

@@ -49,7 +49,7 @@ const PostBox = ({ post, position, rotationY }) => {
 }
 
 const PostsList = ({ posts }) => {
-  const circleRadius = 6
+  const circleRadius = 8
   const postsCount = posts.length
   const angleIncrement = (2 * Math.PI) / postsCount
 
