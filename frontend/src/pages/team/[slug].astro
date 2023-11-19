@@ -6,8 +6,6 @@ import BlogLayout from '../../layouts/BlogLayout.astro'
 import { getPostsByTeam, getTeam } from '../../lib/api.js'
 import { getSanityImageURL } from '../../lib/helpers.js'
 
-
-
 export async function getStaticPaths() {
   const Team = await getTeam()
 
@@ -30,13 +28,14 @@ const teamPosts = await getPostsByTeam()
   <div
     class="min-h-screen bg-gray-200 flex flex-col items-center justify-center"
   >
-  <spline-viewer class="w-full h-[87vh] bg-black" url={team.scene}></spline-viewer>
+    <spline-viewer class="w-full h-[87vh]" url={team.scene}></spline-viewer>
 
- 
-    <div class="w-full bg-black  justify-center">
+    <div class="w-full bg-gray-200 justify-center">
       <PortableTextComponent content={team.bio} template="team" />
     </div>
-    <div class="flex w-full p-8 items-center bg-black mb-8 justify-center space-y-2">
+    <div
+      class="flex w-full p-8 items-center bg-gray-200 mb-8 justify-center space-y-2"
+    >
       <Image
         src={getSanityImageURL(team.image).url()}
         alt="Team member image"
@@ -47,11 +46,13 @@ const teamPosts = await getPostsByTeam()
       />
       <div class="flex ml-4 w-full justify-center flex-col">
         <h1
-          class="text-xl mb-1 font-bold font-mono uppercase text-white leading-none tracking-wide"
+          class="text-xl mb-1 font-bold font-mono uppercase text-black leading-none tracking-wide"
         >
           {team.name}
         </h1>
-        <p class="text-sm text-gray-300 uppercase font-mono leading-none tracking-widest">
+        <p
+          class="text-sm text-black uppercase font-mono leading-none tracking-widest"
+        >
           {team.role}
         </p>
       </div>

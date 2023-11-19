@@ -181,11 +181,8 @@ const Light = {
 const Team = {
   block: {
     normal: ({ children }) => (
-      <div
-        className="w-screen flex justify-center "
-        style={{ fontFamily: 'Noto Sans', fontWeight: 400 }}
-      >
-        <p className="w-10/12 text-white leading-7 tracking-normal text-lg md:w-3/4 lg:w-1/2 lg:text-xl mb-8  ">
+      <div className="w-screen flex justify-center ">
+        <p className="w-10/12 font-mono text-black leading-6 tracking-normal text-md md:w-3/4 lg:w-1/2 lg:text-xl mb-8  ">
           {children}
         </p>
       </div>
