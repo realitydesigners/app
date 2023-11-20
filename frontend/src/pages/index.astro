@@ -1,51 +1,44 @@
 ---
-import LeftSidePosts from '../components/blog/LeftSidePosts.astro'
-import MainPost from '../components/blog/MainPost.astro'
-import RightSidePosts from '../components/blog/RightSidePosts.astro'
-import VideoList from '../components/blog/VideoList.astro'
-import Layout from '../layouts/Layout.astro'
-import {
-  getLeftSideBarPosts,
-  getMainPost,
-  getRightSideBarPosts,
-  getVideo,
-} from '../lib/api.js'
-import '@fontsource-variable/jetbrains-mono'
+import LeftSidePosts from '../components/blog/LeftSidePosts.astro';
+import MainPost from '../components/blog/MainPost.astro';
+import RightSidePosts from '../components/blog/RightSidePosts.astro';
+import VideoList from '../components/blog/VideoList.astro';
+import Layout from '../layouts/Layout.astro';
+import { getLeftSideBarPosts, getMainPost, getRightSideBarPosts, getVideo } from '../lib/api.js';
+import '@fontsource-variable/jetbrains-mono';
 
-const post = await getMainPost()
-const sideposts = await getRightSideBarPosts()
-const leftposts = await getLeftSideBarPosts()
-const videos = await getVideo()
+const post = await getMainPost();
+const sideposts = await getRightSideBarPosts();
+const leftposts = await getLeftSideBarPosts();
+const videos = await getVideo();
 ---
 
 <Layout title="Reality Designers">
-  <main
-    class="flex flex-wrap w-screen h-auto justify-center bg-gray-200 pt-20 p-0 lg:p-12 lg:pt-28"
-  >
-    <LeftSidePosts posts={leftposts} />
-    <MainPost post={post} />
-    <RightSidePosts posts={sideposts} />
-    <VideoList videos={videos} />
-  </main>
+   <main class="flex flex-wrap w-screen h-auto justify-center bg-gray-200 pt-20 p-0 lg:p-12 lg:pt-28">
+      <LeftSidePosts posts={leftposts} />
+      <MainPost post={post} />
+      <RightSidePosts posts={sideposts} />
+      <VideoList videos={videos} />
+   </main>
 </Layout>
 
 <style>
-  .dud {
-    color: transparent;
-    transition: color 0.3s;
-  }
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  .animate-fadeIn {
-    animation: fadeIn 0.7s forwards;
-  }
-  .mono {
-    font-family: 'JetBrains Mono Variable', sans-serif;
-  }
+   .dud {
+      color: transparent;
+      transition: color 0.3s;
+   }
+   @keyframes fadeIn {
+      0% {
+         opacity: 0;
+      }
+      100% {
+         opacity: 1;
+      }
+   }
+   .animate-fadeIn {
+      animation: fadeIn 0.7s forwards;
+   }
+   .mono {
+      font-family: 'JetBrains Mono Variable', sans-serif;
+   }
 </style>

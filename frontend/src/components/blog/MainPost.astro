@@ -1,73 +1,46 @@
 ---
-import { Image } from 'astro:assets'
-import { getSanityImageURL } from '../../lib/helpers.js'
+import { Image } from 'astro:assets';
+import { getSanityImageURL } from '../../lib/helpers.js';
 
-const { post } = Astro.props
+const { post } = Astro.props;
 ---
 
 {
-  post && post.block && (
-    <ul class="w-full lg:w-1/2 h-auto grid grid-cols-1 p-0 lg:p-2 flex-wrap">
-      <a href={`/posts/${post.slug?.current}`}>
-        <div class="text-white p-0 lg:p-2 w-full ">
-          {post.image && (
-            <div class="flex group overflow-hidden w-full mb-2 h-80 lg:h-96">
-              <Image
-                src={getSanityImageURL(post.image).url()}
-                alt="Post image"
-                width={1000}
-                height={800}
-                format="webp"
-                class="object-cover rounded-md transform transition-transform duration-300 w-full h-full group-hover:scale-105 "
-              />
+   post && post.block && (
+      <ul class="w-full lg:w-1/2 h-auto grid grid-cols-1 p-0 lg:p-2 flex-wrap">
+         <a href={`/posts/${post.slug?.current}`}>
+            <div class="text-white p-0 lg:p-2 w-full ">
+               {post.image && (
+                  <div class="flex group overflow-hidden w-full mb-2 h-80 lg:h-96">
+                     <Image src={getSanityImageURL(post.image).url()} alt="Post image" width={1000} height={800} format="webp" class="object-cover rounded-md transform transition-transform duration-300 w-full h-full group-hover:scale-105 " />
+                  </div>
+               )}
+               <div class=" pl-4 pr-4 pt-2 lg:p-0">
+                  {post.subcategories?.map((sub: { title: string }) => sub.title).join(', ') && <span class="bg-black text-white text-xs px-2 py-1 rounded-full mr-2 mb-2 uppercase mono tracking-wide leading-tight">{post.subcategories.map((sub: { title: string }) => sub.title).join(', ')}</span>}
+                  <h2 class="pt-3  text-5xl leading-none text-black scramble-title">{post.title}</h2>
+                  <p class="pt-2 mono text-lg leading-tight text-gray-700 ">{post.excerpt}</p>
+                  <div class="w-full pt-4 flex justify-between">
+                     {post.block[0]?.team?.name && <span class="mono text-xs tracking-wide uppercase leading-tight text-black">{post.block[0].team.name}</span>}
+                     {post.block?.[0]?.publicationDate && <span class="mono text-xs tracking-wide uppercase leading-tight text-black">{new Date(post.block[0].publicationDate).toLocaleDateString()}</span>}
+                  </div>
+               </div>
             </div>
-          )}
-          <div class=" pl-4 pr-4 pt-2 lg:p-0">
-            {post.subcategories
-              ?.map((sub: { title: string }) => sub.title)
-              .join(', ') && (
-              <span class="bg-black text-white text-xs px-2 py-1 rounded-full mr-2 mb-2 uppercase mono tracking-wide leading-tight">
-                {post.subcategories
-                  .map((sub: { title: string }) => sub.title)
-                  .join(', ')}
-              </span>
-            )}
-            <h2 class="pt-3  text-5xl leading-none text-black scramble-title">
-              {post.title}
-            </h2>
-            <p class="pt-2 mono text-lg leading-tight text-gray-700 ">
-              {post.excerpt}
-            </p>
-            <div class="w-full pt-4 flex justify-between">
-              {post.block[0]?.team?.name && (
-                <span class="mono text-xs tracking-wide uppercase leading-tight text-black">
-                  {post.block[0].team.name}
-                </span>
-              )}
-              {post.block?.[0]?.publicationDate && (
-                <span class="mono text-xs tracking-wide uppercase leading-tight text-black">
-                  {new Date(post.block[0].publicationDate).toLocaleDateString()}
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      </a>
-    </ul>
-  )
+         </a>
+      </ul>
+   )
 }
 
 <style>
-  h2 {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-  }
-  p {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 500;
-  }
+   h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+   }
+   p {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+   }
 
-  .mono {
-    font-family: 'JetBrains Mono Variable', sans-serif;
-  }
+   .mono {
+      font-family: 'JetBrains Mono Variable', sans-serif;
+   }
 </style>

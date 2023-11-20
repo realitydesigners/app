@@ -1,46 +1,25 @@
 ---
-import PortableTextComponent from '../portabletext/PortableTextComponent'
-import HeadingBlockDark from './HeadingBlockDark.astro'
-import HeadingBlockLight from './HeadingBlockLight.astro'
-import LinkedPosts from './LinkedPosts.astro'
-import { SidebarWrapper } from './Sidebar'
-import TeamBlock from './TeamBlock.astro'
+import PortableTextComponent from '../portabletext/PortableTextComponent';
+import HeadingBlockDark from './HeadingBlockDark.astro';
+import HeadingBlockLight from './HeadingBlockLight.astro';
+import LinkedPosts from './LinkedPosts.astro';
+import { SidebarWrapper } from './Sidebar';
+import TeamBlock from './TeamBlock.astro';
 
 export interface Props {
-  post: any
+   post: any;
 }
 
-const { post } = Astro.props
+const { post } = Astro.props;
 
-const h2Headings = Array.isArray(post?.block)
-  ? post.block.flatMap((contentBlock: any) =>
-      contentBlock?.content
-        ? contentBlock.content
-            .filter(
-              (block: any) => block._type === 'block' && block.style === 'h2',
-            )
-            .map((block: any) => block.children[0]?.text)
-        : [],
-    )
-  : []
+const h2Headings = Array.isArray(post?.block) ? post.block.flatMap((contentBlock: any) => (contentBlock?.content ? contentBlock.content.filter((block: any) => block._type === 'block' && block.style === 'h2').map((block: any) => block.children[0]?.text) : [])) : [];
 ---
 
 {/* HEADING BLOCK */}
-{
-  post?.block?.map((block: any) => (
-    <>
-      {block._type === 'headingBlock' &&
-        (block.layout === 'dark' ? (
-          <HeadingBlockDark block={block} />
-        ) : block.layout === 'light' ? (
-          <HeadingBlockLight block={block} />
-        ) : null)}
-    </>
-  ))
-}
+{post?.block?.map((block: any) => <>{block._type === 'headingBlock' && (block.layout === 'dark' ? <HeadingBlockDark block={block} /> : block.layout === 'light' ? <HeadingBlockLight block={block} /> : null)}</>)}
 
 {
-  /* SIDEBAR 
+   /* SIDEBAR 
 <div class="flex absolute p-8 h-full w-1/4">
   <div class="relative w-auto h-full">
     <SidebarWrapper h2Headings={h2Headings} />
@@ -51,57 +30,50 @@ const h2Headings = Array.isArray(post?.block)
 
 {/* CONTENT BLOCK */}
 {
-  post?.block?.map(
-    (contentBlock: any, index: number) =>
-      contentBlock?.content &&
-      (contentBlock.layout === 'dark' ? (
-        <PortableTextComponent content={contentBlock.content} template="blog" />
-      ) : contentBlock.layout === 'light' ? (
-        <div class="w-full h-auto bg-gray-200  lg:pt-24">
-          <PortableTextComponent
-            content={contentBlock.content}
-            template="light"
-          />
-        </div>
-      ) : null),
-  )
+   post?.block?.map(
+      (contentBlock: any, index: number) =>
+         contentBlock?.content &&
+         (contentBlock.layout === 'dark' ? (
+            <PortableTextComponent content={contentBlock.content} template="blog" />
+         ) : contentBlock.layout === 'light' ? (
+            <div class="w-full h-auto bg-gray-200  lg:pt-24">
+               <PortableTextComponent content={contentBlock.content} template="light" />
+            </div>
+         ) : null),
+   )
 }
 
 {/* TEAM BLOCK */}
-{
-  post?.block?.map((block: any) => (
-    <div>{block._type === 'teamBlock' && <TeamBlock block={block} />}</div>
-  ))
-}
+{post?.block?.map((block: any) => <div>{block._type === 'teamBlock' && <TeamBlock block={block} />}</div>)}
 
 {/* RELATED POSTS */}
 <LinkedPosts linkedContent={post?.linkedContent} />
 
 <style>
-  h1 {
-    font-family: 'Noto Sans', sans-serif;
-    font-weight: 700;
-    animation: fadeIn 2s ease-out;
-  }
-  h2 {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-  }
-  p {
-    font-family: 'Noto Sans', sans-serif;
-    font-weight: 500;
-    animation: fadeIn 1s ease-out;
-  }
-  .rajhani {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-  }
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+   h1 {
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 700;
+      animation: fadeIn 2s ease-out;
+   }
+   h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+   }
+   p {
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 500;
+      animation: fadeIn 1s ease-out;
+   }
+   .rajhani {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+   }
+   @keyframes fadeIn {
+      0% {
+         opacity: 0;
+      }
+      100% {
+         opacity: 1;
+      }
+   }
 </style>

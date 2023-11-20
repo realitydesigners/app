@@ -1,15 +1,15 @@
 ---
-import BlogPost from './BlogPostPage.astro'
+import BlogPost from './BlogPostPage.astro';
 
 export interface Props {
-  linkedContent: any[]
+   linkedContent: any[];
 }
 
-const { linkedContent } = Astro.props
+const { linkedContent } = Astro.props;
 ---
 
 {
-  linkedContent?.map((item: any) => {
-    return <BlogPost post={item.post} />
-  })
+   linkedContent?.map((item: any) => {
+      return <BlogPost post={item.post} />;
+   })
 }

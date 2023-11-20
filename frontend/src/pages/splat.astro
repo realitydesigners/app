@@ -1,13 +1,12 @@
 ---
-import SplatScene from '../components/library/Splat.jsx'
-import LibraryLayout from '../layouts/LibraryLayout.astro'
+import SplatScene from '../components/library/Splat.jsx';
+import LibraryLayout from '../layouts/LibraryLayout.astro';
 
-const url =
-  'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/stump/stump-7k.splat'
+const url = 'https://huggingface.co/datasets/dylanebert/3dgs/resolve/main/stump/stump-7k.splat';
 ---
 
 <LibraryLayout title="Reality Designers">
-  <div class="w-screen h-screen pl-4 pr-4 pt-16 pb-4 bg-gray-200">
-    <SplatScene url={url} client:load />
-  </div>
+   <div class="w-screen h-screen pl-4 pr-4 pt-16 pb-4 bg-gray-200">
+      <SplatScene url={url} client:load />
+   </div>
 </LibraryLayout>

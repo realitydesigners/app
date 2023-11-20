@@ -1,64 +1,61 @@
 ---
-import Footer from '../components/global/Footer.astro'
-import Navbar from '../components/global/Navbar.astro'
-import Nav from '../components/global/Nav'
-import { ViewTransitions } from 'astro:transitions'
-import { fade } from 'astro:transitions'
-import { slide } from 'astro:transitions'
+import Footer from '../components/global/Footer.astro';
+import Navbar from '../components/global/Navbar.astro';
+import Nav from '../components/global/Nav';
+import { ViewTransitions } from 'astro:transitions';
+import { fade } from 'astro:transitions';
+import { slide } from 'astro:transitions';
 
-import '@fontsource/orbitron'
-import '@fontsource/noto-sans/400.css'
-import '@fontsource/noto-sans/500.css'
-import '@fontsource/noto-sans/700.css'
-import '@fontsource/rajdhani/400.css'
-import '@fontsource/rajdhani/500.css'
-import '@fontsource/rajdhani/700.css'
-import '@fontsource/noto-sans/400.css'
-import '@fontsource/noto-sans/500.css'
-import '@fontsource/noto-sans/600.css'
+import '@fontsource/orbitron';
+import '@fontsource/noto-sans/400.css';
+import '@fontsource/noto-sans/500.css';
+import '@fontsource/noto-sans/700.css';
+import '@fontsource/rajdhani/400.css';
+import '@fontsource/rajdhani/500.css';
+import '@fontsource/rajdhani/700.css';
+import '@fontsource/noto-sans/400.css';
+import '@fontsource/noto-sans/500.css';
+import '@fontsource/noto-sans/600.css';
 // Supports weights 100-800
-import '@fontsource-variable/jetbrains-mono'
+import '@fontsource-variable/jetbrains-mono';
 
 interface Props {
-  title: string
-  description: string
-  imageURL: string
+   title: string;
+   description: string;
+   imageURL: string;
 }
 
-const { title, description, imageURL } = Astro.props
+const { title, description, imageURL } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={imageURL} />
+      <!-- Open Graph Tags -->
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={imageURL} />
 
-    <!-- Twitter Card Tags -->
-    <meta property="twitter:card" content="summary_large_image" />
+      <!-- Twitter Card Tags -->
+      <meta property="twitter:card" content="summary_large_image" />
 
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={imageURL} />
+      <meta property="twitter:title" content={title} />
+      <meta property="twitter:description" content={description} />
+      <meta property="twitter:image" content={imageURL} />
 
-    <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <ViewTransitions transition:animate="slide" />
-    <script
-      type="module"
-      src="https://unpkg.com/@splinetool/viewer@0.9.506/build/spline-viewer.js"
-    ></script>
-  </head>
-  <body class="bg-gray-200">
-    <main transition:animate="fade">
-      <Nav client:load />
-      <slot />
-      <Footer />
-    </main>
-  </body>
+      <title>{title}</title>
+      <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+      <ViewTransitions transition:animate="slide" />
+      <script type="module" src="https://unpkg.com/@splinetool/viewer@0.9.506/build/spline-viewer.js"></script>
+   </head>
+   <body class="bg-gray-200">
+      <main transition:animate="fade">
+         <Nav client:load />
+         <slot />
+         <Footer />
+      </main>
+   </body>
 </html>

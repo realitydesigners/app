@@ -1,16 +1,16 @@
-import { createClient } from '@sanity/client'
+import { createClient } from '@sanity/client';
 
 const client = createClient({
-  name: 'default',
-  title: 'website',
-  projectId: 'fovvfda4',
-  dataset: 'production',
-  apiVersion: '2023-08-31',
-  useCdn: true,
-})
+   name: 'default',
+   title: 'website',
+   projectId: 'fovvfda4',
+   dataset: 'production',
+   apiVersion: '2023-08-31',
+   useCdn: true,
+});
 
 export async function getLeftSideBarPosts() {
-  const query = `*[_type == "posts"] |  order(_createdAt desc)[1..2] {
+   const query = `*[_type == "posts"] |  order(_createdAt desc)[1..2] {
     title,
     category,
     author,
@@ -43,13 +43,13 @@ export async function getLeftSideBarPosts() {
     },
   },
     
-  }`
-  const data = await client.fetch(query)
-  return data
+  }`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getRightSideBarPosts() {
-  const query = `*[_type == "posts"] |  order(_createdAt desc)[3..7] {
+   const query = `*[_type == "posts"] |  order(_createdAt desc)[3..7] {
     title,
     category,
     author,
@@ -82,13 +82,13 @@ export async function getRightSideBarPosts() {
       shortBio,
     },
   },
-  }`
-  const data = await client.fetch(query)
-  return data
+  }`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getMainPost() {
-  const query = `*[_type == "posts"] |  order(_createdAt desc)[0] {
+   const query = `*[_type == "posts"] |  order(_createdAt desc)[0] {
     title,
     category,
     excerpt,
@@ -121,13 +121,13 @@ export async function getMainPost() {
     },
   },
     image,
-  }`
-  const data = await client.fetch(query)
-  return data
+  }`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getPostBySlug() {
-  const query = `
+   const query = `
     *[_type == "posts"] | order(_createdAt desc) {
       title,
       slug,
@@ -269,14 +269,14 @@ export async function getPostBySlug() {
     },
   },
     }
-  `
+  `;
 
-  const data = await client.fetch(query)
-  return data
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getPosts() {
-  const query = `*[_type == "posts"] |  order(_createdAt desc) {
+   const query = `*[_type == "posts"] |  order(_createdAt desc) {
     title,
     slug,
     image,
@@ -284,13 +284,13 @@ export async function getPosts() {
     content[],
 
     
-  }`
-  const data = await client.fetch(query)
-  return data
+  }`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getImg() {
-  const query = `*[_type == "img"] |  order(_createdAt desc) {
+   const query = `*[_type == "img"] |  order(_createdAt desc) {
     image,
     title,
     alt,
@@ -307,26 +307,26 @@ export async function getImg() {
       title,
     },
   
-  }`
-  const data = await client.fetch(query)
-  return data
+  }`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getQuote() {
-  const query = `*[_type == "quote"] {
+   const query = `*[_type == "quote"] {
     quote,
     "mediaRef": {
       "layout": mediaRef.layout,
       "image": mediaRef.image->image.asset->url
     }
-  }`
+  }`;
 
-  const data = await client.fetch(query)
-  return data
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getArticle() {
-  const query = `*[_type == "article"]  |  order(_createdAt desc) {
+   const query = `*[_type == "article"]  |  order(_createdAt desc) {
   title,
   slug,
   image,
@@ -340,13 +340,13 @@ export async function getArticle() {
     }
   }
     
-}`
-  const data = await client.fetch(query)
-  return data
+}`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getArticleBySlug() {
-  const query = `
+   const query = `
     *[_type == "article"] {
       title,
       slug,
@@ -380,14 +380,14 @@ export async function getArticleBySlug() {
         }
       }
     }
-  `
+  `;
 
-  const data = await client.fetch(query)
-  return data
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getTeam() {
-  const query = `*[_type == "team"] |  order(_createdAt asc) {
+   const query = `*[_type == "team"] |  order(_createdAt asc) {
   name,
   role,
   image,
@@ -396,13 +396,13 @@ export async function getTeam() {
   bio,
   slug,
   title,    
-}`
-  const data = await client.fetch(query)
-  return data
+}`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getPostsByTeam() {
-  const query = `*[_type == "posts" ] | order(_createdAt desc) {
+   const query = `*[_type == "posts" ] | order(_createdAt desc) {
     title,
     category,
     author,
@@ -412,13 +412,13 @@ export async function getPostsByTeam() {
     publicationDate,
     image,
     content[],
-  }`
-  const data = await client.fetch(query)
-  return data
+  }`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getVideo() {
-  const query = `*[_type == "video"] |  order(_createdAt desc) {
+   const query = `*[_type == "video"] |  order(_createdAt desc) {
   title,
   slug,
   url,
@@ -430,13 +430,13 @@ export async function getVideo() {
     title,
   },
   
-  }`
-  const data = await client.fetch(query)
-  return data
+  }`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getVideoBySlug() {
-  const query = `*[_type == "video"] |  order(_createdAt desc) {
+   const query = `*[_type == "video"] |  order(_createdAt desc) {
     title,
     slug,
     url,
@@ -455,22 +455,22 @@ export async function getVideoBySlug() {
       team->,
     },
     
-    }`
-  const data = await client.fetch(query)
-  return data
+    }`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getModel() {
-  const query = `*[_type == "model"] |  order(_createdAt desc) {
+   const query = `*[_type == "model"] |  order(_createdAt desc) {
   title, 
   file,
-  }`
-  const data = await client.fetch(query)
-  return data
+  }`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getModules() {
-  const query = `*[_type == "modules" ] {
+   const query = `*[_type == "modules" ] {
   title,
   model->{...,
   file,
@@ -490,13 +490,13 @@ export async function getModules() {
     slug,
     file,
   }
-}`
-  const data = await client.fetch(query)
-  return data
+}`;
+   const data = await client.fetch(query);
+   return data;
 }
 
 export async function getCategory() {
-  const query = `*[_type == "category"] {
+   const query = `*[_type == "category"] {
     _id,
     _type,
     title,
@@ -529,8 +529,8 @@ export async function getCategory() {
       }
     },
   }
-  `
+  `;
 
-  const data = await client.fetch(query)
-  return data
+   const data = await client.fetch(query);
+   return data;
 }

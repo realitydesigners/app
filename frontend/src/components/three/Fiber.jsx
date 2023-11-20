@@ -1,45 +1,42 @@
-import { CameraControls } from '@react-three/drei'
-import { Canvas, useThree } from '@react-three/fiber'
-import { useEffect, useRef } from 'react'
-import Stars from './Stars'
+import { CameraControls } from '@react-three/drei';
+import { Canvas, useThree } from '@react-three/fiber';
+import { useEffect, useRef } from 'react';
+import Stars from './Stars';
 
 const Scene = () => {
-  const { controls } = useThree()
-  const meshRef = useRef()
+   const { controls } = useThree();
+   const meshRef = useRef();
 
-  const margin = 0.2
-  useEffect(() => {
-    if (controls) {
-      controls.fitToBox(meshRef.current, true, {
-        paddingTop: margin,
-        paddingLeft: margin,
-        paddingBottom: margin,
-        paddingRight: margin,
-      })
-      controls.rotateTo(Math.PI / -0.4, Math.PI / 2.5, true)
-    }
-  }, [controls])
+   const margin = 0.2;
+   useEffect(() => {
+      if (controls) {
+         controls.fitToBox(meshRef.current, true, {
+            paddingTop: margin,
+            paddingLeft: margin,
+            paddingBottom: margin,
+            paddingRight: margin,
+         });
+         controls.rotateTo(Math.PI / -0.4, Math.PI / 2.5, true);
+      }
+   }, [controls]);
 
-  return (
-    <>
-      <mesh ref={meshRef}>
-        <boxGeometry />
-        <meshNormalMaterial />
-      </mesh>
-      <CameraControls makeDefault />
-    </>
-  )
-}
+   return (
+      <>
+         <mesh ref={meshRef}>
+            <boxGeometry />
+            <meshNormalMaterial />
+         </mesh>
+         <CameraControls makeDefault />
+      </>
+   );
+};
 
 export const Fiber = () => {
-  return (
-    <Canvas
-      camera={{ position: [10, -20, 5], fov: 45 }}
-      style={{ height: '100%' }}
-    >
-      <Scene />
-      <Stars />
-    </Canvas>
-  )
-}
-export default Fiber
+   return (
+      <Canvas camera={{ position: [10, -20, 5], fov: 45 }} style={{ height: '100%' }}>
+         <Scene />
+         <Stars />
+      </Canvas>
+   );
+};
+export default Fiber;

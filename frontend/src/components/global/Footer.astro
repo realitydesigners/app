@@ -1,158 +1,107 @@
 ---
-import { Image } from 'astro:assets'
-import Discord from '../../../public/icons/Discord.svg'
-import GitHub from '../../../public/icons/GitHub.svg'
-import Instagram from '../../../public/icons/Instagram.svg'
-import TikTok from '../../../public/icons/TikTok.svg'
-import X from '../../../public/icons/X.svg'
-import YouTube from '../../../public/icons/YouTube.svg'
-import RDLogo from '../../../public/rd-logo.svg'
+import { Image } from 'astro:assets';
+import Discord from '../../../public/icons/Discord.svg';
+import GitHub from '../../../public/icons/GitHub.svg';
+import Instagram from '../../../public/icons/Instagram.svg';
+import TikTok from '../../../public/icons/TikTok.svg';
+import X from '../../../public/icons/X.svg';
+import YouTube from '../../../public/icons/YouTube.svg';
+import RDLogo from '../../../public/rd-logo.svg';
 ---
 
 <footer>
-  <div
-    class="w-full p-2 bg-black md:p-4 lg:p-8 flex flex-wrap justify-between flex-row border-t border-gray-600 py-8"
-  >
-    <div class="w-full md:w-1/3 lg:w-1/4 p-2">
-      <div class="w-auto p-6 border border-gray-600 rounded-xl">
-        <div class="relative mb-4">
-          <a href="/" class="flex-cols z-80 items-center flex">
-            <Image src={RDLogo} alt="logo" class="h-12 w-12 mr-2" />
-            <div class="block">
-              <h1
-                class="text-2xl uppercase leading-none tracking-wide text-white"
-              >
-                Reality
-              </h1>
-              <h1
-                class="text-md tracking-widest uppercase leading-none text-white"
-              >
-                Designers
-              </h1>
+   <div class="w-full p-2 bg-black md:p-4 lg:p-8 flex flex-wrap justify-between flex-row border-t border-gray-600 py-8">
+      <div class="w-full md:w-1/3 lg:w-1/4 p-2">
+         <div class="w-auto p-6 border border-gray-600 rounded-xl">
+            <div class="relative mb-4">
+               <a href="/" class="flex-cols z-80 items-center flex">
+                  <Image src={RDLogo} alt="logo" class="h-12 w-12 mr-2" />
+                  <div class="block">
+                     <h1 class="text-2xl uppercase leading-none tracking-wide text-white">Reality</h1>
+                     <h1 class="text-md tracking-widest uppercase leading-none text-white">Designers</h1>
+                  </div>
+               </a>
             </div>
-          </a>
-        </div>
-        <p class="text-gray-400 leading-5 text-md mb-2">
-          We're dreamers, developers, engineers & healers guided by the truth
-          and determined to design a better timeline.
-        </p>
-        <div
-          class="w-auto p-2 gap-6 md:gap-0 md:justify-between justify-center flex items-center flex-wrap"
-        >
-          <a
-            href="https://discord.com/channels/825128650935631942/927340981169307698"
-          >
-            <Image
-              src={Discord}
-              alt="Discord Icon"
-              class="h-4 w-4 transition-transform transform hover:scale-110"
-            />
-          </a>
-          <a href="https://github.com/realitydesigners">
-            <Image
-              src={GitHub}
-              alt="GitHub Icon"
-              class="h-4 w-4 transition-transform transform hover:scale-110"
-            />
-          </a>
-          <a href="https://twitter.com/realitydesignrs">
-            <Image
-              src={X}
-              alt="X Icon"
-              class="h-4 w-4 transition-transform transform hover:scale-110"
-            />
-          </a>
+            <p class="text-gray-400 leading-5 text-md mb-2">We're dreamers, developers, engineers & healers guided by the truth and determined to design a better timeline.</p>
+            <div class="w-auto p-2 gap-6 md:gap-0 md:justify-between justify-center flex items-center flex-wrap">
+               <a href="https://discord.com/channels/825128650935631942/927340981169307698">
+                  <Image src={Discord} alt="Discord Icon" class="h-4 w-4 transition-transform transform hover:scale-110" />
+               </a>
+               <a href="https://github.com/realitydesigners">
+                  <Image src={GitHub} alt="GitHub Icon" class="h-4 w-4 transition-transform transform hover:scale-110" />
+               </a>
+               <a href="https://twitter.com/realitydesignrs">
+                  <Image src={X} alt="X Icon" class="h-4 w-4 transition-transform transform hover:scale-110" />
+               </a>
 
-          <a href="https://www.youtube.com/@realitydesigners">
-            <Image
-              src={YouTube}
-              alt="YouTube Icon"
-              class="h-4 w-4 transition-transform transform hover:scale-110"
-            />
-          </a>
-          <a href="https://www.instagram.com/realitydesignerstv/">
-            <Image
-              src={Instagram}
-              alt="Instagram Icon"
-              class="h-4 w-4 transition-transform transform hover:scale-110"
-            />
-          </a>
-          <a href="https://www.tiktok.com/@realitydesigners">
-            <Image
-              src={TikTok}
-              alt="TikTok Icon"
-              class="h-4 w-4 transition-transform transform hover:scale-110"
-            />
-          </a>
-        </div>
+               <a href="https://www.youtube.com/@realitydesigners">
+                  <Image src={YouTube} alt="YouTube Icon" class="h-4 w-4 transition-transform transform hover:scale-110" />
+               </a>
+               <a href="https://www.instagram.com/realitydesignerstv/">
+                  <Image src={Instagram} alt="Instagram Icon" class="h-4 w-4 transition-transform transform hover:scale-110" />
+               </a>
+               <a href="https://www.tiktok.com/@realitydesigners">
+                  <Image src={TikTok} alt="TikTok Icon" class="h-4 w-4 transition-transform transform hover:scale-110" />
+               </a>
+            </div>
+         </div>
       </div>
-    </div>
-    <div class="w-1/2 md:w-1/3 lg:w-1/4 p-2">
-      <div class="w-full h-full p-6 border border-gray-600 rounded-xl">
-        <p
-          class="text-lg font-semibold tracking-wide text-white mb-2 uppercase border-b border-gray-600 pb-2"
-        >
-          Explore
-        </p>
-        <ul class="list-none text-xl uppercase">
-          <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
-          <li><a href="#" class="text-gray-400 hover:text-white">Portal</a></li>
-          <li>
-            <a href="#" class="text-gray-400 hover:text-white">Library</a>
-          </li>
-          <li><a href="#" class="text-gray-400 hover:text-white">Story</a></li>
-          <li><a href="#" class="text-gray-400 hover:text-white">Feed</a></li>
-        </ul>
+      <div class="w-1/2 md:w-1/3 lg:w-1/4 p-2">
+         <div class="w-full h-full p-6 border border-gray-600 rounded-xl">
+            <p class="text-lg font-semibold tracking-wide text-white mb-2 uppercase border-b border-gray-600 pb-2">Explore</p>
+            <ul class="list-none text-xl uppercase">
+               <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+               <li><a href="#" class="text-gray-400 hover:text-white">Portal</a></li>
+               <li>
+                  <a href="#" class="text-gray-400 hover:text-white">Library</a>
+               </li>
+               <li><a href="#" class="text-gray-400 hover:text-white">Story</a></li>
+               <li><a href="#" class="text-gray-400 hover:text-white">Feed</a></li>
+            </ul>
+         </div>
       </div>
-    </div>
-    <div class="w-1/2 md:w-1/3 lg:w-1/4 p-2">
-      <div class="w-full h-full p-6 border border-gray-600 rounded-xl">
-        <p
-          class="text-lg font-semibold tracking-wide text-white mb-2 uppercase border-b border-gray-600 pb-2"
-        >
-          News & Updates
-        </p>
-        <ul class="list-none text-xl uppercase">
-          <li>
-            <a href="#" class="text-gray-400 hover:text-white">Podcast</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-400 hover:text-white">Change Log</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-400 hover:text-white">Contact</a>
-          </li>
-        </ul>
+      <div class="w-1/2 md:w-1/3 lg:w-1/4 p-2">
+         <div class="w-full h-full p-6 border border-gray-600 rounded-xl">
+            <p class="text-lg font-semibold tracking-wide text-white mb-2 uppercase border-b border-gray-600 pb-2">News & Updates</p>
+            <ul class="list-none text-xl uppercase">
+               <li>
+                  <a href="#" class="text-gray-400 hover:text-white">Podcast</a>
+               </li>
+               <li>
+                  <a href="#" class="text-gray-400 hover:text-white">Change Log</a>
+               </li>
+               <li>
+                  <a href="#" class="text-gray-400 hover:text-white">Contact</a>
+               </li>
+            </ul>
+         </div>
       </div>
-    </div>
-    <div class="w-full lg:w-1/4 p-2">
-      <div
-        class="w-full h-full flex border justify-center items-center border-gray-600 rounded-xl lg:p-0 p-12"
-      >
-        <p class="text-5xl bold text-center leading-10 text-white uppercase">
-          Design<br />Your<br /> Reality
-        </p>
+      <div class="w-full lg:w-1/4 p-2">
+         <div class="w-full h-full flex border justify-center items-center border-gray-600 rounded-xl lg:p-0 p-12">
+            <p class="text-5xl bold text-center leading-10 text-white uppercase">
+               Design<br />Your<br /> Reality
+            </p>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </footer>
 
 <style>
-  h1 {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-  }
+   h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+   }
 
-  p {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 500;
-  }
-  .bold {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-  }
-  a {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-  }
+   p {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+   }
+   .bold {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+   }
+   a {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+   }
 </style>

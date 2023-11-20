@@ -1,13 +1,13 @@
 ---
-import Videos from '../components/blog/Videos.astro'
-import Layout from '../layouts/Layout.astro'
-import { getVideo } from '../lib/api'
+import Videos from '../components/blog/Videos.astro';
+import Layout from '../layouts/Layout.astro';
+import { getVideo } from '../lib/api';
 
-const videos = await getVideo()
+const videos = await getVideo();
 ---
 
 <Layout title="Reality Designers">
-  <main class="flex items-center w-screen h-auto pt-20 justify-center bg-black">
-    <Videos videos={videos} />
-  </main>
+   <main class="flex items-center w-screen h-auto pt-20 justify-center bg-black">
+      <Videos videos={videos} />
+   </main>
 </Layout>

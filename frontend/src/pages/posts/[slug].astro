@@ -1,25 +1,21 @@
 ---
-import BlogPostPage from '../../components/blog/BlogPostPage.astro'
-import BlogLayout from '../../layouts/BlogLayout.astro'
-import { getPostBySlug } from '../../lib/api.js'
-import { getSanityImageURL } from '../../lib/helpers.js'
+import BlogPostPage from '../../components/blog/BlogPostPage.astro';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { getPostBySlug } from '../../lib/api.js';
+import { getSanityImageURL } from '../../lib/helpers.js';
 
 export async function getStaticPaths() {
-  const allBlogPosts = await getPostBySlug()
+   const allBlogPosts = await getPostBySlug();
 
-  return allBlogPosts.map((post: any) => ({
-    params: { slug: post.slug.current },
-    props: { post },
-  }))
+   return allBlogPosts.map((post: any) => ({
+      params: { slug: post.slug.current },
+      props: { post },
+   }));
 }
 
-const { post = {} as any } = Astro.props
+const { post = {} as any } = Astro.props;
 ---
 
-<BlogLayout
-  title={post.title}
-  description={post.excerpt}
-  imageURL={getSanityImageURL(post.image).url()}
->
-  <BlogPostPage post={post} />}
+<BlogLayout title={post.title} description={post.excerpt} imageURL={getSanityImageURL(post.image).url()}>
+   <BlogPostPage post={post} />}
 </BlogLayout>

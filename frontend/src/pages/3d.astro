@@ -1,13 +1,13 @@
 ---
-import Fiber from '../components/three/Fiber.jsx'
-import Layout from '../layouts/Layout.astro'
-import { getCategory } from '../lib/api.js'
+import Fiber from '../components/three/Fiber.jsx';
+import Layout from '../layouts/Layout.astro';
+import { getCategory } from '../lib/api.js';
 
-const category = await getCategory()
+const category = await getCategory();
 ---
 
 <Layout title="Reality Designers">
-  <main class="w-screen h-screen">
-    <Fiber client:load />
-  </main>
+   <main class="w-screen h-screen">
+      <Fiber client:load />
+   </main>
 </Layout>

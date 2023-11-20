@@ -1,42 +1,42 @@
-import { createClient } from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
+import { createClient } from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
 
 const SANITY_CONFIG = {
-  name: 'default',
-  title: 'website',
-  projectId: 'fovvfda4',
-  dataset: 'production',
-  apiVersion: '2023-08-31',
-  useCdn: true,
-}
+   name: 'default',
+   title: 'website',
+   projectId: 'fovvfda4',
+   dataset: 'production',
+   apiVersion: '2023-08-31',
+   useCdn: true,
+};
 
-const BASE_URL = `https://cdn.sanity.io/files/${SANITY_CONFIG.projectId}/${SANITY_CONFIG.dataset}`
+const BASE_URL = `https://cdn.sanity.io/files/${SANITY_CONFIG.projectId}/${SANITY_CONFIG.dataset}`;
 
-const client = createClient(SANITY_CONFIG)
-const builder = imageUrlBuilder(client)
+const client = createClient(SANITY_CONFIG);
+const builder = imageUrlBuilder(client);
 
 export function urlFor(source) {
-  return builder.image(source)
+   return builder.image(source);
 }
 
 export function fileUrlFor(ref) {
-  const parts = ref.split('-')
-  const fileId = parts[1]
-  const fileExtension = parts[parts.length - 1]
+   const parts = ref.split('-');
+   const fileId = parts[1];
+   const fileExtension = parts[parts.length - 1];
 
-  return `${BASE_URL}/${fileId}.${fileExtension}`
+   return `${BASE_URL}/${fileId}.${fileExtension}`;
 }
 
 export function videoFileUrlFor(refString, fileExtension = 'mp4') {
-  if (!refString) {
-    return null
-  }
+   if (!refString) {
+      return null;
+   }
 
-  const fileIdParts = refString.split('-')
-  if (fileIdParts.length >= 2 && typeof fileIdParts[1] === 'string') {
-    const fileId = fileIdParts[1]
-    return `${BASE_URL}/${fileId}.${fileExtension}`
-  }
+   const fileIdParts = refString.split('-');
+   if (fileIdParts.length >= 2 && typeof fileIdParts[1] === 'string') {
+      const fileId = fileIdParts[1];
+      return `${BASE_URL}/${fileId}.${fileExtension}`;
+   }
 
-  return null
+   return null;
 }

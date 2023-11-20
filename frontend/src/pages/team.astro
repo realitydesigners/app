@@ -1,18 +1,16 @@
 ---
-import TeamMembers from '../components/TeamMembers.astro'
-import Layout from '../layouts/Layout.astro'
-import { getTeam } from '../lib/api.js'
+import TeamMembers from '../components/TeamMembers.astro';
+import Layout from '../layouts/Layout.astro';
+import { getTeam } from '../lib/api.js';
 
-const team = await getTeam()
+const team = await getTeam();
 ---
 
 <Layout title="Team">
-  <div class="flex w-full h-full justify-center bg-gray-200">
-    <div class="w-full h-full py-32 items-center justify-center flex-col flex">
-      <h1 class="text-black uppercase font-bold font-mono text-5xl">
-        Our Team
-      </h1>
-      <TeamMembers team={team} />
-    </div>
-  </div>
+   <div class="flex w-full h-full justify-center bg-gray-200">
+      <div class="w-full h-full py-32 items-center justify-center flex-col flex">
+         <h1 class="text-black uppercase font-bold font-mono text-5xl">Our Team</h1>
+         <TeamMembers team={team} />
+      </div>
+   </div>
 </Layout>

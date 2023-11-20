@@ -1,22 +1,21 @@
 ---
-import LibraryLayout from '../../layouts/LibraryLayout.astro'
-import { getCategory } from '../../lib/api.js'
-import Scene from '../../components/library/Scene'
+import LibraryLayout from '../../layouts/LibraryLayout.astro';
+import { getCategory } from '../../lib/api.js';
+import Scene from '../../components/library/Scene';
 
 export async function getStaticPaths() {
-  const category = await getCategory()
+   const category = await getCategory();
 
-  return category.map((category: any) => ({
-    params: { slug: category.slug.current },
-    props: { category },
-  }))
+   return category.map((category: any) => ({
+      params: { slug: category.slug.current },
+      props: { category },
+   }));
 }
-const { category = {} as any } = Astro.props
+const { category = {} as any } = Astro.props;
 ---
+
 <LibraryLayout title="Reality Designers">
-  <main class="w-screen h-screen bg-gray-200">
-
-    <Scene category={category} client:load />
-  </main>
+   <main class="w-screen h-screen bg-gray-200">
+      <Scene category={category} client:load />
+   </main>
 </LibraryLayout>
-

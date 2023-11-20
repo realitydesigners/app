@@ -1,130 +1,95 @@
 ---
-import { Image } from 'astro:assets'
-import { getSanityImageURL } from '../../lib/helpers.js'
-import { slide } from 'astro:transitions'
+import { Image } from 'astro:assets';
+import { getSanityImageURL } from '../../lib/helpers.js';
+import { slide } from 'astro:transitions';
 
-const { block } = Astro.props
+const { block } = Astro.props;
 ---
 
 <div class="w-full h-auto bg-gray-200 pt-20 lg:pt-32">
-  {
-    block?._type === 'headingBlock' && (
-      <div class="w-full flex justify-center flex-wrap">
-        <div class="w-11/12 flex items-center  lg:hidden">
-          <div class="flex w-full">
-            <span class="text-black ml-2 w-auto text-xs font-mono tracking-wide scramble">
-              PUBLISHED ON{' '}
-              {new Date(block.publicationDate).toLocaleDateString()}
-            </span>
-          </div>
-          {block.tags && block.tags.length > 0 && (
-            <div class="flex">
-              {block.tags.map((tag: string) => (
-                <span class="text-xs h-6 flex uppercase font-mono  font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-        {block.image && (
-          <div class="w-full flex-wrap  lg:w-1/2 p-4 flex ">
-            <Image
-              src={getSanityImageURL(block.image).url()}
-              alt={block.image.alt || 'Image Alt Text'}
-              width={1000}
-              height={1000}
-              format="webp"
-              class="w-full h-[250px] sm:h-[350px] md:h-[425px] lg:h-[600px] object-cover rounded-xl"
-            />
-          </div>
-        )}
-        <div class="w-full lg:w-1/2 p-4 pr-4 lg:pr-20 flex pt-2 lg:pt-4 justify-center flex-cols">
-          <div class="w-full">
-            <div class="w-full hidden items-center lg:flex mb-6 ">
-              <div class="flex w-full">
-                <span class="text-black font-mono w-auto text-xs tracking-wide scramble">
-                  PUBLISHED ON {block.publicationDate}
-                </span>
-              </div>
-              {block.tags && block.tags.length > 0 && (
-                <div class="flex">
-                  {block.tags.map((tag: string) => (
-                    <span class="text-xs h-6  flex uppercase font-mono font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-            {block.heading && (
-              <h1 class="text-3xl text-black leading-8  mb-4  lg:text-6xl w-auto lg:w-full scramble">
-                {block.heading}
-              </h1>
-            )}
-            {block.subheading && (
-              <p class="w-full text-md text-black leading-5  tracking-wide scramble">
-                {block.subheading}
-              </p>
-            )}
-            <div class="w-full flex items-center pt-4">
-              <a href={`/team/${block.team.slug.current}`}>
-                {block.team && block.team.image && (
-                  <div class="flex items-center pl-2 pr-3 p-4 h-8 bg-gray-300 rounded-lg border w-auto">
-                    <Image
-                      src={getSanityImageURL(block.team.image).url()}
-                      alt="Author Image"
-                      width={10}
-                      height={10}
-                      format="webp"
-                      class="w-5 h-5 object-cover rounded-full"
-                    />
-                    {block.team.name && (
-                      <span class="ml-2 uppercase text-black font-semibold tracking-wide font-mono text-xs">
-                        By {block.team.name}
-                      </span>
-                    )}
+   {
+      block?._type === 'headingBlock' && (
+         <div class="w-full flex justify-center flex-wrap">
+            <div class="w-11/12 flex items-center  lg:hidden">
+               <div class="flex w-full">
+                  <span class="text-black ml-2 w-auto text-xs font-mono tracking-wide scramble">PUBLISHED ON {new Date(block.publicationDate).toLocaleDateString()}</span>
+               </div>
+               {block.tags && block.tags.length > 0 && (
+                  <div class="flex">
+                     {block.tags.map((tag: string) => (
+                        <span class="text-xs h-6 flex uppercase font-mono  font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">{tag}</span>
+                     ))}
                   </div>
-                )}
-              </a>
+               )}
             </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+            {block.image && (
+               <div class="w-full flex-wrap  lg:w-1/2 p-4 flex ">
+                  <Image src={getSanityImageURL(block.image).url()} alt={block.image.alt || 'Image Alt Text'} width={1000} height={1000} format="webp" class="w-full h-[250px] sm:h-[350px] md:h-[425px] lg:h-[600px] object-cover rounded-xl" />
+               </div>
+            )}
+            <div class="w-full lg:w-1/2 p-4 pr-4 lg:pr-20 flex pt-2 lg:pt-4 justify-center flex-cols">
+               <div class="w-full">
+                  <div class="w-full hidden items-center lg:flex mb-6 ">
+                     <div class="flex w-full">
+                        <span class="text-black font-mono w-auto text-xs tracking-wide scramble">PUBLISHED ON {block.publicationDate}</span>
+                     </div>
+                     {block.tags && block.tags.length > 0 && (
+                        <div class="flex">
+                           {block.tags.map((tag: string) => (
+                              <span class="text-xs h-6  flex uppercase font-mono font-semibold bg-black items-center justify-center p-2 border tracking-wide text-white mr-1">{tag}</span>
+                           ))}
+                        </div>
+                     )}
+                  </div>
+                  {block.heading && <h1 class="text-3xl text-black leading-8  mb-4  lg:text-6xl w-auto lg:w-full scramble">{block.heading}</h1>}
+                  {block.subheading && <p class="w-full text-md text-black leading-5  tracking-wide scramble">{block.subheading}</p>}
+                  <div class="w-full flex items-center pt-4">
+                     <a href={`/team/${block.team.slug.current}`}>
+                        {block.team && block.team.image && (
+                           <div class="flex items-center pl-2 pr-3 p-4 h-8 bg-gray-300 rounded-lg border w-auto">
+                              <Image src={getSanityImageURL(block.team.image).url()} alt="Author Image" width={10} height={10} format="webp" class="w-5 h-5 object-cover rounded-full" />
+                              {block.team.name && <span class="ml-2 uppercase text-black font-semibold tracking-wide font-mono text-xs">By {block.team.name}</span>}
+                           </div>
+                        )}
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      )
+   }
 </div>
 
 <style>
-  h1 {
-    font-family: 'Noto Sans', sans-serif;
-    font-weight: 700;
-    animation: fadeIn 2s ease-out;
-  }
-  h2 {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-  }
-  p {
-    font-family: 'Noto Sans', sans-serif;
-    font-weight: 500;
-    animation: fadeIn 1s ease-out;
-  }
+   h1 {
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 700;
+      animation: fadeIn 2s ease-out;
+   }
+   h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+   }
+   p {
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 500;
+      animation: fadeIn 1s ease-out;
+   }
 
-  span {
-    font-size: 10px;
-  }
+   span {
+      font-size: 10px;
+   }
 
-  .rajhani {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-  }
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+   .rajhani {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+   }
+   @keyframes fadeIn {
+      0% {
+         opacity: 0;
+      }
+      100% {
+         opacity: 1;
+      }
+   }
 </style>

@@ -1,76 +1,57 @@
 ---
-import { Image } from 'astro:assets'
-import { getSanityImageURL } from '../../lib/helpers.js'
-import { slide } from 'astro:transitions'
+import { Image } from 'astro:assets';
+import { getSanityImageURL } from '../../lib/helpers.js';
+import { slide } from 'astro:transitions';
 
-const { posts } = Astro.props
+const { posts } = Astro.props;
 ---
 
 <div class="w-full lg:w-1/4">
-  <ul class="w-full h-auto grid grid-cols-1 gap-2 p-2 flex-wrap">
-    {
-      posts &&
-        posts.map((post: any) => (
-          <a href={`/posts/${post.slug?.current}`}>
-            <div class="flex flex-wrap p-2 w-full border-b-2 mb-2 border-gray-300 ">
-              {post?.image && (
-                <div class="flex group overflow-hidden w-full h-56 sm:h-80 lg:h-48">
-                  <Image
-                    src={getSanityImageURL(post?.image).url()}
-                    alt="this"
-                    width={1000}
-                    height={1000}
-                    format="webp"
-                    class="object-cover rounded-md transform transition-transform duration-300 w-full h-full group-hover:scale-105 "
-                  />
-                </div>
-              )}
-              <div class="w-full mb-2">
-                <div class="flex p-1" />
-                {post.subcategories
-                  ?.map((sub: { title: string }) => sub.title)
-                  .join(', ') && (
-                  <span class="bg-black text-white text-xs px-2 py-1 rounded-full mr-2 mb-2 uppercase mono tracking-wide leading-tight">
-                    {post.subcategories
-                      .map((sub: { title: string }) => sub.title)
-                      .join(', ')}
-                  </span>
-                )}
-                <h2 class="pt-3 text-2xl leading-none text-black scramble-title">
-                  {post.title}
-                </h2>
-                <p class="pt-2 text-sm leading-tight text-gray-700 mono excerpt-clamp">
-                  {post.excerpt}
-                </p>
-              </div>
-            </div>
-          </a>
-        ))
-    }
-  </ul>
+   <ul class="w-full h-auto grid grid-cols-1 gap-2 p-2 flex-wrap">
+      {
+         posts &&
+            posts.map((post: any) => (
+               <a href={`/posts/${post.slug?.current}`}>
+                  <div class="flex flex-wrap p-2 w-full border-b-2 mb-2 border-gray-300 ">
+                     {post?.image && (
+                        <div class="flex group overflow-hidden w-full h-56 sm:h-80 lg:h-48">
+                           <Image src={getSanityImageURL(post?.image).url()} alt="this" width={1000} height={1000} format="webp" class="object-cover rounded-md transform transition-transform duration-300 w-full h-full group-hover:scale-105 " />
+                        </div>
+                     )}
+                     <div class="w-full mb-2">
+                        <div class="flex p-1" />
+                        {post.subcategories?.map((sub: { title: string }) => sub.title).join(', ') && <span class="bg-black text-white text-xs px-2 py-1 rounded-full mr-2 mb-2 uppercase mono tracking-wide leading-tight">{post.subcategories.map((sub: { title: string }) => sub.title).join(', ')}</span>}
+                        <h2 class="pt-3 text-2xl leading-none text-black scramble-title">{post.title}</h2>
+                        <p class="pt-2 text-sm leading-tight text-gray-700 mono excerpt-clamp">{post.excerpt}</p>
+                     </div>
+                  </div>
+               </a>
+            ))
+      }
+   </ul>
 </div>
 
 <style>
-  h2 {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-  }
-  p {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 500;
-  }
+   h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+   }
+   p {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+   }
 
-  .mono {
-    font-family: 'JetBrains Mono Variable', sans-serif;
-  }
+   .mono {
+      font-family: 'JetBrains Mono Variable', sans-serif;
+   }
 
-  .excerpt-clamp {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.3em;
-    max-height: 6em;
-  }
+   .excerpt-clamp {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3em;
+      max-height: 6em;
+   }
 </style>
