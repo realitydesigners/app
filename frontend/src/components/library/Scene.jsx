@@ -7,6 +7,8 @@ const CAMERA_POSITION = [0, 0, 5];
 const Scene = ({ category }) => {
    const { subCategories } = useCategoryInteraction(category);
 
+   console.log('sub', subCategories);
+
    return (
       <>
          <Canvas style={{ height: '100vh', width: '100vw' }}>

@@ -1,4 +1,3 @@
-export { default as ArticleRef } from './ArticleRef';
 export { default as AudioRef } from './AudioRef';
 export { default as ImageRef } from './ImageRef';
 export { default as MediaRef } from './MediaRef';

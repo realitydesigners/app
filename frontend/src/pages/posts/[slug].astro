@@ -17,5 +17,5 @@ const { post = {} as any } = Astro.props;
 ---
 
 <BlogLayout title={post.title} description={post.excerpt} imageURL={getSanityImageURL(post.image).url()}>
-   <BlogPostPage post={post} />}
+   <BlogPostPage post={post} />
 </BlogLayout>

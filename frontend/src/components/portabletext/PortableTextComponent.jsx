@@ -1,7 +1,7 @@
 import { PortableText } from '@portabletext/react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { ArticleRef, AudioRef, ImageRef, MediaRef, MediaRefLight, PostsRef, PostsRefLight, QuoteRef, SplineRef, VideoRef } from './index';
+import { AudioRef, ImageRef, MediaRef, MediaRefLight, PostsRef, PostsRefLight, QuoteRef, SplineRef, VideoRef } from './index';
 
 const iFrame = ({ value }) => {
    const { url, width, height } = value;
@@ -47,7 +47,7 @@ const Blog = {
    types: {
       iframe: iFrame,
       postsRef: PostsRef,
-      articleRef: ArticleRef,
+
       mediaRef: MediaRef,
       spline: SplineRef,
       image: ImageRef,
@@ -103,7 +103,7 @@ const Light = {
    types: {
       iframe: iFrame,
       postsRef: PostsRefLight,
-      articleRef: ArticleRef,
+
       mediaRef: MediaRefLight,
       videoRef: VideoRef,
       spline: SplineRef,
