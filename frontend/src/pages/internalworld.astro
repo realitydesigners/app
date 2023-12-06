@@ -1,13 +1,13 @@
 ---
 import Scene from '../components/internalworld/Scene.jsx';
-import NewLayout from '../layouts/NewLayout.astro';
+import Layout from '../layouts/Layout.astro';
 import { getModules } from '../lib/api.js';
 
 const category = await getModules();
 ---
 
-<NewLayout title="Reality Designers">
+<Layout title="Reality Designers">
    <main class="w-screen h-screen">
       <Scene category={category} client:load />
    </main>
-</NewLayout>
+</Layout>
